@@ -359,6 +359,14 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
 </head>
 <body>
 
+<!-- Netlify Forms detection - do not remove -->
+<form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name"/>
+  <input type="email" name="email"/>
+  <textarea name="message"></textarea>
+  <input name="bot-field"/>
+</form>
+
 <!-- ── NAV ── -->
 <nav>
   <a href="#" class="nav-brand">
