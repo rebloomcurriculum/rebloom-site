@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>re:Bloom — My Portal (Center-Based)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--forest:#2d4a2d;--sage:#4a7c59;--sage-mid:#6a9e78;--sage-light:#c8dfc8;--sage-pale:#eaf3ea;--sage-paler:#f4faf4;--cream:#fdfaf5;--gold:#b8943a;--gold-light:#f5ecd4;--gold-pale:#fdf8ef;--td:#2a2a2a;--tm:#4a4a4a;--tl:#7a7a7a;--border:#d8e8d8;--serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif}
+body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webkit-font-smoothing:antialiased;font-size:14px}
+.topnav{background:var(--forest);height:52px;display:flex;align-items:center;padding:0 1.5rem;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-l{display:flex;align-items:center;gap:0.75rem}
+.logo{font-family:var(--serif);font-size:1.1rem;color:#fff;font-weight:500;letter-spacing:-0.01em}
+.logo em{color:#e8c97a;font-style:normal}
+.nav-pill{font-size:0.58rem;padding:0.15rem 0.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:rgba(255,255,255,0.5);letter-spacing:0.07em;text-transform:uppercase;font-weight:700}
+.nav-r{display:flex;align-items:center;gap:0.6rem}
+.nav-name{font-size:0.78rem;color:rgba(255,255,255,0.65);font-weight:500}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;color:#fff;border:1.5px solid rgba(255,255,255,0.2);cursor:pointer}
+.signout{font-size:0.72rem;color:rgba(255,255,255,0.38);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0.25rem 0.5rem;border-radius:5px}
+.signout:hover{color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.08)}
+.page{max-width:1080px;margin:0 auto;padding:1.75rem 1.5rem 4rem}
+.welcome{background:var(--forest);border-radius:16px;padding:1.75rem 2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:1.25rem}
+.welcome-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 80% at 100% 50%,rgba(184,148,58,0.13) 0%,transparent 65%),radial-gradient(ellipse 40% 60% at 8% 50%,rgba(106,158,120,0.16) 0%,transparent 65%);pointer-events:none}
+.welcome-text{position:relative;z-index:1}
+.welcome-text h1{font-family:var(--serif);font-size:1.4rem;color:#fff;font-weight:500;line-height:1.25;margin-bottom:0.3rem}
+.welcome-text h1 em{color:#e8c97a;font-style:italic}
+.welcome-text p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.6}
+.welcome-btns{position:relative;z-index:1;display:flex;gap:0.5rem;flex-shrink:0}
+.btn-gold{padding:0.55rem 1.1rem;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.78rem;font-weight:700;font-family:var(--sans);cursor:pointer;white-space:nowrap;transition:background 0.18s}
+.btn-gold:hover{background:#a07e2e}
+.btn-ghost{padding:0.55rem 1rem;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.78);border:1px solid rgba(255,255,255,0.18);border-radius:8px;font-size:0.78rem;font-weight:600;font-family:var(--sans);cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{background:rgba(255,255,255,0.14)}
+.sec-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.45rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--sage-light)}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.5rem}
+.ai-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.25rem;cursor:pointer;transition:border-color 0.18s,box-shadow 0.18s,transform 0.18s;position:relative}
+.ai-card:hover{border-color:var(--sage-light);box-shadow:0 3px 16px rgba(74,124,89,0.1);transform:translateY(-2px)}
+.ai-card-feat{border-color:var(--sage);background:linear-gradient(135deg,#fff 0%,var(--sage-pale) 100%)}
+.ai-card-feat:hover{box-shadow:0 5px 22px rgba(74,124,89,0.18)}
+.ai-badge{position:absolute;top:0.85rem;right:0.85rem;font-size:0.58rem;font-weight:700;padding:0.15rem 0.48rem;border-radius:100px;letter-spacing:0.05em;text-transform:uppercase;background:var(--sage-pale);color:var(--sage);border:1px solid var(--sage-light)}
+.ai-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:0.85rem}
+.icon-g{background:var(--sage-pale);color:var(--sage)}
+.icon-b{background:#e8f0fa;color:#2d5a9e}
+.ai-card h3{font-family:var(--serif);font-size:0.98rem;color:var(--forest);font-weight:500;margin-bottom:0.28rem;line-height:1.3}
+.ai-card p{font-size:0.76rem;color:var(--tl);line-height:1.6;margin-bottom:0.95rem}
+.ai-link{font-size:0.74rem;font-weight:700;color:var(--sage);display:flex;align-items:center;gap:0.3rem}
+.ai-link svg{transition:transform 0.18s}
+.ai-card:hover .ai-link svg{transform:translateX(3px)}
+.read-section{margin-bottom:1.5rem}
+.read-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+.read-card{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:0.9rem 1rem;cursor:pointer;transition:border-color 0.18s,box-shadow 0.18s;display:flex;align-items:flex-start;gap:0.7rem}
+.read-card:hover{border-color:var(--sage-light);box-shadow:0 2px 10px rgba(74,124,89,0.08)}
+.read-icon{width:34px;height:34px;border-radius:8px;background:var(--sage-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--sage)}
+.read-info{flex:1;min-width:0}
+.read-title{font-size:0.8rem;font-weight:700;color:var(--forest);line-height:1.3;margin-bottom:0.15rem}
+.read-meta{font-size:0.68rem;color:var(--tl)}
+.read-tags{display:flex;gap:0.3rem;margin-top:0.28rem;flex-wrap:wrap}
+.tag{font-size:0.57rem;font-weight:700;padding:0.1rem 0.38rem;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase}
+.tag-ps{background:var(--sage-pale);color:var(--sage)}
+.tag-it{background:var(--gold-pale);color:var(--gold)}
+.tag-web{background:#e8f0fa;color:#2d5a9e;border:1px solid #c0ccee}
+.tag-all{background:var(--sage-paler);color:var(--tl);border:1px solid var(--border)}
+.tag-ver{background:var(--sage-pale);color:var(--sage);border:1px solid var(--sage-light)}
+.read-arrow{margin-left:auto;flex-shrink:0;color:var(--tl);align-self:center}
+.dl-section{margin-bottom:1.5rem}
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem}
+.dl-card{background:#fff;border:1.5px solid var(--border);border-radius:9px;padding:0.85rem 0.95rem;cursor:pointer;transition:border-color 0.18s,box-shadow 0.18s;display:flex;align-items:flex-start;gap:0.65rem}
+.dl-card:hover{border-color:var(--sage-light);box-shadow:0 2px 8px rgba(74,124,89,0.07)}
+.dl-icon{width:30px;height:30px;border-radius:7px;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.dl-title{font-size:0.77rem;font-weight:700;color:var(--forest);line-height:1.3;margin-bottom:0.12rem}
+.dl-meta{font-size:0.64rem;color:var(--tl)}
+.bottom-row{display:grid;grid-template-columns:2fr 1fr;gap:0.85rem}
+.tips-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.1rem}
+.tips-card h3{font-family:var(--serif);font-size:0.9rem;color:var(--forest);font-weight:500;margin-bottom:0.75rem}
+.tip-item{display:flex;align-items:flex-start;gap:0.55rem;padding:0.48rem 0;border-bottom:1px solid var(--sage-paler)}
+.tip-item:last-child{border-bottom:none;padding-bottom:0}
+.tip-num{width:18px;height:18px;border-radius:50%;background:var(--sage-pale);color:var(--sage);font-size:0.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tip-text{font-size:0.75rem;color:var(--tm);line-height:1.55}
+.tip-text strong{color:var(--forest);font-weight:700}
+.account-card{background:var(--gold-pale);border:1.5px solid rgba(184,148,58,0.2);border-radius:12px;padding:1.1rem}
+.account-card h3{font-family:var(--serif);font-size:0.9rem;color:var(--forest);font-weight:500;margin-bottom:0.75rem}
+.acct-row{display:flex;justify-content:space-between;align-items:center;padding:0.38rem 0;border-bottom:1px solid rgba(184,148,58,0.15);font-size:0.74rem}
+.acct-row:last-of-type{border-bottom:none}
+.acct-label{color:var(--tl);font-weight:500}
+.acct-val{color:var(--forest);font-weight:700}
+.acct-val.ok{color:var(--sage)}
+.btn-manage{width:100%;margin-top:0.85rem;padding:0.5rem;background:#fff;border:1.5px solid rgba(184,148,58,0.3);border-radius:7px;font-size:0.74rem;font-weight:700;color:var(--gold);font-family:var(--sans);cursor:pointer}
+.btn-manage:hover{background:var(--gold-light)}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.welcome{animation:up 0.35s ease both}
+.ai-grid{animation:up 0.35s 0.07s ease both}
+.read-section{animation:up 0.35s 0.12s ease both}
+.dl-section{animation:up 0.35s 0.17s ease both}
+.bottom-row{animation:up 0.35s 0.22s ease both}
+</style>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-l">
+    <span class="logo">re<em>:Bloom</em></span>
+    <span class="nav-pill">Center-Based Portal</span>
+  </div>
+  <div class="nav-r">
+    <span class="nav-name" id="user-name">...</span>
+    <div class="avatar" id="user-avatar">...</div>
+    <button class="signout" onclick="signOut()">Sign out</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="welcome">
+    <div class="welcome-bg"></div>
+    <div class="welcome-text">
+      <h1>Good morning, <em>Sarah.</em></h1>
+      <p>Your center-based curriculum toolkit is ready. Week 2 of October — time to plan.</p>
+    </div>
+    <div class="welcome-btns">
+      <button class="btn-gold">✦ Generate This Week's Plan</button>
+      <button class="btn-ghost">Browse Curriculum</button>
+    </div>
+  </div>
+
+  <div class="sec-label">AI-Powered Tools</div>
+  <div class="ai-grid">
+    <div class="ai-card ai-card-feat">
+      <span class="ai-badge">AI Tool</span>
+      <div class="ai-icon icon-g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+      <h3>AI Lesson Plan Generator</h3>
+      <p>Enter your theme, child interests, and group needs — get a complete weekly plan with all 9 domains, SoR alignment, educator scripts, differentiation, parent handout, and state ELDS codes in under 30 seconds.</p>
+      <div class="ai-link">Open generator <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.85rem">
+      <div class="ai-card">
+        <span class="ai-badge">AI Tool</span>
+        <div class="ai-icon icon-b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Child Assessment Tool</h3>
+        <p>Rate indicators across all 9 domains for any child, generate an AI summary, and print a portfolio-ready report.</p>
+        <div class="ai-link">Open tool <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="read-section">
+    <div class="sec-label">Read Online — Curriculum Documents</div>
+    <div class="read-grid">
+      <div class="read-card">
+        <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="read-info">
+          <div class="read-title">Preschool Scope and Sequence</div>
+          <div class="read-meta">All 9 domains · 54 standards · 217 indicators · Philosophy and research base</div>
+          <div class="read-tags"><span class="tag tag-ps">Preschool</span><span class="tag tag-web">Web Only</span></div>
+        </div>
+        <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="read-card">
+        <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="read-info">
+          <div class="read-title">Infant and Toddler Scope and Sequence</div>
+          <div class="read-meta">All 9 domains · 55 standards · Infant and toddler age bands</div>
+          <div class="read-tags"><span class="tag tag-it">Infant/Toddler</span><span class="tag tag-web">Web Only</span></div>
+        </div>
+        <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="read-card">
+        <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="read-info">
+          <div class="read-title">Novice Implementation Guide</div>
+          <div class="read-meta">For educators new to curriculum · Scripted sample days · FCC section included · Glossary</div>
+          <div class="read-tags"><span class="tag tag-ps">Preschool</span><span class="tag tag-it">IT</span><span class="tag tag-web">Web Only</span></div>
+        </div>
+        <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+      <div class="read-card">
+        <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="read-info">
+          <div class="read-title">Expert Implementation Guide</div>
+          <div class="read-meta">For credentialed educators · Theory · CLASS alignment · FCC section included · QRIS documentation</div>
+          <div class="read-tags"><span class="tag tag-ps">Preschool</span><span class="tag tag-it">IT</span><span class="tag tag-web">Web Only</span></div>
+        </div>
+        <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dl-section">
+    <div class="sec-label">Downloads</div>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div><div class="dl-title">Monthly Planning Guide</div><div class="dl-meta">All 12 months · Both tracks</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-ps">Preschool</span><span class="tag tag-it">IT</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="dl-title">Standalone Activity Guides</div><div class="dl-meta">18 guides · One per domain</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-ps">Preschool</span><span class="tag tag-it">IT</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <div><div class="dl-title">Differentiation and Support Guide</div><div class="dl-meta">Skill progressions · Intervention tiers</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-all">All Tracks</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div><div class="dl-title">Assessment Guide</div><div class="dl-meta">Observation · Portfolio · QRIS</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-all">All Tracks</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="dl-title">Sample Plan — Preschool</div><div class="dl-meta">Living Things · 4 weeks</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-ps">Preschool</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="dl-title">Sample Plan — Infant</div><div class="dl-meta">Faces &amp; Feelings · 4 weeks</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-it">Infant</span></div></div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="dl-title">Sample Plan — Toddler</div><div class="dl-meta">Faces &amp; Feelings · 4 weeks</div><div class="read-tags" style="margin-top:0.22rem"><span class="tag tag-it">Toddler</span></div></div>
+      </div>
+
+    </div>
+    <div style="margin-top:0.75rem;padding:0.85rem 1rem;background:#fff;border:1.5px solid var(--border);border-radius:9px;display:flex;align-items:center;gap:0.75rem">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <p style="font-size:0.76rem;color:var(--tm);line-height:1.55"><strong style="color:var(--forest)">Need a state standards alignment document?</strong> Alignment documents are completed for many states, with more added regularly. <a href="/cdn-cgi/l/email-protection#a6cec3cacac9e6d4c3c4cac9c9cbc5d3d4d4cfc5d3cad3cb88c5c9cb" style="color:var(--sage);font-weight:700;text-decoration:none">Contact us</a> to request the alignment for your state.</p>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+    <div class="tips-card">
+      <h3>Getting the most from re:Bloom</h3>
+      <div class="tip-item"><div class="tip-num">1</div><p class="tip-text"><strong>Start with the lesson generator each week.</strong> Enter your theme, child interests, and group needs — your complete plan downloads as a Word doc in under 30 seconds.</p></div>
+      <div class="tip-item"><div class="tip-num">2</div><p class="tip-text"><strong>Read the Scope and Sequence for your track.</strong> You don't need to memorize it — just know where to look. Bookmark the domains you reference most.</p></div>
+      <div class="tip-item"><div class="tip-num">3</div><p class="tip-text"><strong>Do assessments three times per year.</strong> Fall, mid-year, and spring. Use the Assessment Tool for each child and file the printed report in their portfolio folder.</p></div>
+      <div class="tip-item"><div class="tip-num">4</div><p class="tip-text"><strong>Select your state in the lesson generator</strong> to get automatic ELDS standards tagging on every activity — saves hours of QRIS documentation prep.</p></div>
+    </div>
+    <div class="account-card">
+      <h3>My Subscription</h3>
+      <div class="acct-row"><span class="acct-label">Plan</span><span class="acct-val">re:Bloom Curriculum</span></div>
+      <div class="acct-row"><span class="acct-label">Status</span><span class="acct-val ok">Active ✓</span></div>
+      <div class="acct-row"><span class="acct-label">Billing</span><span class="acct-val">$39 / month</span></div>
+      <div class="acct-row"><span class="acct-label">Next renewal</span><span class="acct-val">Nov 21, 2026</span></div>
+      <div class="acct-row"><span class="acct-label">Member since</span><span class="acct-val">Oct 2025</span></div>
+      <button class="btn-manage">Manage Subscription</bu

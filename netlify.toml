@@ -1,0 +1,26 @@
+[build]
+  publish = "/"
+  functions = "netlify/functions"
+
+# Enable Netlify Identity
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+# Clean URLs
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal"
+  to = "/portal.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal-fcc"
+  to = "/portal-fcc.html"
+  status = 200
