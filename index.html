@@ -356,6 +356,8 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
   .pricing-grid,.tracks-grid{grid-template-columns:1fr}
 }
 </style>
+<!-- Netlify Identity -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -392,7 +394,8 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
     <li><a href="#sample-plans">Free Samples</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#pricing" class="nav-cta">Subscribe</a>
+  <a href="/portal-login.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.75);text-decoration:none;padding:0.4rem 0.85rem;border:1px solid rgba(255,255,255,0.25);border-radius:7px;transition:background 0.18s" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background=''">Sign In</a>
+  <button onclick="window.netlifyIdentity.open()" style="background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:#fff;padding:0.45rem 1rem;border-radius:7px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;margin-right:0.5rem">Sign In</button><a href="#pricing" class="nav-cta">Subscribe</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -1019,6 +1022,26 @@ function toggleBilling(){
     document.getElementById('price-fcc').innerHTML='<sup>$</sup>13<span class="per">/mo</span>'
     document.getElementById('note-fcc').innerHTML='&nbsp;'
   }
+}
+</script>
+<script>
+// Netlify Identity initialization
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    if (!user) {
+      window.netlifyIdentity.on("login", () => {
+        // After login, check subscription type and route accordingly
+        const user = window.netlifyIdentity.currentUser();
+        const meta = user && user.app_metadata;
+        const subType = meta && meta.subscription_type;
+        if (subType === 'fcc') {
+          window.location.href = '/portal-fcc.html';
+        } else {
+          window.location.href = '/portal.html';
+        }
+      });
+    }
+  });
 }
 </script>
 </body>
