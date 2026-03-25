@@ -1,6 +1,36 @@
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
+[build]
+  publish = "/"
+  functions = "netlify/functions"
+
+[dev]
+  framework = "#static"
+
+[[redirects]]
+  from = "/portal-login.html"
+  to = "/portal-login.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal-center.html"
+  to = "/portal-center.html"
+  status = 200
+
+[[redirects]]
+  from = "/portal-fcc.html"
+  to = "/portal-fcc.html"
+  status = 200
+
+[[headers]]
+  for = "/portal-center.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/portal-fcc.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
 
 # Enable Netlify Identity
 [[headers]]
