@@ -394,8 +394,8 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
     <li><a href="#sample-plans">Free Samples</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="/portal-login.html" style="font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.75);text-decoration:none;padding:0.4rem 0.85rem;border:1px solid rgba(255,255,255,0.25);border-radius:7px;transition:background 0.18s" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background=''">Sign In</a>
-  <button onclick="window.netlifyIdentity.open()" style="background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:#fff;padding:0.45rem 1rem;border-radius:7px;font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;margin-right:0.5rem">Sign In</button><a href="#pricing" class="nav-cta">Subscribe</a>
+  <a href="/portal-login.html" style="font-size:0.82rem;font-weight:600;color:var(--forest);text-decoration:none;padding:0.4rem 0.85rem;border:1.5px solid var(--sage-light);border-radius:7px;transition:all 0.18s;margin-right:0.5rem;font-size:0.82rem;font-weight:600" onmouseover="this.style.background='var(--sage-pale)'" onmouseout="this.style.background=''">Sign In</a>
+<a href="#pricing" class="nav-cta">Subscribe</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -733,7 +733,7 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
           <li>Family handouts — all three center tracks</li>
           <li>New monthly content as released</li>
         </ul>
-        <a class="btn-subscribe" href="https://buy.rebloomcurriculum.com/center" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:100%">Subscribe Now</a>
+        <a class="btn-subscribe" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:100%">Subscribe Now</a>
       </div>
 
       <div class="price-card" style="border-top:3px solid #A85C3E;max-width:420px">
@@ -752,7 +752,7 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
           <li>State standards alignment documents</li>
           <li>New monthly content as released</li>
         </ul>
-        <a class="btn-subscribe-outline" href="https://buy.rebloomcurriculum.com/fcc" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:100%;border-color:#A85C3E;color:#7B3D2A">Subscribe Now</a>
+        <a class="btn-subscribe-outline" href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:100%;border-color:#A85C3E;color:#7B3D2A">Subscribe Now</a>
       </div>
 
       <div class="price-card" style="max-width:420px">
@@ -1043,6 +1043,33 @@ if (window.netlifyIdentity) {
     }
   });
 }
+</script>
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', function(user) {
+    if (!user) {
+      window.netlifyIdentity.on('login', function() {
+        var plan = window.netlifyIdentity.currentUser().app_metadata && 
+                   window.netlifyIdentity.currentUser().app_metadata.plan;
+        window.location.href = plan === 'fcc' ? '/portal-fcc.html' : '/portal-center.html';
+      });
+    }
+  });
+}
+// Make Sign In link open Identity modal
+document.addEventListener('DOMContentLoaded', function() {
+  var signInLink = document.querySelector('a[href="/portal-login.html"]');
+  if (signInLink) {
+    signInLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.open('login');
+      } else {
+        window.location.href = '/portal-login.html';
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
