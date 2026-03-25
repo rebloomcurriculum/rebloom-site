@@ -1,0 +1,9 @@
+{
+  "name": "rebloom-site",
+  "version": "1.0.0",
+  "description": "re:Bloom Digital Curriculum",
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "node-fetch": "^2.7.0"
+  }
+}
