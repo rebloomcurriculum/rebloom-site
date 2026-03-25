@@ -1,6 +1,7 @@
 [build]
-  publish = "/"
+  publish = "."
   functions = "netlify/functions"
+  command = "npm install"
 
 # Enable Netlify Identity
 [[headers]]
