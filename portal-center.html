@@ -115,18 +115,18 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
   <div class="welcome">
     <div class="welcome-bg"></div>
     <div class="welcome-text">
-      <h1>Good morning, <em>Sarah.</em></h1>
-      <p>Your center-based curriculum toolkit is ready. Week 2 of October — time to plan.</p>
+      <h1 id="welcome-heading">Good morning.</h1>
+      <p id="welcome-sub">Your center-based curriculum toolkit is ready.</p>
     </div>
     <div class="welcome-btns">
-      <button class="btn-gold">✦ Generate This Week's Plan</button>
-      <button class="btn-ghost">Browse Curriculum</button>
+      <button class="btn-gold" onclick="window.location.href='/rebloom_lesson_generator.html'">✦ Generate This Week's Plan</button>
+      <button class="btn-ghost" onclick="window.location.href='/rebloom_scope_preschool.html'">Browse Curriculum</button>
     </div>
   </div>
 
   <div class="sec-label">AI-Powered Tools</div>
   <div class="ai-grid">
-    <div class="ai-card ai-card-feat">
+    <div class="ai-card ai-card-feat" onclick="window.location.href='/rebloom_lesson_generator.html'" style="cursor:pointer">
       <span class="ai-badge">AI Tool</span>
       <div class="ai-icon icon-g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
       <h3>AI Lesson Plan Generator</h3>
@@ -134,21 +134,20 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
       <div class="ai-link">Open generator <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:0.85rem">
-      <div class="ai-card">
+      <div class="ai-card" onclick="window.location.href='/rebloom_assessment.html'" style="cursor:pointer">
         <span class="ai-badge">AI Tool</span>
         <div class="ai-icon icon-b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
         <h3>Child Assessment Tool</h3>
         <p>Rate indicators across all 9 domains for any child, generate an AI summary, and print a portfolio-ready report.</p>
         <div class="ai-link">Open tool <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
-
     </div>
   </div>
 
   <div class="read-section">
     <div class="sec-label">Read Online — Curriculum Documents</div>
     <div class="read-grid">
-      <div class="read-card">
+      <div class="read-card" onclick="window.location.href='/rebloom_scope_preschool.html'" style="cursor:pointer">
         <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
         <div class="read-info">
           <div class="read-title">Preschool Scope and Sequence</div>
@@ -157,7 +156,7 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
         </div>
         <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
-      <div class="read-card">
+      <div class="read-card" onclick="window.location.href='/rebloom_scope_it.html'" style="cursor:pointer">
         <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
         <div class="read-info">
           <div class="read-title">Infant and Toddler Scope and Sequence</div>
@@ -166,7 +165,7 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
         </div>
         <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
-      <div class="read-card">
+      <div class="read-card" onclick="window.location.href='/rebloom_guide_novice.html'" style="cursor:pointer">
         <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
         <div class="read-info">
           <div class="read-title">Novice Implementation Guide</div>
@@ -175,7 +174,7 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
         </div>
         <div class="read-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
-      <div class="read-card">
+      <div class="read-card" onclick="window.location.href='/rebloom_guide_expert.html'" style="cursor:pointer">
         <div class="read-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
         <div class="read-info">
           <div class="read-title">Expert Implementation Guide</div>
@@ -236,9 +235,59 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
     </div>
     <div class="account-card">
       <h3>My Subscription</h3>
-      <div class="acct-row"><span class="acct-label">Plan</span><span class="acct-val">re:Bloom Curriculum</span></div>
+      <div class="acct-row"><span class="acct-label">Plan</span><span class="acct-val">Center-Based · $39/mo</span></div>
       <div class="acct-row"><span class="acct-label">Status</span><span class="acct-val ok">Active ✓</span></div>
-      <div class="acct-row"><span class="acct-label">Billing</span><span class="acct-val">$39 / month</span></div>
-      <div class="acct-row"><span class="acct-label">Next renewal</span><span class="acct-val">Nov 21, 2026</span></div>
-      <div class="acct-row"><span class="acct-label">Member since</span><span class="acct-val">Oct 2025</span></div>
-      <button class="btn-manage">Manage Subscription</bu
+      <div class="acct-row"><span class="acct-label">Email</span><span class="acct-val" id="acct-email">—</span></div>
+      <button class="btn-manage" onclick="window.location.href='https://billing.stripe.com/p/login/test_00000'">Manage Subscription</button
+    </div>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+// Netlify Identity — populate user info and protect page
+netlifyIdentity.on('init', function(user) {
+  if (!user) {
+    window.location.href = '/portal-login.html';
+    return;
+  }
+  populateUser(user);
+});
+
+netlifyIdentity.on('login', function(user) {
+  populateUser(user);
+});
+
+function populateUser(user) {
+  // Welcome greeting with time of day
+  var hour = new Date().getHours();
+  var greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  var name = (user.user_metadata && user.user_metadata.full_name)
+    ? user.user_metadata.full_name.split(' ')[0]
+    : user.email.split('@')[0];
+
+  var heading = document.getElementById('welcome-heading');
+  if (heading) heading.innerHTML = greeting + ', <em>' + name + '.</em>';
+
+  // Set email in subscription card
+  var emailEl = document.getElementById('acct-email');
+  if (emailEl) emailEl.textContent = user.email;
+
+  // Set nav name and avatar
+  var navName = document.getElementById('user-name');
+  if (navName) navName.textContent = name;
+  var avatar = document.getElementById('user-avatar');
+  if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
+}
+
+function signOut() {
+  netlifyIdentity.logout();
+  window.location.href = '/portal-login.html';
+}
+
+netlifyIdentity.on('logout', function() {
+  window.location.href = '/portal-login.html';
+});
+</script>
+</body>
+</html>
