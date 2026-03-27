@@ -374,7 +374,6 @@ function App() {
   const [plan,setPlan]=useState(null);
   const [error,setError]=useState("");
   const [downloading,setDownloading]=useState(false);
-  const [apiKey,setApiKey]=useState(()=>localStorage.getItem("rb_api_key")||"");
   const loadRef=useRef(null);
   const v=VERIFIED.includes(state);
 
@@ -386,7 +385,7 @@ function App() {
     const needsEnrich = scriptLevel!=="none" || !!state;
     try {
       // ── Call 1: Core plan (always) ──────────────────────────────────────────
-      const res1=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:8000,messages:[{role:"user",content:buildCorePrompt({track,weekStart,weekNum,teacher,theme,interests,needs,notes,groupComposition,homeEnv})}]})});
+      const res1=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:8000,messages:[{role:"user",content:buildCorePrompt({track,weekStart,weekNum,teacher,theme,interests,needs,notes,groupComposition,homeEnv})}]})});
       if(!res1.ok){const e=await res1.json();throw new Error(e.error?.message||`API error ${res1.status}`);}
       const data1=await res1.json();
       const raw1=data1.content.map(b=>b.text||"").join("");
@@ -396,7 +395,7 @@ function App() {
 
       // ── Call 2: Scripts + state alignment (only when needed) ────────────────
       setLoadStep(4);
-      const res2=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:6000,messages:[{role:"user",content:buildEnrichPrompt({plan:corePlan,track,theme,interests,needs,state,scriptLevel,groupComposition})}]})});
+      const res2=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:6000,messages:[{role:"user",content:buildEnrichPrompt({plan:corePlan,track,theme,interests,needs,state,scriptLevel,groupComposition})}]})});
       if(!res2.ok){const e=await res2.json();throw new Error(e.error?.message||`API error ${res2.status}`);}
       const data2=await res2.json();
       const raw2=data2.content.map(b=>b.text||"").join("");
@@ -499,18 +498,7 @@ function App() {
               ))}
             </div>
           </div>
-          <div style={{marginBottom:"0.75rem"}}>
-            <label style={{fontSize:"0.72rem",fontWeight:700,color:"#4a7c59",display:"block",marginBottom:"0.3rem",textTransform:"uppercase",letterSpacing:"0.05em"}}>Anthropic API Key</label>
-            <input
-              type="password"
-              placeholder="sk-ant-..."
-              value={apiKey}
-              onChange={e=>{setApiKey(e.target.value);localStorage.setItem("rb_api_key",e.target.value);}}
-              style={{width:"100%",padding:"0.5rem 0.65rem",fontSize:"0.8rem",border:"1.5px solid #ddd",borderRadius:"7px",fontFamily:"monospace",boxSizing:"border-box"}}
-            />
-            <p style={{fontSize:"0.68rem",color:"#888",marginTop:"0.25rem",lineHeight:1.4}}>Your key is stored only in your browser. <a href="https://console.anthropic.com" target="_blank" style={{color:"#4a7c59"}}>Get a key →</a></p>
-          </div>
-          <button style={S.genBtn(loading||!apiKey)} onClick={generate} disabled={loading||!apiKey}>
+          <button style={S.genBtn(loading)} onClick={generate} disabled={loading}>
             {loading?<><Spinner/> Generating…</>:"✦  Generate Lesson Plan"}
           </button>
         </aside>
