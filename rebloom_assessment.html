@@ -1527,7 +1527,7 @@ function toggleDomain(code) {
 function renderAll() {
   ratings = {}; // reset on track change
   var container = document.getElementById('domains-container');
-  container.innerHTML = DOMAINS.map(renderDomain).join('');
+  container.innerHTML = window.ACTIVE_DOMAINS.map(renderDomain).join('');
   updateProgress();
   updateSummary();
 }
