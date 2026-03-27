@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>re:Bloom Child Observation and Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#2d4a2d;--sage:#4a7c59;--sage-mid:#6a9e78;
+  --sage-light:#c8dfc8;--sage-pale:#eaf3ea;--sage-paler:#f4faf4;
+  --cream:#fdfaf5;--cream-warm:#f8f2e8;
+  --gold:#b8943a;--gold-light:#f5ecd4;--gold-pale:#fdf8ef;
+  --td:#2a2a2a;--tm:#4a4a4a;--tl:#7a7a7a;--th:#bbb;
+  --border:#d8e8d8;--border-dark:#b8d0b8;
+  --serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  /* Rating colors */
+  --c-nye:#f5e8d8;  --c-nye-t:#8a5a1a;  --c-nye-b:#e0c89a;
+  --c-em:#e8f0fa;   --c-em-t:#1a4a8a;   --c-em-b:#a0bce0;
+  --c-dev:#e8f5e8;  --c-dev-t:#1a5a2a;  --c-dev-b:#88c898;
+  --c-con:#f0eafa;  --c-con-t:#4a1a8a;  --c-con-b:#b8a0d8;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--td);background:var(--sage-paler);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.site-header{background:var(--forest);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.header-brand{display:flex;align-items:center;gap:0.55rem;text-decoration:none}
+.header-logo{font-family:var(--serif);font-size:1.2rem;color:#fff;font-weight:500}
+.header-logo span{color:#e8c97a}
+.header-sub{font-size:0.75rem;color:rgba(255,255,255,0.45);font-weight:300}
+
+/* ── INTRO BANNER ── */
+.intro-banner{
+  background:var(--cream-warm);border-bottom:1.5px solid var(--border);
+  padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.intro-text h1{font-family:var(--serif);font-size:1.35rem;color:var(--forest);font-weight:500;margin-bottom:0.2rem}
+.intro-text p{font-size:0.85rem;color:var(--tl);font-weight:300;max-width:560px;line-height:1.6}
+.intro-actions{display:flex;gap:0.65rem;flex-wrap:wrap}
+.btn-print{
+  background:var(--sage);color:#fff;border:none;
+  padding:0.55rem 1.25rem;border-radius:100px;
+  font-size:0.85rem;font-weight:600;font-family:var(--sans);
+  cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.4rem;
+}
+.btn-print:hover{background:var(--forest)}
+.btn-clear{
+  background:transparent;color:var(--tl);
+  border:1px solid var(--border-dark);
+  padding:0.55rem 1.25rem;border-radius:100px;
+  font-size:0.85rem;font-weight:500;font-family:var(--sans);
+  cursor:pointer;transition:all 0.2s;
+}
+.btn-clear:hover{border-color:var(--sage);color:var(--sage)}
+
+/* ── SETUP PANEL ── */
+.setup-panel{
+  background:var(--cream);border-bottom:1.5px solid var(--border);
+  padding:1.25rem 2rem;
+}
+.setup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.85rem;max-width:900px}
+.setup-field label{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tl);margin-bottom:0.3rem}
+.setup-field input,.setup-field select,.setup-field textarea{
+  width:100%;padding:0.5rem 0.7rem;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-size:0.875rem;font-family:var(--sans);
+  background:#fff;color:var(--td);outline:none;transition:border-color 0.2s;
+}
+.setup-field input:focus,.setup-field select:focus,.setup-field textarea:focus{border-color:var(--sage-mid)}
+.setup-field textarea{min-height:52px;resize:vertical;line-height:1.5}
+
+/* ── TRACK SELECTOR ── */
+.track-row{display:flex;gap:0.5rem;margin-top:0.3rem}
+.track-btn{
+  padding:0.4rem 0.9rem;border:1.5px solid var(--border);border-radius:100px;
+  background:#fff;font-size:0.8rem;font-family:var(--sans);color:var(--tm);
+  cursor:pointer;transition:all 0.15s;font-weight:500;
+}
+.track-btn:hover{border-color:var(--sage-mid)}
+.track-btn.active{border-color:var(--sage);background:var(--sage-pale);color:var(--sage);font-weight:600}
+.track-btn.fcc-tab.active{border-color:#A85C3E;background:#FAF0EB;color:#7B3D2A}
+
+/* ── LEGEND ── */
+.legend{
+  padding:0.75rem 2rem;background:#fff;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+}
+.legend-label{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tl);margin-right:0.25rem}
+.legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:500}
+.legend-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid}
+.legend-dot.nye{background:var(--c-nye);border-color:var(--c-nye-b);color:var(--c-nye-t)}
+.legend-dot.em{background:var(--c-em);border-color:var(--c-em-b)}
+.legend-dot.dev{background:var(--c-dev);border-color:var(--c-dev-b)}
+.legend-dot.con{background:var(--c-con);border-color:var(--c-con-b)}
+
+/* ── MAIN CONTENT ── */
+.main{padding:1.5rem 2rem;max-width:1200px;margin:0 auto}
+
+/* ── DOMAIN SECTION ── */
+.domain-section{margin-bottom:1.25rem;border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:#fff}
+.domain-header{
+  padding:0.8rem 1.1rem;
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+  transition:background 0.15s;user-select:none;
+}
+.domain-header:hover{background:var(--sage-paler)}
+.domain-header-left{display:flex;align-items:center;gap:0.75rem}
+.domain-badge{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.05em;
+  padding:0.25rem 0.6rem;border-radius:6px;font-family:var(--sans);
+  white-space:nowrap;
+}
+.domain-title{font-family:var(--serif);font-size:1rem;color:var(--forest);font-weight:500}
+.domain-meta{font-size:0.75rem;color:var(--tl);font-weight:300}
+.domain-chevron{
+  width:20px;height:20px;border-radius:50%;background:var(--sage-pale);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.2s;
+}
+.domain-chevron svg{width:10px;height:10px;stroke:var(--sage);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform 0.2s}
+.domain-section.open .domain-chevron svg{transform:rotate(180deg)}
+.domain-progress{
+  display:flex;align-items:center;gap:0.5rem;margin-right:0.75rem;
+}
+.domain-prog-bar{width:80px;height:5px;background:var(--sage-light);border-radius:100px;overflow:hidden}
+.domain-prog-fill{height:100%;background:var(--sage);border-radius:100px;transition:width 0.3s}
+.domain-prog-text{font-size:0.72rem;color:var(--tl);min-width:32px;text-align:right}
+
+/* ── STANDARDS TABLE ── */
+.domain-body{display:none;border-top:1px solid var(--border)}
+.domain-section.open .domain-body{display:block}
+
+.standard-row{border-bottom:1px solid #eef5ee}
+.standard-row:last-child{border-bottom:none}
+.standard-header{
+  padding:0.7rem 1.1rem 0.5rem;
+  display:flex;align-items:baseline;gap:0.6rem;
+}
+.std-code{
+  font-size:0.72rem;font-weight:700;font-family:var(--sans);
+  color:var(--sage);letter-spacing:0.04em;white-space:nowrap;
+  background:var(--sage-pale);padding:0.15rem 0.45rem;border-radius:4px;
+  border:1px solid var(--sage-light);
+}
+.std-text{font-size:0.85rem;color:var(--tm);font-weight:400;line-height:1.4;font-style:italic}
+
+/* ── INDICATORS ── */
+.indicators-table{width:100%;border-collapse:collapse}
+.ind-row{display:grid;align-items:start}
+/* 4 columns for full assessment, 3 for infant/toddler shortform */
+.ind-row.cols-4{grid-template-columns:auto 1fr 120px 140px}
+.ind-row.cols-header{grid-template-columns:auto 1fr 120px 140px}
+
+.ind-header{
+  background:var(--sage-paler);
+  padding:0.4rem 1.1rem;
+  display:grid;grid-template-columns:auto 1fr 120px 140px;
+  border-bottom:1px solid var(--border);
+  font-size:0.68rem;font-weight:700;letter-spacing:0.07em;
+  text-transform:uppercase;color:var(--tl);gap:0;
+}
+.ind-header-cell{padding:0 0.5rem}
+.ind-header-cell:first-child{padding-left:0;min-width:32px}
+
+.ind-item{
+  display:grid;grid-template-columns:auto 1fr 120px 140px;
+  padding:0.4rem 1.1rem;border-bottom:1px solid #f0f8f0;
+  align-items:start;gap:0;transition:background 0.1s;
+}
+.ind-item:hover{background:#fafdf9}
+.ind-item:last-child{border-bottom:none}
+
+.ind-num{
+  font-size:0.68rem;color:var(--th);font-weight:600;
+  padding-top:0.1rem;min-width:32px;padding-right:0.5rem;
+}
+.ind-text{font-size:0.82rem;color:var(--tm);line-height:1.5;padding:0 0.75rem 0 0;font-weight:400}
+.ind-track-tag{font-size:0.65rem;color:var(--th);font-weight:600;font-style:normal;margin-left:0.3rem;letter-spacing:0.03em}
+
+/* ── RATING BUTTONS ── */
+.rating-cell{padding:0 0.25rem}
+.rating-group{display:flex;gap:0.25rem}
+.rating-btn{
+  flex:1;padding:0.3rem 0.2rem;border-radius:5px;
+  border:1px solid var(--border);background:#fff;
+  font-size:0.65rem;font-weight:600;font-family:var(--sans);
+  cursor:pointer;transition:all 0.15s;text-align:center;line-height:1.2;color:var(--tl);
+}
+.rating-btn:hover{border-color:var(--border-dark)}
+.rating-btn.active-nye{background:var(--c-nye);border-color:var(--c-nye-b);color:var(--c-nye-t)}
+.rating-btn.active-em{background:var(--c-em);border-color:var(--c-em-b);color:var(--c-em-t)}
+.rating-btn.active-dev{background:var(--c-dev);border-color:var(--c-dev-b);color:var(--c-dev-t)}
+.rating-btn.active-con{background:var(--c-con);border-color:var(--c-con-b);color:var(--c-con-t)}
+
+/* ── NOTES CELL ── */
+.notes-cell{padding:0 0 0 0.25rem}
+.notes-input{
+  width:100%;padding:0.3rem 0.5rem;
+  border:1px solid var(--border);border-radius:5px;
+  font-size:0.75rem;font-family:var(--sans);color:var(--td);
+  background:#fff;outline:none;resize:none;
+  min-height:32px;line-height:1.4;transition:border-color 0.15s;
+}
+.notes-input:focus{border-color:var(--sage-mid)}
+.notes-input::placeholder{color:var(--th);font-style:italic}
+
+/* ── SUMMARY SECTION ── */
+.summary-section{
+  background:var(--cream);border:1.5px solid var(--border);
+  border-radius:var(--r-lg);padding:1.25rem 1.5rem;margin-bottom:1.25rem;
+}
+.summary-title{font-family:var(--serif);font-size:1rem;color:var(--forest);font-weight:500;margin-bottom:0.25rem}
+.summary-subtitle{font-size:0.8rem;color:var(--tl);font-weight:300;margin-bottom:1rem;line-height:1.5}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:0.65rem;margin-bottom:1.25rem}
+.summary-chip{
+  text-align:center;padding:0.75rem 0.5rem 0.65rem;border-radius:var(--r);
+  border:1.5px solid var(--border);background:var(--sage-paler);
+  transition:background 0.35s,border-color 0.35s;cursor:default;position:relative;
+}
+.summary-chip.chip-nye{background:var(--c-nye);border-color:var(--c-nye-b)}
+.summary-chip.chip-em {background:var(--c-em); border-color:var(--c-em-b)}
+.summary-chip.chip-dev{background:var(--c-dev);border-color:var(--c-dev-b)}
+.summary-chip.chip-con{background:var(--c-con);border-color:var(--c-con-b)}
+.summary-chip-code{font-size:0.72rem;font-weight:700;letter-spacing:0.05em;display:block;margin-bottom:0.25rem;transition:color 0.35s}
+.summary-chip.chip-nye .summary-chip-code{color:var(--c-nye-t)}
+.summary-chip.chip-em  .summary-chip-code{color:var(--c-em-t)}
+.summary-chip.chip-dev .summary-chip-code{color:var(--c-dev-t)}
+.summary-chip.chip-con .summary-chip-code{color:var(--c-con-t)}
+.summary-chip:not([class*="chip-"]) .summary-chip-code{color:var(--sage)}
+.summary-chip-rating{font-size:0.78rem;font-weight:700;display:block;margin-bottom:0.1rem;transition:color 0.35s;font-family:var(--sans)}
+.summary-chip.chip-nye .summary-chip-rating{color:var(--c-nye-t)}
+.summary-chip.chip-em  .summary-chip-rating{color:var(--c-em-t)}
+.summary-chip.chip-dev .summary-chip-rating{color:var(--c-dev-t)}
+.summary-chip.chip-con .summary-chip-rating{color:var(--c-con-t)}
+.summary-chip:not([class*="chip-"]) .summary-chip-rating{color:var(--tl)}
+.summary-chip-pct{font-size:0.68rem;display:block;transition:color 0.35s;font-weight:500}
+.summary-chip.chip-nye .summary-chip-pct{color:var(--c-nye-t);opacity:0.7}
+.summary-chip.chip-em  .summary-chip-pct{color:var(--c-em-t);opacity:0.7}
+.summary-chip.chip-dev .summary-chip-pct{color:var(--c-dev-t);opacity:0.7}
+.summary-chip.chip-con .summary-chip-pct{color:var(--c-con-t);opacity:0.7}
+.summary-chip:not([class*="chip-"]) .summary-chip-pct{color:var(--th)}
+/* tooltip on hover */
+.summary-chip[title]:hover::after{
+  content:attr(title);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:rgba(30,30,30,0.88);color:#fff;font-size:0.7rem;white-space:nowrap;
+  padding:0.3rem 0.6rem;border-radius:6px;pointer-events:none;z-index:10;font-family:var(--sans);
+  max-width:200px;white-space:normal;text-align:center;line-height:1.4;
+}
+
+/* ── DOMAIN NARRATIVE SUMMARY ── */
+.domain-narratives{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.25rem}
+.narrative-row{
+  display:flex;align-items:flex-start;gap:0.65rem;
+  padding:0.6rem 0.75rem;border-radius:var(--r-sm);border:1px solid var(--border);
+  background:var(--sage-paler);transition:background 0.35s,border-color 0.35s;
+}
+.narrative-row.chip-nye{background:var(--c-nye);border-color:var(--c-nye-b)}
+.narrative-row.chip-em {background:var(--c-em); border-color:var(--c-em-b)}
+.narrative-row.chip-dev{background:var(--c-dev);border-color:var(--c-dev-b)}
+.narrative-row.chip-con{background:var(--c-con);border-color:var(--c-con-b)}
+.narrative-badge{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.04em;padding:0.15rem 0.45rem;
+  border-radius:5px;flex-shrink:0;margin-top:0.05rem;font-family:var(--sans);
+  background:rgba(255,255,255,0.5);
+}
+.narrative-row.chip-nye .narrative-badge{color:var(--c-nye-t)}
+.narrative-row.chip-em  .narrative-badge{color:var(--c-em-t)}
+.narrative-row.chip-dev .narrative-badge{color:var(--c-dev-t)}
+.narrative-row.chip-con .narrative-badge{color:var(--c-con-t)}
+.narrative-row:not([class*="chip-"]) .narrative-badge{color:var(--tl)}
+.narrative-text{font-size:0.8rem;line-height:1.5;color:var(--tm);font-weight:400}
+.narrative-row.chip-nye .narrative-text{color:var(--c-nye-t)}
+.narrative-row.chip-em  .narrative-text{color:var(--c-em-t)}
+.narrative-row.chip-dev .narrative-text{color:var(--c-dev-t)}
+.narrative-row.chip-con .narrative-text{color:var(--c-con-t)}
+
+.overall-notes{margin-top:0.5rem}
+.overall-notes label{font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tl);display:block}
+.overall-notes textarea{
+  width:100%;padding:0.65rem 0.75rem;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-size:0.875rem;font-family:var(--sans);color:var(--td);background:#fff;
+  outline:none;resize:vertical;min-height:120px;line-height:1.65;transition:border-color 0.15s;
+}
+.overall-notes textarea:focus{border-color:var(--sage-mid)}
+
+/* ── AI GENERATE BUTTON ── */
+.ai-gen-btn{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:var(--forest);color:#fff;border:none;
+  padding:0.45rem 1rem;border-radius:100px;
+  font-size:0.78rem;font-weight:600;font-family:var(--sans);
+  cursor:pointer;transition:all 0.2s;flex-shrink:0;
+}
+.ai-gen-btn:hover{background:var(--sage)}
+.ai-gen-btn:disabled{opacity:0.6;cursor:not-allowed}
+.ai-gen-btn .ai-spinner{
+  width:12px;height:12px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin 0.7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── AI STATUS ── */
+.ai-status{
+  font-size:0.78rem;color:var(--tl);font-weight:300;font-style:italic;
+  padding:0.4rem 0;margin-bottom:0.25rem;display:flex;align-items:center;gap:0.5rem;
+}
+.ai-status.error{color:#c33;font-style:normal}
+.ai-status-dots{display:flex;gap:3px}
+.ai-status-dots span{
+  width:5px;height:5px;border-radius:50%;background:var(--sage-mid);
+  animation:rbp 1.2s ease-in-out infinite;
+}
+.ai-status-dots span:nth-child(2){animation-delay:0.2s}
+.ai-status-dots span:nth-child(3){animation-delay:0.4s}
+.overall-notes label{font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tl);display:block;margin-bottom:0.4rem}
+.overall-notes textarea{
+  width:100%;padding:0.65rem 0.75rem;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-size:0.875rem;font-family:var(--sans);color:var(--td);background:#fff;
+  outline:none;resize:vertical;min-height:72px;line-height:1.55;transition:border-color 0.15s;
+}
+.overall-notes textarea:focus{border-color:var(--sage-mid)}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff;font-size:10pt}
+  .no-print{display:none!important}
+  .site-header,.intro-actions,.btn-print,.btn-clear,.legend{display:none!important}
+  .intro-banner{padding:0.5rem 0;border:none}
+  .main{padding:0}
+  .domain-section{break-inside:avoid;page-break-inside:avoid;border:1px solid #ccc}
+  .domain-body{display:block!important}
+  .domain-chevron{display:none}
+  .domain-header{cursor:default;padding:0.5rem 0.75rem}
+  .rating-btn{border:0.5px solid #ccc;font-size:8pt;padding:0.2rem}
+  .notes-input{border:0.5px solid #ccc;font-size:8pt}
+  .setup-field input,.setup-field select{border:0.5px solid #ccc}
+  .track-row{display:none}
+  h1{font-size:14pt}
+  .summary-chip{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .summary-chip.chip-nye{background:var(--c-nye)!important;border-color:var(--c-nye-b)!important}
+  .summary-chip.chip-em {background:var(--c-em)!important; border-color:var(--c-em-b)!important}
+  .summary-chip.chip-dev{background:var(--c-dev)!important;border-color:var(--c-dev-b)!important}
+  .summary-chip.chip-con{background:var(--c-con)!important;border-color:var(--c-con-b)!important}
+  .narrative-row{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .narrative-row.chip-nye{background:var(--c-nye)!important;border-color:var(--c-nye-b)!important}
+  .narrative-row.chip-em {background:var(--c-em)!important; border-color:var(--c-em-b)!important}
+  .narrative-row.chip-dev{background:var(--c-dev)!important;border-color:var(--c-dev-b)!important}
+  .narrative-row.chip-con{background:var(--c-con)!important;border-color:var(--c-con-b)!important}
+}
+
+@media(max-width:700px){
+  .ind-item,.ind-header{grid-template-columns:1fr}
+  .ind-num{display:none}
+  .rating-cell,.notes-cell{padding-left:0;padding-top:0.3rem}
+  .domain-progress{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="site-header no-print">
+  <a href="rebloom_website.html" class="header-brand">
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(0 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(72 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(144 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(216 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(288 14 14)"/>
+      <circle cx="14" cy="14" r="3.5" fill="#b8943a"/>
+      <circle cx="14" cy="14" r="2" fill="#d4aa50"/>
+    </svg>
+    <span class="header-logo">re<span>:Bloom</span></span>
+  </a>
+  <span class="header-sub">Child Observation &amp; Assessment</span>
+</div>
+
+<!-- Intro banner -->
+<div class="intro-banner">
+  <div class="intro-text">
+    <h1>Child Observation &amp; Assessment</h1>
+    <p>Complete this form for each child during your observation period. Rate each indicator, add notes, then print or save as PDF for your portfolio and QRIS documentation folder. No data is saved. This is a fill-and-print tool.</p>
+  </div>
+  <div class="intro-actions no-print">
+    <button class="btn-print" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save PDF
+    </button>
+    <button class="btn-clear" onclick="clearAll()">Clear All</button>
+  </div>
+</div>
+
+<!-- Setup panel -->
+<div class="setup-panel">
+  <div class="setup-grid">
+    <div class="setup-field">
+      <label>Child Name</label>
+      <input type="text" id="child-name" placeholder="First name or initials"/>
+    </div>
+    <div class="setup-field">
+      <label>Date of Birth</label>
+      <input type="date" id="child-dob"/>
+    </div>
+    <div class="setup-field">
+      <label>Assessment Date</label>
+      <input type="date" id="assess-date"/>
+    </div>
+    <div class="setup-field">
+      <label>Teacher / Observer</label>
+      <input type="text" id="teacher-name" placeholder="Your name"/>
+    </div>
+    <div class="setup-field">
+      <label>Program Name</label>
+      <input type="text" id="program-name" placeholder="Program or classroom name"/>
+    </div>
+    <div class="setup-field">
+      <label>Assessment Period</label>
+      <select id="assess-period">
+        <option value="">Select period</option>
+        <option>Fall: September/October</option>
+        <option>Winter: January/February</option>
+        <option>Spring: April/May</option>
+        <option>Summer: July/August</option>
+        <option>Beginning of Year</option>
+        <option>Mid Year</option>
+        <option>End of Year</option>
+      </select>
+    </div>
+  </div>
+  <div style="margin-top:0.85rem">
+    <label style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tl);display:block;margin-bottom:0.35rem">Age Track</label>
+    <div class="track-row no-print" id="track-selector">
+      <button class="track-btn active" data-track="infant" onclick="switchTrack(this)">Infant (Birth–12 Months)</button>
+      <button class="track-btn" data-track="toddler" onclick="switchTrack(this)">Toddler (12–36 Months)</button>
+      <button class="track-btn" data-track="preschool" onclick="switchTrack(this)">Preschool (Ages 3–5)</button>
+      <button class="track-btn fcc-tab" data-track="fcc" onclick="switchTrack(this)">Family Child Care (Birth–5)</button>
+    </div>
+    <input type="hidden" id="current-track" value="infant"/>
+  </div>
+</div>
+
+<!-- Legend -->
+<div class="legend no-print">
+  <span class="legend-label">Rating Key:</span>
+  <div class="legend-item"><span class="legend-dot nye"></span>Not Yet Observed</div>
+  <div class="legend-item"><span class="legend-dot em"></span>Emerging</div>
+  <div class="legend-item"><span class="legend-dot dev"></span>Developing</div>
+  <div class="legend-item"><span class="legend-dot con"></span>Consistently Observed</div>
+</div>
+
+<!-- Main assessment area -->
+<div class="main" id="assessment-main">
+
+  <!-- Domain coverage summary -->
+  <div class="summary-section" id="summary-section">
+    <div class="summary-title">Assessment Overview</div>
+    <p class="summary-subtitle" id="summary-subtitle">Complete indicators in each domain to see this child's developmental profile. Boxes will color-code to match the rating key as you rate.</p>
+    <div class="summary-grid" id="summary-grid">
+      <!-- populated by JS -->
+    </div>
+    <div class="domain-narratives" id="domain-narratives">
+      <!-- populated by JS -->
+    </div>
+    <div class="overall-notes">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem">
+        <label style="margin-bottom:0">Overall Summary &amp; Next Steps</label>
+        <button class="ai-gen-btn" id="ai-gen-btn" onclick="generateAISummary()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Generate AI Summary
+        </button>
+      </div>
+      <div id="ai-status" class="ai-status" style="display:none"></div>
+      <textarea id="overall-summary" placeholder="Rate indicators across the domains above, then click 'Generate AI Summary' to produce a personalized developmental summary and next steps for this child. You can also type your own notes here directly."></textarea>
+    </div>
+  </div>
+
+  <!-- Domain sections rendered by JS -->
+  <div id="fcc-note" style="display:none;padding:0.75rem 1rem;background:#FAF0EB;border:1px solid #E8C4B0;border-radius:8px;font-size:0.8rem;color:#7B3D2A;margin-bottom:1rem">
+  <strong>Family Child Care Track:</strong> Indicators are organized by age band (Infant, Toddler, Preschool) within each standard. Rate each indicator for the specific child you are assessing. Use one form per child and select the indicators that are appropriate for their current developmental level.
+</div>
+<div id="domains-container"></div>
+
+</div>
+
+<script>
+// ── ALL DOMAINS DATA ────────────────────────────────────────────────────
+// Indicators sourced directly from re:Bloom Scope and Sequence documents
+const DOMAINS = [
+  {
+    code:"AL", label:"Approaches to Learning", color:"#4a7c59", bg:"#eaf3ea",
+    standards:[
+      { code:"AL.1.a", text:"Engages in new and unfamiliar experiences.",
+        infant:["Shows interest in new objects placed nearby or within visual field","Reaches toward and mouths new materials as primary exploration","Repeats actions that produce interesting results (batting a mobile, splashing water)","Shows brief wariness of unfamiliar people before returning to exploration with caregiver present"],
+        toddler:["Approaches new materials and activities with visible excitement or curiosity","Imitates new skills or actions demonstrated by a familiar adult","Repeats a new activity many times to develop confidence and mastery","Seeks caregiver reassurance when uncertain, then re-engages with the new experience"],
+        preschool:["Approaches new materials with curiosity and interest","Tries new activities without requiring significant adult persuasion","Tolerates ambiguity and uncertainty in open-ended tasks","Verbally expresses interest in what something is or how it works"] },
+      { code:"AL.1.b", text:"Attempts and repeats activities with increasing complexity.",
+        infant:["Repeats a purposeful action many times (dropping a block, banging a surface)","Follows through on a simple one-step sequence with adult support","Shows frustration or persistence when an object is just out of reach","Moves through familiar routines with increasing anticipation of next steps"],
+        toddler:["Attempts two-step familiar routines without adult initiation","Returns to an unfinished activity after interruption","Tries multiple approaches when first attempt does not work","Sequences familiar activities in correct order (gets bib, then sits at table)"],
+        preschool:["Follows three or more step directions to complete a project","Plans a sequence of actions before beginning","Returns to multi-step projects over multiple days","Adjusts plan when a step does not work as expected"] },
+      { code:"AL.1.c", text:"Sustains attention and persists in completing activities.",
+        infant:["Maintains focused attention on a preferred object or face for a sustained period","Returns gaze or reach to an object after a brief distraction","Shows satisfaction (kicking, vocalizing) when an action produces an expected result"],
+        toddler:["Sustains engagement with a self-chosen activity for five or more minutes","Returns to a challenging task after a brief break","Expresses visible pride or satisfaction when completing something difficult","Resists redirection during deep engagement with a preferred activity"],
+        preschool:["Sustains engagement in a self-chosen task for 15 or more minutes","Resists distraction during a preferred activity","Tries a different approach when first attempt fails","Expresses satisfaction or pride when completing something difficult"] },
+      { code:"AL.2.a", text:"Develops a beginning orientation toward learning and growth.",
+        infant:["Responds positively to adult encouragement during exploration","Attempts actions that are slightly beyond current ability (reaching a bit farther, pulling to stand)","Shows pride through vocalization or expression after achieving something new"],
+        toddler:["Says or implies \'I can do it\' when attempting a challenge","Tries again after a setback with caregiver encouragement","Notices and names growing abilities: \'I jumped!\' \'I did it myself!\'","Begins to distinguish between things they can do now and things they are still learning"],
+        preschool:["Views mistakes as expected and useful parts of learning","Welcomes challenge rather than avoiding it","Notices and names own growing abilities","Encourages peers when they are struggling"] },
+    ]
+  },
+  {
+    code:"CO", label:"Cognitive Development", color:"#1a4a8a", bg:"#e8f0fa",
+    standards:[
+      { code:"CO.1.a", text:"Develops the ability to recall and recognize people, objects, and experiences.",
+        infant:["Recognizes primary caregiver by sight, sound, and smell","Shows recognition of frequently used objects (bottle, pacifier, favorite toy)","Anticipates familiar routines and events (excitement at seeing the bib)","Shows object permanence: looks for a toy briefly hidden under a cloth"],
+        toddler:["Remembers where familiar objects are kept and retrieves them","Recalls events from earlier in the day when prompted by a familiar adult","Identifies familiar people and objects in photographs","Re-enacts familiar routines in play (feeds doll, puts it to bed)"],
+        preschool:["Accurately recalls events from previous days or weeks when prompted","Retells the sequence of a recent experience with correct ordering","Uses memory of past experiences to inform current decisions","Connects a current experience to a related memory without adult prompting"] },
+      { code:"CO.2.a", text:"Develops the capacity for symbolic and representational thinking.",
+        infant:["Uses a familiar object functionally (holds cup to mouth, spoon to food)","Begins to use gestures to represent requests (reaching up means \'pick me up\')","Responds to pictures in board books as representations of real things","Imitates familiar actions after a brief delay (deferred imitation)"],
+        toddler:["Uses one object to represent another in play (a block becomes a phone)","Engages in brief two- to three-step pretend play sequences","Names objects in photographs and simple illustrations","Begins to understand that print and numbers carry meaning"],
+        preschool:["Engages in complex pretend scenarios with multiple roles and storylines","Creates representations of real objects through drawing, building, or mark-making","Understands that print, numbers, and symbols carry meaning","Uses symbols and signs in play (makes signs for a restaurant, writes on a notepad)"] },
+      { code:"CO.3.a", text:"Uses increasingly purposeful strategies to achieve goals.",
+        infant:["Tries a different approach when first attempt fails (reaches around an obstacle)","Uses a caregiver as a tool to achieve a goal (hands them the jar to open)","Repeatedly experiments with cause-and-effect relationships (drops food from highchair)","Persists in physical problem-solving with brief concentration"],
+        toddler:["Tries two or more approaches before seeking adult help","Asks for help using words or gestures when genuinely stuck","Applies a solution learned in one situation to a similar new situation","Begins to verbalize the problem before attempting to solve it"],
+        preschool:["Generates two or more possible solutions before acting","Evaluates which approach worked and explains why","Applies a solution from one problem to a new, similar situation","Seeks information resources (books, teachers, peers) before giving up"] },
+      { code:"CO.4.a", text:"Develops beginning cognitive flexibility and tolerance for change.",
+        infant:["Adjusts behavior in response to consistent caregiver cues","Shifts visual attention from one object to another","Tolerates minor changes in routine with caregiver support and preparation"],
+        toddler:["Accepts changes in routine with advance notice and clear explanation","Shifts between two play activities with decreasing difficulty over time","Follows simple rules in one context even when they differ from another context","Tolerates a substitute caregiver with a familiar caregiver\'s reassurance and preparation"],
+        preschool:["Transitions between activities with minimal emotional disruption","Applies different rules in different contexts without adult reminders","Changes approach when presented with new information","Sustains attention and shifts attention flexibly as needed"] },
+    ]
+  },
+  {
+    code:"CR", label:"Creative Development", color:"#7a4a1a", bg:"#f5ede0",
+    standards:[
+      { code:"CR.1.a", text:"Explores and expresses through sensory and visual art experiences.",
+        infant:["Explores art materials through touch, taste, and visual attention","Makes marks with a held crayon or marker using palmar grasp","Reacts visibly to colors, patterns, and textures in the environment","Shows sustained interest in looking at simple illustrations and images"],
+        toddler:["Makes intentional marks and lines on paper with a writing tool","Explores multiple art materials: paint, playdough, collage, markers","Chooses colors or materials with apparent intentionality","Names or points to what they have created when asked"],
+        preschool:["Creates representations that are recognizable to others and connected to personal experience","Chooses specific colors, textures, and materials with clear intention","Describes own artwork and the process of creating it with vocabulary","Revisits and refines a piece across multiple sessions"] },
+      { code:"CR.1.b", text:"Expresses self through music, movement, and vocal play.",
+        infant:["Responds to music with whole-body movement: kicking, rocking, reaching","Vocalizes along with songs and rhymes","Attends to singing faces and musical instruments with focused interest","Produces varied vocalizations including babbles that rise and fall in pitch"],
+        toddler:["Moves body to a musical beat with increasing coordination","Sings along with familiar songs, filling in words and phrases","Experiments with rhythm instruments: shaking, banging, tapping","Creates simple original songs or chants spontaneously during play"],
+        preschool:["Sings songs with reasonably accurate words and melody","Creates original songs, chants, or rhythms spontaneously","Moves expressively to music with varied tempo and dynamics","Takes on roles in complex dramatic play scenarios"] },
+      { code:"CR.2.a", text:"Develops imaginative and inventive play.",
+        infant:["Imitates simple familiar actions (stirs with a spoon, holds a phone to ear)","Responds to adult\'s playful pretend actions with interest and imitation","Uses an object in its functional context during play (drinks from empty cup)"],
+        toddler:["Engages in pretend play sequences of two or more steps","Takes on a simple role in dramatic play: baby, dog, mommy","Uses one object to represent another within a play sequence","Invites caregivers or peers into pretend play with gestures or words"],
+        preschool:["Creates elaborate multi-day pretend scenarios with narrative arcs","Assigns roles, negotiates plot lines, and resolves in-play conflicts verbally","Invents solutions to in-play problems using available materials","Sustains imaginative play over extended time with increasing complexity"] },
+    ]
+  },
+  {
+    code:"LL", label:"Language and Literacy", color:"#1a5a2a", bg:"#e8f5e8",
+    standards:[
+      { code:"LL.1.a", text:"Demonstrates understanding of increasingly complex language.",
+        infant:["Turns head and body toward familiar voice","Responds to own name by four to six months","Follows simple one-word directions: \'up,\' \'no,\' \'more\'","Responds to changes in adult tone: excited, soothing, warning"],
+        toddler:["Follows two-step directions in familiar contexts","Points to named pictures in board books","Responds appropriately to simple \'wh-\' questions about the immediate environment","Understands simple negatives, location words, and action words"],
+        preschool:["Follows three or more step directions correctly","Understands comparative and superlative language (bigger, biggest, faster than)","Responds appropriately to conditional language (\'if/then\') in conversation","Understands spatial and temporal vocabulary accurately (before, after, between, behind)"] },
+      { code:"LL.1.b", text:"Develops vocabulary and conceptual knowledge.",
+        infant:["Responds to frequently heard words with orienting behavior","Looks at named objects or people when language-object pairing is consistent","Associates words with familiar routines and objects","Responds differently to words with emotional valence: name, \'no,\' \'milk\'"],
+        toddler:["Understands 200 or more words by 24 months","Responds accurately to action words, descriptive words, and basic categories","Understands spatial terms in context: in, on, under, next to","Learns new words rapidly through a single exposure in meaningful context (fast mapping)"],
+        preschool:["Understands and uses Tier 2 vocabulary words introduced in instruction","Learns and retains 3–5 new words per week when explicitly taught","Explains word meanings in context using own language","Makes connections between new words and known words, concepts, or experiences"] },
+      { code:"LL.1.c", text:"Communicates using increasingly complex language.",
+        infant:["Coos and vocalizes in response to caregiver voices from birth","Uses varied consonant-vowel babbles by six to eight months","Produces intentional communicative gestures: reaching, pointing, waving","Uses first words with clear communicative intent between 10 and 14 months"],
+        toddler:["Uses 50 or more words by 18 to 24 months","Combines two words into meaningful phrases: \'more milk,\' \'daddy go,\' \'big dog\'","Uses three-word sentences by 24 to 30 months","Speech is understood by familiar adults most of the time; unfamiliar adults understand 50 to 75 percent"],
+        preschool:["Uses complete sentences of 5–6 or more words consistently","Uses compound and complex sentence structures in conversation","Uses language to explain reasoning, describe cause and effect, and make comparisons","Speech is fully intelligible to unfamiliar adults in most contexts"] },
+      { code:"LL.1.d", text:"Participates in early conversational turn-taking.",
+        infant:["Engages in vocal back-and-forth with a familiar caregiver from birth","Pauses after vocalizing as if expecting a response","Initiates \'conversation\' through eye contact, smiling, and vocalizing","Maintains joint attention on a shared object or event with a caregiver"],
+        toddler:["Initiates conversation to make requests, share observations, or seek help","Takes two or more conversational turns on the same topic","Stays on topic for two to three exchanges before shifting","Uses conversation to communicate needs, desires, and growing understanding of the world"],
+        preschool:["Sustains a topic across 3 or more conversational turns","Listens without interrupting during structured discussion (with support)","Adjusts language and tone for different listeners","Asks clarifying questions to extend or deepen conversation"] },
+      { code:"LL.1.e", text:"Develops early comprehension of books and read-aloud text.",
+        infant:["Attends to board book sharing for a brief time when held in caregiver\'s lap","Reaches for and explores board books as physical objects","Responds with excitement to familiar books through vocalization and movement","Attends to the pictures while the caregiver reads or points"],
+        toddler:["Turns pages one at a time and holds books correctly","Points to and names familiar pictures in books","Anticipates repeated phrases or events in familiar stories","Requests favorite books and shows preference for specific titles"],
+        preschool:["Retells main events in sequence after a read-aloud","Answers both literal and inferential questions about text","Makes predictions before and during reading using text evidence","Makes connections between texts and personal experience, other books, or world knowledge"] },
+      { code:"LL.2.a", text:"Develops early awareness of syllables and rhythm in speech.",
+        infant:["Responds to the rhythmic qualities of speech and song","Attends to variations in vocal rhythm and prosody","Vocalizes with varied syllable patterns: ba-ba-ba, ma-ma-ma"],
+        toddler:["Claps or moves to the rhythm of songs and chants","Recognizes and repeats simple rhythmic patterns in familiar songs","Participates in call-and-response rhyme games and fingerplays","Begins to identify when words sound alike at the end (rhyme awareness)"],
+        preschool:["Claps or taps syllables in multi-syllabic words accurately","Identifies whether a word has one, two, or more syllables","Blends two syllables to form a compound word","Segments two-syllable words into component parts"] },
+      { code:"LL.2.b", text:"Develops early awareness of beginning sounds and sound patterns.",
+        infant:["Attends to alliterative language in songs and books","Responds to repetitive sound patterns with increased attention","Produces varied consonant sounds in babbling"],
+        toddler:["Notices and shows interest in alliterative language and tongue twisters","Fills in a missing word in a familiar song or rhyme","Shows beginning awareness when two words start with the same sound","Enjoys and repeats playful words with similar initial sounds"],
+        preschool:["Identifies words that begin with the same sound","Isolates the initial consonant sound in a familiar one-syllable word","Blends an onset and rime to form a recognizable word","Generates words that begin with a given target sound"] },
+      { code:"LL.2.c", text:"Develops early awareness and enjoyment of rhyme.",
+        infant:["Attends to rhyming language in songs and books with visible interest","Responds with calm or delight to familiar rhyming text"],
+        toddler:["Shows excitement and recognition during familiar rhyming books","Fills in the rhyming word in a frequently heard book or song","Recognizes when a substituted non-rhyming word is wrong (with delight)","Produces a simple rhyming word with adult modeling and scaffolding"],
+        preschool:["Identifies whether two words rhyme with high accuracy","Generates multiple rhyming words for a given word","Distinguishes rhyming from non-rhyming word pairs","Appreciates and creates playful rhymes independently"] },
+      { code:"LL.3.a", text:"Develops early knowledge of print and books.",
+        infant:["Handles board books as objects: holds, mouths, and turns pages with assistance","Attends to caregiver pointing to print while reading","Shows recognition of frequently seen covers or books"],
+        toddler:["Turns pages one at a time in the correct direction","Holds books right-side up and reads front to back","Points to pictures when asked and understands that print carries meaning","Distinguishes between pictures and text on a page when pointed out"],
+        preschool:["Understands print is read left to right and top to bottom in English","Identifies a word, letter, sentence, and page in a text","Locates specific words or letters in familiar environmental print","Distinguishes between print and pictures on a page"] },
+      { code:"LL.3.b", text:"Develops early interest in and awareness of letters and print.",
+        infant:["Attends to adult pointing to letters and naming them during shared reading","Shows interest in environmental print in familiar settings"],
+        toddler:["Shows interest in letters, especially in own name","Recognizes own name in print in some contexts","Distinguishes letters from numbers and from pictures","Points to or names one to three familiar letters with consistency"],
+        preschool:["Names and identifies most uppercase and 10 or more lowercase letters","Produces the most common sound for several letters","Identifies the letter that represents a given initial sound in familiar words","Writes several letters independently including own first name"] },
+      { code:"LL.4.a", text:"Develops early understanding of mark-making and writing.",
+        infant:["Observes adult writing with interest","Makes mark-making motions with a held writing tool (assisted)","Shows interest in the result of making a mark"],
+        toddler:["Makes intentional marks on paper with a writing tool","Understands that marks and scribbles \'say something\'","Dictates words or ideas for an adult to write","Distinguishes drawing from writing when both are present"],
+        preschool:["Understands that letters and words on a page represent spoken words","Asks adults to read back what they wrote","Attempts to write words by saying them aloud and writing letters for sounds","Writes own name to communicate identity and ownership"] },
+      { code:"LL.4.b", text:"Develops early fine motor control for mark-making and tool use.",
+        infant:["Grasps a large crayon with whole-hand palmar grip","Transfers objects between hands","Explores mark-making through whole-arm movement"],
+        toddler:["Uses digital pronate grasp with wrist rotated downward","Makes intentional marks, lines, and circular scribbles","Shows beginning hand preference in tool use","Attempts to copy a simple vertical line or circular shape"],
+        preschool:["Uses a dynamic tripod or similar mature grasp for writing tools","Copies basic geometric shapes with accuracy","Produces recognizable letters with controlled directionality","Writes from left to right with increasing consistency"] },
+    ]
+  },
+  {
+    code:"MA", label:"Mathematics", color:"#4a1a7a", bg:"#f0e8fa",
+    standards:[
+      { code:"MA.1.a", text:"Develops early awareness of counting and number words.",
+        infant:["Responds to the rhythmic quality of counting chants","Attends to adult counting during caregiving routines","Vocalizes along with counting songs"],
+        toddler:["Recites number words in sequence up to five, sometimes skipping or repeating","Points to objects while saying number words (without reliable one-to-one correspondence yet)","Demonstrates awareness that counting involves saying number words in a sequence","Participates enthusiastically in counting songs and fingerplays"],
+        preschool:["Counts accurately to 20 without skipping or repeating numbers","Counts backward from 10 with accuracy","Begins counting a set from any number, not always from 1","Counts by 10s to 100 with support"] },
+      { code:"MA.1.b", text:"Develops early understanding of quantity and one-to-one correspondence.",
+        infant:["Distinguishes visually between one and more than one object","Reaches toward a visible collection of objects","Shows awareness when an expected object is missing from a familiar set"],
+        toddler:["Points to each object once while counting a set of one to three (with support)","Accurately counts and distributes small sets of one to three with adult modeling","Understands \'one more\' and \'one less\' with concrete objects present","Responds correctly when asked to give one, two, or three objects from a larger set"],
+        preschool:["Counts a set of up to 10 objects with reliable one-to-one correspondence","Understands that the last number stated equals the total (cardinality principle)","Counts out a specific number from a larger set accurately","Compares two sets and determines \'more,\' \'less,\' or \'equal\'"] },
+      { code:"MA.1.c", text:"Develops early subitizing ability with very small quantities.",
+        infant:["Visually attends to small collections of one or two objects","Shows different attention patterns to one versus two versus three objects"],
+        toddler:["Recognizes one or two objects without counting","Begins to recognize three objects without counting in familiar contexts","Names the quantity of a very small group (\'two!\' for two crackers) without visible counting"],
+        preschool:["Instantly recognizes groups of 1–3 without counting","Recognizes groups of 4–5 with brief exposure and practice","Names the quantity of a small group without counting aloud","Uses subitizing to compare small groups quickly"] },
+      { code:"MA.2.a", text:"Develops early understanding of quantity relationships and simple operations.",
+        infant:["Notices and reacts when objects are added to or removed from a small visible set","Shows a surprised response when visual addition or subtraction produces an unexpected result"],
+        toddler:["Uses \'more\' and \'all gone\' with accurate understanding","Combines two small groups and makes an attempt to count the total","Shows awareness that adding increases and taking away decreases a set","Uses \'more,\' \'less,\' and \'same\' in play and mealtime contexts"],
+        preschool:["Combines two groups of objects and counts the total (addition)","Removes objects from a group and counts what remains (subtraction)","Solves simple addition and subtraction story problems using objects","Uses number relationships to compare quantities (5 is more than 3 because...)"] },
+      { code:"MA.3.a", text:"Develops early measurement concepts through comparison.",
+        infant:["Holds and mouths objects of different sizes and weights","Reacts with surprise when a container does not hold what is expected","Compares two objects by placing them next to each other"],
+        toddler:["Uses big and little, heavy and light in spontaneous speech","Compares two objects directly and identifies which is bigger or smaller","Fills and dumps containers repeatedly to explore capacity","Lines objects up by size with adult guidance"],
+        preschool:["Compares and orders 3 or more objects by length, weight, or capacity","Uses non-standard units to measure with consistency","Uses accurate measurement vocabulary (longer, shorter, heavier, lighter, holds more)","Understands that measuring requires a consistent unit"] },
+      { code:"MA.3.b", text:"Develops early sorting and classification skills.",
+        infant:["Mouths and manipulates objects with different attributes","Reacts differently to objects of different sizes or textures","Shows consistent preferences for certain objects over others"],
+        toddler:["Matches objects that are identical","Sorts objects by a single obvious attribute with adult guidance (all the red ones, all the big ones)","Notices when an object does not belong in a group","Names the attribute used to sort after sorting"],
+        preschool:["Sorts a collection by a single attribute with accuracy","Sorts the same collection by a different attribute when asked","Names the sorting rule before or after sorting","Creates own categories and explains the reasoning behind them"] },
+      { code:"MA.3.c", text:"Develops early awareness of patterns.",
+        infant:["Responds to predictable patterns in routines and songs","Attends to visual patterns in fabric, wallpaper, and the environment","Anticipates the next event in a familiar repeated sequence"],
+        toddler:["Recognizes and repeats a simple AB sound or movement pattern","Continues a two-element pattern from a model with support","Identifies when a pattern has been broken in a familiar song or routine","Participates in patterned songs and movement games"],
+        preschool:["Creates and extends AB and ABB patterns independently","Identifies the repeating unit in a pattern","Creates patterns with three or more elements","Translates a pattern across different representations (color → sound → movement)"] },
+      { code:"MA.4.a", text:"Develops early shape recognition and spatial awareness.",
+        infant:["Mouths and handles objects of different shapes","Attends to high-contrast shapes in the visual environment","Explores spatial relationships by mouthing, turning, and transferring objects"],
+        toddler:["Names circle, square, and triangle in familiar contexts","Matches identical two-dimensional shapes","Finds shapes in the environment when named by an adult","Fits shapes into matching holes in simple shape sorters"],
+        preschool:["Names circle, square, triangle, rectangle, oval, and hexagon reliably","Describes shapes by number of sides and corners","Identifies shapes in different orientations and sizes","Names common 3D shapes (sphere, cube, cylinder, cone)"] },
+      { code:"MA.4.b", text:"Develops early spatial reasoning and positional awareness.",
+        infant:["Reaches across the midline to retrieve objects","Explores in, out, over, and under by placing objects into and out of containers","Reacts to position changes: being lifted, lowered, and turned"],
+        toddler:["Follows directions using in, on, under, and next to","Uses spatial words in spontaneous speech: up, down, more, out","Completes simple inset puzzles","Fills and dumps containers with increasing intentionality about placement"],
+        preschool:["Uses and understands spatial language accurately (in front of, behind, between, beside, above, below)","Creates and follows a simple diagram or map of a familiar space","Completes 12+ piece puzzles","Describes the location of objects using accurate positional language"] },
+    ]
+  },
+  {
+    code:"PW", label:"Physical Development and Wellness", color:"#8b1a1a", bg:"#fae8e8",
+    standards:[
+      { code:"PW.1.a", text:"Develops competency in locomotor and non-locomotor movement.",
+        infant:["Gains and maintains head control in supported positions and during tummy time","Rolls from back to belly and belly to back","Pulls to stand at a support surface","Takes first steps with support, then independently"],
+        toddler:["Walks independently with improving balance and coordination","Walks up and down stairs with hand support (both feet on each step)","Runs with increasing coordination and directional control","Jumps with two feet together and kicks a stationary ball"],
+        preschool:["Runs with control of speed and direction","Hops on one foot 3 or more consecutive times","Skips with an alternating step-hop pattern","Walks up and down stairs alternating feet","Throws, catches, and kicks with increasing coordination and accuracy"] },
+      { code:"PW.1.b", text:"Develops fine motor precision and hand-eye coordination.",
+        infant:["Develops reach with increasing accuracy from random batting to directed grasp","Transfers objects between hands","Develops pincer grasp (thumb and forefinger) between seven and ten months","Bangs objects together with intention"],
+        toddler:["Turns pages in a board book one at a time","Uses a spoon with some spilling","Strings large beads and completes four- to six-piece puzzles","Uses scissors with bilateral hand stabilization and adult guidance"],
+        preschool:["Cuts along a line and around simple shapes with scissors","Strings small beads or laces with control","Completes 20+ piece puzzles independently","Demonstrates tripod grasp for writing tools with stability"] },
+      { code:"PW.1.c", text:"Develops oral motor function for feeding, communication, and health.",
+        infant:["Establishes effective latch and rhythmic sucking for feeding","Transitions to soft pureed foods with minimal gagging at four to six months","Manages increasing food textures as developmentally appropriate","Develops the tongue lateralization needed to move food to the molars"],
+        toddler:["Manages a wide variety of food textures without difficulty","Drinks from an open cup with minimal spilling","Uses tongue movement effectively in articulation of most sounds","Blows, sucks, and uses lip rounding for varied oral motor activities"],
+        preschool:["Produces most English speech sounds accurately for age","Uses utensils for eating with control and appropriate grip","Manages a variety of food textures without difficulty","Blows, sucks, and uses tongue movements for age-appropriate activities"] },
+      { code:"PW.1.d", text:"Uses sensory information to guide movement and interaction.",
+        infant:["Responds to touch, sound, light, and movement in the environment","Reaches toward visual targets with increasing accuracy","Orients to familiar voices and sounds","Shows sensory preferences and sensitivities from birth"],
+        toddler:["Uses hands to explore objects before using them functionally","Visually tracks moving objects across the full visual field","Adjusts movement in response to sensory information: steps around obstacles, slows on uneven ground","Shows consistent sensory preferences for certain textures, sounds, and light levels"],
+        preschool:["Adjusts movement in response to sensory information (steps around obstacles, catches a rolling ball)","Manages varied sensory environments without significant dysregulation","Describes sensory experiences using vocabulary for texture, temperature, sound, and movement","Shows appropriate sensory seeking or avoidance preferences"] },
+      { code:"PW.2.a", text:"Develops awareness of the body and its basic functions.",
+        infant:["Explores own hands and feet visually and through mouthing","Brings hands together at the midline","Shows awareness of hunger, satiation, and discomfort through distinct cues","Begins to associate words with body parts through consistent naming during caregiving"],
+        toddler:["Names major body parts including head, arms, legs, hands, feet, and belly","Points to body parts on a doll or in a picture","Shows awareness of internal physical states: hunger, fatigue, and the need to use the toilet","Begins to understand that body parts have specific functions"],
+        preschool:["Names and locates all major body parts including internal organs","Describes basic functions of the brain, heart, and lungs in child-accessible terms","Understands that the body needs nutritious food, water, sleep, and movement","Connects physical feelings (hunger, fatigue, nervousness) to body signals"] },
+      { code:"PW.2.b", text:"Develops personal health and self-care practices with increasing independence.",
+        infant:["Participates in the diapering routine with increasing cooperation","Holds out arm or lifts foot for dressing with adult cue","Responds to tooth-brushing routine without major resistance","Shows awareness during caregiving routines through orientation and attention"],
+        toddler:["Assists with hand washing following adult modeling and verbal prompts","Attempts to dress and undress with adult support","Pulls up diaper or pants independently","Uses tissue with adult reminder and support"],
+        preschool:["Washes hands correctly and independently following all steps","Dresses and undresses independently, managing buttons and zippers with effort","Brushes teeth and blows/wipes nose independently","Manages toileting completely independently"] },
+      { code:"PW.2.c", text:"Develops healthy eating behaviors and a positive relationship with food.",
+        infant:["Feeds on demand and communicates clear hunger and satiation cues","Accepts spoon feeding calmly and shows interest in family foods","Explores finger foods with curiosity from six to eight months","Begins to self-feed with hands from eight to ten months"],
+        toddler:["Eats a variety of foods from multiple food groups with some variation in acceptance","Shows willingness to try new foods with adult modeling and patience","Uses utensils at most meals with some spilling","Communicates hunger and fullness and has those communications respected"],
+        preschool:["Names foods from all major food groups and categorizes them","Describes why some foods support the body\'s energy and growth","Serves own food portions and uses utensils independently","Communicates hunger and fullness with vocabulary and self-advocates"] },
+      { code:"PW.2.d", text:"Develops healthy sleep behaviors and a regulated rest rhythm.",
+        infant:["Begins to consolidate sleep into longer periods by three to four months","Shows clear sleepiness cues: yawning, eye rubbing, decreased engagement","Self-soothes for brief periods with caregiver support","Develops predictable nap rhythm with consistent caregiver response"],
+        toddler:["Naps once daily by 12 to 18 months, typically for one to three hours","Uses a comfort object for self-soothing at rest time","Falls asleep with decreasing caregiver intervention over time","Shows irritability, dysregulation, or hyperactivity as tired signals"],
+        preschool:[] },
+      { code:"PW.2.e", text:"Participates in physical activity with joy and growing endurance.",
+        infant:["Engages actively during floor play with visible enjoyment","Responds positively to outdoor time through increased alertness and engagement","Tolerates and begins to enjoy tummy time with growing duration","Reaches, rolls, and moves purposefully during play time"],
+        toddler:["Participates enthusiastically in outdoor play with climbing, running, and exploring","Seeks out physical challenges: climbing, jumping, rolling down a hill","Sustains active physical play for 20 or more minutes","Shows distress when denied outdoor time or movement opportunities"],
+        preschool:["Participates willingly in structured and unstructured physical activity daily","Describes physical activity as enjoyable and beneficial","Demonstrates sustained engagement in active play for 20+ continuous minutes","Identifies physical activities they enjoy and seeks them out voluntarily"] },
+      { code:"PW.2.f", text:"Develops early understanding of safety.",
+        infant:["Calms in response to caregiver voice in startling or unfamiliar situations","Responds to firm \'no\' or \'stop\' with brief pausing","Tolerates safe sleep environment without resistance","Orients to caregiver as safety anchor in unfamiliar settings"],
+        toddler:["Follows basic safety rules with consistent adult reminders: holding hands near traffic, not climbing on furniture","Communicates pain, discomfort, or fear using words or gestures","Understands \'hot,\' \'sharp,\' and \'be careful\' as safety signals","Participates in basic safety routines with adult guidance"],
+        preschool:["States and follows classroom and outdoor safety rules without adult reminders","Understands pedestrian and traffic safety basics","Identifies trusted adults to go to for help in different settings","Participates in and can explain safety drill procedures"] },
+    ]
+  },
+  {
+    code:"SC", label:"Science", color:"#0b5345", bg:"#e0f5f0",
+    standards:[
+      { code:"SC.1.a", text:"Explores and investigates objects and events in the environment.",
+        infant:["Mouths, shakes, bangs, and drops objects to explore their properties","Repeats actions that produce interesting results with clear intention","Explores natural materials with interest: leaves, grass, water, sand","Reaches for and explores objects of varied textures, weights, and temperatures"],
+        toddler:["Uses multiple senses systematically to explore materials","Pours, fills, stirs, and mixes substances in repetitive investigation","Compares two objects using simple descriptive language","Asks \'What\'s that?\' and \'Why?\' about unfamiliar phenomena"],
+        preschool:["Uses multiple senses purposefully and systematically to gather information","Uses tools to extend observation (magnifying glass, ruler, balance scale)","Makes detailed verbal observations and records them through drawing or dictation","Compares two or more objects or phenomena using precise descriptive vocabulary"] },
+      { code:"SC.1.b", text:"Develops early reasoning about cause and effect.",
+        infant:["Repeats actions that produce a desired effect with clear intention","Shows a surprised response when an expected effect does not occur","Demonstrates understanding that their own actions produce predictable results","Explores cause-and-effect toys with sustained engagement"],
+        toddler:["Identifies a simple cause-and-effect relationship they have observed: \'It broke because I dropped it\'","Predicts what will happen before a familiar action","Asks \'Why?\' about observed phenomena with genuine curiosity","Connects an observed effect to its cause with adult prompting and scaffolding"],
+        preschool:["States a hypothesis and tests it (\'I think it will happen because...\')","Identifies the cause of an observed phenomenon using evidence","Designs a simple test to answer a question with adult support","Distinguishes between variables in a simple investigation with guidance"] },
+    ]
+  },
+  {
+    code:"SE", label:"Social-Emotional Development", color:"#7d4e00", bg:"#fdf0dc",
+    standards:[
+      { code:"SE.1.a", text:"Develops a beginning sense of self as a unique and valued person.",
+        infant:["Shows awareness of own body through mouthing, touching, and visual exploration","Smiles at own reflection in a mirror","Distinguishes familiar from unfamiliar people with different responses","Shows awareness of own emotional and physical states"],
+        toddler:["Refers to self by name and begins using \'I\' and \'me\'","Names and communicates basic personal characteristics: name, age, family members","Identifies own physical characteristics with some accuracy","Expresses preferences, opinions, and growing sense of personal identity"],
+        preschool:["Describes own characteristics, preferences, abilities, and family with specificity","Understands that personal characteristics make each person unique and valuable","Identifies personal strengths and names areas still developing with equanimity","Connects personal identity to family culture, language, and community background"] },
+      { code:"SE.1.b", text:"Develops early understanding of emotions in self and others.",
+        infant:["Expresses emotions through facial expression, body, and vocalization","Responds differentially to caregiver emotional expressions","Shows clear differentiation between happy, distressed, and fearful states","Distinguishes between a smiling and a frowning face by two to three months"],
+        toddler:["Names happy, sad, mad, and scared in self and others","Identifies emotions in pictures, stories, and the faces of familiar people","Shows empathy through facial expression, physical comfort, or offers of an object","Begins to use words to express emotional states before or during emotional escalation"],
+        preschool:["Names and identifies a range of emotions beyond basic happy/sad/mad/scared","Identifies the cause of an emotional experience (\'I\'m frustrated because...\')","Recognizes emotions in others from facial cues, body language, and verbal expression","Uses feeling vocabulary in daily interactions across contexts"] },
+      { code:"SE.2.a", text:"Develops early capacity for emotional regulation with caregiver support.",
+        infant:["Calms in response to consistent caregiver soothing strategies","Uses a comfort object or self-soothing behavior for brief periods","Shows increasing predictability in distress and recovery patterns","Responds to caregiver co-regulation with decreased arousal"],
+        toddler:["Uses simple regulation strategies with caregiver coaching: deep breath, going to a quiet space, using a comfort object","Accepts caregiver redirection and co-regulation most of the time","Shows growing ability to recover from emotional upset with caregiver support","Begins to signal distress before full escalation in familiar, safe environments"],
+        preschool:["Uses 2 or more self-regulation strategies independently when distressed","Waits for a turn without adult prompting in most contexts","Recovers from emotional upset within a reasonable time frame without adult escalation","Identifies own regulation strategies and names them: \'When I\'m mad I take breaths\'"] },
+      { code:"SE.3.a", text:"Develops early empathy and awareness of others.",
+        infant:["Shows concern when another infant cries","Imitates the emotional expressions of a familiar caregiver","Responds to distress in others with changed attention and expression","Initiates affectionate contact with familiar people"],
+        toddler:["Shows concern and attempts comfort when a peer is hurt or upset","Notices and names emotions in familiar peers","Offers a toy or comfort object to a distressed peer occasionally","Begins to consider others\' feelings with adult prompting"],
+        preschool:["Consistently shows concern for others\' feelings without adult prompting","Identifies how others might feel in a given situation using evidence","Offers comfort or assistance to a peer who is distressed","Understands that others can feel differently about the same situation"] },
+      { code:"SE.4.a", text:"Develops secure, trusting relationships with consistent caregivers.",
+        infant:["Shows clear preference for primary caregiver by two to three months","Uses primary caregiver as a secure base for exploration","Seeks primary caregiver for comfort when distressed","Responds to caregiver initiations with engagement and delight"],
+        toddler:["Seeks familiar caregivers for comfort, play, and reassurance","Greets familiar caregivers warmly after separation","Uses a trusted caregiver as a resource for problem-solving and exploration","Shows distress at caregiver departure and welcomes their return"],
+        preschool:["Maintains a positive and secure relationship with the primary teacher","Seeks adult support for academic and social challenges without hesitation","Responds positively to teacher warmth and encouragement","Uses the adult relationship as a stable base for exploration and risk-taking"] },
+      { code:"SE.4.b", text:"Develops beginning social competence with familiar peers.",
+        infant:["Shows interest in the faces and vocalizations of other infants","Initiates brief interaction with familiar peers","Engages in simple back-and-forth interaction with a peer with adult facilitation"],
+        toddler:["Plays alongside peers with awareness of what they are doing (parallel play)","Initiates brief interactions with peers through gestures and words","Shares a toy or material with adult prompting","Begins to prefer certain peers for play and seeks them out"],
+        preschool:["Initiates and sustains cooperative play with peers","Compromises and negotiates in peer play without adult mediation most of the time","Shows preference for specific friends and maintains reciprocal friendships","Invites others into play and responds warmly to peer invitations"] },
+      { code:"SE.4.c", text:"Develops beginning strategies for navigating conflict.",
+        infant:["Protests by crying or pulling away when a toy is taken","Uses gestures to communicate displeasure","Accepts caregiver mediation with brief soothing"],
+        toddler:["Uses words to communicate displeasure: \'Mine!\', \'No!\', \'Stop!\'","Accepts caregiver mediation in most peer conflicts","Occasionally uses a simple negotiation strategy: \'I had it first,\' \'Can I have it after?\'","Moves away from a conflict rather than escalating it in some situations"],
+        preschool:["Attempts verbal negotiation before seeking adult help","Uses 2 or more conflict resolution strategies independently","Accepts a peer\'s solution and moves forward without lingering resentment","Reflects on a conflict and identifies what they might do differently next time"] },
+    ]
+  },
+  {
+    code:"SS", label:"Social Studies", color:"#2c3e50", bg:"#e8ecf0",
+    standards:[
+      { code:"SS.1.a", text:"Develops awareness of own identity and the diversity of people and families.",
+        infant:["Recognizes and responds to family members and other familiar caregivers","Shows recognition of cultural foods, music, and objects from the home environment","Responds positively to images of people who look like family members","Attends to human faces with particular intensity from birth"],
+        toddler:["Names family members and describes basic roles: mama feeds me, daddy gives baths","Identifies self as belonging to a specific family and community","Shows interest in and curiosity about cultural differences in food, language, and customs","Uses home language words and shows comfort and pride in home culture"],
+        preschool:["Describes own family, culture, traditions, and community with specificity","Shows genuine curiosity about and respect for others\' cultures, languages, and family structures","Makes connections between own and others\' families, identifying similarities and differences","Uses culturally respectful language when talking about people who are different from themselves"] },
+      { code:"SS.1.b", text:"Develops early understanding of needs, wants, and community roles.",
+        infant:["Communicates needs through crying, gesture, and later vocalization","Distinguishes between caregiving contexts (feeding, play, comfort) and responds accordingly","Shows satisfaction when needs are met and distress when they are not"],
+        toddler:["Identifies basic needs: food, water, sleep, love, and safety","Distinguishes between something needed and something wanted with adult support","Identifies one or two community helpers by name and role","Connects the role of familiar helpers to meeting needs: \'The doctor helps when you are sick\'"],
+        preschool:["Identifies basic needs (food, water, shelter, love, safety) and distinguishes them from wants","Understands that people make choices because resources are limited","Connects community helper roles to meeting people\'s needs","Understands basic concepts of exchange: trading, buying, and giving"] },
+      { code:"SS.1.c", text:"Develops beginning understanding of rules, rights, and shared community.",
+        infant:["Responds to consistent caregiver expectations with increasing cooperation","Follows simple safety routines with consistent adult cuing","Shows awareness of classroom structures and expectations through anticipation of routine"],
+        toddler:["Follows simple classroom rules with adult reminders","Participates in classroom cleanup and care routines with adult guidance","Begins to understand that rules help the group stay safe and happy","Shows awareness when rules are broken and may communicate about it"],
+        preschool:["States and follows classroom rules without adult prompting most of the time","Takes ownership of classroom responsibilities and jobs","Explains why rules and responsibilities matter for the wellbeing of the group","Participates meaningfully in creating classroom agreements"] },
+      { code:"SS.1.d", text:"Develops beginning ability to care for materials and the environment.",
+        infant:["Tolerates gentle guidance in handling materials","Responds to caregiver modeling of careful material handling","Shows interest in observing the caregiver care for the room"],
+        toddler:["Returns materials to the shelf with adult reminders and physical guidance","Handles books and materials with increasing care","Participates in classroom cleanup with enthusiastic adult participation","Notices when materials are broken or misused and communicates about it"],
+        preschool:["Returns materials to proper locations independently after use","Handles books, tools, and materials with demonstrated care","Takes initiative to repair or report damaged materials rather than abandoning them","Participates in caring for living things in the classroom environment"] },
+    ]
+  },
+];
+
+// ── State ──────────────────────────────────────────────────────────────
+const FCC_DOMAINS = [
+  {
+    code:"AL", label:"Approaches to Learning", color:"#2980B9", bg:"#e8f4fd",
+    standards:[
+      { code:"AL.1.a", text:"Engages with new experiences and materials with curiosity and initiative.",
+        fcc:[{text:"Reaches toward and mouths new objects placed in reach",age:"Infant"},
+        {text:"Orients toward novel sounds and visual stimuli",age:"Infant"},
+        {text:"Shows excitement (kicking, vocalizing) when presented with new materials",age:"Infant"},
+        {text:"Approaches new materials independently after brief observation",age:"Toddler"},
+        {text:"Returns to a new material multiple times across the day",age:"Toddler"},
+        {text:"Vocalizes or points to new things with interest",age:"Toddler"},
+        {text:"Approaches unfamiliar activities without requiring adult encouragement",age:"Preschool"},
+        {text:"Asks questions about how things work or what will happen",age:"Preschool"},
+        {text:"Sustains engagement with a self-chosen activity for 15 or more minutes",age:"Preschool"}] },
+      { code:"AL.1.b", text:"Persists in completing activities with increasing complexity.",
+        fcc:[{text:"Repeats an action to reproduce an interesting effect (shaking rattle)",age:"Infant"},
+        {text:"Maintains interest in an object or face for extended moments",age:"Infant"},
+        {text:"Continues reaching for an object after initial attempts",age:"Infant"},
+        {text:"Returns to an interrupted activity after a brief distraction",age:"Toddler"},
+        {text:"Attempts multiple approaches before seeking adult help",age:"Toddler"},
+        {text:"Completes familiar two-step sequences independently",age:"Toddler"},
+        {text:"Follows through on multi-step projects across multiple days",age:"Preschool"},
+        {text:"Adjusts strategy when first approach fails",age:"Preschool"},
+        {text:"Completes a task from beginning to end without adult reminders",age:"Preschool"}] },
+      { code:"AL.2.a", text:"Develops a growth mindset and orientation toward learning from mistakes.",
+        fcc:[{text:"Recovers from minor frustration with caregiver support",age:"Infant"},
+        {text:"Tries a different position or approach to reach a desired object",age:"Infant"},
+        {text:"Attempts again after initial failure with brief adult encouragement",age:"Toddler"},
+        {text:"Watches how others solve a problem and tries the same approach",age:"Toddler"},
+        {text:"Shows pride in accomplishment: clapping, vocalizing",age:"Toddler"},
+        {text:"Names mistakes as expected parts of learning ('I did not get it yet')",age:"Preschool"},
+        {text:"Encourages a peer who is struggling",age:"Preschool"},
+        {text:"Welcomes challenge rather than avoiding difficulty",age:"Preschool"}] },
+      { code:"AL.1.c", text:"Sustains attention and transitions between activities with increasing flexibility.",
+        fcc:[{text:"Maintains focus on a face or object for several seconds",age:"Infant"},
+        {text:"Shifts attention smoothly when an adult redirects with a warm tone",age:"Infant"},
+        {text:"Sustains play with a preferred material for 5 to 10 minutes",age:"Toddler"},
+        {text:"Uses transition objects (stuffed animal, blanket) to support move between activities",age:"Toddler"},
+        {text:"Responds to a verbal warning before a transition with less distress over time",age:"Toddler"},
+        {text:"Transitions between activities with minimal emotional disruption when warned in advance",age:"Preschool"},
+        {text:"Applies different rules in different contexts without adult reminders",age:"Preschool"},
+        {text:"Holds a thought through a brief distraction and returns to it",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"CO", label:"Cognitive Development", color:"#1A5276", bg:"#eaf0fb",
+    standards:[
+      { code:"CO.1.a", text:"Develops the ability to recall and connect information from past experiences.",
+        fcc:[{text:"Recognizes familiar caregiver faces and voices",age:"Infant"},
+        {text:"Anticipates next step in a repeated routine (opens mouth when bib appears)",age:"Infant"},
+        {text:"Shows recognition of a familiar object after brief disappearance",age:"Infant"},
+        {text:"Recalls events from previous days when prompted by an adult",age:"Toddler"},
+        {text:"Remembers where a favorite toy is kept",age:"Toddler"},
+        {text:"Connects a current experience to a previous one: 'Like at grandma's'",age:"Toddler"},
+        {text:"Accurately recalls a sequence of events from a prior day or week",age:"Preschool"},
+        {text:"Uses memory of past experiences to predict or plan ('Last time it did not work, so I will try...')",age:"Preschool"},
+        {text:"Makes connections between new information and prior knowledge spontaneously",age:"Preschool"}] },
+      { code:"CO.2.a", text:"Develops the capacity for symbolic and representational thinking.",
+        fcc:[{text:"Uses one object as a tool to reach another",age:"Infant"},
+        {text:"Responds to own name and image in a mirror",age:"Infant"},
+        {text:"Imitates facial expressions and simple gestures",age:"Infant"},
+        {text:"Uses one object to represent another in play (block as car, cloth as cape)",age:"Toddler"},
+        {text:"Understands that a picture in a book represents a real object",age:"Toddler"},
+        {text:"Engages in simple pretend sequences with one or two steps",age:"Toddler"},
+        {text:"Creates elaborate pretend scenarios with multiple roles and props",age:"Preschool"},
+        {text:"Understands that printed letters and numbers carry meaning",age:"Preschool"},
+        {text:"Uses drawing, painting, or building to represent an idea or experience",age:"Preschool"}] },
+      { code:"CO.3.a", text:"Uses increasingly sophisticated strategies to understand and solve problems.",
+        fcc:[{text:"Explores cause-and-effect through repeated actions",age:"Infant"},
+        {text:"Searches for a partially hidden object",age:"Infant"},
+        {text:"Uses a caregiver's face to gauge safety of new situation (social referencing)",age:"Infant"},
+        {text:"Attempts multiple strategies when first approach fails",age:"Toddler"},
+        {text:"Seeks adult assistance when a problem exceeds capacity",age:"Toddler"},
+        {text:"Observes a more capable peer and adapts the observed strategy",age:"Toddler"},
+        {text:"Generates two or more possible solutions before acting",age:"Preschool"},
+        {text:"Evaluates which strategy worked and explains why",age:"Preschool"},
+        {text:"Applies a solution from one problem to a new, similar situation",age:"Preschool"}] },
+      { code:"CO.4.a", text:"Develops the ability to hold attention and shift thinking flexibly.",
+        fcc:[{text:"Maintains gaze on a moving object",age:"Infant"},
+        {text:"Recovers interest in a familiar object after brief distraction",age:"Infant"},
+        {text:"Sustains play for gradually increasing durations",age:"Toddler"},
+        {text:"Adapts behavior when a familiar rule changes with adult support",age:"Toddler"},
+        {text:"Holds one rule in mind while an adult gives a direction",age:"Toddler"},
+        {text:"Applies different rules in different contexts without reminders",age:"Preschool"},
+        {text:"Sustains focused attention during a chosen activity despite background distraction",age:"Preschool"},
+        {text:"Changes approach when presented with new information mid-task",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"CR", label:"Creative Development", color:"#B7950B", bg:"#fdf8e1",
+    standards:[
+      { code:"CR.1.a", text:"Expresses ideas, feelings, and experiences through visual art.",
+        fcc:[{text:"Responds to visual stimulation with gaze, reaching, or vocalizing",age:"Infant"},
+        {text:"Explores texture and color when safe materials are placed in reach",age:"Infant"},
+        {text:"Creates marks on paper or sensory surfaces with hands or tools",age:"Infant"},
+        {text:"Selects specific materials with apparent preference",age:"Toddler"},
+        {text:"Creates recognizable (to themselves) marks or shapes",age:"Toddler"},
+        {text:"Describes their artwork when asked: 'That is my dog'",age:"Toddler"},
+        {text:"Creates representations connected to personal experience or imagination",age:"Preschool"},
+        {text:"Chooses specific colors and materials with clear intention",age:"Preschool"},
+        {text:"Revisits and refines a piece across multiple sessions",age:"Preschool"}] },
+      { code:"CR.1.b", text:"Expresses self through music and movement.",
+        fcc:[{text:"Calms or activates in response to music",age:"Infant"},
+        {text:"Moves body rhythmically to a beat",age:"Infant"},
+        {text:"Vocalizes in musical patterns: cooing, babbling with varied pitch",age:"Infant"},
+        {text:"Attempts to sing familiar songs with partial words",age:"Toddler"},
+        {text:"Moves to music with whole-body engagement",age:"Toddler"},
+        {text:"Creates simple rhythmic patterns through clapping, stomping, or banging",age:"Toddler"},
+        {text:"Sings familiar songs with reasonably accurate words and melody",age:"Preschool"},
+        {text:"Creates original songs, chants, or rhythms spontaneously",age:"Preschool"},
+        {text:"Moves expressively to music with attention to tempo and dynamics",age:"Preschool"}] },
+      { code:"CR.2.a", text:"Develops original ideas through imaginative and inventive play.",
+        fcc:[{text:"Imitates caregiver actions with objects (pretends to talk on a block)",age:"Infant"},
+        {text:"Anticipates a playful routine (peek-a-boo)",age:"Infant"},
+        {text:"Shows delight in novel combinations of objects",age:"Infant"},
+        {text:"Engages in simple one-to-two step pretend sequences",age:"Toddler"},
+        {text:"Assigns roles to stuffed animals or dolls",age:"Toddler"},
+        {text:"Invents play scenarios using available materials",age:"Toddler"},
+        {text:"Creates elaborate multi-day pretend scenarios with narrative arcs",age:"Preschool"},
+        {text:"Assigns roles, negotiates plot lines, and resolves in-play conflicts",age:"Preschool"},
+        {text:"Sustains imaginative play over extended time with increasing complexity",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"LL", label:"Language and Literacy", color:"#1E8449", bg:"#eaf5ec",
+    standards:[
+      { code:"LL.1.a", text:"Demonstrates understanding of increasingly complex language.",
+        fcc:[{text:"Turns toward familiar voices and responds to own name",age:"Infant"},
+        {text:"Responds to 'no' and other high-frequency words with behavioral change",age:"Infant"},
+        {text:"Follows simple gestures paired with words",age:"Infant"},
+        {text:"Follows simple two-step directions",age:"Toddler"},
+        {text:"Understands basic prepositions (on, in, under)",age:"Toddler"},
+        {text:"Responds to questions about familiar objects and people",age:"Toddler"},
+        {text:"Follows three or more step directions correctly",age:"Preschool"},
+        {text:"Understands comparative and superlative language",age:"Preschool"},
+        {text:"Responds appropriately to conditional language: 'if/then'",age:"Preschool"}] },
+      { code:"LL.1.b", text:"Develops and expands understanding of vocabulary and concepts.",
+        fcc:[{text:"Attends to face and mouth of caregiver during speech",age:"Infant"},
+        {text:"Associates specific words with objects through repeated naming",age:"Infant"},
+        {text:"Vocalizes in response to language-rich interactions",age:"Infant"},
+        {text:"Understands and uses 50 or more words",age:"Toddler"},
+        {text:"Rapidly acquires new words from one or two exposures in context",age:"Toddler"},
+        {text:"Asks 'What's that?' repeatedly to label the world",age:"Toddler"},
+        {text:"Understands and uses Tier 2 vocabulary introduced in instruction",age:"Preschool"},
+        {text:"Learns and retains three to five new words per week when explicitly taught",age:"Preschool"},
+        {text:"Explains word meanings in context using own language",age:"Preschool"}] },
+      { code:"LL.1.c", text:"Communicates using increasingly complex and grammatically mature language.",
+        fcc:[{text:"Vocalizes to communicate need, pleasure, and distress",age:"Infant"},
+        {text:"Babbles with varied consonant-vowel combinations",age:"Infant"},
+        {text:"Uses different vocalizations for different communicative purposes",age:"Infant"},
+        {text:"Produces two-word combinations by 18 months and three-word phrases by 24 months",age:"Toddler"},
+        {text:"Asks simple questions: 'Where doggie?' and 'What that?'",age:"Toddler"},
+        {text:"Speaks clearly enough for familiar adults to understand most utterances",age:"Toddler"},
+        {text:"Uses complete sentences of five or more words consistently",age:"Preschool"},
+        {text:"Uses compound and complex sentence structures in conversation",age:"Preschool"},
+        {text:"Speech is fully intelligible to unfamiliar adults in most contexts",age:"Preschool"}] },
+      { code:"LL.1.d", text:"Participates in reciprocal communication and conversation.",
+        fcc:[{text:"Engages in serve-and-return interaction: vocalizes, pauses, responds to adult response",age:"Infant"},
+        {text:"Maintains eye contact during social interaction",age:"Infant"},
+        {text:"Uses gestures paired with vocalization to communicate intent",age:"Infant"},
+        {text:"Sustains a conversational exchange of three or more turns",age:"Toddler"},
+        {text:"Uses words to initiate and maintain a topic",age:"Toddler"},
+        {text:"Listens and responds appropriately to short conversational turns from an adult",age:"Toddler"},
+        {text:"Sustains a topic across multiple conversational turns",age:"Preschool"},
+        {text:"Adjusts language and tone for different listeners",age:"Preschool"},
+        {text:"Asks clarifying questions to extend or deepen conversation",age:"Preschool"}] },
+      { code:"LL.1.e", text:"Develops comprehension of read-aloud text.",
+        fcc:[{text:"Shows sustained attention to a picture book when held by a caregiver",age:"Infant"},
+        {text:"Vocalizes or reaches toward pictures in a board book",age:"Infant"},
+        {text:"Calms or activates in response to caregiver's reading voice",age:"Infant"},
+        {text:"Points to named pictures accurately",age:"Toddler"},
+        {text:"Fills in repeated words or phrases in a familiar text",age:"Toddler"},
+        {text:"Asks to have a favorite book read again",age:"Toddler"},
+        {text:"Retells main events in sequence after a read-aloud",age:"Preschool"},
+        {text:"Answers both literal and inferential questions about text",age:"Preschool"},
+        {text:"Makes predictions before and during reading using text evidence",age:"Preschool"}] },
+      { code:"LL.2.a", text:"Develops awareness of the syllable structure of spoken words.",
+        fcc:[{text:"Responds to rhythmic language and song",age:"Infant"},
+        {text:"Kicks or activates in response to a familiar rhyme",age:"Infant"},
+        {text:"Claps or taps along to songs and chants",age:"Toddler"},
+        {text:"Begins to notice when words rhyme",age:"Toddler"},
+        {text:"Fills in the last word of a familiar rhyming text",age:"Toddler"},
+        {text:"Claps or taps syllables in multi-syllabic words accurately",age:"Preschool"},
+        {text:"Identifies whether a word has one, two, or three syllables",age:"Preschool"},
+        {text:"Blends two syllables to form a compound word",age:"Preschool"}] },
+      { code:"LL.2.b", text:"Develops awareness of initial sounds and rhyme patterns.",
+        fcc:[{text:"Attends to the prosody and rhythm of speech",age:"Infant"},
+        {text:"Calms in response to familiar lullabies",age:"Infant"},
+        {text:"Recognizes and finishes familiar rhymes",age:"Toddler"},
+        {text:"Notices when two words start with the same sound",age:"Toddler"},
+        {text:"Plays with language sounds playfully: nonsense words, made-up rhymes",age:"Toddler"},
+        {text:"Produces rhyming words when prompted",age:"Preschool"},
+        {text:"Isolates and identifies the initial sound of familiar words",age:"Preschool"},
+        {text:"Sorts pictures or objects by initial sound with support",age:"Preschool"}] },
+      { code:"LL.2.c", text:"Develops awareness of individual phonemes in spoken words.",
+        fcc:[{text:"Discriminates between phoneme contrasts in native language",age:"Infant"},
+        {text:"Shows awareness that words are made of sounds through playful sound play",age:"Toddler"},
+        {text:"Responds with delight to tongue twisters and sound-focused songs",age:"Toddler"},
+        {text:"Segments a three-phoneme word into its individual sounds with support",age:"Preschool"},
+        {text:"Blends two or three phonemes into a word when given the individual sounds",age:"Preschool"},
+        {text:"Identifies the first and last sound in a familiar word",age:"Preschool"}] },
+      { code:"LL.3.a", text:"Develops awareness of print concepts and book organization.",
+        fcc:[{text:"Mouths, pats, and holds board books",age:"Infant"},
+        {text:"Attends to a picture when an adult names it",age:"Infant"},
+        {text:"Holds a book right-side-up and turns pages front-to-back",age:"Toddler"},
+        {text:"Points to pictures when named",age:"Toddler"},
+        {text:"Understands that the text on the page says the same words each time",age:"Toddler"},
+        {text:"Identifies where to start reading on a page",age:"Preschool"},
+        {text:"Understands directionality: left to right, top to bottom",age:"Preschool"},
+        {text:"Distinguishes between letters and words and spaces",age:"Preschool"}] },
+      { code:"LL.3.b", text:"Develops knowledge of letters and their connection to sounds.",
+        fcc:[{text:"Attends to high-contrast letter shapes",age:"Infant"},
+        {text:"Shows interest in adult pointing to text",age:"Infant"},
+        {text:"Recognizes own name in print",age:"Toddler"},
+        {text:"Begins to identify a few letters, typically from own name",age:"Toddler"},
+        {text:"Understands that letters are different from pictures and numbers",age:"Toddler"},
+        {text:"Knows most uppercase letters and at least 15 lowercase letters",age:"Preschool"},
+        {text:"Names the sounds associated with approximately 10 or more letters",age:"Preschool"},
+        {text:"Identifies letters in environmental print and books",age:"Preschool"}] },
+      { code:"LL.4.a", text:"Develops understanding that writing communicates meaning.",
+        fcc:[{text:"Watches adult writing with interest",age:"Infant"},
+        {text:"Begins making marks on paper when given a tool",age:"Infant"},
+        {text:"Makes intentional marks and describes them as writing",age:"Toddler"},
+        {text:"Asks adults to write things down",age:"Toddler"},
+        {text:"Understands that a shopping list, a note, and a card carry meaning",age:"Toddler"},
+        {text:"Produces writing with the intent to communicate a message",age:"Preschool"},
+        {text:"Incorporates writing in dramatic play (menus, lists, signs)",age:"Preschool"},
+        {text:"Dictates stories or sentences for an adult to transcribe",age:"Preschool"}] },
+      { code:"LL.4.b", text:"Develops writing grasp and fine motor control for writing tools.",
+        fcc:[{text:"Explores objects with fingers and uses palmar grasp",age:"Infant"},
+        {text:"Transfers objects between hands",age:"Infant"},
+        {text:"Uses palmar grasp transitioning toward digital grasp for crayons",age:"Toddler"},
+        {text:"Makes purposeful vertical and horizontal strokes",age:"Toddler"},
+        {text:"Imitates simple letter-like marks with a writing tool",age:"Toddler"},
+        {text:"Uses a functional tripod grip with consistent tool use",age:"Preschool"},
+        {text:"Copies some letters, particularly those in own name",age:"Preschool"},
+        {text:"Produces writing with directional intent: left to right, top to bottom",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"MA", label:"Mathematics", color:"#7D3C98", bg:"#f5eafa",
+    standards:[
+      { code:"MA.1.a", text:"Develops understanding of counting sequence and number words.",
+        fcc:[{text:"Responds to number songs and chants with body movement",age:"Infant"},
+        {text:"Attends when adult counts objects during caregiving",age:"Infant"},
+        {text:"Recites number words in sequence to five or more",age:"Toddler"},
+        {text:"Points to objects while counting, though not yet with reliable correspondence",age:"Toddler"},
+        {text:"Understands 'one' and 'two' as distinct quantities",age:"Toddler"},
+        {text:"Counts accurately to 20 without skipping or repeating",age:"Preschool"},
+        {text:"Counts backward from 10",age:"Preschool"},
+        {text:"Begins counting a set from a number other than one",age:"Preschool"}] },
+      { code:"MA.1.b", text:"Develops one-to-one correspondence and cardinality.",
+        fcc:[{text:"Explores single objects and small sets through touching and mouthing",age:"Infant"},
+        {text:"Responds with interest when objects are revealed and hidden",age:"Infant"},
+        {text:"Touches each object once while counting a small set of two or three",age:"Toddler"},
+        {text:"Understands that adding an object makes more",age:"Toddler"},
+        {text:"Shows 'one' and 'two' using fingers",age:"Toddler"},
+        {text:"Counts a set of up to 10 objects with reliable one-to-one correspondence",age:"Preschool"},
+        {text:"Understands that the last number said equals the total",age:"Preschool"},
+        {text:"Counts out a specific quantity from a larger set",age:"Preschool"}] },
+      { code:"MA.2.a", text:"Develops understanding of number relationships and early operations.",
+        fcc:[{text:"Notices when an object disappears from a small set",age:"Infant"},
+        {text:"Reaches for more when a preferred food is eaten",age:"Infant"},
+        {text:"Understands 'more' and 'all gone' as quantities",age:"Toddler"},
+        {text:"Combines two small groups of objects and reacts to the result",age:"Toddler"},
+        {text:"Responds to 'give me one' and 'give me two' accurately",age:"Toddler"},
+        {text:"Combines two groups of objects and counts the total",age:"Preschool"},
+        {text:"Removes objects from a group and counts what remains",age:"Preschool"},
+        {text:"Solves simple addition and subtraction story problems using objects",age:"Preschool"}] },
+      { code:"MA.3.a", text:"Develops measurement and comparison concepts.",
+        fcc:[{text:"Experiences different weights, temperatures, and textures through caregiving",age:"Infant"},
+        {text:"Shows preference for larger quantities of preferred food",age:"Infant"},
+        {text:"Uses comparison language: big/little, heavy/light, full/empty",age:"Toddler"},
+        {text:"Lines up objects by size with support",age:"Toddler"},
+        {text:"Fills and dumps containers, developing intuitive volume understanding",age:"Toddler"},
+        {text:"Uses non-standard measurement tools (footsteps, blocks) to measure and compare",age:"Preschool"},
+        {text:"Understands that measurement requires a consistent unit",age:"Preschool"},
+        {text:"Orders three or more objects by size, weight, or length",age:"Preschool"}] },
+      { code:"MA.3.b", text:"Develops the ability to sort, classify, and organize data.",
+        fcc:[{text:"Responds differently to objects of different textures, colors, and sizes",age:"Infant"},
+        {text:"Explores objects by mouthing, shaking, and banging to determine properties",age:"Infant"},
+        {text:"Sorts objects into two categories with support: big and small, red and blue",age:"Toddler"},
+        {text:"Identifies a simple rule used to sort a set of objects",age:"Toddler"},
+        {text:"Notices when an object does not belong: 'That is not blue'",age:"Toddler"},
+        {text:"Sorts objects by one or more attributes and explains the rule",age:"Preschool"},
+        {text:"Creates a simple graph with objects or pictures and describes the result",age:"Preschool"},
+        {text:"Identifies similarities and differences between two sets",age:"Preschool"}] },
+      { code:"MA.3.c", text:"Develops awareness and understanding of patterns.",
+        fcc:[{text:"Responds with recognition to repeated sensory patterns: a familiar song, a recurring routine",age:"Infant"},
+        {text:"Initiates a repeated movement pattern: clap, clap, stomp",age:"Toddler"},
+        {text:"Continues a simple ABAB pattern when shown the beginning",age:"Toddler"},
+        {text:"Recognizes a familiar visual pattern: stripes on a shirt, tiles on a floor",age:"Toddler"},
+        {text:"Creates and extends AB, ABB, and more complex repeating patterns",age:"Preschool"},
+        {text:"Identifies the core unit of a pattern",age:"Preschool"},
+        {text:"Transfers a pattern from one medium to another: clap pattern to a drawing",age:"Preschool"}] },
+      { code:"MA.4.a", text:"Develops shape knowledge and geometric thinking.",
+        fcc:[{text:"Explores objects of different shapes through mouthing and grasping",age:"Infant"},
+        {text:"Discriminates between circle and square shapes in simple stimuli",age:"Infant"},
+        {text:"Names circle, square, and triangle when shown",age:"Toddler"},
+        {text:"Matches identical shapes",age:"Toddler"},
+        {text:"Sorts objects by shape with support",age:"Toddler"},
+        {text:"Names, describes, and compares two-dimensional and three-dimensional shapes",age:"Preschool"},
+        {text:"Identifies shapes in the environment: the clock is a circle, the door is a rectangle",age:"Preschool"},
+        {text:"Creates pictures and structures using shapes",age:"Preschool"}] },
+      { code:"MA.4.b", text:"Develops spatial reasoning and position understanding.",
+        fcc:[{text:"Follows a moving object with gaze",age:"Infant"},
+        {text:"Explores spatial relationships through body movement: crawling under, climbing over",age:"Infant"},
+        {text:"Uses position words accurately: in, on, under, behind",age:"Toddler"},
+        {text:"Navigates familiar spaces and communicates about their location",age:"Toddler"},
+        {text:"Hides objects and finds them in a simple game",age:"Toddler"},
+        {text:"Uses precise directional and positional language in communication",age:"Preschool"},
+        {text:"Creates simple maps of familiar spaces: the bedroom, the yard",age:"Preschool"},
+        {text:"Describes routes between locations in the FCC home and neighborhood",age:"Preschool"}] },
+      { code:"MA.1.c", text:"Develops subitizing: instantly recognizing small quantities without counting.",
+        fcc:[{text:"Responds differently to one object versus two or three",age:"Infant"},
+        {text:"Recognizes one and two objects at a glance",age:"Toddler"},
+        {text:"Begins to distinguish two from three with repeated experience",age:"Toddler"},
+        {text:"Instantly recognizes quantities of one through five without counting",age:"Preschool"},
+        {text:"Recognizes common dice and domino patterns by sight",age:"Preschool"},
+        {text:"Uses subitizing to support counting on from a known quantity",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"PW", label:"Physical Development and Wellness", color:"#C0392B", bg:"#fdecea",
+    standards:[
+      { code:"PW.1.a", text:"Develops locomotor and large muscle movement skills.",
+        fcc:[{text:"Achieves head control with decreasing support",age:"Infant"},
+        {text:"Rolls from back to front and front to back",age:"Infant"},
+        {text:"Sits independently and begins pulling to stand",age:"Infant"},
+        {text:"Walks with increasing steadiness and confidence",age:"Toddler"},
+        {text:"Runs with better coordination and stopping control",age:"Toddler"},
+        {text:"Climbs on low surfaces, kicks a ball, and throws overhand",age:"Toddler"},
+        {text:"Skips, hops on one foot, and gallops",age:"Preschool"},
+        {text:"Demonstrates coordinated movement in games and obstacle courses",age:"Preschool"},
+        {text:"Catches a large ball with both hands consistently",age:"Preschool"}] },
+      { code:"PW.1.b", text:"Develops fine motor skills and hand-eye coordination.",
+        fcc:[{text:"Grasps objects with full hand and transfers between hands",age:"Infant"},
+        {text:"Reaches with increasing accuracy toward desired objects",age:"Infant"},
+        {text:"Uses index finger to poke and point",age:"Infant"},
+        {text:"Uses spoon for self-feeding with increasing accuracy",age:"Toddler"},
+        {text:"Turns pages of a board book one at a time",age:"Toddler"},
+        {text:"Builds a tower of three or more blocks",age:"Toddler"},
+        {text:"Uses scissors with correct grip to cut along a line",age:"Preschool"},
+        {text:"Strings beads and uses a pincer grip for small objects",age:"Preschool"},
+        {text:"Writes letters and draws recognizable shapes with writing tools",age:"Preschool"}] },
+      { code:"PW.1.c", text:"Develops body awareness and sensory processing through movement.",
+        fcc:[{text:"Responds to sensory stimulation in varied ways: seeking or withdrawing",age:"Infant"},
+        {text:"Develops proprioceptive awareness through tummy time and handling",age:"Infant"},
+        {text:"Explores the sensory properties of objects through mouthing",age:"Infant"},
+        {text:"Moves body in response to music and rhythm",age:"Toddler"},
+        {text:"Begins to modulate responses to sensory input with support",age:"Toddler"},
+        {text:"Uses outdoor sensory experiences (sand, water, mud) with engagement",age:"Toddler"},
+        {text:"Identifies and communicates sensory preferences and sensitivities",age:"Preschool"},
+        {text:"Uses movement strategically for self-regulation: jumping, rocking, pushing",age:"Preschool"},
+        {text:"Participates in sensory activities with increasing comfort and purpose",age:"Preschool"}] },
+      { code:"PW.1.d", text:"Develops oral motor skills and healthy eating habits.",
+        fcc:[{text:"Transitions through texture stages with caregiver guidance",age:"Infant"},
+        {text:"Explores new foods through mouthing and touching",age:"Infant"},
+        {text:"Communicates hunger and satiation through movement and expression",age:"Infant"},
+        {text:"Uses a cup independently",age:"Toddler"},
+        {text:"Eats a variety of foods across food groups",age:"Toddler"},
+        {text:"Self-regulates eating with 'I am done' communication",age:"Toddler"},
+        {text:"Names food groups and connects them to body function",age:"Preschool"},
+        {text:"Participates in meal preparation enthusiastically",age:"Preschool"},
+        {text:"Tries new foods with encouragement in a low-pressure environment",age:"Preschool"}] },
+      { code:"PW.2.a", text:"Develops self-care and hygiene independence.",
+        fcc:[{text:"Participates in diapering and hygiene routines with increasing cooperation",age:"Infant"},
+        {text:"Responds to warm, narrated caregiving routines with calm engagement",age:"Infant"},
+        {text:"Begins washing hands with reminders and support",age:"Toddler"},
+        {text:"Attempts to dress and undress with varying success",age:"Toddler"},
+        {text:"Uses the toilet independently or with support depending on stage",age:"Toddler"},
+        {text:"Washes hands independently and at appropriate times",age:"Preschool"},
+        {text:"Dresses and undresses independently including simple fasteners",age:"Preschool"},
+        {text:"Manages personal hygiene with minimal adult prompting",age:"Preschool"}] },
+      { code:"PW.2.b", text:"Develops understanding of health, wellness, and body awareness.",
+        fcc:[{text:"Responds to body states of comfort and discomfort with clear signals",age:"Infant"},
+        {text:"Benefits from a predictable sleep and feeding schedule",age:"Infant"},
+        {text:"Names body parts correctly",age:"Toddler"},
+        {text:"Identifies basic body states: hungry, tired, sick, energetic",age:"Toddler"},
+        {text:"Understands that sleep, food, and movement help the body feel good",age:"Toddler"},
+        {text:"Describes basic body functions in age-appropriate language",age:"Preschool"},
+        {text:"Connects food, sleep, and physical activity to feeling well",age:"Preschool"},
+        {text:"Asks questions about the body with increasing sophistication",age:"Preschool"}] },
+      { code:"PW.2.c", text:"Develops understanding of safety and injury prevention.",
+        fcc:[{text:"Benefits from consistent safety monitoring during floor exploration",age:"Infant"},
+        {text:"Responds to gentle safety guidance through voice and touch",age:"Infant"},
+        {text:"Follows basic safety rules with consistent reminders",age:"Toddler"},
+        {text:"Understands 'hot,' 'sharp,' 'stop,' and 'careful' as safety words",age:"Toddler"},
+        {text:"Communicates when something feels wrong or hurts",age:"Toddler"},
+        {text:"Follows safety rules in varied environments without constant reminders",age:"Preschool"},
+        {text:"Explains the reason for a safety rule: 'We wear helmets so our heads stay safe'",age:"Preschool"},
+        {text:"Identifies trusted adults to approach for help",age:"Preschool"}] },
+      { code:"PW.2.d", text:"Develops healthy sleep and rest patterns.",
+        fcc:[{text:"Develops a predictable sleep and wake cycle with caregiver support",age:"Infant"},
+        {text:"Signals tiredness through yawning, eye rubbing, and decreased activity",age:"Infant"},
+        {text:"Settles to sleep with caregiver support through a consistent routine",age:"Infant"},
+        {text:"Transitions to nap with a consistent quiet routine",age:"Toddler"},
+        {text:"Rests during quiet time even when sleep is not needed",age:"Toddler"},
+        {text:"Communicates tiredness with words or gestures",age:"Toddler"},
+        {text:"Participates in quiet rest time without disrupting others",age:"Preschool"},
+        {text:"Understands that rest supports learning and health",age:"Preschool"},
+        {text:"Manages transition to and from rest time with increasing independence",age:"Preschool"}] },
+      { code:"PW.2.e", text:"Develops joyful engagement in physical activity.",
+        fcc:[{text:"Responds with pleasure to gentle movement games: bouncing, rocking",age:"Infant"},
+        {text:"Shows excitement for physical play with a familiar adult",age:"Infant"},
+        {text:"Initiates physical play: running, chasing, rolling",age:"Toddler"},
+        {text:"Expresses delight during active outdoor time",age:"Toddler"},
+        {text:"Seeks physical challenge: climbing, jumping from low heights",age:"Toddler"},
+        {text:"Engages in vigorous physical activity with enthusiasm and stamina",age:"Preschool"},
+        {text:"Understands that physical activity is important for health",age:"Preschool"},
+        {text:"Identifies activities they enjoy and seeks them out",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"SC", label:"Science", color:"#148F77", bg:"#e6f5f2",
+    standards:[
+      { code:"SC.1.a", text:"Explores and investigates objects, materials, and natural phenomena with curiosity.",
+        fcc:[{text:"Explores objects through all senses: mouthing, shaking, banging, dropping",age:"Infant"},
+        {text:"Attends to changes in the environment: a new sound, a change in light",age:"Infant"},
+        {text:"Responds with fascination to natural phenomena: rain on a window, wind in trees",age:"Infant"},
+        {text:"Manipulates objects to discover properties: squeezing, stacking, pouring",age:"Toddler"},
+        {text:"Notices and comments on changes in the environment",age:"Toddler"},
+        {text:"Asks 'What is that?' repeatedly about new natural phenomena",age:"Toddler"},
+        {text:"Plans and carries out a simple investigation with a prediction",age:"Preschool"},
+        {text:"Observes and documents findings through drawing or dictation",age:"Preschool"},
+        {text:"Asks questions that lead to investigation: 'I wonder what would happen if...'",age:"Preschool"}] },
+      { code:"SC.1.b", text:"Develops understanding of cause-and-effect relationships.",
+        fcc:[{text:"Repeats actions to reproduce an interesting effect",age:"Infant"},
+        {text:"Shows surprise at unexpected outcomes",age:"Infant"},
+        {text:"Discovers that their own actions produce reliable effects",age:"Infant"},
+        {text:"Predicts outcomes of simple familiar actions: 'If I push it, it will fall'",age:"Toddler"},
+        {text:"Tests cause-and-effect through repeated experimentation",age:"Toddler"},
+        {text:"Communicates about what caused an observed change",age:"Toddler"},
+        {text:"States a prediction before an investigation and checks the result",age:"Preschool"},
+        {text:"Identifies multiple possible causes for an observed effect",age:"Preschool"},
+        {text:"Designs a simple test to check which of two things is true",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"SE", label:"Social-Emotional Development", color:"#CA6F1E", bg:"#fef5ec",
+    standards:[
+      { code:"SE.1.a", text:"Develops self-concept and a sense of unique identity.",
+        fcc:[{text:"Recognizes self in a mirror with interest",age:"Infant"},
+        {text:"Responds with recognition to own name",age:"Infant"},
+        {text:"Shows differential responses to familiar and unfamiliar adults",age:"Infant"},
+        {text:"Uses 'I,' 'me,' and 'mine' consistently",age:"Toddler"},
+        {text:"Identifies own belongings and personal space",age:"Toddler"},
+        {text:"Expresses preferences clearly: 'I want the blue one'",age:"Toddler"},
+        {text:"Describes personal characteristics, preferences, and family connections",age:"Preschool"},
+        {text:"Acknowledges similarities and differences between self and others with curiosity",age:"Preschool"},
+        {text:"Identifies cultural or family traditions as part of self",age:"Preschool"}] },
+      { code:"SE.1.b", text:"Develops emotion literacy: recognizing and naming emotions.",
+        fcc:[{text:"Expresses pleasure, distress, surprise, and interest through facial expression, voice, and body",age:"Infant"},
+        {text:"Responds to caregiver's emotional tone",age:"Infant"},
+        {text:"Begins to distinguish between emotional expressions on familiar faces",age:"Infant"},
+        {text:"Names basic emotions: happy, sad, mad, scared",age:"Toddler"},
+        {text:"Notices and responds to emotional states in others",age:"Toddler"},
+        {text:"Uses emotional language to communicate need: 'I sad'",age:"Toddler"},
+        {text:"Names an expanded emotional vocabulary: frustrated, proud, nervous, disappointed, excited",age:"Preschool"},
+        {text:"Identifies emotions in others and in story characters",age:"Preschool"},
+        {text:"Describes what caused a feeling: 'I am frustrated because I cannot do it'",age:"Preschool"}] },
+      { code:"SE.2.a", text:"Develops emotional regulation with decreasing dependence on adult co-regulation.",
+        fcc:[{text:"Calms with caregiver support through holding, rocking, and voice",age:"Infant"},
+        {text:"Begins to show self-soothing behaviors: sucking, gaze aversion",age:"Infant"},
+        {text:"Signals need for regulation support through crying and fussing",age:"Infant"},
+        {text:"Accepts co-regulation from a trusted adult with increasing speed",age:"Toddler"},
+        {text:"Uses simple self-soothing strategies with adult reminders",age:"Toddler"},
+        {text:"Identifies when they are feeling dysregulated: 'I am upset'",age:"Toddler"},
+        {text:"Uses a small repertoire of regulation strategies independently",age:"Preschool"},
+        {text:"Removes self from an overstimulating situation with some adult support",age:"Preschool"},
+        {text:"Identifies what will help when dysregulated: 'I need a hug' or 'I need to be alone for a minute'",age:"Preschool"}] },
+      { code:"SE.3.a", text:"Develops empathy and perspective-taking.",
+        fcc:[{text:"Shows distress in response to another infant's distress",age:"Infant"},
+        {text:"Reaches toward or vocalizes toward a peer in distress",age:"Infant"},
+        {text:"Offers a comfort object to a distressed peer spontaneously",age:"Toddler"},
+        {text:"Notices and names another's emotional state: 'Baby crying'",age:"Toddler"},
+        {text:"Follows another's gaze to understand what they are attending to",age:"Toddler"},
+        {text:"Takes action to comfort or assist a distressed peer",age:"Preschool"},
+        {text:"Considers another's perspective in a conflict: 'She is sad because she wanted a turn'",age:"Preschool"},
+        {text:"Includes a child who is left out when pointed out by an adult",age:"Preschool"}] },
+      { code:"SE.4.a", text:"Forms secure attachments with primary caregivers.",
+        fcc:[{text:"Shows differential calming and engagement with familiar FCC provider versus strangers",age:"Infant"},
+        {text:"Uses the provider as a secure base for exploration",age:"Infant"},
+        {text:"Shows separation distress and reunion joy with consistent caregiver",age:"Infant"},
+        {text:"Seeks comfort from the FCC provider when distressed",age:"Toddler"},
+        {text:"References the provider to gauge safety of new situations",age:"Toddler"},
+        {text:"Shows affection and connection to the FCC provider throughout the day",age:"Toddler"},
+        {text:"Maintains a positive working relationship with the FCC provider",age:"Preschool"},
+        {text:"Seeks the provider for emotional support, not only for physical needs",age:"Preschool"},
+        {text:"Shows pride in the provider's attention and approval",age:"Preschool"}] },
+      { code:"SE.4.b", text:"Develops peer social competence.",
+        fcc:[{text:"Shows interest in peers through gaze and vocalization",age:"Infant"},
+        {text:"Engages in brief turn-taking interactions with a peer",age:"Infant"},
+        {text:"Plays in proximity to peers (parallel play)",age:"Toddler"},
+        {text:"Engages in brief exchanges of toy or object in context of play",age:"Toddler"},
+        {text:"Watches peers with interest and imitates their play strategies",age:"Toddler"},
+        {text:"Initiates play with specific peers",age:"Preschool"},
+        {text:"Sustains cooperative play with shared goals and negotiated roles",age:"Preschool"},
+        {text:"Uses verbal strategies to enter play: 'Can I be the dog?' rather than simply joining uninvited",age:"Preschool"}] },
+      { code:"SE.4.c", text:"Develops conflict resolution skills.",
+        fcc:[{text:"Reacts to a peer taking an object with distress",age:"Infant"},
+        {text:"Accepts redirection toward a substitute object",age:"Infant"},
+        {text:"Communicates conflict through words and gestures rather than only through physical action",age:"Toddler"},
+        {text:"Accepts adult mediation of a conflict with decreasing distress",age:"Toddler"},
+        {text:"Uses simple language to express needs in a conflict: 'Mine' and 'I want it'",age:"Toddler"},
+        {text:"Uses a sequence of verbal strategies before seeking adult help",age:"Preschool"},
+        {text:"Proposes solutions in a conflict: 'You can have it when I am done'",age:"Preschool"},
+        {text:"Accepts a solution that is not their first choice with adult support",age:"Preschool"}] }
+    ]
+  },
+  {
+    code:"SS", label:"Social Studies", color:"#616A6B", bg:"#f2f3f4",
+    standards:[
+      { code:"SS.1.a", text:"Develops awareness of self in relation to family and cultural identity.",
+        fcc:[{text:"Responds with recognition to family members' voices and faces",age:"Infant"},
+        {text:"Calms more readily with family members than with unfamiliar adults",age:"Infant"},
+        {text:"Names family members and identifies their roles",age:"Toddler"},
+        {text:"Brings family photos and objects from home into play",age:"Toddler"},
+        {text:"Uses 'my family' language spontaneously",age:"Toddler"},
+        {text:"Describes family composition, traditions, and cultural practices",age:"Preschool"},
+        {text:"Recognizes similarities and differences between own family and others without judgment",age:"Preschool"},
+        {text:"Connects family history to their own identity",age:"Preschool"}] },
+      { code:"SS.1.b", text:"Develops understanding of community roles, needs, and interdependence.",
+        fcc:[{text:"Benefits from a community of care beyond primary caregiver",age:"Infant"},
+        {text:"Responds differently to familiar community members over time",age:"Infant"},
+        {text:"Identifies community helpers: doctor, firefighter, teacher",age:"Toddler"},
+        {text:"Understands that different people have different roles",age:"Toddler"},
+        {text:"Participates in simple community tasks: passing food, helping clean up",age:"Toddler"},
+        {text:"Describes what specific community helpers do and why their role matters",age:"Preschool"},
+        {text:"Understands the concept of needs and wants in a community context",age:"Preschool"},
+        {text:"Engages in real community helping roles within the FCC home",age:"Preschool"}] },
+      { code:"SS.1.c", text:"Develops understanding of rules, rights, and responsibilities.",
+        fcc:[{text:"Benefits from consistent, predictable rules embedded in caregiving routines",age:"Infant"},
+        {text:"Follows a small set of consistent FCC home rules with reminders",age:"Toddler"},
+        {text:"Understands that rules apply to everyone, including the provider",age:"Toddler"},
+        {text:"Communicates when a rule is violated: 'He hit me'",age:"Toddler"},
+        {text:"Participates in creating classroom agreements and understands why rules exist",age:"Preschool"},
+        {text:"Uses rules to argue for fairness: 'That is not fair because the rule is...'",age:"Preschool"},
+        {text:"Takes on responsibility roles: class jobs, caring for younger children, environmental stewardship",age:"Preschool"}] },
+      { code:"SS.1.d", text:"Develops environmental awareness and stewardship.",
+        fcc:[{text:"Benefits from regular outdoor time and natural environment exposure",age:"Infant"},
+        {text:"Shows interest in natural objects: leaves, rocks, insects, water",age:"Infant"},
+        {text:"Participates in simple environmental stewardship: watering a plant, picking up litter",age:"Toddler"},
+        {text:"Notices seasonal changes in the outdoor environment",age:"Toddler"},
+        {text:"Shows care for plants and animals under FCC provider guidance",age:"Toddler"},
+        {text:"Explains why it is important to care for the natural environment",age:"Preschool"},
+        {text:"Takes initiative in stewardship activities: gardening, composting, reducing waste",age:"Preschool"},
+        {text:"Makes connections between actions and environmental consequences",age:"Preschool"}] }
+    ]
+  }
+];
+
+var currentTrack = 'infant';
+var ratings = {}; // key: "AL.1.a-0" = {rating: 'em'}
+window.ACTIVE_DOMAINS = DOMAINS;
+var openDomains = new Set(ACTIVE_DOMAINS.map(d=>d.code)); // all open by default
+
+// ── Track switch ───────────────────────────────────────────────────────
+function switchTrack(btn) {
+  document.querySelectorAll('.track-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTrack = btn.dataset.track;
+  document.getElementById('current-track').value = currentTrack;
+  // Switch domain set based on track
+  window.ACTIVE_DOMAINS = currentTrack === 'fcc' ? FCC_DOMAINS : DOMAINS;
+  var fccNote = document.getElementById('fcc-note');
+  if(fccNote) fccNote.style.display = currentTrack==='fcc'?'block':'none';
+  renderAll();
+}
+
+// ── Rating logic ───────────────────────────────────────────────────────
+function setRating(key, rating, btn) {
+  var group = btn.closest('.rating-group');
+  group.querySelectorAll('.rating-btn').forEach(b=>{
+    b.className = 'rating-btn';
+  });
+  if (ratings[key] === rating) {
+    delete ratings[key];
+  } else {
+    ratings[key] = rating;
+    btn.classList.add('active-'+rating);
+  }
+  updateProgress();
+}
+
+function getRatingClass(key) {
+  var r = ratings[key];
+  return r ? 'active-'+r : '';
+}
+
+// ── Rating hierarchy ───────────────────────────────────────────────────
+var RATING_ORDER = ['nye','em','dev','con'];
+var RATING_LABELS = { nye:'Not Yet Observed', em:'Emerging', dev:'Developing', con:'Consistently Observed' };
+var RATING_SHORT  = { nye:'Not Yet Observed', em:'Emerging', dev:'Developing', con:'Consistently' };
+
+// ── Domain narrative templates ────────────────────────────────────────
+// Called with (domainLabel, track, counts, total, dominant)
+function buildNarrative(domain, track, counts, total, rated, dominant) {
+  var name = document.getElementById('child-name')&&document.getElementById('child-name').value.trim();
+  var child = name ? name.split(' ')[0] : 'This child';
+  var trackLabel = {infant:'infant',toddler:'toddler',preschool:'preschool',fcc:'mixed-age'}[track]||track;
+  var pct = Math.round((rated/total)*100);
+  var conPct = Math.round((counts.con/total)*100);
+  var nyePct = Math.round((counts.nye/total)*100);
+
+  if (rated === 0) return domain.label+': No indicators rated yet.';
+
+  var templates = {
+    nye: [
+      `${child} has not yet demonstrated most ${domain.label.toLowerCase()} indicators at the ${trackLabel} level. This domain is a priority area for intentional support and observation.`,
+      `Most ${domain.label.toLowerCase()} indicators are not yet observed. Consider embedding additional ${domain.label.toLowerCase()} strategies into daily routines and re-observing in 4–6 weeks.`,
+    ],
+    em: [
+      `${child} is beginning to show ${domain.label.toLowerCase()} skills, with most indicators in the emerging range. Consistent modeling, scaffolding, and repetition will support continued growth.`,
+      `${domain.label} skills are emerging. ${child} benefits from adult co-regulation, clear language models, and repeated opportunities to practice in low-stakes contexts.`,
+    ],
+    dev: [
+      `${child} is developing solidly across ${domain.label.toLowerCase()} indicators. Most skills are present and strengthening; focus on extending complexity and building independence.`,
+      `${domain.label} skills are well underway. ${child} demonstrates consistent effort and is moving toward independence across most ${trackLabel}-level indicators.`,
+    ],
+    con: [
+      `${child} consistently demonstrates ${domain.label.toLowerCase()} skills across most indicators at the ${trackLabel} level. This is a strength area; consider ways to build on and extend this foundation.`,
+      `Strong ${domain.label} performance. ${child} shows consistent mastery across ${conPct}% of indicators. Look for ways to deepen complexity and connect this strength to other domains.`,
+    ],
+  };
+
+  var opts = templates[dominant];
+  return opts[Math.floor(Math.random()*opts.length)];
+}
+
+// ── Get domain rating analysis ─────────────────────────────────────────
+function getDomainAnalysis(domainCode) {
+  var domain = ACTIVE_ACTIVE_DOMAINS.find(d=>d.code===domainCode);
+  if (!domain) return null;
+  var total = 0, rated = 0;
+  var counts = {nye:0, em:0, dev:0, con:0};
+  domain.standards.forEach(std=>{
+    var inds = currentTrack==='fcc' ? (std.fcc||[]) : (std[currentTrack]||[]);
+    inds.forEach((_,i)=>{
+      total++;
+      var r = ratings[std.code+'-'+i];
+      if (r) { rated++; counts[r]++; }
+    });
+  });
+  var pct = total>0 ? Math.round((rated/total)*100) : 0;
+
+  // Determine dominant rating
+  // Only assign a dominant rating once at least 50% of indicators are rated
+  var dominant = null;
+  if (rated > 0 && pct >= 50) {
+    // Weight: con=4, dev=3, em=2, nye=1; find weighted average
+    var weightedSum = (counts.con*4) + (counts.dev*3) + (counts.em*2) + (counts.nye*1);
+    var avg = weightedSum / rated;
+    // Map average to rating bucket; bias toward lower to be conservative
+    if (avg >= 3.6)      dominant = 'con';
+    else if (avg >= 2.6) dominant = 'dev';
+    else if (avg >= 1.6) dominant = 'em';
+    else                 dominant = 'nye';
+  } else if (rated > 0) {
+    // Partial; show in-progress indicator based on what's been rated so far
+    var weightedSum = (counts.con*4) + (counts.dev*3) + (counts.em*2) + (counts.nye*1);
+    var avg = weightedSum / rated;
+    if (avg >= 3.6)      dominant = 'con';
+    else if (avg >= 2.6) dominant = 'dev';
+    else if (avg >= 1.6) dominant = 'em';
+    else                 dominant = 'nye';
+  }
+
+  return { total, rated, pct, counts, dominant };
+}
+
+function getDomainProgress(domainCode) {
+  var a = getDomainAnalysis(domainCode);
+  return a || {rated:0,total:0,pct:0};
+}
+
+function updateProgress() {
+  ACTIVE_DOMAINS.forEach(d=>{
+    var analysis = getDomainAnalysis(d.code);
+    var fill = document.getElementById('prog-fill-'+d.code);
+    var text = document.getElementById('prog-text-'+d.code);
+    if (fill) fill.style.width = analysis.pct+'%';
+    if (text) text.textContent = analysis.pct+'%';
+    // Color the progress bar fill to match dominant rating
+    if (fill && analysis.dominant) {
+      var barColors = {nye:'#e0c89a', em:'#a0bce0', dev:'#88c898', con:'#b8a0d8'};
+      fill.style.background = barColors[analysis.dominant];
+    }
+  });
+  updateSummary();
+}
+
+function updateSummary() {
+  var grid = document.getElementById('summary-grid');
+  var narratives = document.getElementById('domain-narratives');
+  var subtitle = document.getElementById('summary-subtitle');
+  if (!grid) return;
+
+  // Count how many domains have been started
+  var totalRated = ACTIVE_DOMAINS.filter(d=>getDomainAnalysis(d.code).rated>0).length;
+  var allComplete = ACTIVE_DOMAINS.every(d=>{
+    var a = getDomainAnalysis(d.code);
+    return a.pct >= 80;
+  });
+
+  // Update subtitle
+  if (subtitle) {
+    if (totalRated === 0) {
+      subtitle.textContent = 'Complete indicators in each domain to see this child\'s developmental profile. Boxes will color-code to match the rating key as you rate.';
+    } else if (allComplete) {
+      var name = document.getElementById('child-name')&&document.getElementById('child-name').value.trim();
+      subtitle.textContent = (name||'This child')+'\'s assessment is complete. Review the domain summaries below, then print or save as PDF for your QRIS documentation folder.';
+    } else {
+      subtitle.textContent = totalRated+' of 9 domains started. Continue rating to complete the profile.';
+    }
+  }
+
+  // Update chips
+  grid.innerHTML = ACTIVE_DOMAINS.map(d=>{
+    var a = getDomainAnalysis(d.code);
+    var chipClass = a.dominant ? 'chip-'+a.dominant : '';
+    var ratingLabel = a.dominant ? RATING_SHORT[a.dominant] : (a.rated>0?'In progress':'Not started');
+    var tooltipText = a.dominant ?
+      d.label+': '+RATING_LABELS[a.dominant]+' ('+a.rated+'/'+a.total+' rated)' :
+      d.label+': '+a.rated+' of '+a.total+' indicators rated';
+    return `<div class="summary-chip ${chipClass}" title="${tooltipText}">
+      <span class="summary-chip-code">${d.code}</span>
+      <span class="summary-chip-rating">${ratingLabel}</span>
+      <span class="summary-chip-pct">${a.pct}% rated</span>
+    </div>`;
+  }).join('');
+
+  // Update narrative rows
+  if (narratives) {
+    var ratedDomains = ACTIVE_DOMAINS.filter(d=>getDomainAnalysis(d.code).rated>0);
+    if (ratedDomains.length === 0) {
+      narratives.innerHTML = '';
+    } else {
+      narratives.innerHTML = ratedDomains.map(d=>{
+        var a = getDomainAnalysis(d.code);
+        var rowClass = a.dominant ? 'chip-'+a.dominant : '';
+        var ratingLabel = a.dominant ? RATING_LABELS[a.dominant] : 'In progress';
+        var narrative = buildNarrative(d, currentTrack, a.counts, a.total, a.rated, a.dominant||'em');
+        var completionNote = a.pct < 100 ? ` <em style="opacity:0.65;font-size:0.72rem">(${a.pct}% rated)</em>` : '';
+        return `<div class="narrative-row ${rowClass}">
+          <span class="narrative-badge">${d.code}</span>
+          <span class="narrative-text"><strong>${d.label}${completionNote}:</strong> ${narrative}</span>
+        </div>`;
+      }).join('');
+    }
+  }
+}
+
+// ── Toggle domain open/close ───────────────────────────────────────────
+function toggleDomain(code) {
+  var section = document.getElementById('domain-'+code);
+  if (!section) return;
+  if (openDomains.has(code)) {
+    openDomains.delete(code);
+    section.classList.remove('open');
+  } else {
+    openDomains.add(code);
+    section.classList.add('open');
+  }
+}
+
+// ── Render ─────────────────────────────────────────────────────────────
+function renderAll() {
+  ratings = {}; // reset on track change
+  var container = document.getElementById('domains-container');
+  container.innerHTML = DOMAINS.map(renderDomain).join('');
+  updateProgress();
+  updateSummary();
+}
+
+function renderDomain(domain) {
+  var isOpen = openDomains.has(domain.code);
+  var prog = getDomainProgress(domain.code);
+  return `
+<div class="domain-section ${isOpen?'open':''}" id="domain-${domain.code}">
+  <div class="domain-header" onclick="toggleDomain('${domain.code}')">
+    <div class="domain-header-left">
+      <span class="domain-badge" style="background:${domain.bg};color:${domain.color};border:1px solid ${domain.color}30">${domain.code}</span>
+      <span class="domain-title">${domain.label}</span>
+      <span class="domain-meta">${domain.standards.length} standards</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <div class="domain-progress no-print">
+        <div class="domain-prog-bar"><div class="domain-prog-fill" id="prog-fill-${domain.code}" style="width:${prog.pct}%"></div></div>
+        <span class="domain-prog-text" id="prog-text-${domain.code}">${prog.pct}%</span>
+      </div>
+      <div class="domain-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+  </div>
+  <div class="domain-body">
+    <div class="ind-header">
+      <span class="ind-header-cell">#</span>
+      <span class="ind-header-cell">Indicator</span>
+      <span class="ind-header-cell">Rating</span>
+      <span class="ind-header-cell">Observation Notes</span>
+    </div>
+    ${domain.standards.map(std=>renderStandard(std)).join('')}
+  </div>
+</div>`;
+}
+
+function renderStandard(std) {
+  var isFCC = currentTrack === 'fcc';
+  var rawItems = isFCC ? (std.fcc||[]) : (std[currentTrack]||[]).map(function(t){return {text:t,age:null};});
+  return '<div class="standard-row">'
+    +'<div class="standard-header">'
+    +'<span class="std-code">'+std.code+'</span>'
+    +'<span class="std-text">'+std.text+'</span>'
+    +'</div>'
+    +rawItems.map(function(item,i){return renderIndicator(std.code, item.text, i, rawItems.length, item.age);}).join('')
+    +'</div>';
+}
+
+var AGE_BADGE_BG   = {Infant:'#e8f4fd', Toddler:'#e8f5e8', Preschool:'#fdf5ec'};
+var AGE_BADGE_COL  = {Infant:'#1a5276', Toddler:'#1e5c2a', Preschool:'#7B3D2A'};
+
+function renderIndicator(stdCode, ind, i, total, ageLabel) {
+  var key = stdCode+'-'+i;
+  var rc = getRatingClass(key);
+  var isLast = i===total-1;
+  var ageBadge = ageLabel
+    ? '<span style="font-size:0.6rem;font-weight:700;padding:0.1rem 0.38rem;border-radius:3px;margin-right:0.4rem;vertical-align:middle;background:'+(AGE_BADGE_BG[ageLabel]||'#eee')+';color:'+(AGE_BADGE_COL[ageLabel]||'#555')+'">'+ageLabel+'</span>'
+    : '';
+  return '<div class="ind-item" style="'+(isLast?'border-bottom:none':'')+'">'
+    +'<span class="ind-num">'+(i+1)+'</span>'
+    +'<span class="ind-text">'+ageBadge+ind+'</span>'
+    +'<div class="rating-cell"><div class="rating-group">'
+    +'<button class="rating-btn '+(rc==='active-nye'?'active-nye':'')+'" onclick="setRating(\''+key+'\',\'nye\',this)" title="Not Yet Observed">NYO</button>'
+    +'<button class="rating-btn '+(rc==='active-em'?'active-em':'')+'" onclick="setRating(\''+key+'\',\'em\',this)" title="Emerging">Em</button>'
+    +'<button class="rating-btn '+(rc==='active-dev'?'active-dev':'')+'" onclick="setRating(\''+key+'\',\'dev\',this)" title="Developing">Dev</button>'
+    +'<button class="rating-btn '+(rc==='active-con'?'active-con':'')+'" onclick="setRating(\''+key+'\',\'con\',this)" title="Consistently Observed">Con</button>'
+    +'</div></div>'
+    +'<div class="notes-cell"><textarea class="notes-input" placeholder="Note specific observation…" rows="1" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\'"></textarea></div>'
+    +'</div>';
+}
+
+// ── AI Summary Generator ───────────────────────────────────────────────
+function buildAssessmentPrompt() {
+  var childName = document.getElementById('child-name').value.trim() || 'the child';
+  var track = currentTrack;
+  var period = document.getElementById('assess-period').value || 'current period';
+  var teacher = document.getElementById('teacher-name').value.trim() || '';
+
+  // Build domain-by-domain rating summary
+  var domainSummaries = DOMAINS.map(d => {
+    var a = getDomainAnalysis(d.code);
+    if (a.rated === 0) return null;
+    var ratingLabel = a.dominant ? RATING_LABELS[a.dominant] : 'Partially rated';
+    // List which specific indicators were rated and how
+    var stdDetails = [];
+    d.standards.forEach(std => {
+      var inds = std[currentTrack] || [];
+      var stdRatings = [];
+      inds.forEach((ind, i) => {
+        var r = ratings[std.code + '-' + i];
+        if (r) stdRatings.push({ ind, r });
+      });
+      if (stdRatings.length > 0) {
+        stdDetails.push({
+          code: std.code,
+          text: std.text,
+          ratings: stdRatings
+        });
+      }
+    });
+    return { domain: d.label, code: d.code, dominant: ratingLabel, pct: a.pct, standards: stdDetails };
+  }).filter(Boolean);
+
+  var domainText = domainSummaries.map(ds => {
+    var stdText = ds.standards.map(s => {
+      var ratingMap = { nye:'Not Yet Observed', em:'Emerging', dev:'Developing', con:'Consistently Observed' };
+      var indText = s.ratings.map(r => `"${r.ind}" → ${ratingMap[r.r]}`).join('; ');
+      return `  ${s.code} (${s.text}): ${indText}`;
+    }).join('\n');
+    return `${ds.domain} (${ds.code}): Overall: ${ds.dominant}, ${ds.pct}% of indicators rated\n${stdText}`;
+  }).join('\n\n');
+
+  return `You are an expert early childhood curriculum specialist writing for re:Bloom Digital Curriculum writing a developmental assessment summary for a teacher's records and QRIS documentation folder.
+
+CHILD: ${childName}
+AGE TRACK: ${track} (${{infant:'Birth to 12 Months',toddler:'12 to 36 Months',preschool:'Ages 3 to 5'}[track]})
+CURRICULUM: re:Bloom Digital Curriculum, Nine Domains, Science of Reading aligned, Play-based
+ASSESSMENT PERIOD: ${period}
+${teacher ? 'TEACHER: ' + teacher : ''}
+
+ASSESSMENT RESULTS BY DOMAIN:
+${domainText}
+
+Write a professional, warm, and specific developmental summary grounded in re:Bloom's nine-domain framework in the voice of an experienced early childhood educator writing for a portfolio or QRIS documentation folder. Structure your response in exactly these four sections, using plain text (no markdown):
+
+1. DEVELOPMENTAL STRENGTHS
+2 to 3 sentences highlighting the domains where this child is performing at the Developing or Consistently Observed level. Be specific: name the actual skills and behaviors observed. Use the child's name (${childName}).
+
+2. AREAS FOR GROWTH
+2 to 3 sentences identifying domains where indicators are Not Yet Observed or Emerging. Frame this constructively: describe what growth would look like, not what the child cannot do. Be specific about which skills are emerging.
+
+3. RECOMMENDED NEXT STEPS
+3 to 4 specific, actionable recommendations for the educator. Each should connect directly to the assessment results. Include at least one recommendation about the environment, one about educator strategies, and one about family connection. Keep language practical and jargon-free.
+
+4. REFERRAL CONSIDERATIONS
+1 sentence. If any domain shows predominantly Not Yet Observed across most indicators, note it as a consideration for additional screening or support, and suggest consulting the re:Bloom Differentiation and Support Guide. If no concerns, write: "No referral concerns noted at this time based on the current assessment."
+
+Write in complete sentences. Do not use bullet points, headers with # symbols, or markdown formatting. Write the section names in plain text followed by a colon. Keep the total response to 300 to 350 words. Warm and professional in tone; this will be printed and placed in a child's portfolio.`;
+}
+
+async function generateAISummary() {
+  var ratedCount = DOMAINS.filter(d => getDomainAnalysis(d.code).rated > 0).length;
+  if (ratedCount < 3) {
+    showStatus('Please rate indicators in at least 3 domains before generating a summary.', true);
+    return;
+  }
+
+  var btn = document.getElementById('ai-gen-btn');
+  var status = document.getElementById('ai-status');
+  var textarea = document.getElementById('overall-summary');
+
+  btn.disabled = true;
+  btn.innerHTML = '<div class="ai-spinner"></div> Generating…';
+  status.style.display = 'flex';
+  status.className = 'ai-status';
+  status.innerHTML = '<div class="ai-status-dots"><span></span><span></span><span></span></div> Writing developmental summary…';
+  textarea.value = '';
+
+  try {
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: buildAssessmentPrompt() }]
+      })
+    });
+
+    if (!res.ok) {
+      var e = await res.json();
+      throw new Error(e.error?.message || 'API error ' + res.status);
+    }
+
+    var data = await res.json();
+    var text = data.content.map(b => b.text || '').join('').trim();
+    textarea.value = text;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    status.style.display = 'none';
+
+  } catch(e) {
+    showStatus('Could not generate summary: ' + e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Regenerate Summary';
+  }
+}
+
+function showStatus(msg, isError) {
+  var status = document.getElementById('ai-status');
+  status.style.display = 'flex';
+  status.className = 'ai-status' + (isError ? ' error' : '');
+  status.textContent = msg;
+  if (!isError) setTimeout(() => status.style.display = 'none', 3000);
+}
+
+function clearAll() {
+  if (!confirm('Clear all ratings and notes for this assessment?')) return;
+  ratings = {};
+  renderAll();
+  document.querySelectorAll('.notes-input').forEach(t => t.value = '');
+  document.querySelectorAll('#child-name,#teacher-name,#program-name').forEach(t => t.value = '');
+  var summary = document.getElementById('overall-summary');
+  if (summary) summary.value = '';
+  var status = document.getElementById('ai-status');
+  if (status) status.style.display = 'none';
+  var btn = document.getElementById('ai-gen-btn');
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Generate AI Summary';
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────────────
+// Set today's date as default
+document.getElementById('assess-date').value = new Date().toISOString().split('T')[0];
+renderAll();
+</script>
+</body>
+</html>

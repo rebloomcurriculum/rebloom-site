@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>re:Bloom — Family Child Care Scope and Sequence</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --terra:#7B3D2A;--terra-mid:#A05035;--terra-light:#D4A090;--terra-pale:#FAF0EB;--terra-paler:#FDF6F3;
+  --gold:#B8943A;--gold-pale:#FDF8EF;--gold-light:#F5ECD4;
+  --teal:#2E7D6B;--teal-light:#E0F2EC;
+  --navy:#1A3A6A;--navy-light:#E8EDF8;
+  --sage:#4A7C59;--sage-pale:#EAF3EA;--sage-light:#C8DFC8;
+  --td:#2A2A2A;--tm:#4A4A4A;--tl:#7A7A7A;--border:#E0C8BC;
+  --serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif;
+}
+body{font-family:var(--sans);background:var(--terra-paler);color:var(--td);-webkit-font-smoothing:antialiased;height:100vh;overflow:hidden;display:flex;flex-direction:column;user-select:none}
+.topbar{background:var(--terra);height:52px;display:flex;align-items:center;padding:0 1.25rem;gap:0.75rem;flex-shrink:0}
+.logo{font-family:var(--serif);font-size:1.05rem;color:#fff;font-weight:500}.logo em{color:#E8C97A;font-style:normal}
+.sep{width:1px;height:18px;background:rgba(255,255,255,0.2)}
+.doc-title{font-size:0.7rem;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.track-badge{margin-left:auto;font-size:0.62rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-weight:700;letter-spacing:0.05em;text-transform:uppercase}
+.layout{display:grid;grid-template-columns:240px 1fr;flex:1;min-height:0}
+.sidebar{background:#fff;border-right:1px solid var(--border);overflow-y:auto;padding:0.6rem 0}
+.nav-group-label{font-size:0.58rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--tl);padding:0.7rem 1rem 0.3rem;border-top:1px solid var(--border);margin-top:0.3rem}
+.nav-group-label:first-child{border-top:none;margin-top:0}
+.nav-btn{width:100%;text-align:left;background:none;border:none;padding:0.42rem 1rem;cursor:pointer;font-family:var(--sans);font-size:0.76rem;color:var(--tm);font-weight:500;transition:background 0.15s;border-left:3px solid transparent;display:flex;align-items:center;gap:0.45rem;line-height:1.4}
+.nav-btn:hover{background:var(--terra-paler)}
+.nav-btn.active{background:var(--terra-pale);border-left-color:var(--terra);color:var(--terra);font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.main{overflow-y:auto;padding:1.75rem 2.25rem;display:flex;flex-direction:column}
+.section{display:none}.section.visible{display:flex;flex-direction:column;gap:0.9rem}
+.sec-title{font-family:var(--serif);font-size:1.35rem;color:var(--terra);font-weight:500;padding-bottom:0.5rem;border-bottom:2px solid var(--terra-light)}
+.body-p{font-size:0.85rem;color:var(--tm);line-height:1.8;max-width:820px}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:0.3rem;padding-left:0.25rem;max-width:760px}
+.bullet-list li{font-size:0.82rem;color:var(--tm);line-height:1.6;display:flex;align-items:flex-start;gap:0.5rem}
+.bullet-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--terra-mid);flex-shrink:0;margin-top:0.5rem}
+.callout{display:flex;gap:0.7rem;border-radius:9px;padding:0.85rem 1rem;max-width:820px}
+.sor-callout{background:var(--gold-pale);border:1px solid rgba(184,148,58,0.2)}
+.tic-callout{background:var(--navy-light);border:1px solid rgba(26,58,106,0.18)}
+.mix-callout{background:var(--teal-light);border:1px solid rgba(46,125,107,0.2)}
+.fcc-callout{background:var(--terra-pale);border:1px solid rgba(123,61,42,0.18)}
+.note-callout{background:#fdfaf5;border:1px solid var(--border)}
+.callout-badge{flex-shrink:0;font-size:0.6rem;font-weight:800;padding:0.2rem 0.5rem;border-radius:4px;align-self:flex-start;margin-top:1px;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
+.sor-badge{background:var(--gold-light);color:#7A5010}
+.tic-badge{background:var(--navy-light);color:var(--navy);border:1px solid rgba(26,58,106,0.2)}
+.mix-badge{background:var(--teal-light);color:var(--teal);border:1px solid rgba(46,125,107,0.25)}
+.fcc-badge{background:var(--terra-pale);color:var(--terra);border:1px solid rgba(123,61,42,0.25)}
+.note-badge{background:var(--border);color:var(--tl)}
+.callout-text{font-size:0.81rem;color:var(--tm);line-height:1.7}
+.sched-table{width:100%;border-collapse:collapse;font-size:0.8rem;max-width:920px}
+.sched-table thead tr{background:var(--terra);color:#fff}
+.sched-table thead th{padding:0.6rem 0.9rem;text-align:left;font-weight:700;font-size:0.74rem}
+.sched-table tbody tr{border-bottom:1px solid var(--border)}
+.sched-table tbody tr.alt{background:var(--terra-paler)}
+.sched-block{padding:0.6rem 0.9rem;font-weight:700;color:var(--terra);width:190px;vertical-align:top}
+.sched-domains{padding:0.6rem 0.9rem;color:var(--terra-mid);font-weight:600;font-size:0.74rem;width:110px;vertical-align:top}
+.sched-focus{padding:0.6rem 0.9rem;color:var(--tm);line-height:1.6;vertical-align:top}
+.env-table{width:100%;border-collapse:collapse;max-width:820px;font-size:0.82rem}
+.env-table thead tr{background:var(--terra);color:#fff}
+.env-table thead th{padding:0.5rem 0.9rem;text-align:left;font-weight:700;font-size:0.74rem}
+.env-table tbody tr{border-bottom:1px solid var(--border)}
+.env-table tbody tr.alt{background:var(--terra-paler)}
+.env-area{padding:0.55rem 0.9rem;font-weight:700;color:var(--terra);width:200px;vertical-align:top}
+.env-desc{padding:0.55rem 0.9rem;line-height:1.6;vertical-align:top}
+.assess-item{background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:0.85rem 1rem}
+.assess-head{font-size:0.8rem;font-weight:700;color:var(--terra)}
+.dom-header{display:flex;align-items:flex-start;gap:0.85rem;padding:1.1rem 1.25rem;background:#fff;border-radius:10px;border:1.5px solid var(--border)}
+.dom-badge{width:48px;height:48px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;color:#fff;flex-shrink:0}
+.dom-title{font-family:var(--serif);font-size:1.2rem;font-weight:500;margin-bottom:0.2rem}
+.dom-meta{font-size:0.75rem;color:var(--tl)}
+.phil-box{background:var(--terra-pale);border:1px solid var(--border);border-radius:9px;padding:1rem 1.2rem}
+.phil-label{font-size:0.62rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--terra-mid);margin-bottom:0.45rem}
+.phil-text{font-size:0.82rem;color:var(--tm);line-height:1.8}
+.stds-list{display:flex;flex-direction:column;gap:0.6rem}
+.std-card{background:#fff;border:1.5px solid var(--border);border-radius:9px;overflow:hidden}
+.std-head{padding:0.7rem 1rem;display:flex;align-items:center;gap:0.7rem;cursor:pointer}.std-head:hover{background:var(--terra-paler)}
+.std-code{font-size:0.72rem;font-weight:800;padding:0.18rem 0.48rem;border-radius:4px;color:#fff;flex-shrink:0}
+.std-title{font-size:0.86rem;font-weight:600;color:var(--terra);flex:1;line-height:1.4}
+.std-chev{color:var(--tl);font-size:0.9rem;flex-shrink:0;transition:transform 0.2s}
+.std-card.open .std-chev{transform:rotate(180deg)}
+.std-body{display:none;border-top:1px solid var(--border);padding:1rem 1.1rem}
+.std-card.open .std-body{display:block}
+.cont-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.cont-col{display:flex;flex-direction:column;gap:0.35rem}
+.cont-label{font-size:0.62rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.3rem}
+.ind-list{list-style:none;display:flex;flex-direction:column;gap:0.28rem}
+.ind-list li{display:flex;align-items:flex-start;gap:0.4rem;font-size:0.79rem;color:var(--tm);line-height:1.55}
+.ind-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;margin-top:0.42rem;opacity:0.4}
+.ind-list li.muted{color:var(--tl);font-style:italic}
+.ind-list li.muted::before{display:none}
+.strat-box{background:var(--terra-pale);border:1.5px solid var(--border);border-radius:9px;padding:1rem 1.2rem}
+.strat-label{font-size:0.62rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--terra-mid);margin-bottom:0.5rem}
+.strat-list{list-style:decimal;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.32rem}
+.strat-list li{font-size:0.79rem;color:var(--tm);line-height:1.6;padding-left:0.25rem}
+.refs-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem;max-width:820px}
+.ref-item{font-size:0.8rem;color:var(--tm);line-height:1.65;padding-left:1.5rem;text-indent:-1.5rem}
+</style>
+</head>
+<body oncontextmenu="return false">
+<div class="topbar">
+  <span class="logo">re<em>:Bloom</em></span>
+  <span class="sep"></span>
+  <span class="doc-title">Scope and Sequence</span>
+  <span class="track-badge">Family Child Care Track · Birth to Age 5</span>
+</div>
+<div class="layout">
+  <nav class="sidebar"><div class="nav-group-label">Introduction</div>
+<button class="nav-btn" data-sec="intro" onclick="show('intro')">Curriculum Philosophy</button>
+<button class="nav-btn" data-sec="howto" onclick="show('howto')">How to Use This Document</button>
+<button class="nav-btn" data-sec="homeenv" onclick="show('homeenv')">Home Environment Guide</button>
+<button class="nav-btn" data-sec="schedule" onclick="show('schedule')">Daily Schedule Framework</button>
+<button class="nav-btn" data-sec="routines" onclick="show('routines')">FCC Routine Guidance</button>
+<button class="nav-btn" data-sec="assess" onclick="show('assess')">Assessment Overview</button>
+<div class="nav-group-label">Nine Developmental Domains</div>
+<button class="nav-btn dom-btn" data-sec="dom_AL" onclick="show('dom_AL')" style="border-left-color:transparent"><span class="dot" style="background:#7B3D2A"></span>Approaches to Learning</button>
+<button class="nav-btn dom-btn" data-sec="dom_CO" onclick="show('dom_CO')" style="border-left-color:transparent"><span class="dot" style="background:#6B3424"></span>Cognitive Development</button>
+<button class="nav-btn dom-btn" data-sec="dom_CR" onclick="show('dom_CR')" style="border-left-color:transparent"><span class="dot" style="background:#9E5535"></span>Creative Development</button>
+<button class="nav-btn dom-btn" data-sec="dom_LL" onclick="show('dom_LL')" style="border-left-color:transparent"><span class="dot" style="background:#5C2D1A"></span>Language and Literacy</button>
+<button class="nav-btn dom-btn" data-sec="dom_MA" onclick="show('dom_MA')" style="border-left-color:transparent"><span class="dot" style="background:#8A4A2F"></span>Mathematics</button>
+<button class="nav-btn dom-btn" data-sec="dom_PW" onclick="show('dom_PW')" style="border-left-color:transparent"><span class="dot" style="background:#6E3828"></span>Physical Development and Wellness</button>
+<button class="nav-btn dom-btn" data-sec="dom_SC" onclick="show('dom_SC')" style="border-left-color:transparent"><span class="dot" style="background:#A05A38"></span>Science</button>
+<button class="nav-btn dom-btn" data-sec="dom_SE" onclick="show('dom_SE')" style="border-left-color:transparent"><span class="dot" style="background:#7A3220"></span>Social-Emotional Development</button>
+<button class="nav-btn dom-btn" data-sec="dom_SS" onclick="show('dom_SS')" style="border-left-color:transparent"><span class="dot" style="background:#8F4E30"></span>Social Studies</button>
+<div class="nav-group-label">Back Matter</div>
+<button class="nav-btn" data-sec="refs" onclick="show('refs')">References</button>
+</nav>
+  <main class="main" id="main"><div class="section" id="intro">
+<h2 class="sec-title">Curriculum Philosophy</h2>
+<p class="body-p">re:Bloom's Family Child Care Track is built on a fundamental conviction: that the home-based child care setting is not a lesser version of center-based care. It is a distinct and often superior learning environment that has been chronically underserved by the curriculum publishing world. Most published curricula are designed for center-based programs with age-separated classrooms, dedicated rooms for different activities, and multiple staff members. Family child care providers have been expected to adapt these curricula to a fundamentally different context — a task that requires professional expertise that many providers have never been offered. This document is built specifically for the family child care setting, with its mixed-age groups, home environment, intimate caregiving relationships, and the extraordinary developmental range that a single provider manages throughout every day.</p>
+<p class="body-p">The theoretical foundation of this document draws on the full research base that grounds all re:Bloom curriculum. Jean Piaget's constructivism establishes that children build knowledge through active experience. Lev Vygotsky's sociocultural theory grounds our understanding that children's highest-level thinking emerges through relationship and scaffolded interaction. The mixed-age family child care environment is a uniquely powerful Vygotskian setting: children naturally operate in each other's zones of proximal development across the entire age span. Mary Ainsworth's attachment research establishes that the primary caregiver relationship is the foundation of all learning, and in a high-quality family child care home, that relationship has a consistency and depth that is among the best in early care.</p>
+<p class="body-p">Science of Reading principles are embedded throughout all nine domains. The oral language richness of the home-based setting — its real conversations, real reading materials, and real-world vocabulary experiences — is one of the most powerful SoR-aligned learning environments available to young children. Every diapering conversation, every shared meal, every outdoor walk, and every read-aloud is an act of literacy instruction when conducted with intentionality.</p>
+<p class="body-p">Trauma-informed care principles are woven throughout this document. Family child care providers often have deep knowledge of the families and circumstances of the children in their care. This knowledge, held with confidentiality and non-judgment, is one of the most powerful trauma-informed tools available. The consistent, warm, predictable environment of a high-quality FCC home is itself a healing intervention for children who have experienced adversity.</p>
+</div><div class="section" id="howto">
+<h2 class="sec-title">How to Use This Document</h2>
+<p class="body-p">This Scope and Sequence is organized into nine developmental domains. Each domain section contains the following:</p>
+<ul class="bullet-list">
+  <li>A domain philosophy grounded in research, developmental theory, and the specific context of the family child care home</li>
+  <li>A Science of Reading (SoR) connection note</li>
+  <li>A Trauma-Informed Care (TIC) note where most critical for the FCC context</li>
+  <li>A Mixed-Age (MIX) grouping strategy note with specific guidance for the home-based setting</li>
+  <li>A Family Child Care (FCC) note with home-environment-specific guidance where applicable</li>
+  <li>A continuum standards table showing developmental progression across three age bands: Infant (Birth to 12 Months), Toddler (12 to 36 Months), and Preschool (3 to 5 Years)</li>
+  <li>Educator strategies and mixed-age grouping strategies for each domain</li>
+</ul>
+<div class="callout note-callout">
+  <span class="callout-badge note-badge">Note</span>
+  <div class="callout-text">Standard codes (AL.1.a, LL.2.b, etc.) are re:Bloom internal codes aligned to the nine-domain framework. They correspond to early learning and development standards across multiple states. Consult the re:Bloom State Alignment Documents for crosswalks to your specific state's standards.</div>
+</div>
+<p class="body-p" style="margin-top:0.5rem">This document is designed to be used alongside:</p>
+<ul class="bullet-list">
+  <li>re:Bloom Family Child Care Monthly Planning Guide, for monthly curriculum organization</li>
+  <li>re:Bloom AI Lesson Plan Generator, set to the Family Child Care track</li>
+  <li>re:Bloom Family Child Care Activity Guides, standalone printable guides for mixed-age activities</li>
+  <li>re:Bloom Child Observation and Assessment Tool (Birth to 12 Months, 12 to 36 Months, and Preschool tracks)</li>
+  <li>re:Bloom Expert and Novice Implementation Guides</li>
+</ul>
+</div><div class="section" id="homeenv">
+<h2 class="sec-title">The Family Child Care Home Learning Environment</h2>
+<p class="body-p">A family child care home does not need to look like a center-based classroom to be a high-quality learning environment. What it needs is intentional organization, age-appropriate materials that rotate to remain engaging, and clear areas that invite specific types of play and learning. The goal is not to transform a home into an institution but to ensure that the home environment actively supports development rather than passively hosting it.</p>
+<div class="assess-head" style="margin-top:0.75rem;margin-bottom:0.5rem">Essential Environment Areas</div>
+<table class="env-table">
+  <thead><tr><th>Area</th><th>Description and Purpose</th></tr></thead>
+  <tbody><tr class="">
+  <td class="env-area">Book and Literacy Corner</td>
+  <td class="env-desc">A consistent, accessible area with books at child height. Rotate books to match inquiry themes. Include board books (infants), picture books (toddlers), and informational texts (preschoolers). Cushions or a rug signal that this is a place for quiet engagement.</td>
+</tr><tr class="alt">
+  <td class="env-area">Art and Creative Area</td>
+  <td class="env-desc">A table or surface with art materials accessible to all age groups. Provide developmentally appropriate tools: large brushes and thick paint for infants, crayons and collage materials for toddlers, a range of media for preschoolers. Process art is the expectation; templates and coloring sheets are not used.</td>
+</tr><tr class="">
+  <td class="env-area">Building and Construction Area</td>
+  <td class="env-desc">Blocks, Duplos, and loose parts in a low, accessible area. Label storage containers with pictures so children of all ages can access and return materials independently. Protect construction from disruption during deep play.</td>
+</tr><tr class="alt">
+  <td class="env-area">Nature and Discovery Area</td>
+  <td class="env-desc">A windowsill or tabletop area with natural materials: specimens from outdoor walks, a plant to care for, a magnifying glass, and a simple observation journal. Rotate specimens seasonally.</td>
+</tr><tr class="">
+  <td class="env-area">Cozy Corner</td>
+  <td class="env-desc">A small, enclosed, calm space for regulation and quiet retreat. Cushions, soft materials, and a few sensory items. Not a timeout space; an always-available choice for any child who needs a break.</td>
+</tr><tr class="alt">
+  <td class="env-area">Dramatic Play Area</td>
+  <td class="env-desc">A consistent space with open-ended props that change with the inquiry theme. A home-based FCC has natural dramatic play materials: pots, scarves, bags, and household objects. No single-purpose plastic toys required.</td>
+</tr><tr class="">
+  <td class="env-area">Fine Motor Station</td>
+  <td class="env-desc">A small tabletop area with rotating fine motor activities: playdough, threading materials, tongs and transferring activities, puzzles. Changes weekly to maintain interest.</td>
+</tr></tbody>
+</table>
+<div class="assess-item" style="margin-top:1rem">
+  <div class="assess-head">Mixing Ages in One Environment</div>
+  <p class="body-p" style="margin-top:0.35rem">The most significant environmental challenge in a mixed-age FCC home is creating materials and areas that serve all age groups simultaneously without creating hazards for younger children or boredom for older children. Key principles: infant floor space must be protected from active toddler traffic; small loose parts for preschoolers require careful management when infants are on the floor; toddler and preschooler materials should overlap so play can be shared. Post the daily schedule visually at child height so all children understand the sequence of the day through pictures.</p>
+</div>
+</div><div class="section" id="schedule">
+<h2 class="sec-title">Family Child Care Daily Schedule Framework</h2>
+<p class="body-p">The following schedule framework reflects the re:Bloom approach to structuring the family child care day. Infant schedules must be individually responsive and cannot be imposed as a group schedule. Toddler schedules can be more consistent while accommodating individual variation. In a mixed-age FCC home, the schedule must serve all age groups simultaneously: infants flow through their individual rhythms while toddlers and preschoolers follow a more consistent group structure.</p>
+<table class="sched-table">
+  <thead><tr><th>Routine Block</th><th>Domains</th><th>FCC Context and Curriculum Focus</th></tr></thead>
+  <tbody><tr class="">
+  <td class="sched-block">Arrival and Welcome</td>
+  <td class="sched-domains">SE, AL</td>
+  <td class="sched-focus">Greeting each child by name at the door. Brief connection with the arriving family. Children choose a quiet independent activity or join an ongoing project. Morning message or photo board changes signal the day&#39;s theme.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Morning Meeting / Circle</td>
+  <td class="sched-domains">SE, LL, SS, MA</td>
+  <td class="sched-focus">Brief gathering of all children. Greeting song, calendar or weather observation, daily schedule review. Read-aloud or fingerplay. Questions of the day. Mixed-age participation: each child contributes at their developmental level.</td>
+</tr><tr class="">
+  <td class="sched-block">Phonological Awareness Block</td>
+  <td class="sched-domains">LL</td>
+  <td class="sched-focus">10-minute SoR-aligned phonological awareness practice embedded in morning routine. Rhymes, syllable games, initial sound activities, and sound-play songs. Preschoolers practice targeted skills while toddlers and infants benefit from incidental exposure to phonologically rich language.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Choice Time / Open Play</td>
+  <td class="sched-domains">ALL</td>
+  <td class="sched-focus">45 to 60 minutes of child-directed exploration and play across all domains. Provider facilitates and extends rather than directs. Materials rotate to reflect current inquiry theme. All age groups play simultaneously with developmentally appropriate materials.</td>
+</tr><tr class="">
+  <td class="sched-block">Read-Aloud</td>
+  <td class="sched-domains">LL, CO, SE, SC/SS</td>
+  <td class="sched-focus">Daily intentional read-aloud using Interactive Read-Aloud or Dialogic Reading methodology. Books chosen for vocabulary richness, content connection to current theme, and developmental range. Provider asks differentiated questions to different age groups during the same book.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Outdoor Time (Morning)</td>
+  <td class="sched-domains">PW, SC, SE, AL</td>
+  <td class="sched-focus">Minimum 30 minutes. Outdoor exploration, gross motor play, nature investigation, and sensory experience. Provider narrates and extends children&#39;s outdoor investigations. Obstacle courses, gardening, nature walks, and free movement are all curriculum.</td>
+</tr><tr class="">
+  <td class="sched-block">Meal / Snack</td>
+  <td class="sched-domains">PW, LL, MA, SS</td>
+  <td class="sched-focus">Family-style meals with conversation. Children serve themselves, practice mathematics (counting, measuring, comparing), develop fine motor skills, and engage in community building. Meal is curriculum, not a break from it.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Quiet / Rest Time</td>
+  <td class="sched-domains">PW, AL</td>
+  <td class="sched-focus">Infants on individual schedules. Toddlers nap on consistent schedule. Preschoolers rest or engage in quiet independent activity: books, drawing, puzzles. Provider documents observations during this time.</td>
+</tr><tr class="">
+  <td class="sched-block">Afternoon Activity</td>
+  <td class="sched-domains">CO, MA, SC, CR</td>
+  <td class="sched-focus">Intentional small-group or individual activity connected to current inquiry theme. Science investigation, art project, math game, or literacy activity. Mixed-age groupings with differentiated roles and expectations.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Outdoor Time (Afternoon)</td>
+  <td class="sched-domains">PW, SC, SE</td>
+  <td class="sched-focus">Second outdoor period. Gross motor play, nature observation, gardening, and physical activity. Outdoor time is non-negotiable regardless of child preference; adjust activity type for weather.</td>
+</tr><tr class="">
+  <td class="sched-block">Closing Meeting</td>
+  <td class="sched-domains">SE, LL, SS, AL</td>
+  <td class="sched-focus">Plan-do-review closing: brief recall conversation about the day. What did we learn? What will we explore tomorrow? Preparation for family pickup. Each child&#39;s meaningful moment from the day shared with their family at pickup.</td>
+</tr></tbody>
+</table>
+</div><div class="section" id="routines">
+<h2 class="sec-title">FCC-Specific Routine Guidance</h2>
+<div class="assess-item">
+  <div class="assess-head">Arrival and Pickup</div>
+  <div class="callout fcc-callout" style="margin:0.5rem 0 0.6rem">
+    <span class="callout-badge fcc-badge">FCC</span>
+    <div class="callout-text">The transition between home and FCC is an attachment moment and a community-building opportunity. How it is handled sets the emotional tone for what follows.</div>
+  </div>
+  <ul class="bullet-list"><li>Greet every arriving child by name at the door; get to their level and make eye contact before they enter</li><li>Offer parents a brief, specific positive observation about their child at pickup: &#39;She was so focused at the science table today&#39; communicates that you see their child as an individual</li><li>Maintain a brief written daily communication system for infants and toddlers: feedings, sleep, mood, and a developmental observation</li><li>Preschoolers can participate in greeting new arrivals, building community responsibility and welcoming skills</li></ul>
+</div><div class="assess-item">
+  <div class="assess-head">Mealtimes</div>
+  <div class="callout fcc-callout" style="margin:0.5rem 0 0.6rem">
+    <span class="callout-badge fcc-badge">FCC</span>
+    <div class="callout-text">Mealtimes in a home-based FCC are among the highest-value developmental experiences in the day. They are simultaneously social studies, language development, fine motor practice, and health education.</div>
+  </div>
+  <ul class="bullet-list"><li>Use family-style meals where children serve themselves: this builds fine motor skills, mathematical thinking, and autonomy</li><li>Engage children in meal preparation at a developmental level: tearing, pouring, stirring, spreading, and setting the table are all legitimate curriculum activities</li><li>Maintain consistent conversation during meals: introduce a topic and ensure all children participate at their level</li><li>Ellyn Satter&#39;s Division of Responsibility: the provider decides what food is offered and when; the child decides whether and how much to eat</li></ul>
+</div><div class="assess-item">
+  <div class="assess-head">Diapering and Toileting</div>
+  <div class="callout fcc-callout" style="margin:0.5rem 0 0.6rem">
+    <span class="callout-badge fcc-badge">FCC</span>
+    <div class="callout-text">Caregiving routines with infants and toddlers are not interruptions to learning. They are the primary context for relationship-building, language development, and body awareness.</div>
+  </div>
+  <ul class="bullet-list"><li>Narrate every step of the diapering routine: &#39;Now I am going to put a clean diaper on. Here comes the wipe. Does that feel cold?&#39;</li><li>Use diapering time as one-on-one language time: sing a specific song, play peek-a-boo, or name body parts</li><li>Toddler toileting: support independence by providing appropriate tools (step stool, potty chair) and time; never rush or shame</li><li>Preschooler toileting: complete independence is expected; provide accessible facilities and a consistent hand-washing routine</li></ul>
+</div><div class="assess-item">
+  <div class="assess-head">Nap and Rest Time</div>
+  <div class="callout fcc-callout" style="margin:0.5rem 0 0.6rem">
+    <span class="callout-badge fcc-badge">FCC</span>
+    <div class="callout-text">Sleep is not a break from the program. It is a neurological necessity. The way rest time is structured communicates whether the FCC home treats children&#39;s whole bodies as its responsibility.</div>
+  </div>
+  <ul class="bullet-list"><li>Individual infant sleep schedules must be honored regardless of the group schedule</li><li>A consistent pre-sleep routine for toddlers (dim lights, quiet music, a brief story or song) signals the body to prepare for sleep</li><li>Preschoolers who do not sleep still need a daily quiet rest period; provide books, drawing materials, or quiet puzzles</li><li>Use rest time for observation documentation: completing notes on what children did and said during the morning is high-quality professional practice</li></ul>
+</div><div class="assess-item">
+  <div class="assess-head">Outdoor Time</div>
+  <div class="callout fcc-callout" style="margin:0.5rem 0 0.6rem">
+    <span class="callout-badge fcc-badge">FCC</span>
+    <div class="callout-text">Outdoor time in a family child care home is not recess. It is curriculum. The outdoor environment provides movement, nature investigation, science inquiry, gross motor development, and regulation support that indoor environments cannot replicate.</div>
+  </div>
+  <ul class="bullet-list"><li>Aim for a minimum of 60 cumulative minutes of outdoor time daily across two or more outdoor periods</li><li>Take the learning outside: bring books, art materials, counting materials, and magnifying glasses outdoors</li><li>Dress for the weather and go outside in most conditions; children who regularly experience outdoor time in varied weather develop resilience and environmental literacy</li><li>Active supervision outdoors means the provider&#39;s full attention is on children</li></ul>
+</div>
+</div><div class="section" id="assess">
+<h2 class="sec-title">Assessment Overview</h2>
+<p class="body-p">Assessment in a family child care home is always observational, relationship-based, and ongoing. The intimacy of the FCC setting is a significant assessment advantage: a provider who cares for the same children across multiple years has a depth of developmental knowledge about each child that is genuinely difficult to replicate in center-based care.</p>
+<div class="assess-item">
+  <div class="assess-head">Child Observation and Assessment Tool</div>
+  <p class="body-p" style="margin-top:0.35rem">Use the Birth to 12 Months, 12 to 36 Months, or Preschool version of the re:Bloom Child Observation and Assessment Tool for each child based on their current developmental age. Complete three times per year (fall, mid-year, spring). The AI-generated developmental summary and next steps inform planning and support family communication.</p>
+</div>
+<div class="assess-item">
+  <div class="assess-head">Daily Anecdotal Records</div>
+  <p class="body-p" style="margin-top:0.35rem">Brief written observations recorded during caregiving and play. In an FCC home, observation notes can be captured on sticky notes, a simple notebook, or a notes app during routine moments. Organize by child and domain code. A minimum of two to three anecdotes per child per week is the expectation.</p>
+</div>
+<div class="assess-item">
+  <div class="assess-head">Portfolio Documentation</div>
+  <p class="body-p" style="margin-top:0.35rem">Each child's portfolio includes dated photographs with provider notations, work samples, and the completed assessment at each rating period. In an FCC home, a simple binder or digital folder works well. Share portfolios with families at conferences and use them as the basis for individualized planning.</p>
+</div>
+<div class="assess-item">
+  <div class="assess-head">Family Communication</div>
+  <p class="body-p" style="margin-top:0.35rem">Daily verbal and written communication with families about what their child explored, said, and accomplished is a core component of the re:Bloom FCC assessment system. A brief daily note (written, text, or app-based) for infants and toddlers supports the trust and partnership that characterize high-quality FCC.</p>
+</div>
+</div><div class="section" id="dom_AL">
+      <div class="dom-header" style="border-left:4px solid #7B3D2A">
+        <span class="dom-badge" style="background:#7B3D2A">AL</span>
+        <div>
+          <h2 class="dom-title" style="color:#7B3D2A">Approaches to Learning</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Approaches to Learning is the domain that makes everything else possible. In a family child care setting, the intimate multi-age environment is one of the most powerful learning laboratories that exists. When a three-year-old watches an infant discover a rattle with complete fascination, both children are learning: the infant through sensory exploration, the preschooler through observation and early scientific thinking. Curiosity, persistence, initiative, and flexibility are not skills that can be directly taught. They are dispositions cultivated over time through relationship, through environments that invite investigation, and through adults who treat children&#39;s questions as worthy of serious attention. Howard Gardner&#39;s multiple intelligences framework is particularly visible in a family child care home: the child who builds elaborate block towers, the one who hums constantly, and the one who watches people with intense curiosity are all demonstrating intelligence that deserves recognition and cultivation. Trauma-informed practice in this domain means understanding that a child who will not try new things or who collapses quickly under challenge is not willfully defiant. They are protecting themselves from the fear of failure that adversity has taught them. Safety comes first. Curiosity follows.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: The Approaches to Learning dispositions, particularly sustained attention, persistence, and the willingness to engage with difficulty, are among the strongest non-cognitive predictors of reading success. A child who approaches a new sound game with curiosity rather than avoidance is building the dispositional foundation that phonological awareness instruction depends on.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">In a mixed-age FCC home, older children model persistence and initiative for younger children naturally. Assign preschoolers the role of &quot;explorer guide&quot; during discovery activities, asking them to invite infants and toddlers into their investigations. This builds leadership in older children while exposing younger children to more complex engagement with materials.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7B3D2A">AL.1.a</span>
+            <span class="std-title">Engages with new experiences and materials with curiosity and initiative.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Reaches toward and mouths new objects placed in reach</li><li>Orients toward novel sounds and visual stimuli</li><li>Shows excitement (kicking, vocalizing) when presented with new materials</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Approaches new materials independently after brief observation</li><li>Returns to a new material multiple times across the day</li><li>Vocalizes or points to new things with interest</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Approaches unfamiliar activities without requiring adult encouragement</li><li>Asks questions about how things work or what will happen</li><li>Sustains engagement with a self-chosen activity for 15 or more minutes</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7B3D2A">AL.1.b</span>
+            <span class="std-title">Persists in completing activities with increasing complexity.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Repeats an action to reproduce an interesting effect (shaking rattle)</li><li>Maintains interest in an object or face for extended moments</li><li>Continues reaching for an object after initial attempts</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Returns to an interrupted activity after a brief distraction</li><li>Attempts multiple approaches before seeking adult help</li><li>Completes familiar two-step sequences independently</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Follows through on multi-step projects across multiple days</li><li>Adjusts strategy when first approach fails</li><li>Completes a task from beginning to end without adult reminders</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7B3D2A">AL.2.a</span>
+            <span class="std-title">Develops a growth mindset and orientation toward learning from mistakes.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Recovers from minor frustration with caregiver support</li><li>Tries a different position or approach to reach a desired object</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Attempts again after initial failure with brief adult encouragement</li><li>Watches how others solve a problem and tries the same approach</li><li>Shows pride in accomplishment: clapping, vocalizing</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Names mistakes as expected parts of learning (&#39;I did not get it yet&#39;)</li><li>Encourages a peer who is struggling</li><li>Welcomes challenge rather than avoiding difficulty</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7B3D2A">AL.1.c</span>
+            <span class="std-title">Sustains attention and transitions between activities with increasing flexibility.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Maintains focus on a face or object for several seconds</li><li>Shifts attention smoothly when an adult redirects with a warm tone</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Sustains play with a preferred material for 5 to 10 minutes</li><li>Uses transition objects (stuffed animal, blanket) to support move between activities</li><li>Responds to a verbal warning before a transition with less distress over time</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7B3D2A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Transitions between activities with minimal emotional disruption when warned in advance</li><li>Applies different rules in different contexts without adult reminders</li><li>Holds a thought through a brief distraction and returns to it</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Rotate one new material into the environment each week rather than changing everything at once; novelty without overwhelm</li><li>Narrate your own curiosity aloud during caregiving: &#39;I wonder why the leaves changed color. What do you think?&#39;</li><li>Follow the child&#39;s lead: when an infant fixates on a shadow on the wall, stop and honor that investigation rather than redirecting</li><li>Avoid rushing children away from deep engagement; interrupted exploration teaches children that their attention does not matter</li><li>Use the HighScope plan-do-review structure: brief planning at the start of choice time, active work, and recall conversation at the end</li><li>Offer materials that have a gradual difficulty curve (stacking rings, puzzles) so children can self-regulate challenge level</li><li>Celebrate effort and process rather than completion: &#39;You kept trying even when it was hard&#39;</li><li>In an FCC home, use meal preparation and caregiving routines as natural persistence-building activities: let children stir, pour, and fold at their developmental level</li><li>Use Dweck&#39;s language throughout the day: &#39;You have not figured it out yet. That means your brain is growing&#39;</li><li>Display children&#39;s work in progress, not only finished products, to normalize the learning process</li><li>Model your own mistakes transparently: &#39;I spilled that. That is OK. I will clean it up and try again&#39;</li><li>Read aloud books that feature characters who fail and persist; discuss explicitly: &#39;What did she do when it did not work?&#39;</li><li>Give a two-minute and a one-minute verbal warning before every transition; predictability reduces resistance</li><li>In an FCC home, transitions are more fluid than in centers; use this flexibility intentionally: a child who is deeply engaged does not have to stop when others do</li><li>Visual schedules posted at child height support all age groups, including those who cannot read yet, through pictures</li><li>Songs and fingerplays signal transitions in a low-stress way; the same song used consistently becomes a powerful regulatory cue</li></ol>
+    </div>
+    </div><div class="section" id="dom_CO">
+      <div class="dom-header" style="border-left:4px solid #6B3424">
+        <span class="dom-badge" style="background:#6B3424">CO</span>
+        <div>
+          <h2 class="dom-title" style="color:#6B3424">Cognitive Development</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Cognitive development in early childhood is not the accumulation of facts. It is the construction of increasingly complex mental structures through which children interpret, organize, and act on their world. Jean Piaget described infants as sensorimotor learners who build knowledge through physical action: grasping, shaking, dropping, and observing. By toddlerhood, symbolic thinking begins to emerge: a block becomes a phone, a banana becomes an airplane. This is not pretending in the trivial sense. It is the cognitive achievement that makes language, literacy, and mathematics possible, since all three depend on the understanding that one thing can stand for another. In a family child care home, the cognitive environment is naturally rich: real cooking, real cleaning, real caregiving, real social problem-solving. The child who watches a provider weigh flour for baking is learning measurement, fractions, and cause-and-effect relationships simultaneously. Vygotsky&#39;s concept of the Zone of Proximal Development reminds providers that the most powerful learning happens at the edge of what a child can do alone. The mixed-age FCC environment is uniquely suited to this: a preschooler working just above a toddler&#39;s level, with gentle scaffolding, is operating in both children&#39;s zones of proximal development at once.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Symbolic and representational thinking (CO.2.a) is the cognitive prerequisite for understanding that letters represent sounds. Background knowledge (CO.1.a, CO.3.a) is among the most powerful predictors of reading comprehension; the richer and more varied a child&#39;s real-world experiences, the more vocabulary and conceptual structure they bring to reading.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">The mixed-age home offers a uniquely rich environment for cognitive development. When a preschooler explains to a toddler why you have to wait for ice to melt, both children benefit: the preschooler consolidates understanding by teaching, and the toddler gains exposure to reasoning vocabulary and causal thinking that exceeds what they would produce alone.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6B3424">CO.1.a</span>
+            <span class="std-title">Develops the ability to recall and connect information from past experiences.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Recognizes familiar caregiver faces and voices</li><li>Anticipates next step in a repeated routine (opens mouth when bib appears)</li><li>Shows recognition of a familiar object after brief disappearance</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Recalls events from previous days when prompted by an adult</li><li>Remembers where a favorite toy is kept</li><li>Connects a current experience to a previous one: &#39;Like at grandma&#39;s&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Accurately recalls a sequence of events from a prior day or week</li><li>Uses memory of past experiences to predict or plan (&#39;Last time it did not work, so I will try...&#39;)</li><li>Makes connections between new information and prior knowledge spontaneously</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6B3424">CO.2.a</span>
+            <span class="std-title">Develops the capacity for symbolic and representational thinking.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Uses one object as a tool to reach another</li><li>Responds to own name and image in a mirror</li><li>Imitates facial expressions and simple gestures</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses one object to represent another in play (block as car, cloth as cape)</li><li>Understands that a picture in a book represents a real object</li><li>Engages in simple pretend sequences with one or two steps</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Creates elaborate pretend scenarios with multiple roles and props</li><li>Understands that printed letters and numbers carry meaning</li><li>Uses drawing, painting, or building to represent an idea or experience</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6B3424">CO.3.a</span>
+            <span class="std-title">Uses increasingly sophisticated strategies to understand and solve problems.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Explores cause-and-effect through repeated actions</li><li>Searches for a partially hidden object</li><li>Uses a caregiver&#39;s face to gauge safety of new situation (social referencing)</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Attempts multiple strategies when first approach fails</li><li>Seeks adult assistance when a problem exceeds capacity</li><li>Observes a more capable peer and adapts the observed strategy</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Generates two or more possible solutions before acting</li><li>Evaluates which strategy worked and explains why</li><li>Applies a solution from one problem to a new, similar situation</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6B3424">CO.4.a</span>
+            <span class="std-title">Develops the ability to hold attention and shift thinking flexibly.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Maintains gaze on a moving object</li><li>Recovers interest in a familiar object after brief distraction</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Sustains play for gradually increasing durations</li><li>Adapts behavior when a familiar rule changes with adult support</li><li>Holds one rule in mind while an adult gives a direction</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6B3424">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Applies different rules in different contexts without reminders</li><li>Sustains focused attention during a chosen activity despite background distraction</li><li>Changes approach when presented with new information mid-task</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Conduct daily recall conversations during routines: &#39;What did we do in the yard yesterday? What do you remember seeing?&#39;</li><li>Use documentation: photos with captions on the wall invite children to revisit and narrate past experiences</li><li>In an FCC home, revisit shared experiences intentionally: &#39;Remember when we baked bread last week? What happened to the dough?&#39;</li><li>Build on prior knowledge explicitly: &#39;We learned about caterpillars last month. What do you know about butterflies?&#39;</li><li>Provide open-ended materials that invite symbolic substitution: fabric, cardboard, loose parts</li><li>Connect symbolic play explicitly to literacy: &#39;When you pretend the block is a phone, you are doing the same kind of thinking as when we read: one thing stands for another&#39;</li><li>In an FCC home, real household objects (pots, wooden spoons, fabric) are ideal open-ended materials; they do not prescribe a single use</li><li>Display and narrate children&#39;s representations: &#39;Can you tell me about your drawing? I want to understand what you made&#39;</li><li>Ask &#39;What are your ideas?&#39; rather than &#39;What is the answer?&#39; to communicate that thinking matters more than correctness</li><li>Use Socratic questioning: &#39;What makes you think that? What else could be true? What would happen if?&#39;</li><li>In an FCC home, real household problems (a stuck lid, a spilled drink, a clogged funnel) are authentic problem-solving opportunities; invite children into them</li><li>Document children&#39;s problem-solving in writing or photos to make thinking visible and revisitable</li><li>Harvard&#39;s Center on the Developing Child identifies executive function as trainable through routine, game-based practice; build flexibility through games like Simon Says, Red Light/Green Light, and sorting by changing rules</li><li>Visual schedules reduce cognitive load by externalizing sequence, freeing children&#39;s working memory for learning</li><li>In a multi-age home, the natural shifting of attention between children of different ages models and develops cognitive flexibility in all children</li><li>Prepare children verbally for rule changes: &#39;At the library we will use quiet voices; that is different from at home&#39;</li></ol>
+    </div>
+    </div><div class="section" id="dom_CR">
+      <div class="dom-header" style="border-left:4px solid #9E5535">
+        <span class="dom-badge" style="background:#9E5535">CR</span>
+        <div>
+          <h2 class="dom-title" style="color:#9E5535">Creative Development</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 3 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Creative development encompasses visual art, music, movement, and imaginative play. In the context of a family child care home, creative expression is not a scheduled activity. It is a way of life. The provider who hums while folding laundry, who lets children paint at the kitchen table, who participates in a two-year-old&#39;s drumming session with a wooden spoon, is doing curriculum. The Reggio Emilia concept of the hundred languages of children holds that there are at least a hundred ways children express what they know: painting, sculpting, dramatic play, music, movement, construction, storytelling. Each of these is a legitimate intellectual language, not merely an emotional outlet. In a mixed-age FCC home, creative activities can be structured so that infants participate in sensory exploration, toddlers engage in process-focused making, and preschoolers pursue intentional representation, all at the same table and at the same time. The critical principle across all age groups is process over product: the value of fingerpainting is in the child&#39;s engagement with color, texture, cause-and-effect, and decision-making, not in what the painting looks like at the end.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Dramatic play develops oral language, narrative structure, and vocabulary, all of which are foundational for reading comprehension. A child who can sustain a complex play narrative is practicing the story grammar (character, setting, problem, solution) that reading comprehension instruction formalized in later grades.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">In mixed-age creative activities, differentiate by material and intention rather than by separating children. At a shared art table: infants explore with large brushes and thick paint; toddlers experiment with mixing and tool use; preschoolers may work on a representational piece or collaborative mural. The shared space communicates that creativity belongs to everyone at every age.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#9E5535">CR.1.a</span>
+            <span class="std-title">Expresses ideas, feelings, and experiences through visual art.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds to visual stimulation with gaze, reaching, or vocalizing</li><li>Explores texture and color when safe materials are placed in reach</li><li>Creates marks on paper or sensory surfaces with hands or tools</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Selects specific materials with apparent preference</li><li>Creates recognizable (to themselves) marks or shapes</li><li>Describes their artwork when asked: &#39;That is my dog&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Creates representations connected to personal experience or imagination</li><li>Chooses specific colors and materials with clear intention</li><li>Revisits and refines a piece across multiple sessions</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#9E5535">CR.1.b</span>
+            <span class="std-title">Expresses self through music and movement.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Calms or activates in response to music</li><li>Moves body rhythmically to a beat</li><li>Vocalizes in musical patterns: cooing, babbling with varied pitch</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Attempts to sing familiar songs with partial words</li><li>Moves to music with whole-body engagement</li><li>Creates simple rhythmic patterns through clapping, stomping, or banging</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Sings familiar songs with reasonably accurate words and melody</li><li>Creates original songs, chants, or rhythms spontaneously</li><li>Moves expressively to music with attention to tempo and dynamics</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#9E5535">CR.2.a</span>
+            <span class="std-title">Develops original ideas through imaginative and inventive play.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Imitates caregiver actions with objects (pretends to talk on a block)</li><li>Anticipates a playful routine (peek-a-boo)</li><li>Shows delight in novel combinations of objects</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Engages in simple one-to-two step pretend sequences</li><li>Assigns roles to stuffed animals or dolls</li><li>Invents play scenarios using available materials</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#9E5535">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Creates elaborate multi-day pretend scenarios with narrative arcs</li><li>Assigns roles, negotiates plot lines, and resolves in-play conflicts</li><li>Sustains imaginative play over extended time with increasing complexity</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Offer a consistent, accessible art area in the home with rotating materials; process art does not require elaborate setup</li><li>Never use coloring sheets or pre-made templates; these communicate that there is a right answer in art, which is the opposite of the truth</li><li>Ask &#39;Tell me about your artwork&#39; rather than &#39;What is it?&#39;; the child&#39;s meaning is the curriculum</li><li>Montessori&#39;s principle of beauty in the environment: art materials should be real, beautiful, and respected, even in a home setting</li><li>Integrate music into every routine: transitions, cleanup, meals, and diaper changes; children learn language through song</li><li>An FCC home is well-suited to music: you can sing, play recorded music, and use household objects as instruments freely</li><li>Use call-and-response and choral chanting; both support phonological awareness as well as creative expression</li><li>Ask children to listen to music for emotional quality: &#39;What does this music feel like? Happy? Sleepy? Energetic?&#39;</li><li>Block dramatic play interruptions; a child deep in a narrative is doing advanced cognitive and social work</li><li>In an FCC home, real household props (pots, scarves, bags) make the richest dramatic play materials</li><li>Support play by adding materials that extend the story rather than redirecting it</li><li>Connect in-play language to literacy: &#39;You just made up a story. Should we write it down? You could be the author&#39;</li></ol>
+    </div>
+    </div><div class="section" id="dom_LL">
+      <div class="dom-header" style="border-left:4px solid #5C2D1A">
+        <span class="dom-badge" style="background:#5C2D1A">LL</span>
+        <div>
+          <h2 class="dom-title" style="color:#5C2D1A">Language and Literacy</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 12 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Language and Literacy in a family child care home begins at birth and never stops. Hart and Risley&#39;s foundational research established that the quantity and quality of language a child hears in the first three years predicts vocabulary size at school entry with striking consistency. The family child care provider who narrates caregiving routines, who names the world during walks, who reads aloud daily, and who responds warmly and contingently to every communicative attempt is doing some of the most important literacy work that exists. The Science of Reading framework, grounded in decades of rigorous research, identifies five core components of early literacy: phonological awareness, phonics, fluency, vocabulary, and comprehension. All five are built in the family child care home through intentional daily practices that look nothing like school instruction: rhyming fingerplays during diaper changes, talking about story characters during read-aloud, and introducing new vocabulary words as they appear naturally in real life. In a mixed-age setting, the literacy environment is naturally enriched: when a preschooler asks to know what a word means, the toddler overhears the explanation and stores the language. When the provider reads aloud to the group, the book works on each child at the level they are ready for.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: This entire domain is grounded in Science of Reading research. LL.2.a through LL.2.c address phonological awareness directly. LL.1.a through LL.1.e develop language comprehension. LL.3.a through LL.3.b build print and alphabetic knowledge. LL.4.a through LL.4.b develop writing foundations. All four strands of Scarborough&#39;s Reading Rope are seeded in the family child care home years before formal reading instruction begins.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">A shared read-aloud in a mixed-age FCC home is one of the highest-yield activities available. Choose books that work on multiple levels: board books with strong visual patterns for infants, rhythm and repetition for toddlers, and vocabulary and narrative complexity for preschoolers. Ask different questions to different children during the same reading: &#39;Where is the dog?&#39; (toddler) versus &#39;Why do you think the dog is hiding?&#39; (preschooler).</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.1.a</span>
+            <span class="std-title">Demonstrates understanding of increasingly complex language.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Turns toward familiar voices and responds to own name</li><li>Responds to &#39;no&#39; and other high-frequency words with behavioral change</li><li>Follows simple gestures paired with words</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Follows simple two-step directions</li><li>Understands basic prepositions (on, in, under)</li><li>Responds to questions about familiar objects and people</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Follows three or more step directions correctly</li><li>Understands comparative and superlative language</li><li>Responds appropriately to conditional language: &#39;if/then&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.1.b</span>
+            <span class="std-title">Develops and expands understanding of vocabulary and concepts.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Attends to face and mouth of caregiver during speech</li><li>Associates specific words with objects through repeated naming</li><li>Vocalizes in response to language-rich interactions</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Understands and uses 50 or more words</li><li>Rapidly acquires new words from one or two exposures in context</li><li>Asks &#39;What&#39;s that?&#39; repeatedly to label the world</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Understands and uses Tier 2 vocabulary introduced in instruction</li><li>Learns and retains three to five new words per week when explicitly taught</li><li>Explains word meanings in context using own language</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.1.c</span>
+            <span class="std-title">Communicates using increasingly complex and grammatically mature language.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Vocalizes to communicate need, pleasure, and distress</li><li>Babbles with varied consonant-vowel combinations</li><li>Uses different vocalizations for different communicative purposes</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Produces two-word combinations by 18 months and three-word phrases by 24 months</li><li>Asks simple questions: &#39;Where doggie?&#39; and &#39;What that?&#39;</li><li>Speaks clearly enough for familiar adults to understand most utterances</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses complete sentences of five or more words consistently</li><li>Uses compound and complex sentence structures in conversation</li><li>Speech is fully intelligible to unfamiliar adults in most contexts</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.1.d</span>
+            <span class="std-title">Participates in reciprocal communication and conversation.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Engages in serve-and-return interaction: vocalizes, pauses, responds to adult response</li><li>Maintains eye contact during social interaction</li><li>Uses gestures paired with vocalization to communicate intent</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Sustains a conversational exchange of three or more turns</li><li>Uses words to initiate and maintain a topic</li><li>Listens and responds appropriately to short conversational turns from an adult</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Sustains a topic across multiple conversational turns</li><li>Adjusts language and tone for different listeners</li><li>Asks clarifying questions to extend or deepen conversation</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.1.e</span>
+            <span class="std-title">Develops comprehension of read-aloud text.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Shows sustained attention to a picture book when held by a caregiver</li><li>Vocalizes or reaches toward pictures in a board book</li><li>Calms or activates in response to caregiver&#39;s reading voice</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Points to named pictures accurately</li><li>Fills in repeated words or phrases in a familiar text</li><li>Asks to have a favorite book read again</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Retells main events in sequence after a read-aloud</li><li>Answers both literal and inferential questions about text</li><li>Makes predictions before and during reading using text evidence</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.2.a</span>
+            <span class="std-title">Develops awareness of the syllable structure of spoken words.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds to rhythmic language and song</li><li>Kicks or activates in response to a familiar rhyme</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Claps or taps along to songs and chants</li><li>Begins to notice when words rhyme</li><li>Fills in the last word of a familiar rhyming text</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Claps or taps syllables in multi-syllabic words accurately</li><li>Identifies whether a word has one, two, or three syllables</li><li>Blends two syllables to form a compound word</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.2.b</span>
+            <span class="std-title">Develops awareness of initial sounds and rhyme patterns.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Attends to the prosody and rhythm of speech</li><li>Calms in response to familiar lullabies</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Recognizes and finishes familiar rhymes</li><li>Notices when two words start with the same sound</li><li>Plays with language sounds playfully: nonsense words, made-up rhymes</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Produces rhyming words when prompted</li><li>Isolates and identifies the initial sound of familiar words</li><li>Sorts pictures or objects by initial sound with support</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.2.c</span>
+            <span class="std-title">Develops awareness of individual phonemes in spoken words.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Discriminates between phoneme contrasts in native language</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Shows awareness that words are made of sounds through playful sound play</li><li>Responds with delight to tongue twisters and sound-focused songs</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Segments a three-phoneme word into its individual sounds with support</li><li>Blends two or three phonemes into a word when given the individual sounds</li><li>Identifies the first and last sound in a familiar word</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.3.a</span>
+            <span class="std-title">Develops awareness of print concepts and book organization.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Mouths, pats, and holds board books</li><li>Attends to a picture when an adult names it</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Holds a book right-side-up and turns pages front-to-back</li><li>Points to pictures when named</li><li>Understands that the text on the page says the same words each time</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Identifies where to start reading on a page</li><li>Understands directionality: left to right, top to bottom</li><li>Distinguishes between letters and words and spaces</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.3.b</span>
+            <span class="std-title">Develops knowledge of letters and their connection to sounds.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Attends to high-contrast letter shapes</li><li>Shows interest in adult pointing to text</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Recognizes own name in print</li><li>Begins to identify a few letters, typically from own name</li><li>Understands that letters are different from pictures and numbers</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Knows most uppercase letters and at least 15 lowercase letters</li><li>Names the sounds associated with approximately 10 or more letters</li><li>Identifies letters in environmental print and books</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.4.a</span>
+            <span class="std-title">Develops understanding that writing communicates meaning.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Watches adult writing with interest</li><li>Begins making marks on paper when given a tool</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Makes intentional marks and describes them as writing</li><li>Asks adults to write things down</li><li>Understands that a shopping list, a note, and a card carry meaning</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Produces writing with the intent to communicate a message</li><li>Incorporates writing in dramatic play (menus, lists, signs)</li><li>Dictates stories or sentences for an adult to transcribe</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#5C2D1A">LL.4.b</span>
+            <span class="std-title">Develops writing grasp and fine motor control for writing tools.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Explores objects with fingers and uses palmar grasp</li><li>Transfers objects between hands</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses palmar grasp transitioning toward digital grasp for crayons</li><li>Makes purposeful vertical and horizontal strokes</li><li>Imitates simple letter-like marks with a writing tool</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#5C2D1A">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses a functional tripod grip with consistent tool use</li><li>Copies some letters, particularly those in own name</li><li>Produces writing with directional intent: left to right, top to bottom</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Use precise, rich language throughout the day: not simplified speech but supported speech with contextual clues</li><li>Build spatial and temporal vocabulary deliberately through movement games and daily schedule discussions</li><li>Check for understanding through action rather than verbal confirmation; ask children to show rather than tell</li><li>In an FCC home, real routines provide constant comprehensible input in meaningful context: &#39;Put your shoes by the door before we go outside&#39;</li><li>Use Beck, McKeown, and Kucan&#39;s Tier 2 vocabulary framework: choose words that appear across many contexts and are worth owning</li><li>Teach words deeply: meaning, use in a sentence, connection to a concept, and a physical gesture</li><li>In an FCC home, introduce one Tier 2 vocabulary word each week and use it consistently across all routines and activities</li><li>Revisit vocabulary words across the week in multiple contexts; a word taught once is rarely retained</li><li>Expand and extend children&#39;s utterances naturally: if a child says &#39;dog run,&#39; respond &#39;Yes, the big dog ran very fast&#39;</li><li>Use Dialogic Reading techniques during read-alouds: PEER (Prompt, Evaluate, Expand, Repeat)</li><li>Avoid correcting grammar directly; model correct form in your response</li><li>In an FCC home, mealtimes are high-value conversation opportunities: structured conversation during meals significantly increases language production</li><li>Serve-and-return interaction is the foundational language development tool for infants and toddlers: respond to every communicative attempt contingently and warmly</li><li>Teach turn-taking explicitly using a visual cue (a talking stone, a microphone) for preschoolers</li><li>Model active listening visibly: &#39;I am going to look at you and wait because I want to hear your whole idea&#39;</li><li>In an FCC home, the provider is often the primary conversational partner; the richness of this relationship is a significant linguistic advantage</li><li>Daily read-aloud is non-negotiable; use Interactive Read-Aloud methodology with stopping points for thinking and prediction</li><li>Balance literary and informational text; informational texts build background knowledge, a critical comprehension variable</li><li>In an FCC home, mixed-age read-aloud is high-yield: ask developmentally differentiated questions to different children during the same book</li><li>Before reading: activate background knowledge. During: model thinking aloud. After: extend meaning through drawing, drama, or retelling</li><li>Syllable clapping is an entry point for phonological awareness; use it daily in transitions, songs, and name games</li><li>Work at the syllable level before moving to onset-rime or phoneme levels; this is the research-established progression</li><li>Use children&#39;s names as primary teaching material: each name in the FCC home is a built-in syllable lesson</li><li>Songs, chants, and fingerplays are the most natural syllable awareness vehicles in a home environment</li><li>Read rhyming books repeatedly; ask &#39;What word comes next?&#39; before the rhyme to build anticipation and phonological prediction</li><li>Play initial sound games during transitions: &#39;I spy something that starts with /m/&#39;</li><li>Tongue twisters and alliterative chants develop initial sound awareness playfully</li><li>In an FCC home, daily language play (alliterative greetings, rhyming name games, silly sound songs) is the most accessible phonological awareness curriculum</li><li>Phoneme awareness is the strongest single predictor of early reading success; invest in daily playful practice at the preschool level</li><li>Elkonin sound boxes (say and push a counter for each sound) make phoneme segmentation concrete</li><li>In a mixed-age home, phoneme work can be done with preschoolers while younger children listen; incidental exposure to phonological language benefits all age groups</li><li>Kilpatrick (2015): phoneme awareness develops through a consistent hierarchy; do not skip to blending before segmentation is established</li><li>Model print concepts explicitly during every read-aloud: point to words as you read, locate the title, identify the author</li><li>Environmental print in the home (food labels, signs, mail) is an accessible and authentic print concept teaching tool</li><li>In an FCC home, create a print-rich environment: children&#39;s names displayed, a calendar, simple labeled areas for toys and materials</li><li>A morning message written in front of children connects spoken language to written language in a real and meaningful way</li><li>Begin systematic letter-sound instruction only after phoneme awareness is established; this is the SoR-aligned sequence</li><li>Use multisensory letter learning: tracing in sand, forming with playdough, writing in shaving cream</li><li>In an FCC home, the child&#39;s own name is the highest-motivation letter-learning tool; start there and build outward</li><li>Alphabet books, environmental print walks, and name recognition activities are developmentally appropriate and home-setting-friendly</li><li>In an FCC home, authentic writing purposes abound: grocery lists, birthday cards, notes to parents, labels for belongings; include children in all of them</li><li>Provide a writing center with varied tools: crayons, markers, pencils, chalk; children need to explore different instruments</li><li>Accept all forms of writing: scribble, letterlike forms, random letters, and invented spelling all represent developmental progress</li><li>Ask &#39;What did you write?&#39; rather than asking children to decode their own marks; honor their communicative intent</li><li>Fine motor development for writing requires extensive hand-strengthening activities: tearing paper, using tongs, squeezing playdough, threading beads</li><li>Provide thick crayons for toddlers and transitional grip pencils for preschoolers; the right tool matters</li><li>In an FCC home, cooking activities develop pincer grip and hand strength naturally: measuring, stirring, and kneading are all writing-readiness activities</li><li>Never rush to a tripod grip; hand strength and bilateral coordination must develop first</li></ol>
+    </div>
+    </div><div class="section" id="dom_MA">
+      <div class="dom-header" style="border-left:4px solid #8A4A2F">
+        <span class="dom-badge" style="background:#8A4A2F">MA</span>
+        <div>
+          <h2 class="dom-title" style="color:#8A4A2F">Mathematics</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 9 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Mathematics in early childhood is not arithmetic. It is the construction of number sense, spatial understanding, and logical reasoning through direct physical experience with quantities, patterns, shapes, and relationships. In a family child care home, mathematics is embedded in virtually every routine: counting crackers at snack, sorting socks in the laundry, observing the sequence of the daily schedule, measuring water for a recipe, and comparing who has more blocks. Piaget&#39;s constructivist understanding of number development is particularly important here: children must construct number concepts through their own actions on objects. A toddler who has touched each cracker while counting to five is building a different and deeper understanding than one who simply hears the number words. The family child care environment, with its access to real household mathematics (budgeting, cooking, measuring, sorting household items), is among the richest possible settings for early mathematical thinking. In a mixed-age home, mathematical thinking at different levels coexist and inform each other: a preschooler who explains to a toddler why five is more than three is consolidating their own understanding while doing something genuinely kind.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Number word knowledge and mathematical vocabulary develop through the same oral language pathways as literacy vocabulary. Counting rhymes, number songs, and mathematical vocabulary instruction directly reinforce the phonological awareness and vocabulary knowledge that support reading. The structured sequence of mathematics instruction models the kind of explicit, sequential skill-building that characterizes effective Science of Reading instruction.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">Mathematics in a mixed-age home works naturally in parallel: infants explore object permanence through hiding games while toddlers sort by color and preschoolers count and compare quantities. The same set of manipulatives (blocks, pebbles, shells) can serve all three levels simultaneously. Assign preschoolers the role of counting auditor during snack distribution, which practices cardinality while giving them a purposeful role.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.1.a</span>
+            <span class="std-title">Develops understanding of counting sequence and number words.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds to number songs and chants with body movement</li><li>Attends when adult counts objects during caregiving</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Recites number words in sequence to five or more</li><li>Points to objects while counting, though not yet with reliable correspondence</li><li>Understands &#39;one&#39; and &#39;two&#39; as distinct quantities</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Counts accurately to 20 without skipping or repeating</li><li>Counts backward from 10</li><li>Begins counting a set from a number other than one</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.1.b</span>
+            <span class="std-title">Develops one-to-one correspondence and cardinality.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Explores single objects and small sets through touching and mouthing</li><li>Responds with interest when objects are revealed and hidden</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Touches each object once while counting a small set of two or three</li><li>Understands that adding an object makes more</li><li>Shows &#39;one&#39; and &#39;two&#39; using fingers</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Counts a set of up to 10 objects with reliable one-to-one correspondence</li><li>Understands that the last number said equals the total</li><li>Counts out a specific quantity from a larger set</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.2.a</span>
+            <span class="std-title">Develops understanding of number relationships and early operations.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Notices when an object disappears from a small set</li><li>Reaches for more when a preferred food is eaten</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Understands &#39;more&#39; and &#39;all gone&#39; as quantities</li><li>Combines two small groups of objects and reacts to the result</li><li>Responds to &#39;give me one&#39; and &#39;give me two&#39; accurately</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Combines two groups of objects and counts the total</li><li>Removes objects from a group and counts what remains</li><li>Solves simple addition and subtraction story problems using objects</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.3.a</span>
+            <span class="std-title">Develops measurement and comparison concepts.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Experiences different weights, temperatures, and textures through caregiving</li><li>Shows preference for larger quantities of preferred food</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses comparison language: big/little, heavy/light, full/empty</li><li>Lines up objects by size with support</li><li>Fills and dumps containers, developing intuitive volume understanding</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses non-standard measurement tools (footsteps, blocks) to measure and compare</li><li>Understands that measurement requires a consistent unit</li><li>Orders three or more objects by size, weight, or length</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.3.b</span>
+            <span class="std-title">Develops the ability to sort, classify, and organize data.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds differently to objects of different textures, colors, and sizes</li><li>Explores objects by mouthing, shaking, and banging to determine properties</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Sorts objects into two categories with support: big and small, red and blue</li><li>Identifies a simple rule used to sort a set of objects</li><li>Notices when an object does not belong: &#39;That is not blue&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Sorts objects by one or more attributes and explains the rule</li><li>Creates a simple graph with objects or pictures and describes the result</li><li>Identifies similarities and differences between two sets</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.3.c</span>
+            <span class="std-title">Develops awareness and understanding of patterns.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds with recognition to repeated sensory patterns: a familiar song, a recurring routine</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Initiates a repeated movement pattern: clap, clap, stomp</li><li>Continues a simple ABAB pattern when shown the beginning</li><li>Recognizes a familiar visual pattern: stripes on a shirt, tiles on a floor</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Creates and extends AB, ABB, and more complex repeating patterns</li><li>Identifies the core unit of a pattern</li><li>Transfers a pattern from one medium to another: clap pattern to a drawing</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.4.a</span>
+            <span class="std-title">Develops shape knowledge and geometric thinking.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Explores objects of different shapes through mouthing and grasping</li><li>Discriminates between circle and square shapes in simple stimuli</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Names circle, square, and triangle when shown</li><li>Matches identical shapes</li><li>Sorts objects by shape with support</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Names, describes, and compares two-dimensional and three-dimensional shapes</li><li>Identifies shapes in the environment: the clock is a circle, the door is a rectangle</li><li>Creates pictures and structures using shapes</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.4.b</span>
+            <span class="std-title">Develops spatial reasoning and position understanding.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Follows a moving object with gaze</li><li>Explores spatial relationships through body movement: crawling under, climbing over</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses position words accurately: in, on, under, behind</li><li>Navigates familiar spaces and communicates about their location</li><li>Hides objects and finds them in a simple game</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses precise directional and positional language in communication</li><li>Creates simple maps of familiar spaces: the bedroom, the yard</li><li>Describes routes between locations in the FCC home and neighborhood</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8A4A2F">MA.1.c</span>
+            <span class="std-title">Develops subitizing: instantly recognizing small quantities without counting.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds differently to one object versus two or three</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Recognizes one and two objects at a glance</li><li>Begins to distinguish two from three with repeated experience</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8A4A2F">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Instantly recognizes quantities of one through five without counting</li><li>Recognizes common dice and domino patterns by sight</li><li>Uses subitizing to support counting on from a known quantity</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Count during every possible routine: stairs, steps to the car, crackers, socks, spoonfuls of food</li><li>Counting songs and number chants build the verbal sequence; pair with object counting to build correspondence</li><li>In an FCC home, the morning routine, meal preparation, and outdoor time all offer authentic counting contexts daily</li><li>Do not rush to written numerals; the verbal sequence and one-to-one correspondence must be solid first</li><li>Use explicit cardinality language always: &#39;You counted 6, so there are 6 bears. The last number tells us how many&#39;</li><li>Subitizing practice with dot cards and dice builds cardinality intuition; begin with sets of two and build to five</li><li>In an FCC home, setting the table is a natural one-to-one correspondence activity: one fork, one cup, one plate per person</li><li>Gelman and Gallistel&#39;s five counting principles provide the developmental map for this standard; educators should be familiar with them</li><li>Story problems embedded in dramatic play are the most authentic entry point for operations: &#39;We had 4 bears and 2 left. How many are still here?&#39;</li><li>Use five-frames and ten-frames as visual structures for part-whole thinking</li><li>In an FCC home, cooking is a natural operations context: adding, combining, and dividing portions</li><li>Avoid introducing written number sentences before children have extensive concrete experience</li><li>Measurement is naturally embedded in FCC home routines: cooking (measuring cups, spoons), building (how long, how tall), and outdoor play (how far, how high)</li><li>Use comparison language throughout the day; children need to hear &#39;longer,&#39; &#39;heavier,&#39; &#39;more,&#39; and &#39;fewer&#39; in meaningful contexts before they can use them accurately</li><li>A simple balance scale in the home environment is one of the highest-yield mathematical materials available for all age groups</li><li>Non-standard measurement comes before standard measurement developmentally; let children measure with their own hands and feet first</li><li>Sorting is embedded in FCC home routines: sorting laundry by color, sorting silverware, sorting toys by type</li><li>Offer collections for sorting: shells, buttons, leaves, toy animals; mixed-age groups can sort together with each child contributing at their level</li><li>Ask preschoolers to explain their sorting rule to younger children; this consolidates their own understanding</li><li>Data collection in an FCC home: &#39;Let us find out how many books have animals and how many have people&#39; is a real graphing activity</li><li>Point out patterns everywhere in the home environment: floor tiles, fence posts, the daily schedule, songs with repeating verses</li><li>In a mixed-age home, the daily schedule is itself a pattern; making it explicit teaches temporal reasoning and predictability</li><li>Pattern blocks, colored beads, and loose parts are versatile pattern tools usable by all age groups simultaneously</li><li>Ask preschoolers to create a pattern for younger children to copy; this is both a mathematical and a social learning activity</li><li>Point out shapes in the home environment continuously: windows, plates, rugs, clocks, and books are all geometric shapes</li><li>Provide shape puzzles, foam shape sets, and tangrams for all age groups; infants explore shape through fit and feel, preschoolers through composition</li><li>Three-dimensional shape knowledge (sphere, cube, cylinder, cone) is developed through real household objects: a soup can, a ball, a tissue box</li><li>Sorting objects by shape is a combined math and science activity; a collection of household objects sorted by whether they roll is a natural investigation</li><li>Position language is best taught through body movement: obstacle courses, Simon Says with position words, and treasure hunts</li><li>In an FCC home, the layout of the home itself is the geography curriculum: giving children directions within the house builds spatial vocabulary</li><li>Simple mapping projects, such as drawing where each child&#39;s cubby is located, are authentic spatial reasoning activities</li><li>Block play develops spatial reasoning, visualization, and geometry simultaneously; protect long block play periods</li><li>Dot card flash games build subitizing rapidly; show a dot card briefly and ask children to name the number before counting</li><li>Dice games during meals and transitions embed subitizing practice in authentic routines</li><li>In a mixed-age home, subitizing games can be played by all age groups: infants observe, toddlers attempt small quantities, preschoolers identify up to five or more</li><li>Subitizing is the bridge between perceptual quantity awareness and symbolic number; it is a critical and often undertaught mathematical skill</li></ol>
+    </div>
+    </div><div class="section" id="dom_PW">
+      <div class="dom-header" style="border-left:4px solid #6E3828">
+        <span class="dom-badge" style="background:#6E3828">PW</span>
+        <div>
+          <h2 class="dom-title" style="color:#6E3828">Physical Development and Wellness</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 9 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Physical development in a family child care home is both a developmental domain and a daily reality. Infants need tummy time and floor time. Toddlers need space to run, climb, and crash (safely). Preschoolers need extended outdoor time for gross motor development, and fine motor work that prepares their hands for writing. The family child care provider manages all of this within the physical constraints and opportunities of a home environment, which can be both more limiting and more flexible than a center-based classroom. A home with a backyard, a porch, or proximity to a park has outdoor opportunities that many centers lack. Real household activities, such as cooking, gardening, carrying laundry, and sweeping, develop gross and fine motor skills in authentic and intrinsically motivated ways. The wellness dimensions of this domain, including healthy eating, adequate sleep, hygiene, and safety awareness, are also naturally embedded in FCC home routines in ways that center programs often have to simulate. Children who eat real meals prepared in a real kitchen, who observe healthy cooking, and who participate in real household wellness practices are living this curriculum rather than learning about it abstractly.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Physical development supports reading preparation in two critical ways: fine motor control (PW.1.b) develops the writing grasp and tool control that writing requires; and physical activity and adequate sleep (PW.2.d, PW.2.e) directly support the cognitive function, executive function, and attentional regulation that learning to read demands.</div>
+    </div><div class="callout fcc-callout">
+          <span class="callout-badge fcc-badge">FCC</span>
+          <div class="callout-text">Family child care providers have a unique opportunity in the physical development domain: authentic household activities are powerful gross and fine motor curriculum. Cooking develops pincer grip and bilateral coordination. Carrying laundry develops core strength. Sweeping builds hand-eye coordination. Gardening engages multiple motor systems. These real activities are among the best physical development experiences available to young children, and they occur naturally in the FCC home.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.1.a</span>
+            <span class="std-title">Develops locomotor and large muscle movement skills.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Achieves head control with decreasing support</li><li>Rolls from back to front and front to back</li><li>Sits independently and begins pulling to stand</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Walks with increasing steadiness and confidence</li><li>Runs with better coordination and stopping control</li><li>Climbs on low surfaces, kicks a ball, and throws overhand</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Skips, hops on one foot, and gallops</li><li>Demonstrates coordinated movement in games and obstacle courses</li><li>Catches a large ball with both hands consistently</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.1.b</span>
+            <span class="std-title">Develops fine motor skills and hand-eye coordination.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Grasps objects with full hand and transfers between hands</li><li>Reaches with increasing accuracy toward desired objects</li><li>Uses index finger to poke and point</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses spoon for self-feeding with increasing accuracy</li><li>Turns pages of a board book one at a time</li><li>Builds a tower of three or more blocks</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses scissors with correct grip to cut along a line</li><li>Strings beads and uses a pincer grip for small objects</li><li>Writes letters and draws recognizable shapes with writing tools</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.1.c</span>
+            <span class="std-title">Develops body awareness and sensory processing through movement.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds to sensory stimulation in varied ways: seeking or withdrawing</li><li>Develops proprioceptive awareness through tummy time and handling</li><li>Explores the sensory properties of objects through mouthing</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Moves body in response to music and rhythm</li><li>Begins to modulate responses to sensory input with support</li><li>Uses outdoor sensory experiences (sand, water, mud) with engagement</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Identifies and communicates sensory preferences and sensitivities</li><li>Uses movement strategically for self-regulation: jumping, rocking, pushing</li><li>Participates in sensory activities with increasing comfort and purpose</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.1.d</span>
+            <span class="std-title">Develops oral motor skills and healthy eating habits.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Transitions through texture stages with caregiver guidance</li><li>Explores new foods through mouthing and touching</li><li>Communicates hunger and satiation through movement and expression</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses a cup independently</li><li>Eats a variety of foods across food groups</li><li>Self-regulates eating with &#39;I am done&#39; communication</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Names food groups and connects them to body function</li><li>Participates in meal preparation enthusiastically</li><li>Tries new foods with encouragement in a low-pressure environment</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.2.a</span>
+            <span class="std-title">Develops self-care and hygiene independence.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Participates in diapering and hygiene routines with increasing cooperation</li><li>Responds to warm, narrated caregiving routines with calm engagement</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Begins washing hands with reminders and support</li><li>Attempts to dress and undress with varying success</li><li>Uses the toilet independently or with support depending on stage</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Washes hands independently and at appropriate times</li><li>Dresses and undresses independently including simple fasteners</li><li>Manages personal hygiene with minimal adult prompting</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.2.b</span>
+            <span class="std-title">Develops understanding of health, wellness, and body awareness.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds to body states of comfort and discomfort with clear signals</li><li>Benefits from a predictable sleep and feeding schedule</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Names body parts correctly</li><li>Identifies basic body states: hungry, tired, sick, energetic</li><li>Understands that sleep, food, and movement help the body feel good</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Describes basic body functions in age-appropriate language</li><li>Connects food, sleep, and physical activity to feeling well</li><li>Asks questions about the body with increasing sophistication</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.2.c</span>
+            <span class="std-title">Develops understanding of safety and injury prevention.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Benefits from consistent safety monitoring during floor exploration</li><li>Responds to gentle safety guidance through voice and touch</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Follows basic safety rules with consistent reminders</li><li>Understands &#39;hot,&#39; &#39;sharp,&#39; &#39;stop,&#39; and &#39;careful&#39; as safety words</li><li>Communicates when something feels wrong or hurts</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Follows safety rules in varied environments without constant reminders</li><li>Explains the reason for a safety rule: &#39;We wear helmets so our heads stay safe&#39;</li><li>Identifies trusted adults to approach for help</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.2.d</span>
+            <span class="std-title">Develops healthy sleep and rest patterns.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Develops a predictable sleep and wake cycle with caregiver support</li><li>Signals tiredness through yawning, eye rubbing, and decreased activity</li><li>Settles to sleep with caregiver support through a consistent routine</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Transitions to nap with a consistent quiet routine</li><li>Rests during quiet time even when sleep is not needed</li><li>Communicates tiredness with words or gestures</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Participates in quiet rest time without disrupting others</li><li>Understands that rest supports learning and health</li><li>Manages transition to and from rest time with increasing independence</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#6E3828">PW.2.e</span>
+            <span class="std-title">Develops joyful engagement in physical activity.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds with pleasure to gentle movement games: bouncing, rocking</li><li>Shows excitement for physical play with a familiar adult</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Initiates physical play: running, chasing, rolling</li><li>Expresses delight during active outdoor time</li><li>Seeks physical challenge: climbing, jumping from low heights</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#6E3828">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Engages in vigorous physical activity with enthusiasm and stamina</li><li>Understands that physical activity is important for health</li><li>Identifies activities they enjoy and seeks them out</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Daily outdoor time is non-negotiable at all age levels; in adverse weather, indoor movement activities (obstacle courses, dancing, yoga) are essential</li><li>In an FCC home, active outdoor time in a yard or nearby park is often more accessible and flexible than in a center setting; use this advantage intentionally</li><li>Create indoor movement opportunities: yoga poses, animal walks, and freeze dance develop motor skills in any space</li><li>For infants, supervised floor time in both prone and supine positions is the most important physical activity; avoid extended time in bouncers or swings</li><li>Fine motor development requires daily practice with tools and materials: tongs, tweezers, eyedroppers, playdough, and bead stringing</li><li>In an FCC home, meals are fine motor development: spreading butter, using utensils, pouring from a small pitcher, and tearing bread are all legitimate curriculum</li><li>Avoid extended screen time; tablets and passive screen use do not develop fine motor skills</li><li>Pincer grip development: provide activities that require using thumb and forefinger: picking up small items with tweezers, threading large needles, using clothespins</li><li>Create sensory-rich opportunities in the FCC home: water play, sand or rice bins, playdough, paint, and outdoor nature exploration</li><li>Sensory processing differences are neurological rather than behavioral; accommodate rather than correct</li><li>In an FCC home, outdoor natural environments (grass, dirt, leaves, water) are among the richest sensory learning environments available</li><li>Children who need movement for regulation should be offered movement opportunities rather than asked to sit still; sitting still is not a prerequisite for learning</li><li>Family-style mealtimes where children serve themselves develop food relationships, fine motor skills, and conversation simultaneously</li><li>In an FCC home, cooking with children is a natural curriculum activity: measuring, stirring, identifying ingredients, and discussing nutrition are all embedded</li><li>Ellyn Satter&#39;s Division of Responsibility: the adult decides what food is offered and when; the child decides whether and how much to eat; this model reduces mealtime conflict significantly</li><li>Never use food as reward or punishment; this disrupts children&#39;s natural hunger and satiation regulation</li><li>Treat self-care routines as high-value curriculum: narrate each step, allow time for children to do it themselves, and never rush independence</li><li>In an FCC home, self-care is practiced in real contexts, not simulated activities; this authentic practice is more effective than any worksheet</li><li>Toddler strategies: allow extra time for dressing and undressing; set out clothing with limited choices; celebrate each step of independence</li><li>Preschool strategies: provide appropriately designed tools (low sinks, step stools, accessible soap dispensers) and expect increasing independence</li><li>In an FCC home, healthy habits are modeled in authentic daily life; children observe the provider eating, exercising, and resting, making wellness concrete</li><li>Read aloud books about the body and health at a developmental level</li><li>Discuss body states explicitly during caregiving routines: &#39;Your body is tired. That is why we rest. Rest helps your body get ready to play again&#39;</li><li>Children&#39;s body autonomy language is health education: teach children appropriate names for all body parts from infancy</li><li>Use positive safety language: &#39;Hold the railing&#39; rather than &#39;Do not fall&#39;</li><li>In an FCC home, safety rules are embedded in real household contexts: kitchen safety, outdoor safety, traffic safety, and stranger safety all arise naturally</li><li>Practice fire and emergency drills with preparation and debrief; children who understand why a drill happens respond more calmly</li><li>Body safety curriculum (age-appropriate body autonomy and safe/unsafe touch) is a protective factor; this education belongs in family child care settings</li><li>In an FCC home, sleep schedules must accommodate individual variation across age groups; infants follow their own schedule while toddlers and preschoolers nap or rest at consistent times</li><li>A consistent pre-sleep routine (dimmed lights, soft music, a consistent sequence) signals the body to prepare for sleep across all age groups</li><li>Avoid screens before nap or rest time; blue light disrupts melatonin production</li><li>Preschoolers who no longer nap still need a daily quiet rest period; provide books, quiet toys, or drawing materials</li><li>Daily outdoor time of at least 60 minutes total across the day is the minimum for preschoolers; this is both a developmental and licensing standard in most states</li><li>In an FCC home, outdoor time is often more flexible and child-directed than in centers; use this advantage to allow extended outdoor play when children are engaged</li><li>Avoid eliminating outdoor time as a consequence; outdoor physical activity supports the cognitive function and emotional regulation that indoor learning requires</li><li>Model joyful physical activity; join children in movement, chase, and dancing to communicate that physical activity is enjoyable at all ages</li></ol>
+    </div>
+    </div><div class="section" id="dom_SC">
+      <div class="dom-header" style="border-left:4px solid #A05A38">
+        <span class="dom-badge" style="background:#A05A38">SC</span>
+        <div>
+          <h2 class="dom-title" style="color:#A05A38">Science</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 2 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Science in early childhood is not a subject. It is a disposition. Young children are natural scientists: they hypothesize (if I drop this, will it fall?), experiment (dropping the same object forty times), observe (watching the result with intense focus), and revise their understanding (what if I drop it in water?). The family child care home is one of the richest possible environments for early science: a garden, a kitchen, a window with changing light, a yard with insects and weather and seasons. Science in a home-based setting is not taught through discrete science activities. It is cultivated through a provider who narrates their own curiosity, who kneels down to look at what the toddler has found, who keeps a jar of caterpillars on the windowsill, and who takes seriously children&#39;s questions about why the sky is blue and where worms go when it rains. In a mixed-age FCC home, scientific observation and investigation can proceed simultaneously across development: an infant explores the sensory properties of a wet sponge while a toddler squeezes water out of it and a preschooler investigates which objects in the yard absorb water and which repel it.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Science builds the background knowledge and domain-specific vocabulary that reading comprehension depends on. A child who has observed real caterpillars becoming real butterflies, who has planted seeds and watched them grow, and who has investigated the properties of water, ice, and steam will read science texts with dramatically richer comprehension than a child who has only heard the words.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">Science in a mixed-age FCC group works by assigning different observation roles and different questions to different ages during the same investigation. During a rain observation: infant explores the sound and feel of rain through a window; toddler identifies things that are wet and dry; preschooler hypothesizes and tests whether different materials absorb or repel water. One investigation, three developmental levels, one community of inquiry.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#A05A38">SC.1.a</span>
+            <span class="std-title">Explores and investigates objects, materials, and natural phenomena with curiosity.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Explores objects through all senses: mouthing, shaking, banging, dropping</li><li>Attends to changes in the environment: a new sound, a change in light</li><li>Responds with fascination to natural phenomena: rain on a window, wind in trees</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Manipulates objects to discover properties: squeezing, stacking, pouring</li><li>Notices and comments on changes in the environment</li><li>Asks &#39;What is that?&#39; repeatedly about new natural phenomena</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Plans and carries out a simple investigation with a prediction</li><li>Observes and documents findings through drawing or dictation</li><li>Asks questions that lead to investigation: &#39;I wonder what would happen if...&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#A05A38">SC.1.b</span>
+            <span class="std-title">Develops understanding of cause-and-effect relationships.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Repeats actions to reproduce an interesting effect</li><li>Shows surprise at unexpected outcomes</li><li>Discovers that their own actions produce reliable effects</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Predicts outcomes of simple familiar actions: &#39;If I push it, it will fall&#39;</li><li>Tests cause-and-effect through repeated experimentation</li><li>Communicates about what caused an observed change</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#A05A38">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>States a prediction before an investigation and checks the result</li><li>Identifies multiple possible causes for an observed effect</li><li>Designs a simple test to check which of two things is true</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Maintain a nature investigation area in the FCC home: a window display, a jar of specimens, a magnifying glass, and observation journals</li><li>Model scientific curiosity explicitly: &#39;I noticed the ice changed. What do you think happened to it?&#39;</li><li>In an FCC home, the kitchen is a science laboratory: mixing, heating, cooling, dissolving, and growing all happen in authentic contexts</li><li>Allow and honor what looks like making a mess; water play, mud, and sensory exploration are legitimate scientific investigation</li><li>Ask cause-and-effect questions throughout the day: &#39;What do you think will happen when we put the ice in the warm water?&#39;</li><li>Ramp investigations (which object rolls farthest, what surface makes it go fastest) are natural cause-and-effect science in any home setting</li><li>Cooking is cause-and-effect science: heat transforms ingredients, mixing changes textures, time changes chemical properties</li><li>In an FCC home, seasonal changes (leaves falling, snow melting, gardens growing and dying) are a year-long cause-and-effect science curriculum</li></ol>
+    </div>
+    </div><div class="section" id="dom_SE">
+      <div class="dom-header" style="border-left:4px solid #7A3220">
+        <span class="dom-badge" style="background:#7A3220">SE</span>
+        <div>
+          <h2 class="dom-title" style="color:#7A3220">Social-Emotional Development</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 7 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Social-emotional development is not one domain among nine. It is the foundation on which all learning rests. John Bowlby&#39;s attachment theory and Mary Ainsworth&#39;s research on the secure base establish that a child who does not feel safe with their caregiver cannot learn. The family child care provider is, in many cases, the most significant attachment figure in a child&#39;s life outside their family. The intimacy of the home-based setting, with its small group, consistent adult, and family-like atmosphere, is one of the most powerful attachment-supporting environments in child care. Research consistently shows that children in high-quality family child care form secure attachments at rates comparable to home care by parents. This is both an enormous responsibility and an enormous opportunity. Emotion regulation, empathy, friendship skills, conflict resolution, and self-concept all develop within the context of warm, responsive, consistent relationships. In a mixed-age FCC home, older children develop empathy through caring for younger children, and younger children develop trust and social interest through the presence of gentle, more capable peers. The family child care provider who manages this community with warmth, clear expectations, and genuine connection to each child is doing the most important developmental work that exists.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Self-regulation (SE.2.a) is among the strongest predictors of reading achievement. A child who can maintain focused attention, inhibit impulsive responses, and persist through challenge will engage with reading instruction far more effectively than a child who cannot. The emotional regulation skills developed in the family child care home are direct literacy preparation.</div>
+    </div><div class="callout tic-callout">
+          <span class="callout-badge tic-badge">TIC</span>
+          <div class="callout-text">Trauma-informed note: In a family child care home, providers often know children&#39;s family circumstances intimately. This knowledge is both a strength (the provider can contextualize a child&#39;s behavior) and a responsibility (confidentiality and non-judgment are essential). Children who have experienced trauma may test the relationship repeatedly before trusting it. Consistent warmth in the face of testing is the curriculum. Every repair after a rupture builds trust. The FCC home&#39;s consistency of provider and environment is a profound protective factor for traumatized children.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.1.a</span>
+            <span class="std-title">Develops self-concept and a sense of unique identity.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Recognizes self in a mirror with interest</li><li>Responds with recognition to own name</li><li>Shows differential responses to familiar and unfamiliar adults</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Uses &#39;I,&#39; &#39;me,&#39; and &#39;mine&#39; consistently</li><li>Identifies own belongings and personal space</li><li>Expresses preferences clearly: &#39;I want the blue one&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Describes personal characteristics, preferences, and family connections</li><li>Acknowledges similarities and differences between self and others with curiosity</li><li>Identifies cultural or family traditions as part of self</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.1.b</span>
+            <span class="std-title">Develops emotion literacy: recognizing and naming emotions.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Expresses pleasure, distress, surprise, and interest through facial expression, voice, and body</li><li>Responds to caregiver&#39;s emotional tone</li><li>Begins to distinguish between emotional expressions on familiar faces</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Names basic emotions: happy, sad, mad, scared</li><li>Notices and responds to emotional states in others</li><li>Uses emotional language to communicate need: &#39;I sad&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Names an expanded emotional vocabulary: frustrated, proud, nervous, disappointed, excited</li><li>Identifies emotions in others and in story characters</li><li>Describes what caused a feeling: &#39;I am frustrated because I cannot do it&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.2.a</span>
+            <span class="std-title">Develops emotional regulation with decreasing dependence on adult co-regulation.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Calms with caregiver support through holding, rocking, and voice</li><li>Begins to show self-soothing behaviors: sucking, gaze aversion</li><li>Signals need for regulation support through crying and fussing</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Accepts co-regulation from a trusted adult with increasing speed</li><li>Uses simple self-soothing strategies with adult reminders</li><li>Identifies when they are feeling dysregulated: &#39;I am upset&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses a small repertoire of regulation strategies independently</li><li>Removes self from an overstimulating situation with some adult support</li><li>Identifies what will help when dysregulated: &#39;I need a hug&#39; or &#39;I need to be alone for a minute&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.3.a</span>
+            <span class="std-title">Develops empathy and perspective-taking.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Shows distress in response to another infant&#39;s distress</li><li>Reaches toward or vocalizes toward a peer in distress</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Offers a comfort object to a distressed peer spontaneously</li><li>Notices and names another&#39;s emotional state: &#39;Baby crying&#39;</li><li>Follows another&#39;s gaze to understand what they are attending to</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Takes action to comfort or assist a distressed peer</li><li>Considers another&#39;s perspective in a conflict: &#39;She is sad because she wanted a turn&#39;</li><li>Includes a child who is left out when pointed out by an adult</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.4.a</span>
+            <span class="std-title">Forms secure attachments with primary caregivers.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Shows differential calming and engagement with familiar FCC provider versus strangers</li><li>Uses the provider as a secure base for exploration</li><li>Shows separation distress and reunion joy with consistent caregiver</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Seeks comfort from the FCC provider when distressed</li><li>References the provider to gauge safety of new situations</li><li>Shows affection and connection to the FCC provider throughout the day</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Maintains a positive working relationship with the FCC provider</li><li>Seeks the provider for emotional support, not only for physical needs</li><li>Shows pride in the provider&#39;s attention and approval</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.4.b</span>
+            <span class="std-title">Develops peer social competence.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Shows interest in peers through gaze and vocalization</li><li>Engages in brief turn-taking interactions with a peer</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Plays in proximity to peers (parallel play)</li><li>Engages in brief exchanges of toy or object in context of play</li><li>Watches peers with interest and imitates their play strategies</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Initiates play with specific peers</li><li>Sustains cooperative play with shared goals and negotiated roles</li><li>Uses verbal strategies to enter play: &#39;Can I be the dog?&#39; rather than simply joining uninvited</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7A3220">SE.4.c</span>
+            <span class="std-title">Develops conflict resolution skills.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Reacts to a peer taking an object with distress</li><li>Accepts redirection toward a substitute object</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Communicates conflict through words and gestures rather than only through physical action</li><li>Accepts adult mediation of a conflict with decreasing distress</li><li>Uses simple language to express needs in a conflict: &#39;Mine&#39; and &#39;I want it&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#7A3220">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Uses a sequence of verbal strategies before seeking adult help</li><li>Proposes solutions in a conflict: &#39;You can have it when I am done&#39;</li><li>Accepts a solution that is not their first choice with adult support</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>In an FCC home, the intimate group size allows the provider to genuinely know each child; this knowing is the curriculum for self-concept development</li><li>Display family photos, children&#39;s artwork, and culturally representative materials that communicate: &#39;You belong here and you are seen&#39;</li><li>Dual-window cultural representation: every child should see their own culture reflected (mirror) and be introduced to others (window)</li><li>Strength-based family communication: sharing specific observations about each child&#39;s unique characteristics builds identity across home and care settings</li><li>Name emotions throughout the day in yourself and in children: &#39;I see you are frustrated. Your body looks tense and you are growling. That makes sense&#39;</li><li>In an FCC home, emotional coaching is woven into every conflict, every disappointment, and every celebration throughout the day</li><li>Create an emotion vocabulary wall with pictures; update it as children learn new emotion words</li><li>Read aloud books with complex emotional situations and discuss characters&#39; feelings from multiple perspectives</li><li>Co-regulation precedes self-regulation: a child cannot calm themselves before they have borrowed a calm adult&#39;s nervous system many times</li><li>In an FCC home, a cozy corner (a small quiet space with soft materials) provides a regulation space that does not require a separate room</li><li>The regulation menu: explicitly teach a small set of strategies (deep breathing, muscle squeezes, rocking) during calm moments, then remind children of these strategies during activation</li><li>Never use isolation as a regulation strategy; physical proximity to a calm adult is the regulatory mechanism</li><li>Empathy is a teachable and developmentally progressive competency, not a fixed trait</li><li>In a mixed-age FCC home, caring for younger children builds empathy in older children organically; name this: &#39;You were so gentle with the baby. That is empathy&#39;</li><li>Emotion coaching during conflicts: before solving the conflict, name the feelings of all parties</li><li>Vivian Paley&#39;s Rule: &#39;You can&#39;t say you can&#39;t play&#39; is both an empathy curriculum and an inclusion practice; discuss and implement it explicitly</li><li>Primary caregiving is the most critical structural feature of quality FCC: each child should have one identified primary caregiver within the home</li><li>Respond contingently and warmly to every communicative attempt; this is the foundation of secure attachment</li><li>In a family child care home, the provider&#39;s consistent presence across years (many FCC children are enrolled from birth through school entry) is a powerful attachment advantage</li><li>Transitions between FCC and home require attention: brief overlap with parents at drop-off and pick-up builds trust and continuity across attachment figures</li><li>In a mixed-age FCC home, peer relationships naturally span age groups; support cross-age friendships as well as same-age connections</li><li>Facilitate rather than manage play: offer suggestions and language rather than resolving conflicts for children</li><li>Teach explicit friendship entry strategies: model and practice how to ask to join, how to accept and decline invitations kindly</li><li>Preschoolers who struggle with peer play need direct coaching in social scripts, not consequences; isolation worsens the problem</li><li>In an FCC home, conflicts occur in the context of a long-term relationship; support resolution in ways that protect the relationship, not only solve the immediate problem</li><li>Scripted conflict coaching: &#39;Use your words. Tell her what you need. Listen to what she needs. Let us find an idea that works for both of you&#39;</li><li>Do not resolve conflicts for children; guide them through the process and allow them to reach the solution</li><li>Peace corner process: a designated space and a visual conflict resolution prompt that children eventually use independently</li></ol>
+    </div>
+    </div><div class="section" id="dom_SS">
+      <div class="dom-header" style="border-left:4px solid #8F4E30">
+        <span class="dom-badge" style="background:#8F4E30">SS</span>
+        <div>
+          <h2 class="dom-title" style="color:#8F4E30">Social Studies</h2>
+          <p class="dom-meta">Family Child Care Track · Birth through Age 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Social Studies in early childhood encompasses a child&#39;s developing understanding of themselves in relation to their family, their community, and the wider world. In a family child care home, social studies is not an abstraction. The FCC home is itself a small, real community: children of different ages, from different families, with different cultural backgrounds, sharing space, resources, and a relationship with one common adult. The care provider who manages this community with fairness, who celebrates its diversity, who helps children understand that they have rights and responsibilities within it, is teaching civics, economics, history, and geography at the most authentic and developmentally appropriate level possible. The understanding that families look different, that communities are organized by shared agreements, that different people have different roles and contribute different things, and that the natural world is something we are responsible to care for, all begin in the family child care home in the first five years of life. The mixed-age FCC group is itself a social studies curriculum: older children develop leadership and responsibility, younger children learn that communities operate by negotiated rules, and all children experience genuine interdependence.</p>
+      </div>
+      <div class="callout sor-callout">
+      <span class="callout-badge sor-badge">SoR</span>
+      <div class="callout-text">SoR connection: Social studies builds the background knowledge and cultural vocabulary that reading comprehension depends on. A child who understands what a neighborhood is, who the helpers are, what different families look like, and how communities make and use rules will read social studies texts with the comprehension that comes from genuine prior understanding.</div>
+    </div><div class="callout mix-callout">
+          <span class="callout-badge mix-badge">Mixed Age</span>
+          <div class="callout-text">The mixed-age FCC home is a natural social studies laboratory. Assign older children genuine caregiving roles with younger children (handing them toys, helping with shoes, reading them a short book). These are real community responsibilities, not pretend ones, and they build social understanding, empathy, and leadership in older children while giving younger children experience of community care.</div>
+        </div>
+      <div class="stds-list"><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8F4E30">SS.1.a</span>
+            <span class="std-title">Develops awareness of self in relation to family and cultural identity.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Responds with recognition to family members&#39; voices and faces</li><li>Calms more readily with family members than with unfamiliar adults</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Names family members and identifies their roles</li><li>Brings family photos and objects from home into play</li><li>Uses &#39;my family&#39; language spontaneously</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Describes family composition, traditions, and cultural practices</li><li>Recognizes similarities and differences between own family and others without judgment</li><li>Connects family history to their own identity</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8F4E30">SS.1.b</span>
+            <span class="std-title">Develops understanding of community roles, needs, and interdependence.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Benefits from a community of care beyond primary caregiver</li><li>Responds differently to familiar community members over time</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Identifies community helpers: doctor, firefighter, teacher</li><li>Understands that different people have different roles</li><li>Participates in simple community tasks: passing food, helping clean up</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Describes what specific community helpers do and why their role matters</li><li>Understands the concept of needs and wants in a community context</li><li>Engages in real community helping roles within the FCC home</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8F4E30">SS.1.c</span>
+            <span class="std-title">Develops understanding of rules, rights, and responsibilities.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Benefits from consistent, predictable rules embedded in caregiving routines</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Follows a small set of consistent FCC home rules with reminders</li><li>Understands that rules apply to everyone, including the provider</li><li>Communicates when a rule is violated: &#39;He hit me&#39;</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Participates in creating classroom agreements and understands why rules exist</li><li>Uses rules to argue for fairness: &#39;That is not fair because the rule is...&#39;</li><li>Takes on responsibility roles: class jobs, caring for younger children, environmental stewardship</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#8F4E30">SS.1.d</span>
+            <span class="std-title">Develops environmental awareness and stewardship.</span>
+            <span class="std-chev">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="cont-grid">
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Infant — Birth to 12 Months</div>
+                <ul class="ind-list"><li>Benefits from regular outdoor time and natural environment exposure</li><li>Shows interest in natural objects: leaves, rocks, insects, water</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Toddler — 12 to 36 Months</div>
+                <ul class="ind-list"><li>Participates in simple environmental stewardship: watering a plant, picking up litter</li><li>Notices seasonal changes in the outdoor environment</li><li>Shows care for plants and animals under FCC provider guidance</li></ul>
+              </div>
+              <div class="cont-col">
+                <div class="cont-label" style="color:#8F4E30">Preschool — 3 to 5 Years</div>
+                <ul class="ind-list"><li>Explains why it is important to care for the natural environment</li><li>Takes initiative in stewardship activities: gardening, composting, reducing waste</li><li>Makes connections between actions and environmental consequences</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      <div class="strat-box">
+      <div class="strat-label">Family Child Care Educator Strategies</div>
+      <ol class="strat-list"><li>Create a family wall in the FCC home with photos from every child&#39;s family; update it throughout the year</li><li>Celebrate family diversity: when discussing families, ensure that single-parent families, same-sex parent families, multi-generational families, and adoptive families are represented and affirmed</li><li>Family culture projects (bringing an object that represents their family, sharing a family food or tradition) build both identity and community</li><li>Dual-window requirement: every child sees their own culture reflected in the materials and books of the home environment</li><li>In an FCC home, assigning genuine community roles to children builds authentic civic understanding: table setter, door holder, book keeper</li><li>Community helper study: go beyond firefighter and police officer to include farmers, mail carriers, librarians, and the FCC provider herself</li><li>Neighborhood walks with a purpose (counting letter boxes, visiting the library, meeting a neighbor) make community concrete</li><li>Discuss the FCC home as a community: &#39;In our community, we share the toys. What happens when everyone shares?&#39;</li><li>In an FCC home, rules should be co-created with preschoolers: children who help make the rules are more invested in following them</li><li>Keep the rule set small (three to five rules) and post them visually</li><li>A family meeting or class meeting structure, even in a home setting, gives children a legitimate venue to discuss fairness and problems</li><li>Connect rules to values, not just compliance: &#39;We are gentle with the baby because we care about her, not just because it is a rule&#39;</li><li>A garden, even a small container garden on a porch, is one of the highest-yield science and social studies investments in an FCC setting</li><li>Model environmental stewardship through the provider&#39;s own practices: composting, reducing waste, caring for plants, and explaining these choices</li><li>Outdoor time is environmental stewardship curriculum: children who spend time in nature develop attachment to the natural world</li><li>Stewardship pledges: &#39;I will help take care of our yard by...&#39; are both literacy and social studies activities</li></ol>
+    </div>
+    </div><div class="section" id="refs">
+<h2 class="sec-title">References</h2>
+<p class="body-p">The following sources informed the development of the re:Bloom Family Child Care Scope and Sequence. Educators are encouraged to read primary sources where possible.</p>
+<ul class="refs-list"><li class="ref-item">Ainsworth, M. D. S., Blehar, M. C., Waters, E., &amp; Wall, S. (1978). Patterns of attachment: A psychological study of the strange situation. Erlbaum.</li><li class="ref-item">Beck, I. L., McKeown, M. G., &amp; Kucan, L. (2013). Bringing words to life: Robust vocabulary instruction (2nd ed.). Guilford.</li><li class="ref-item">Bowlby, J. (1969). Attachment and loss: Vol. 1. Attachment. Basic Books.</li><li class="ref-item">Cryer, D., Tietze, W., Burchinal, M., Leal, T., &amp; Palacios, J. (1999). Predicting process quality from structural quality in preschool programs. Early Childhood Research Quarterly, 14(3), 339–361.</li><li class="ref-item">Duncan, G. J., Dowsett, C. J., Claessens, A., Magnuson, K., Huston, A. C., Klebanov, P., et al. (2007). School readiness and later achievement. Developmental Psychology, 43(6), 1428–1446.</li><li class="ref-item">Dweck, C. S. (2006). Mindset: The new psychology of success. Random House.</li><li class="ref-item">Gelman, R., &amp; Gallistel, C. R. (1978). The child&#39;s understanding of number. Harvard University Press.</li><li class="ref-item">Gough, P. B., &amp; Tunmer, W. E. (1986). Decoding, reading, and reading disability. Remedial and Special Education, 7(1), 6–10.</li><li class="ref-item">Hart, B., &amp; Risley, T. R. (1995). Meaningful differences in the everyday experience of young American children. Brookes.</li><li class="ref-item">Harvard Center on the Developing Child. (2011). Building the brain&#39;s &#39;air traffic control&#39; system: How early experiences shape the development of executive function. Working Paper 11.</li><li class="ref-item">Kilpatrick, D. A. (2015). Essentials of assessing, preventing, and overcoming reading difficulties. Wiley.</li><li class="ref-item">Montessori, M. (1912). The Montessori method (A. E. George, Trans.). Frederick A. Stokes.</li><li class="ref-item">National Academies of Sciences, Engineering, and Medicine. (2023). High-quality care and education for children birth through age 8. National Academies Press.</li><li class="ref-item">Paley, V. G. (1992). You can&#39;t say you can&#39;t play. Harvard University Press.</li><li class="ref-item">Piaget, J. (1952). The origins of intelligence in children (M. Cook, Trans.). International Universities Press.</li><li class="ref-item">Scarborough, H. S. (2001). Connecting early language and literacy to later reading (dis)abilities: Evidence, theory, and practice. In S. B. Neuman &amp; D. K. Dickinson (Eds.), Handbook of early literacy research (pp. 97–110). Guilford.</li><li class="ref-item">Satter, E. (2000). Child of mine: Feeding with love and good sense. Bull Publishing.</li><li class="ref-item">Suskind, D. (2015). Thirty million words: Building a child&#39;s brain. Dutton.</li><li class="ref-item">Vygotsky, L. S. (1978). Mind in society: The development of higher psychological processes. Harvard University Press.</li><li class="ref-item">Whitebook, M., Phillips, D., &amp; Howes, C. (2014). Worthy work, STILL unlivable wages: The early childhood workforce 25 years after the National Child Care Staffing Study. Center for the Study of Child Care Employment.</li></ul>
+</div></main>
+</div>
+<script>
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&'spac'.includes(e.key.toLowerCase()))e.preventDefault();});
+document.addEventListener('copy',e=>e.preventDefault());
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id)?.classList.add('visible');
+  document.querySelector('[data-sec="'+id+'"]')?.classList.add('active');
+  document.getElementById('main').scrollTop=0;
+}
+function toggleStd(head){head.closest('.std-card').classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>show('intro'));
+</script>
+</body>
+</html>

@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>re:Bloom — Preschool Scope and Sequence</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--forest:#2d4a2d;--sage:#4a7c59;--sage-mid:#6a9e78;--sage-light:#c8dfc8;--sage-pale:#eaf3ea;--sage-paler:#f4faf4;--cream:#fdfaf5;--gold:#b8943a;--gold-pale:#fdf8ef;--td:#2a2a2a;--tm:#4a4a4a;--tl:#7a7a7a;--border:#d8e8d8;--serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif}
+body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webkit-font-smoothing:antialiased;height:100vh;overflow:hidden;display:flex;flex-direction:column;user-select:none}
+.topbar{background:var(--forest);height:52px;display:flex;align-items:center;padding:0 1.25rem;gap:0.75rem;flex-shrink:0}
+.logo{font-family:var(--serif);font-size:1.05rem;color:#fff;font-weight:500}.logo span{color:#e8c97a}
+.sep{width:1px;height:18px;background:rgba(255,255,255,0.2)}
+.doc-title{font-size:0.7rem;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.track-badge{margin-left:auto;font-size:0.62rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);font-weight:700;letter-spacing:0.05em;text-transform:uppercase}
+.layout{display:grid;grid-template-columns:230px 1fr;flex:1;min-height:0}
+.sidebar{background:#fff;border-right:1px solid var(--border);overflow-y:auto;padding:0.6rem 0}
+.nav-group-label{font-size:0.58rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--tl);padding:0.7rem 1rem 0.3rem;border-top:1px solid var(--border);margin-top:0.3rem}
+.nav-group-label:first-child{border-top:none;margin-top:0}
+.nav-btn{width:100%;text-align:left;background:none;border:none;padding:0.42rem 1rem;cursor:pointer;font-family:var(--sans);font-size:0.76rem;color:var(--tm);font-weight:500;transition:background 0.15s;border-left:3px solid transparent;display:flex;align-items:center;gap:0.5rem;line-height:1.4}
+.nav-btn:hover{background:var(--sage-paler)}
+.nav-btn.active{background:var(--sage-pale);border-left-color:var(--sage);color:var(--forest);font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.main{overflow-y:auto;padding:1.5rem 2rem;display:flex;flex-direction:column}
+.section{display:none}.section.visible{display:flex;flex-direction:column;gap:1rem}
+.sec-title{font-family:var(--serif);font-size:1.35rem;color:var(--forest);font-weight:500;padding-bottom:0.5rem;border-bottom:2px solid var(--sage-light)}
+.body-p{font-size:0.85rem;color:var(--tm);line-height:1.8;max-width:780px}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:0.3rem;padding-left:0.25rem;max-width:760px}
+.bullet-list li{font-size:0.82rem;color:var(--tm);line-height:1.6;display:flex;align-items:flex-start;gap:0.5rem}
+.bullet-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--sage-mid);flex-shrink:0;margin-top:0.5rem}
+.callout{display:flex;gap:0.7rem;border-radius:9px;padding:0.85rem 1rem;max-width:760px}
+.sor-callout{background:var(--gold-pale);border:1px solid rgba(184,148,58,0.2)}
+.note-callout{background:var(--cream);border:1px solid var(--border)}
+.callout-badge{flex-shrink:0;font-size:0.6rem;font-weight:800;padding:0.2rem 0.5rem;border-radius:4px;align-self:flex-start;margin-top:1px;letter-spacing:0.04em;text-transform:uppercase}
+.note-badge{background:var(--border);color:var(--tl)}
+.callout-text{font-size:0.81rem;color:var(--tm);line-height:1.7}
+.sched-table{width:100%;border-collapse:collapse;font-size:0.8rem;max-width:900px}
+.sched-table thead tr{background:var(--forest);color:#fff}
+.sched-table thead th{padding:0.6rem 0.9rem;text-align:left;font-weight:700;font-size:0.74rem}
+.sched-table tbody tr{border-bottom:1px solid var(--border)}
+.sched-table tbody tr.alt{background:var(--sage-paler)}
+.sched-block{padding:0.6rem 0.9rem;font-weight:700;color:var(--forest);width:190px;vertical-align:top}
+.sched-domains{padding:0.6rem 0.9rem;color:var(--sage);font-weight:600;font-size:0.74rem;width:120px;vertical-align:top}
+.sched-focus{padding:0.6rem 0.9rem;color:var(--tm);line-height:1.6;vertical-align:top}
+.assess-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.85rem 1rem}
+.assess-head{font-size:0.8rem;font-weight:700;color:var(--forest);margin-bottom:0.35rem}
+.dom-header{display:flex;align-items:flex-start;gap:0.85rem;padding:1.1rem 1.25rem;background:#fff;border-radius:10px;border:1.5px solid var(--border)}
+.dom-badge{width:48px;height:48px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;color:#fff;flex-shrink:0}
+.dom-title{font-family:var(--serif);font-size:1.2rem;font-weight:500;margin-bottom:0.2rem}
+.dom-meta{font-size:0.75rem;color:var(--tl)}
+.phil-box{background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:1rem 1.2rem}
+.phil-label{font-size:0.62rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);margin-bottom:0.45rem}
+.phil-text{font-size:0.82rem;color:var(--tm);line-height:1.8}
+.stds-list{display:flex;flex-direction:column;gap:0.6rem}
+.std-card{background:#fff;border:1.5px solid var(--border);border-radius:9px;overflow:hidden}
+.std-head{padding:0.7rem 1rem;display:flex;align-items:center;gap:0.7rem;cursor:pointer}.std-head:hover{background:var(--sage-paler)}
+.std-code{font-size:0.72rem;font-weight:800;padding:0.18rem 0.48rem;border-radius:4px;color:#fff;flex-shrink:0}
+.std-title{font-size:0.86rem;font-weight:600;color:var(--forest);flex:1;line-height:1.4}
+.std-chevron{color:var(--tl);font-size:0.9rem;flex-shrink:0;transition:transform 0.2s}
+.std-card.open .std-chevron{transform:rotate(180deg)}
+.std-body{display:none;border-top:1px solid var(--border);padding:1rem 1.1rem}
+.std-card.open .std-body{display:block}
+.std-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.col-label{font-size:0.62rem;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:0.45rem}
+.ind-list,.strat-list{list-style:none;display:flex;flex-direction:column;gap:0.3rem}
+.ind-item,.strat-item{display:flex;align-items:flex-start;gap:0.45rem;font-size:0.79rem;color:var(--tm);line-height:1.55}
+.ind-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:0.42rem}
+.strat-num{font-size:0.65rem;font-weight:800;min-width:16px;flex-shrink:0;margin-top:0.15rem}
+.refs-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem;max-width:780px}
+.ref-item{font-size:0.8rem;color:var(--tm);line-height:1.65;padding-left:1.5rem;text-indent:-1.5rem}
+</style>
+</head>
+<body oncontextmenu="return false">
+<div class="topbar">
+  <span class="logo">re<span>:Bloom</span></span>
+  <span class="sep"></span>
+  <span class="doc-title">Preschool Scope and Sequence</span>
+  <span class="track-badge">Ages 3–5</span>
+</div>
+<div class="layout">
+  <nav class="sidebar"><div class="nav-group-label">Introduction</div>
+<button class="nav-btn" data-sec="intro" onclick="show('intro')">Curriculum Philosophy</button>
+<button class="nav-btn" data-sec="howto" onclick="show('howto')">How to Use This Document</button>
+<button class="nav-btn" data-sec="schedule" onclick="show('schedule')">Daily Schedule Framework</button>
+<button class="nav-btn" data-sec="assess" onclick="show('assess')">Assessment Overview</button>
+<div class="nav-group-label">Nine Developmental Domains</div>
+<button class="nav-btn" data-sec="dom_AL" onclick="show('dom_AL')" style="border-left-color:transparent"><span class="dot" style="background:#2980B9"></span>Approaches to Learning</button>
+<button class="nav-btn" data-sec="dom_CO" onclick="show('dom_CO')" style="border-left-color:transparent"><span class="dot" style="background:#1A5276"></span>Cognitive Development</button>
+<button class="nav-btn" data-sec="dom_CR" onclick="show('dom_CR')" style="border-left-color:transparent"><span class="dot" style="background:#B7950B"></span>Creative Development</button>
+<button class="nav-btn" data-sec="dom_LL" onclick="show('dom_LL')" style="border-left-color:transparent"><span class="dot" style="background:#1E8449"></span>Language &amp; Literacy</button>
+<button class="nav-btn" data-sec="dom_MA" onclick="show('dom_MA')" style="border-left-color:transparent"><span class="dot" style="background:#7D3C98"></span>Mathematics</button>
+<button class="nav-btn" data-sec="dom_PW" onclick="show('dom_PW')" style="border-left-color:transparent"><span class="dot" style="background:#C0392B"></span>Physical Development &amp; Wellness</button>
+<button class="nav-btn" data-sec="dom_SC" onclick="show('dom_SC')" style="border-left-color:transparent"><span class="dot" style="background:#148F77"></span>Science</button>
+<button class="nav-btn" data-sec="dom_SE" onclick="show('dom_SE')" style="border-left-color:transparent"><span class="dot" style="background:#CA6F1E"></span>Social-Emotional Development</button>
+<button class="nav-btn" data-sec="dom_SS" onclick="show('dom_SS')" style="border-left-color:transparent"><span class="dot" style="background:#616A6B"></span>Social Studies</button>
+<div class="nav-group-label">Back Matter</div>
+<button class="nav-btn" data-sec="refs" onclick="show('refs')">References</button></nav>
+  <main class="main" id="main"><div class="section" id="intro">
+  <h2 class="sec-title">Curriculum Philosophy and Research Base</h2>
+  <p class="body-p">re:Bloom is a research-grounded, play-based early childhood curriculum designed for licensed child care programs serving children birth through age five. The Preschool Scope and Sequence covers children ages 3–5 across all nine developmental domains, with full integration of Science of Reading principles, trauma-informed practices, and inclusive frameworks throughout. The curriculum is built to be implemented by educators at all experience levels and is designed to support program quality goals including QRIS documentation, CLASS observation alignment, and kindergarten readiness.</p>
+  <p class="body-p">The theoretical foundation of re:Bloom draws on the most influential and research-supported frameworks in child development and education. Jean Piaget&#39;s constructivism grounds our understanding that children build knowledge through active, hands-on interaction with materials and ideas, not through passive absorption of adult-delivered content. Lev Vygotsky&#39;s sociocultural theory shapes our emphasis on rich language interaction, collaborative play, and scaffolded instruction within each child&#39;s Zone of Proximal Development. Maria Montessori&#39;s principles of the prepared environment, intrinsic motivation, and child-directed work inform our physical environment design and center-time philosophy. Howard Gardner&#39;s multiple intelligences framework ensures that our curriculum honors diverse learning pathways. The Harvard Center on the Developing Child&#39;s science of learning and development provides the neurobiological grounding for our emphasis on relationships, executive function, and stress regulation as prerequisites for academic learning.</p>
+  <p class="body-p">Science of Reading (SoR) principles are woven throughout all nine domains, not only Language and Literacy. Reading is a complex skill built on oral language, phonological awareness, alphabetic knowledge, and language comprehension, each of which is developed across the full curriculum. Physical development supports handwriting fluency. Social-emotional development supports the regulatory attention that learning to read requires. Cognitive development provides the symbolic thinking that the alphabetic principle demands. Science and Social Studies build the background knowledge that reading comprehension depends on. re:Bloom treats the entire curriculum as literacy preparation.</p>
+  <p class="body-p">Trauma-informed care (TIC) principles are embedded throughout this curriculum. Children who have experienced adverse childhood experiences (ACEs) or chronic stress arrive in our classrooms with neurological and behavioral adaptations that require understanding rather than correction. re:Bloom educators maintain predictable routines, build genuine relationships, interpret behavior through a trauma lens, and use co-regulation before expecting self-regulation. Inclusion principles are similarly embedded: this curriculum is designed to be implemented with and for all children, including those with individualized education or family service plans, language differences, developmental delays, and other forms of diversity. Adaptation, accommodation, and full belonging are not addenda to re:Bloom; they are its foundation.</p>
+</div><div class="section" id="howto">
+  <h2 class="sec-title">How to Use This Document</h2>
+  <p class="body-p">This Scope and Sequence is organized into nine developmental domains. Each domain includes:</p>
+  <ul class="bullet-list">
+    <li>A domain philosophy grounded in research and theory</li>
+    <li>A Science of Reading (SoR) connection note</li>
+    <li>A Trauma-Informed Care (TIC) note where applicable</li>
+    <li>An Inclusion note where applicable</li>
+    <li>A standards table with code, standard statement, age-appropriate indicators, and research-connected educator strategies</li>
+  </ul>
+  <p class="body-p">This document is designed to be used alongside:</p>
+  <ul class="bullet-list">
+    <li>re:Bloom Monthly Planning Guide, for monthly curriculum organization</li>
+    <li>re:Bloom AI Lesson Plan Generator, for weekly lesson planning in under 30 seconds</li>
+    <li>re:Bloom Preschool Activity Guides, standalone printable guides for individual activities</li>
+    <li>re:Bloom Child Observation and Assessment Tool, for documenting child progress against these indicators</li>
+    <li>re:Bloom Expert and Novice Implementation Guides, for educator support at all experience levels</li>
+  </ul>
+  <div class="callout note-callout">
+    <span class="callout-badge note-badge">Note</span>
+    <div class="callout-text">Standard codes in this document (e.g., AL.1.a, LL.2.b) are re:Bloom internal codes aligned to the framework&#39;s nine-domain structure. They correspond to early learning and development standards across multiple states. Consult the re:Bloom State Alignment Documents for crosswalks to your specific state&#39;s standards.</div>
+  </div>
+</div><div class="section" id="schedule">
+  <h2 class="sec-title">Daily Schedule Framework</h2>
+  <p class="body-p">The following schedule framework reflects the re:Bloom Play-Based Daily Structure for preschool classrooms. It is a framework, not a rigid prescription; programs should adapt timing to meet licensing requirements, family schedules, and child needs. The non-negotiables are: uninterrupted child-directed play of at least 60 minutes, daily read-aloud with interactive comprehension support, daily phonological awareness instruction, and daily outdoor time of at least 45 minutes.</p>
+  <table class="sched-table">
+    <thead><tr><th>Routine Block</th><th>Domains</th><th>Curriculum Focus and Research Rationale</th></tr></thead>
+    <tbody><tr class="">
+  <td class="sched-block">Arrival &amp; Morning Meeting</td>
+  <td class="sched-domains">SE, AL, LL, SS</td>
+  <td class="sched-focus">Community-building greeting, attendance, calendar, daily news, morning message shared writing, question of the day. Morning message is daily SoR-connected print exposure.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Intentional Read-Aloud</td>
+  <td class="sched-domains">LL, CO, SE, SC/SS</td>
+  <td class="sched-focus">Interactive read-aloud using PEER dialogic reading structure. Pre-reading: activate background knowledge and vocabulary. During: think-alouds, predictions, questions. After: extend meaning through art, drama, or writing.</td>
+</tr><tr class="">
+  <td class="sched-block">Phonological Awareness Block</td>
+  <td class="sched-domains">LL</td>
+  <td class="sched-focus">Explicit, playful 10-minute block: rhyme, alliteration, syllable work, onset-rime, or phoneme isolation. Sequence follows SoR research on phonological awareness development hierarchy.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Center Time / Play-Based Exploration</td>
+  <td class="sched-domains">ALL</td>
+  <td class="sched-focus">60–90 minute uninterrupted child-directed play in richly prepared centers: blocks, dramatic play, art studio, science, writing center, sensory table, library corner, math manipulatives, puzzles. Teacher facilitates, observes, and extends without directing.</td>
+</tr><tr class="">
+  <td class="sched-block">Small Group Instruction</td>
+  <td class="sched-domains">LL, MA, SC</td>
+  <td class="sched-focus">Intentional, teacher-led small group (4–6 children) for targeted literacy and math instruction. Homogeneous grouping by current skill level; groups change as skills develop.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Outdoor Play &amp; Gross Motor</td>
+  <td class="sched-domains">PW, SC, SE, AL</td>
+  <td class="sched-focus">Minimum 45 minutes daily outdoor play with intentional gross motor materials and opportunities. Science observation and investigation integrated. Physical activity is academic preparation.</td>
+</tr><tr class="">
+  <td class="sched-block">Mathematics Focus</td>
+  <td class="sched-domains">MA, AL, CO</td>
+  <td class="sched-focus">Daily dedicated math experience: counting collections, pattern work, sorting, measurement, or geometry. Embedded in authentic contexts (cooking, building, nature) as well as structured activities.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Creative Arts</td>
+  <td class="sched-domains">CR, LL, MA, SE</td>
+  <td class="sched-focus">Visual art, music, drama, or movement. Process-focused art studio experiences, music and movement, and creative expression across modalities. Avoids adult-directed craft projects.</td>
+</tr><tr class="">
+  <td class="sched-block">Science Investigation</td>
+  <td class="sched-domains">SC, CO, LL, MA</td>
+  <td class="sched-focus">Weekly hands-on science inquiry: observation, prediction, investigation, and documentation. Science notebooks used for drawing and dictation. Vocabulary from current inquiry woven into daily language.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Rest / Quiet Time</td>
+  <td class="sched-domains">PW, AL</td>
+  <td class="sched-focus">Consistent calming routine. Children who do not sleep have quiet independent activity. Rest is a physical development and regulation need, not a scheduling convenience.</td>
+</tr><tr class="">
+  <td class="sched-block">Personal Care &amp; Health Routines</td>
+  <td class="sched-domains">PW, SE</td>
+  <td class="sched-focus">Handwashing, bathroom routines, and self-care skills practiced with high expectations for independence. These are curriculum, not interruption.</td>
+</tr><tr class="alt">
+  <td class="sched-block">Closing Meeting / Plan-Do-Review</td>
+  <td class="sched-domains">SE, LL, SS, AL</td>
+  <td class="sched-focus">Day recall and reflection, community closing ritual, family communication, preview of tomorrow. Plan-Do-Review from HighScope: children recall their work and connect intention to outcome.</td>
+</tr></tbody>
+  </table>
+</div><div class="section" id="assess">
+  <h2 class="sec-title">Assessment Overview</h2>
+  <p class="body-p">The re:Bloom assessment system is designed to be embedded in authentic classroom practice rather than conducted as separate testing events. Assessment in a play-based preschool program is primarily observational, documentation-based, and ongoing. The following components comprise the full re:Bloom Preschool Assessment System:</p>
+  <div class="assess-item">
+    <div class="assess-head">Child Observation and Assessment Tool</div>
+    <p class="body-p">The re:Bloom Child Observation and Assessment Tool covers all nine domains with 44 standards and age-differentiated indicators. It uses a four-level rating scale: Not Yet Observed, Emerging, Developing, and Consistently Observed. The tool is fill-and-print, generates an AI-written developmental summary and next steps, and is designed for use three times per year (fall, winter, spring) for a complete developmental portrait. Detailed instructions for administration, scoring, and use in QRIS documentation are contained in the re:Bloom Assessment Guide.</p>
+  </div>
+  <div class="assess-item">
+    <div class="assess-head">Anecdotal Records and Running Notes</div>
+    <p class="body-p">Educators take brief anecdotal notes during observation of child-directed play and small group instruction. A minimum of 2 to 3 anecdotes per child per week across the group is the expectation. Anecdotes are filed by domain code and child, and inform the formal assessment tool at each rating period. The re:Bloom Assessment Guide includes a format template.</p>
+  </div>
+  <div class="assess-item">
+    <div class="assess-head">Portfolio Documentation</div>
+    <p class="body-p">Each child&#39;s portfolio includes: dated work samples across all nine domains, photographs with educator notations, and the completed assessment tool at each rating period. Portfolios are shared with families at scheduled conferences and form the basis of family-facing progress summaries. Portfolio documentation directly supports QRIS requirements for documentation of individualized planning.</p>
+  </div>
+</div><div class="section" id="dom_AL">
+      <div class="dom-header" style="border-left:4px solid #2980B9">
+        <span class="dom-badge" style="background:#2980B9">AL</span>
+        <div>
+          <h2 class="dom-title" style="color:#2980B9">Approaches to Learning</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Approaches to Learning encompasses the dispositions, behaviors, and habits of mind that shape how children engage with learning experiences. Research consistently identifies initiative, curiosity, persistence, creativity, and self-regulation as stronger predictors of school success than specific academic content knowledge (Duncan et al., 2007). Vygotsky&#39;s concept of the Zone of Proximal Development underpins this domain: children grow most when supported at the edge of their current capacity. Howard Gardner&#39;s work on multiple intelligences reminds us that children approach learning through diverse pathways: linguistic, logical, musical, spatial, bodily, interpersonal, intrapersonal, and naturalistic. Effective early childhood programs cultivate all of them. Trauma-informed practice is essential in this domain: children whose early experiences include chronic stress or adversity may exhibit reduced risk-taking and persistence not as deficits but as adaptive survival responses. Meeting these children where they are, building safety, and celebrating incremental growth are the entry points to rebuilding learning dispositions.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Approaches to Learning dispositions, particularly persistence, attention regulation, and willingness to take risks, directly support phonological awareness instruction and early decoding. Children who maintain engagement during challenging tasks (like blending phonemes or segmenting words) develop reading skills faster. Build AL simultaneously with literacy instruction.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="AL_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#2980B9">AL.1.a</span>
+            <span class="std-title">Engages in new and unfamiliar experiences and activities.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Approaches new materials with curiosity and interest</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Tries new activities without requiring significant adult persuasion</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Tolerates ambiguity and uncertainty in open-ended tasks</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Verbally expresses interest in what something is or how it works</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#2980B9">1</span>Introduce one new material or provocation per week; allow repeated exploration before rotating</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">2</span>Use Montessori-inspired &#39;invitations to explore&#39;: arrange intriguing materials without instructions</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">3</span>Model curiosity aloud: &#39;I wonder what would happen if...&#39; to normalize not-knowing</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">4</span>Acknowledge the discomfort of novelty before encouraging engagement: &#39;New things can feel strange at first&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="AL_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#2980B9">AL.1.b</span>
+            <span class="std-title">Completes activities with increasingly complex steps.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Follows three or more step directions to complete a project</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Plans a sequence of actions before beginning</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Returns to multi-step projects over multiple days</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Adjusts plan when a step does not work as expected</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#2980B9">1</span>Use plan-do-review sequences from the HighScope framework daily at center time</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">2</span>Provide materials that require multi-step processes (cooking, building, art projects)</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">3</span>Explicitly narrate sequencing: &#39;First we did... then we... what comes next?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">4</span>Avoid completing tasks for children; Vygotsky&#39;s scaffolding means supporting without replacing agency</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="AL_1_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#2980B9">AL.1.c</span>
+            <span class="std-title">Persists in completing a task with increasing concentration.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Sustains engagement in a self-chosen task for 15 or more minutes</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Resists distraction during a preferred activity</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Tries a different approach when first attempt fails</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Expresses satisfaction or pride when completing something difficult</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#2980B9">1</span>Honor long periods of deep play; do not interrupt for transitions unnecessarily</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">2</span>Offer process-based encouragement rather than product praise: &#39;You kept trying even when it was hard&#39;</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">3</span>Use Dweck&#39;s growth mindset language throughout the day: &#39;Not yet&#39; instead of &#39;You can&#39;t&#39;</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">4</span>Document and revisit children&#39;s work to build a sense of continuity and purpose</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="AL_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#2980B9">AL.2.a</span>
+            <span class="std-title">Develops a growth mindset and learning orientation.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Views mistakes as expected and useful parts of learning</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Welcomes challenge rather than avoiding it</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Notices and names own growing abilities</li><li class="ind-item"><span class="ind-dot" style="background:#2980B9"></span>Encourages peers when they are struggling</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#2980B9">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#2980B9">1</span>Read aloud books with growth mindset themes and explicitly connect them to classroom moments</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">2</span>Maintain a &#39;Wall of Learning&#39; showing work in progress, not just finished products</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">3</span>Avoid labeling children as &#39;smart&#39;; research (Dweck, 2006) shows this undermines persistence</li><li class="strat-item"><span class="strat-num" style="color:#2980B9">4</span>Normalize the word &#39;yet&#39;: &#39;You haven&#39;t figured this out yet. That means your brain is working&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_CO">
+      <div class="dom-header" style="border-left:4px solid #1A5276">
+        <span class="dom-badge" style="background:#1A5276">CO</span>
+        <div>
+          <h2 class="dom-title" style="color:#1A5276">Cognitive Development</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Cognitive development in the preschool years is characterized by rapid growth in memory, symbolic thinking, problem-solving, and cognitive flexibility. Jean Piaget&#39;s framework describes preschoolers as pre-operational thinkers who learn through active, hands-on manipulation of objects and ideas rather than through abstract instruction. They are beginning to decenter, meaning they consider perspectives beyond their own, and to use mental representations as the foundation of literacy, mathematics, and scientific reasoning. Lev Vygotsky contributed the critical understanding that cognitive development is inherently social: higher-order thinking emerges first between children (intermental) before it becomes internal (intramental). This means that rich conversation, collaborative play, and adult scaffolding are not supplements to cognitive development; they are its engine. Executive function, the cluster of skills that includes working memory, cognitive flexibility, and inhibitory control, develops rapidly between ages 3 and 5 and is among the strongest predictors of academic and life outcomes (Diamond, 2013; Center on the Developing Child, 2020).</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Symbolic thinking (CO.2.a), the understanding that one thing can stand for another, is the cognitive foundation of the alphabetic principle. Children who develop strong symbolic thinking more readily grasp that letters represent sounds, which is the core insight that unlocks decoding.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="CO_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1A5276">CO.1.a</span>
+            <span class="std-title">Develops the ability to recall information about objects, people, and past experiences.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Accurately recalls events from previous days or weeks when prompted</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Retells the sequence of a recent experience with correct ordering</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Uses memory of past experiences to inform current decisions</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Connects a current experience to a related memory without adult prompting</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1A5276">1</span>Use daily recall conversations: &#39;What did we do in the garden yesterday? What do you remember?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">2</span>Create documentation panels with photos and captions children help write</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">3</span>Build on prior knowledge explicitly: &#39;Remember when we tried to sink the foam block? What did we learn?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">4</span>Use Reggio-inspired learning stories that honor memory and narrative as cognitive tools</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="CO_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1A5276">CO.2.a</span>
+            <span class="std-title">Demonstrates increasing ability to think symbolically.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Engages in complex pretend scenarios with multiple roles and storylines</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Creates representations of real objects through drawing, building, or mark-making</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Understands that print, numbers, and symbols carry meaning</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Uses symbols and signs in play (makes signs for a restaurant, writes on a notepad)</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1A5276">1</span>Provide open-ended dramatic play materials that invite symbolic substitution (blocks as phones, fabric as capes)</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">2</span>Model symbol use throughout the environment: labeled shelves, charts, calendars, illustrated schedules</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">3</span>Connect symbolic play directly to reading: &#39;When you pretend the block is a car, you are thinking like a reader who knows letters are symbols&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">4</span>Piaget&#39;s work supports child-directed symbolic play as the primary vehicle for this development; protect lengthy play blocks</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="CO_3_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1A5276">CO.3.a</span>
+            <span class="std-title">Uses increasingly complex strategies to solve problems.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Generates two or more possible solutions before acting</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Evaluates which approach worked and explains why</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Applies a solution from one problem to a new, similar situation</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Seeks information resources (books, teachers, peers) before giving up</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1A5276">1</span>Use open-ended provocations that have multiple valid solutions (engineering challenges, design problems)</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">2</span>Ask &#39;What are your ideas?&#39; rather than &#39;What&#39;s the answer?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">3</span>Document children&#39;s problem-solving processes in writing to make thinking visible</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">4</span>Socratic questioning: &#39;What makes you think that? What else could be true?&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="CO_4_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1A5276">CO.4.a</span>
+            <span class="std-title">Develops ability to be flexible in own thinking and behavior.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Transitions between activities with minimal emotional disruption</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Applies different rules in different contexts without adult reminders</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Changes approach when presented with new information</li><li class="ind-item"><span class="ind-dot" style="background:#1A5276"></span>Sustains attention and shifts attention flexibly as needed</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1A5276">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1A5276">1</span>Use visual schedules and transition warnings to support cognitive flexibility</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">2</span>Teach explicitly that &#39;rules are different here across settings: classroom, lunchroom, outdoor, and library</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">3</span>Play cognitive flexibility games (sorting the same objects by different attributes, following changing directions)</li><li class="strat-item"><span class="strat-num" style="color:#1A5276">4</span>Harvard&#39;s research on executive function identifies flexibility as trainable; build it through routine game-based practice</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_CR">
+      <div class="dom-header" style="border-left:4px solid #B7950B">
+        <span class="dom-badge" style="background:#B7950B">CR</span>
+        <div>
+          <h2 class="dom-title" style="color:#B7950B">Creative Development</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 3 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Creative development is not supplementary to academic readiness; it is foundational to it. Research consistently links arts engagement to language development, mathematical reasoning, social-emotional competence, and executive function (Education Commission of the States, 2021; Rood, Hadani, &amp; Liberman, 2020). Howard Gardner&#39;s theory of multiple intelligences explicitly validates musical, spatial, and bodily-kinesthetic intelligences as distinct and significant learning pathways, not lesser versions of linguistic or logical intelligence. Maria Montessori&#39;s prepared environment principle applies powerfully here: beautiful, thoughtfully arranged art and music materials invite intrinsic creative engagement. Creative development in early childhood is characterized by process over product: the three-year-old who paints with complete absorption and the five-year-old who sings an original song are engaged in the same profound cognitive and emotional work regardless of the quality of the output.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Creative Development supports phonological awareness through music and rhyme (CR.1.b). Singing, chanting, and rhythm work develop children&#39;s sensitivity to the sound structures of language, the same awareness that underlies phonemic awareness and early decoding.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="CR_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#B7950B">CR.1.a</span>
+            <span class="std-title">Expresses ideas, feelings, and experiences through visual art.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Creates representations that are recognizable to others and connected to personal experience</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Chooses specific colors, textures, and materials with clear intention</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Describes own artwork and the process of creating it with vocabulary</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Revisits and refines a piece across multiple sessions</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#B7950B">1</span>Offer a consistent, beautiful, organized art studio area with rotating materials</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">2</span>Avoid coloring sheets and pre-made templates; these communicate that there is a right answer in art</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">3</span>Ask: &#39;Tell me about your artwork&#39; rather than &#39;What is it?&#39;; the child&#39;s meaning is the curriculum</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">4</span>Montessori&#39;s principle of beauty in the environment: art materials should be real, beautiful, and respected</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="CR_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#B7950B">CR.1.b</span>
+            <span class="std-title">Expresses self through music, movement, and dramatic play.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Sings songs with reasonably accurate words and melody</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Creates original songs, chants, or rhythms spontaneously</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Moves expressively to music with varied tempo and dynamics</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Takes on roles in complex dramatic play scenarios</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#B7950B">1</span>Integrate music into every routine: transitions, cleanup, gathering, meals; children learn language through song</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">2</span>Offer daily opportunities for unscripted dramatic play with open-ended materials</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">3</span>Use call-and-response and choral chanting; both support phonological awareness and oral language</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">4</span>Teach children to listen to music for emotional quality: &#39;What does this music make you feel?&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="CR_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#B7950B">CR.2.a</span>
+            <span class="std-title">Develops ability to express original ideas through imaginative and inventive play.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Creates elaborate multi-day pretend scenarios with narrative arcs</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Assigns roles, negotiates plot lines, and resolves in-play conflicts verbally</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Invents solutions to in-play problems using available materials</li><li class="ind-item"><span class="ind-dot" style="background:#B7950B"></span>Sustains imaginative play over extended time with increasing complexity</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#B7950B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#B7950B">1</span>Block dramatic play interruptions; a child deep in a narrative is doing advanced cognitive and social work</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">2</span>Support play by adding materials that extend the story rather than redirecting it</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">3</span>Document play narratives through Vivian Paley&#39;s storytelling and story-acting approach</li><li class="strat-item"><span class="strat-num" style="color:#B7950B">4</span>Connect in-play language to literacy: &#39;You just made up a story! Should we write it down?&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_LL">
+      <div class="dom-header" style="border-left:4px solid #1E8449">
+        <span class="dom-badge" style="background:#1E8449">LL</span>
+        <div>
+          <h2 class="dom-title" style="color:#1E8449">Language &amp; Literacy</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 12 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Language and Literacy encompasses oral language, phonological awareness, phonics, vocabulary, fluency, comprehension, and writing, all of which are explicitly grounded in the Science of Reading. Hart and Risley&#39;s (1995) seminal research established that vocabulary exposure in the early years is among the most powerful predictors of reading achievement. Scarborough&#39;s Reading Rope (2001) models reading as the integration of word recognition (phonological awareness, decoding, sight recognition) and language comprehension (vocabulary, background knowledge, verbal reasoning, literacy knowledge). Both strands are developed simultaneously in a high-quality preschool environment. The Simple View of Reading (Gough &amp; Tunmer, 1986), Reading = Decoding x Language Comprehension, grounds the SoR emphasis throughout this domain. Preschool is the optimal window for oral language development, phonological awareness, and print concept knowledge. Children who arrive at kindergarten with strong phonological awareness learn to read significantly more easily than those who do not, regardless of socioeconomic background (Kilpatrick, 2015).</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">This entire domain is grounded in Science of Reading research. LL.2.a–LL.2.c address phonological awareness directly. LL.1.a–LL.1.e develop language comprehension. LL.3.a–LL.3.b build print and alphabetic knowledge. LL.4.a–LL.4.b develop writing foundations. All four strands of Scarborough&#39;s Reading Rope are represented.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="LL_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.1.a</span>
+            <span class="std-title">Demonstrates understanding of increasingly complex language.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Follows three or more step directions correctly</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Understands comparative and superlative language (bigger, biggest, faster than)</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Responds appropriately to conditional language (&#39;if/then&#39;) in conversation</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Understands spatial and temporal vocabulary accurately (before, after, between, behind)</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Use precise, rich language throughout the day: not simplified speech but rather supported speech</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Build spatial and temporal vocabulary deliberately through movement games and daily schedule discussions</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Check for understanding through action rather than verbal confirmation; ask children to show rather than simply tell</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Research (Biemiller &amp; Slonim, 2001) supports explicit vocabulary instruction in preschool as high-impact</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.1.b</span>
+            <span class="std-title">Develops and expands understanding of vocabulary and concepts.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Understands and uses Tier 2 vocabulary words introduced in instruction</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Learns and retains 3–5 new words per week when explicitly taught</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Explains word meanings in context using own language</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Makes connections between new words and known words, concepts, or experiences</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Use Beck, McKeown, and Kucan&#39;s Tier 2 vocabulary instruction framework; choose words that appear across many contexts</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Teach words deeply: meaning, use in a sentence, connection to a concept, and a physical gesture</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Revisit vocabulary words across the week in multiple contexts; a word taught once is rarely retained</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Read-aloud books chosen partly for vocabulary richness: Biemiller&#39;s research supports this as highest-yield vocabulary instruction for preschoolers</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_1_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.1.c</span>
+            <span class="std-title">Communicates using increasingly complex and grammatically sophisticated language.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Uses complete sentences of 5–6 or more words consistently</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Uses compound and complex sentence structures in conversation</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Uses language to explain reasoning, describe cause and effect, and make comparisons</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Speech is fully intelligible to unfamiliar adults in most contexts</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Expand and extend children&#39;s utterances naturally: if a child says &#39;dog ran,&#39; respond &#39;Yes, the big dog ran very fast down the hill!&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Use Dialogic Reading techniques during read-alouds: PEER (Prompt, Evaluate, Expand, Repeat)</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Avoid correcting grammar directly; model correct form in your response</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Create a culture of talking: table conversations, partner share, whole-group discussion, and one-on-one conversation during play</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_1_d">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.1.d</span>
+            <span class="std-title">Participates in conversations using turn-taking, topic maintenance, and listening skills.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Sustains a topic across 3 or more conversational turns</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Listens without interrupting during structured discussion (with support)</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Adjusts language and tone for different listeners</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Asks clarifying questions to extend or deepen conversation</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Teach turn-taking explicitly using visual tools (talking stick, conversation cards)</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Use accountable talk structures: &#39;I agree with ___ because...&#39;; &#39;I want to add...&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Model active listening visibly and narrate it: &#39;I&#39;m going to look at you and wait because I want to hear your whole idea&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Conversation is the primary vehicle for oral language development; protect and prioritize it over adult-directed instruction</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_1_e">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.1.e</span>
+            <span class="std-title">Develops comprehension of read-aloud text across literary and informational genres.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Retells main events in sequence after a read-aloud</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Answers both literal and inferential questions about text</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Makes predictions before and during reading using text evidence</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Makes connections between texts and personal experience, other books, or world knowledge</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Use Interactive Read-Aloud methodology: stop for thinking, prediction, visualization, and connection</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Balance literary and informational text; informational texts build background knowledge, a critical reading comprehension variable</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Before reading: activate background knowledge. During reading: model thinking aloud. After reading: extend meaning through drawing, drama, or discussion</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Research (Nation &amp; Snowling, 2004): comprehension strategy instruction in preschool has lasting effects on reading comprehension in elementary school</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.2.a</span>
+            <span class="std-title">Develops awareness of the syllable structure of spoken words.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Claps or taps syllables in multi-syllabic words accurately</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Identifies whether a word has one, two, or more syllables</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Blends two syllables to form a compound word</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Segments two-syllable words into component parts</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Syllable clapping is an entry point for phonological awareness; use it daily in transitions, songs, and name games</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Work at the syllable level before moving to onset-rime or phoneme levels; this is the phonological awareness hierarchy</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Use children&#39;s names as primary teaching material: &#39;Ma-ri-a has three syllables; how many does your name have?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Kilpatrick (2015): syllable awareness typically precedes and supports phoneme awareness development</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_2_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.2.b</span>
+            <span class="std-title">Develops awareness of initial sounds, onsets, and rime patterns.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Identifies words that begin with the same sound</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Isolates the initial consonant sound in a familiar one-syllable word</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Blends an onset and rime to form a recognizable word</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Generates words that begin with a given target sound</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Alliteration tongue twisters, alphabet books, and sound-sorting games develop onset awareness</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Use Elkonin boxes (sound boxes) to make onset-rime segmentation concrete and visual</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Initial sound identification is a critical precursor to phoneme-level awareness; do not rush past it</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Match phonological awareness instruction to books being read aloud: find words with target sounds in current texts</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_2_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.2.c</span>
+            <span class="std-title">Develops understanding and production of rhyme.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Identifies whether two words rhyme with high accuracy</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Generates multiple rhyming words for a given word</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Distinguishes rhyming from non-rhyming word pairs</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Appreciates and creates playful rhymes independently</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Rhyme is among the first phonological awareness skills to emerge; build it through daily songs, nursery rhymes, and books</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Teach the difference between &#39;sounds the same at the end&#39; (rhyme) and &#39;sounds the same at the beginning&#39; (alliteration)</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>When reading rhyming books, pause before the rhyming word and allow children to produce it</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Research confirms: children who can produce rhymes easily have stronger phoneme awareness and decoding foundations (Bryant et al., 1990)</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_3_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.3.a</span>
+            <span class="std-title">Develops knowledge of print organization and the functions of print.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Understands print is read left to right and top to bottom in English</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Identifies a word, letter, sentence, and page in a text</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Locates specific words or letters in familiar environmental print</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Distinguishes between print and pictures on a page</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Point to text while reading aloud; this simple act builds enormous print concept knowledge over time</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Use shared writing experiences daily: children dictate, teacher writes, pointing to each word</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Create a print-rich environment where labels, signs, charts, and lists serve real communicative purposes</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Concepts About Print (Clay, 2000) assessment items directly inform which skills to target next</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_3_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.3.b</span>
+            <span class="std-title">Develops knowledge of the alphabet and the alphabetic principle.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Names and identifies most uppercase and 10 or more lowercase letters</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Produces the most common sound for several letters</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Identifies the letter that represents a given initial sound in familiar words</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Writes several letters independently including own first name</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Teach letters in an order informed by frequency and utility, not A-B-C order, to accelerate decoding access</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Use multisensory letter practice: sand writing, sky writing, playdough letters, tactile letter cards</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Connect letter learning immediately to phoneme awareness: teaching &#39;B says /b/&#39; alongside words that begin with /b/</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Explicit, systematic alphabetic knowledge instruction is supported by the full body of SoR research (Adams, 1990; Kilpatrick, 2015)</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_4_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.4.a</span>
+            <span class="std-title">Develops understanding that writing represents spoken language.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Understands that letters and words on a page represent spoken words</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Asks adults to read back what they wrote</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Attempts to write words by saying them aloud and writing letters for sounds</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Writes own name to communicate identity and ownership</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Daily interactive writing practice: children and teacher compose together, sharing the pen</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Name writing is both literacy instruction and identity development; teach it with full intentionality</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Connect writing to reading: &#39;You just read that word with your eyes; now try to write it with your hand&#39;</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Writing attempts at this age should be celebrated rather than corrected; developmental spelling is a literacy behavior, not an error</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="LL_4_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#1E8449">LL.4.b</span>
+            <span class="std-title">Draws and writes using an increasingly controlled and efficient grip and letter formation.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Uses a dynamic tripod or similar mature grasp for writing tools</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Copies basic geometric shapes with accuracy</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Produces recognizable letters with controlled directionality</li><li class="ind-item"><span class="ind-dot" style="background:#1E8449"></span>Writes from left to right with increasing consistency</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#1E8449">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#1E8449">1</span>Strengthen hand muscles through daily fine motor work: tongs, lacing, playdough, cutting; playdough, cutting, and building are more effective</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">2</span>Teach correct pencil grip explicitly and early; inefficient grips become habits that are difficult to change</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">3</span>Handwriting is a readiness skill for fluent writing; efficient grip reduces cognitive load and supports encoding</li><li class="strat-item"><span class="strat-num" style="color:#1E8449">4</span>Provide a variety of writing tools: thin markers, crayons, and pencils; let children develop a tool preference while maintaining technique</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_MA">
+      <div class="dom-header" style="border-left:4px solid #7D3C98">
+        <span class="dom-badge" style="background:#7D3C98">MA</span>
+        <div>
+          <h2 class="dom-title" style="color:#7D3C98">Mathematics</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 9 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Mathematics in early childhood is not computation practice but the development of mathematical thinking, reasoning, and disposition. Clements and Sarama&#39;s (2014) learning trajectories framework provides the research foundation for the re:Bloom mathematics sequence: children develop mathematical understanding along predictable but not rigid pathways, and instruction is most effective when it meets children at their current level and moves them forward through progressively complex experiences. Piaget&#39;s concrete-representational-abstract progression is foundational here: preschool mathematics is primarily concrete, with abstract symbol introduction supported by extensive physical manipulation. The NCTM (2006) Curriculum Focal Points identify number, operations, and geometry as the core foci for preschool. Executive function, particularly working memory and cognitive flexibility, is deeply implicated in mathematical reasoning and responds to the same environmental supports that benefit all executive function development.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Number word knowledge (MA.1.a) develops through the same oral language pathways as vocabulary. Counting rhymes, number songs, and mathematical vocabulary instruction directly reinforce the phonological awareness and vocabulary knowledge that support reading.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="MA_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.1.a</span>
+            <span class="std-title">Develops understanding of the counting sequence and its stable order.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Counts accurately to 20 without skipping or repeating numbers</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Counts backward from 10 with accuracy</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Begins counting a set from any number, not always from 1</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Counts by 10s to 100 with support</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Count everything, everywhere: steps, bites, children, crackers; counting is not math time, it is all day</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Counting songs and chants build the stable-order principle through repetition and rhythm</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>When children make counting errors, note the specific error: skipping, repeating, or losing track; different errors require different support</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Clements and Sarama: the stable order of counting words is a conceptual achievement that underlies all counting with correspondence</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.1.b</span>
+            <span class="std-title">Develops understanding of one-to-one correspondence and cardinality.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Counts a set of up to 10 objects with reliable one-to-one correspondence</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Understands that the last number stated equals the total (cardinality principle)</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Counts out a specific number from a larger set accurately</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Compares two sets and determines &#39;more,&#39; &#39;less,&#39; or &#39;equal&#39;</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Provide objects to count during every table routine: crackers, napkins, cups, manipulatives</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Use explicit cardinality language: &#39;You counted 7, so there are 7 bears. The last number we count tells us how many.&#39;</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Subitizing practice (dot cards, dice) develops cardinality intuition; begin with sets of 2 and build to 5</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Gelman and Gallistel&#39;s five counting principles provide the research map for cardinality development</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_1_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.1.c</span>
+            <span class="std-title">Develops the ability to subitize small quantities.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Instantly recognizes groups of 1–3 without counting</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Recognizes groups of 4–5 with brief exposure and practice</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Names the quantity of a small group without counting aloud</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Uses subitizing to compare small groups quickly</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Daily dot card flash activities: 2 seconds of exposure, then &#39;How many did you see?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Connect subitizing to dice use in board games: natural, frequent, meaningful</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Distinguish between perceptual subitizing (1–3, instant) and conceptual subitizing (4–8, chunked)</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Clements (1999): subitizing development predicts later arithmetic fluency; invest in it daily in preschool</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.2.a</span>
+            <span class="std-title">Develops understanding of number relationships and early operations.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Combines two groups of objects and counts the total (addition)</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Removes objects from a group and counts what remains (subtraction)</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Solves simple addition and subtraction story problems using objects</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Uses number relationships to compare quantities (5 is more than 3 because...)</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Story problems embedded in dramatic play are the most authentic entry point for operations: &#39;We had 4 bears and 2 left. How many are still here?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Use five-frames and ten-frames as visual structures for part-whole thinking</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Avoid introducing written number sentences before children have extensive concrete experience</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Research shows preschoolers can solve problems using sophisticated informal strategies long before formal instruction; trust and facilitate this capacity</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_3_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.3.a</span>
+            <span class="std-title">Develops knowledge of measurement concepts.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Compares and orders 3 or more objects by length, weight, or capacity</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Uses non-standard units to measure with consistency</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Uses accurate measurement vocabulary (longer, shorter, heavier, lighter, holds more)</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Understands that measuring requires a consistent unit</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Cooking is the richest measurement curriculum available; use it weekly</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Measure everything: height with blocks, weight on a balance scale, and capacity with sand and water</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Introduce non-standard measurement before standard units; this builds the conceptual understanding that formal measurement later formalizes</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Clements and Sarama: measurement understanding at preschool level predicts mathematics achievement through grade 5</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_3_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.3.b</span>
+            <span class="std-title">Develops the ability to sort, classify, and understand attributes.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Sorts a collection by a single attribute with accuracy</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Sorts the same collection by a different attribute when asked</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Names the sorting rule before or after sorting</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Creates own categories and explains the reasoning behind them</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Provide collections for sorting: buttons, shells, leaves, lids, blocks; varied attributes invite varied sorting rules</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Ask &#39;How did you sort these?&#39; before &#39;Why?&#39; because children need to describe before they can explain</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Introduce attribute blocks as a mathematically rich sorting material</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Sorting is pre-algebraic thinking: the child who sorts by color and then by size is developing the pattern recognition that underlies algebraic reasoning</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_3_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.3.c</span>
+            <span class="std-title">Develops understanding of patterns and their structure.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Creates and extends AB and ABB patterns independently</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Identifies the repeating unit in a pattern</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Creates patterns with three or more elements</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Translates a pattern across different representations (color → sound → movement)</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Pattern work should move from physical to visual to symbolic: clap patterns, then block patterns, then color patterns</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Teach children to identify the core unit: &#39;What part repeats?&#39; is the essential pattern question</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Pattern translation (same pattern in different materials) develops abstract pattern understanding</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>NCTM: algebraic thinking begins with pattern recognition in preschool; invest in it as mathematical literacy</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_4_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.4.a</span>
+            <span class="std-title">Develops ability to recognize and describe shapes and their attributes.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Names circle, square, triangle, rectangle, oval, and hexagon reliably</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Describes shapes by number of sides and corners</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Identifies shapes in different orientations and sizes</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Names common 3D shapes (sphere, cube, cylinder, cone)</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Shapes must be presented in varied orientations from the start; a tilted square is still a square</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Go on shape walks: find rectangles in windows, circles in wheels, triangles in rooftops</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Use geoboards and tangrams for active shape composition and decomposition</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Van Hiele&#39;s levels of geometric thinking: preschoolers are at Level 0 (visual) moving toward Level 1 (analysis); attribute description is the bridge</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="MA_4_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#7D3C98">MA.4.b</span>
+            <span class="std-title">Develops understanding of spatial relationships.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Uses and understands spatial language accurately (in front of, behind, between, beside, above, below)</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Creates and follows a simple diagram or map of a familiar space</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Completes 12+ piece puzzles</li><li class="ind-item"><span class="ind-dot" style="background:#7D3C98"></span>Describes the location of objects using accurate positional language</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#7D3C98">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#7D3C98">1</span>Spatial language instruction has outsized impact on mathematical development; use it constantly and precisely</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">2</span>Building blocks support spatial reasoning more than almost any other material; protect and extend block play</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">3</span>Body movement games that use spatial vocabulary: &#39;Stand beside the door, then move behind the chair&#39;</li><li class="strat-item"><span class="strat-num" style="color:#7D3C98">4</span>Research (Verdine et al., 2014): spatial skills at age 3 predict mathematics achievement at age 5, regardless of other factors</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_PW">
+      <div class="dom-header" style="border-left:4px solid #C0392B">
+        <span class="dom-badge" style="background:#C0392B">PW</span>
+        <div>
+          <h2 class="dom-title" style="color:#C0392B">Physical Development &amp; Wellness</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 9 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Physical Development encompasses both the motor competencies and wellness practices that support children&#39;s long-term health, school readiness, and quality of life. Gross motor development in preschool, including running, jumping, climbing, and balancing, builds the proprioceptive and vestibular processing that supports seated attention and fine motor control. Fine motor development, including gripping, manipulating, cutting, and writing, is the embodied foundation of literacy and mathematics tool use. Sensory processing (PW.1.d) has received increased attention in the research literature: children who have difficulty regulating sensory input may exhibit behaviors that are frequently misread as behavioral problems rather than neurological differences requiring environmental accommodation. Trauma-informed care is critical in this domain: physical boundaries, body autonomy, and safe touch are not just wellness concepts but trauma recovery and prevention practices. Inclusion considerations: children with physical disabilities or atypical motor development are entitled to full participation in physical experiences through individualized modifications and adaptive tools.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Fine motor control (PW.1.b) directly supports efficient handwriting, which research (Berninger, 2012) shows is connected to writing fluency and composition, itself connected to reading achievement through shared linguistic pathways.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="PW_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.1.a</span>
+            <span class="std-title">Develops competency in a variety of locomotor and non-locomotor skills.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Runs with control of speed and direction</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Hops on one foot 3 or more consecutive times</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Skips with an alternating step-hop pattern</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Walks up and down stairs alternating feet</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Throws, catches, and kicks with increasing coordination and accuracy</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Intentional gross motor curriculum is not extra but essential neurological development</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Obstacle courses, movement games, and structured outdoor play each address multiple locomotor skills simultaneously</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Gallahue and Ozmun (2012): the fundamental movement phase (ages 2–7) is the window for locomotor skill development; missing it has lasting consequences</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Avoid over-restricting outdoor movement for safety; calculated risk in physical play builds proprioception, confidence, and competence</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.1.b</span>
+            <span class="std-title">Demonstrates developing control and precision in fine motor skills.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Cuts along a line and around simple shapes with scissors</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Strings small beads or laces with control</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Completes 20+ piece puzzles independently</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Demonstrates tripod grasp for writing tools with stability</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Fine motor development requires daily practice embedded in centers: tongs at the sensory table, tweezers in science, lacing in the manipulatives area</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Avoid premature pencil work as the primary fine motor vehicle; playdough, cutting, and building are more effective</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Provide real tools that work: child-safe scissors that actually cut, tongs that grip, and lacing boards with laces that hold</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Handwriting Without Tears research supports specific stroke sequences and grip instruction before age 5</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_1_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.1.c</span>
+            <span class="std-title">Develops oral motor skills in service of articulation and self-care.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Produces most English speech sounds accurately for age</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Uses utensils for eating with control and appropriate grip</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Manages a variety of food textures without difficulty</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Blows, sucks, and uses tongue movements for age-appropriate activities</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Refer concerns about speech sound production to a speech-language pathologist; oral motor development affects academic outcomes</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Mealtime is oral motor curriculum: offer textures, temperatures, and tools that require varied oral motor work</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Blowing instruments such as harmonicas, whistles, and pinwheels support oral motor strength and awareness</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>ASHA developmental norms indicate most consonants should be fully acquired by age 8, with many in place by age 4</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_1_d">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.1.d</span>
+            <span class="std-title">Uses senses to guide movement and engagement with the environment.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Adjusts movement in response to sensory information (steps around obstacles, catches a rolling ball)</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Manages varied sensory environments without significant dysregulation</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Describes sensory experiences using vocabulary for texture, temperature, sound, and movement</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Shows appropriate sensory seeking or avoidance preferences</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Create environments that are both sensory-rich and sensory-predictable; children need stimulation and sanctuary in equal measure</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Offer sensory alternatives; a child who needs movement during circle time may learn better on a wobble seat or while standing</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Sensory processing differences are neurological rather than behavioral; accommodation is inclusion, not permissiveness</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Ayres Sensory Integration theory: sensory processing is foundational to all motor, cognitive, and social learning</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.2.a</span>
+            <span class="std-title">Develops knowledge of the body, its parts, functions, and needs.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Names and locates all major body parts including internal organs</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Describes basic functions of the brain, heart, and lungs in child-accessible terms</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Understands that the body needs nutritious food, water, sleep, and movement</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Connects physical feelings (hunger, fatigue, nervousness) to body signals</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Use body-focused read-alouds and informational books to build body content knowledge</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Create a classroom &#39;body inquiry&#39;: chart what we know and what we wonder about how bodies work</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Interoception, awareness of internal body states, is a learnable skill (Craig, 2015) that supports both health and emotional regulation</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Connect physical wellness to emotional wellness explicitly; for example: &#39;When your body feels rested, it is easier to be patient&#39;</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_2_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.2.b</span>
+            <span class="std-title">Demonstrates personal health and self-care practices with increasing independence.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Washes hands correctly and independently following all steps</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Dresses and undresses independently, managing buttons and zippers with effort</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Brushes teeth and blows/wipes nose independently</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Manages toileting completely independently</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Post visual handwashing steps at child height; the visual cue supports independence</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Self-care is both independence-building and fine motor curriculum; invest time in teaching it rather than simply managing it</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Derman-Sparks &amp; Edwards (2010): self-care competence contributes to positive self-identity and cultural respect</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Acknowledge cultural variation in self-care practices; home routines may differ from school practices and both can be valid</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_2_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.2.c</span>
+            <span class="std-title">Consumes a variety of healthy foods and develops positive eating behaviors.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Names foods from all major food groups and categorizes them</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Describes why some foods support the body&#39;s energy and growth</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Serves own food portions and uses utensils independently</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Communicates hunger and fullness with vocabulary and self-advocates</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Involve children in food preparation whenever possible; hands-on experience builds food knowledge and positive attitudes</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Model trying new foods without pressure by saying something like: &#39;I&#39;m going to try a tiny taste. Want to try with me?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>The Division of Responsibility (Satter, 2000): adults decide what food is offered, children decide whether and how much to eat</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Avoid using food as a reward or punishment; doing so undermines healthy eating relationships over time</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_2_e">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.2.e</span>
+            <span class="std-title">Participates in regular physical activity with enjoyment and awareness of its benefits.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Participates willingly in structured and unstructured physical activity daily</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Describes physical activity as enjoyable and beneficial</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Demonstrates sustained engagement in active play for 20+ continuous minutes</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Identifies physical activities they enjoy and seeks them out voluntarily</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Forty-five minutes of outdoor active play daily is a developmental and health standard, not a reward or a break from learning</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Strong evidence (Hills et al., 2015) links daily physical activity to improved attention, executive function, and academic performance</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Vary the types of physical activity: free play, structured games, movement exploration, and obstacle challenges</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Never use loss of physical activity as a consequence; doing so teaches children that their body&#39;s needs are negotiable</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="PW_2_f">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#C0392B">PW.2.f</span>
+            <span class="std-title">Demonstrates understanding of safety practices and applies them in daily life.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>States and follows classroom and outdoor safety rules without adult reminders</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Understands pedestrian and traffic safety basics</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Identifies trusted adults to go to for help in different settings</li><li class="ind-item"><span class="ind-dot" style="background:#C0392B"></span>Participates in and can explain safety drill procedures</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#C0392B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#C0392B">1</span>Teach safety rules as community agreements, not adult-imposed restrictions; this builds intrinsic motivation to follow them</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">2</span>Practice drills calmly and repeatedly so the procedure becomes second nature before any real emergency arises</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">3</span>Body safety curriculum should include body autonomy and consent, which are among the most evidence-based protective factor approaches available</li><li class="strat-item"><span class="strat-num" style="color:#C0392B">4</span>Finkelhor (2009): body safety education in early childhood is one of the most evidence-based child protection interventions available</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_SC">
+      <div class="dom-header" style="border-left:4px solid #148F77">
+        <span class="dom-badge" style="background:#148F77">SC</span>
+        <div>
+          <h2 class="dom-title" style="color:#148F77">Science</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 2 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Science in early childhood is not about memorizing facts but about developing the habits of scientific thinking: curiosity, observation, questioning, prediction, investigation, and evidence-based reasoning. These habits are both intrinsically valuable and deeply connected to academic success across content areas. The National Research Council&#39;s Framework for K-12 Science Education (2012) grounds science education in three dimensions: disciplinary core ideas, science and engineering practices, and crosscutting concepts. In early childhood, the science and engineering practices, such as asking questions, planning investigations, analyzing data, and communicating findings, are the primary focus. Piaget&#39;s concept of assimilation and accommodation maps directly onto science inquiry: children encounter phenomena that do not match their existing understanding, and must reorganize their thinking. Reggio Emilia&#39;s pedagogical approach treats young children as natural scientists and researchers, a principle that is fully consistent with contemporary neuroscience of learning. Trauma-informed science education creates safety to be wrong: the culture of a science-learning classroom must communicate that incorrect hypotheses are not failures but contributions to the investigation.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Science builds the content knowledge and vocabulary that research identifies as central to reading comprehension. Background knowledge about the world, including scientific concepts, is a primary resource readers draw on to construct meaning from text (Hirsch, 2006).</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="SC_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#148F77">SC.1.a</span>
+            <span class="std-title">Explores and investigates objects, materials, and events in the environment.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#148F77">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Uses multiple senses purposefully and systematically to gather information</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Uses tools to extend observation (magnifying glass, ruler, balance scale)</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Makes detailed verbal observations and records them through drawing or dictation</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Compares two or more objects or phenomena using precise descriptive vocabulary</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#148F77">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#148F77">1</span>Maintain a science investigation area with rotating materials, tools, and provocation questions</li><li class="strat-item"><span class="strat-num" style="color:#148F77">2</span>The teacher&#39;s primary role in science is to question rather than explain; &#39;What do you notice? What do you wonder?&#39; are more powerful than &#39;Let me show you why&#39;</li><li class="strat-item"><span class="strat-num" style="color:#148F77">3</span>Science notebooks build observation literacy even at the preschool level; drawing what you see is a legitimate scientific practice</li><li class="strat-item"><span class="strat-num" style="color:#148F77">4</span>NGSS Engineering Practices at preschool: begin with observing and questioning; the entire inquiry cycle will develop through elementary school</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SC_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#148F77">SC.1.b</span>
+            <span class="std-title">Develops ability to reason about cause and effect through observation and investigation.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#148F77">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>States a hypothesis and tests it (&#39;I think it will happen because...&#39;)</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Identifies the cause of an observed phenomenon using evidence</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Designs a simple test to answer a question with adult support</li><li class="ind-item"><span class="ind-dot" style="background:#148F77"></span>Distinguishes between variables in a simple investigation with guidance</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#148F77">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#148F77">1</span>Causal language is scientific language; teach &#39;because,&#39; &#39;causes,&#39; &#39;makes,&#39; &#39;so that&#39; as scientific vocabulary</li><li class="strat-item"><span class="strat-num" style="color:#148F77">2</span>Use Socratic questioning around cause and effect: &#39;What do you think made that happen? How could we find out?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#148F77">3</span>Use the engineering design cycle for simple projects: identify the problem, brainstorm solutions, test, then reflect and revise</li><li class="strat-item"><span class="strat-num" style="color:#148F77">4</span>NRC (2012) identifies cause and effect as one of seven crosscutting concepts connecting all science disciplines; build it in preschool</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_SE">
+      <div class="dom-header" style="border-left:4px solid #CA6F1E">
+        <span class="dom-badge" style="background:#CA6F1E">SE</span>
+        <div>
+          <h2 class="dom-title" style="color:#CA6F1E">Social-Emotional Development</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 7 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Social-emotional development is not a &#39;soft&#39; curriculum component; it is the foundation upon which all other learning rests. Harvard&#39;s Center on the Developing Child (2020) identifies the serve-and-return interactions between caregivers and children as the primary builder of the neural architecture that enables learning, attention, and regulation. The CASEL (Collaborative for Academic, Social, and Emotional Learning) framework organizes social-emotional competencies into five domains: self-awareness, self-management, social awareness, relationship skills, and responsible decision-making, all of which are addressed in re:Bloom&#39;s SE domain. Trauma-informed practice is most critical here: children who have experienced adverse childhood experiences (ACEs) may have fundamentally different stress-response systems that require not punishment and consequence but co-regulation, predictability, and relational safety (Shonkoff &amp; Garner, 2012). Inclusion considerations: social-emotional development cannot be disaggregated from belonging. Children who feel excluded by ability, language, race, gender, or family structure cannot develop the full social-emotional competencies that only safe community makes possible.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Self-regulation (SE.2.a) and executive function are deeply interconnected with early literacy learning. Children who can regulate attention, manage frustration during challenging tasks, and persist through difficulty learn to read faster and more successfully (Blair &amp; Razza, 2007).</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="SE_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.1.a</span>
+            <span class="std-title">Develops and expands understanding of oneself as a unique and capable person.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Describes own characteristics, preferences, abilities, and family with specificity</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Understands that personal characteristics make each person unique and valuable</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Identifies personal strengths and names areas still developing with equanimity</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Connects personal identity to family culture, language, and community background</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Identity-affirming curriculum is not a special topic; it is the baseline of respectful early childhood practice</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Anti-Bias Education (Derman-Sparks &amp; Edwards, 2010) Framework: children develop identities and need mirror texts, images, and conversations that affirm who they are</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Avoid colorblindness; research shows children notice race, gender, and ability at very young ages; pretending otherwise leaves them without language for what they observe</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>&#39;All About Me&#39; work is most meaningful when it celebrates specificity: this family, this name&#39;s meaning, this tradition, this language</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.1.b</span>
+            <span class="std-title">Develops understanding of emotions in self and others.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Names and identifies a range of emotions beyond basic happy/sad/mad/scared</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Identifies the cause of an emotional experience (&#39;I&#39;m frustrated because...&#39;)</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Recognizes emotions in others from facial cues, body language, and verbal expression</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Uses feeling vocabulary in daily interactions across contexts</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Teach an emotion vocabulary of at least 20 words before kindergarten; research links emotion vocabulary to social competence and academic success</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Use books, puppets, role play, and real moments as equally valid teaching opportunities for emotional literacy</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>RULER approach (Brackett, 2019): Recognize, Understand, Label, Express, and Regulate: a full cycle of emotional competence</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>Zones of Regulation and similar frameworks are useful structures but should never become punitive (a child in &#39;the red zone&#39; is not misbehaving; they are struggling)</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_2_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.2.a</span>
+            <span class="std-title">Develops the capacity to manage emotions and regulate behavior.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Uses 2 or more self-regulation strategies independently when distressed</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Waits for a turn without adult prompting in most contexts</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Recovers from emotional upset within a reasonable time frame without adult escalation</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Identifies own regulation strategies and names them: &#39;When I&#39;m mad I take breaths&#39;</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Regulation must be taught and practiced when children are calm, not only in the moment of dysregulation</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Co-regulation comes before self-regulation; children borrow the calm of a regulated adult before they have developed their own capacity</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Avoid time-out and similar exclusionary practices; the research (Smith et al., 2004) shows they increase dysregulation and decrease trust</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>Sensorimotor strategies are particularly effective: deep breathing, movement, weighted items, quiet spaces; the body regulates the brain</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_3_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.3.a</span>
+            <span class="std-title">Develops empathy, perspective-taking, and understanding of others.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Consistently shows concern for others&#39; feelings without adult prompting</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Identifies how others might feel in a given situation using evidence</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Offers comfort or assistance to a peer who is distressed</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Understands that others can feel differently about the same situation</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Read aloud books with complex emotional situations and discuss characters&#39; feelings from multiple perspectives</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Perspective-taking is a cognitive skill that develops gradually through preschool; it cannot be demanded, only nurtured</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Vivian Paley&#39;s Rule (&#39;You can&#39;t say you can&#39;t play&#39;) is both an empathy curriculum and an inclusion practice</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>Research (Eisenberg et al., 2015): children with higher empathy have significantly better academic outcomes, peer relationships, and mental health across development</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_4_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.4.a</span>
+            <span class="std-title">Develops secure, trusting relationships with adults in the program.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Maintains a positive and secure relationship with the primary teacher</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Seeks adult support for academic and social challenges without hesitation</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Responds positively to teacher warmth and encouragement</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Uses the adult relationship as a stable base for exploration and risk-taking</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Teacher-child relationship quality is the single most powerful variable in the early childhood classroom (Pianta et al., 2008)</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Invest in brief, intentional 2-minute connections with every child daily through greeting, shared reading, or conversation</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Relationship repair after conflict matters more than conflict prevention; model how to repair relationships openly</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>Attachment theory (Bowlby, Ainsworth) applied to classroom: a secure teacher-child relationship creates a secure base for all learning</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_4_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.4.b</span>
+            <span class="std-title">Develops socially competent behaviors with peers.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Initiates and sustains cooperative play with peers</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Compromises and negotiates in peer play without adult mediation most of the time</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Shows preference for specific friends and maintains reciprocal friendships</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Invites others into play and responds warmly to peer invitations</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Peer relationships are curriculum; protect and facilitate them rather than over-directing them</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>Teach friendship skills explicitly: how to invite, how to join, how to compromise, how to exit gracefully</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Mixed-age groupings (when possible) support social learning: older children develop leadership and younger children receive mentorship</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>CASEL research: social competence interventions in preschool produce academic benefits 18 months later; this is not separate from academic work</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SE_4_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#CA6F1E">SE.4.c</span>
+            <span class="std-title">Develops the ability to navigate and resolve conflicts constructively.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Attempts verbal negotiation before seeking adult help</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Uses 2 or more conflict resolution strategies independently</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Accepts a peer&#39;s solution and moves forward without lingering resentment</li><li class="ind-item"><span class="ind-dot" style="background:#CA6F1E"></span>Reflects on a conflict and identifies what they might do differently next time</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#CA6F1E">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">1</span>Teach a specific conflict resolution process and use it consistently: stop, tell what happened, listen, and solve it together</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">2</span>The goal is conflict competence rather than conflict avoidance; children who are never allowed to face conflict never develop the skills to navigate it</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">3</span>Peace corners and problem-solving spaces give children a place to go when heated; the environment is part of the curriculum</li><li class="strat-item"><span class="strat-num" style="color:#CA6F1E">4</span>Research on social problem-solving (Shure, 2001): children who learn problem-solving steps in preschool have lower rates of aggression and higher rates of prosocial behavior through adolescence</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="dom_SS">
+      <div class="dom-header" style="border-left:4px solid #616A6B">
+        <span class="dom-badge" style="background:#616A6B">SS</span>
+        <div>
+          <h2 class="dom-title" style="color:#616A6B">Social Studies</h2>
+          <p class="dom-meta">Preschool Track · Ages 3 to 5 · 4 standards</p>
+        </div>
+      </div>
+      <div class="phil-box">
+        <div class="phil-label">Domain Philosophy and Research Base</div>
+        <p class="phil-text">Social Studies in early childhood lays the foundation for civic identity, historical thinking, geographic awareness, and economic reasoning. The National Council for the Social Studies (2019) explicitly advocates for social studies in early childhood as essential, not supplemental. Young children are natural social scientists: they are intensely curious about people, relationships, communities, rules, fairness, and the physical world they inhabit. Howard Gardner&#39;s interpersonal and intrapersonal intelligences are most directly exercised in social studies content. Anti-bias education principles (Derman-Sparks &amp; Edwards, 2010) are foundational to this domain: children are not color-blind, and social studies that ignores systemic inequality, cultural diversity, or the reality of children&#39;s lived experiences fails them as learners and citizens. Trauma-informed social studies recognizes that discussions of community, family, helpers, and rules may surface painful realities for some children; approach these topics with awareness, honesty, and care.</p>
+      </div>
+      <div class="callout sor-callout">
+      <div class="callout-badge" style="background:#fdf3d0;color:#7a5010;border:1px solid rgba(184,148,58,0.3)">SoR</div>
+      <div class="callout-text">Science of Reading connection: Social Studies builds the background knowledge and world knowledge that research identifies as central to reading comprehension. Knowledge of community, culture, history, and place gives readers the schemas they need to construct meaning from text about the social world.</div>
+    </div>
+      <div class="stds-list"><div class="std-card" id="SS_1_a">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#616A6B">SS.1.a</span>
+            <span class="std-title">Develops awareness of own culture and characteristics of diverse groups of people.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Describes own family, culture, traditions, and community with specificity</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Shows genuine curiosity about and respect for others&#39; cultures, languages, and family structures</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Makes connections between own and others&#39; families, identifying similarities and differences</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Uses culturally respectful language when talking about people who are different from themselves</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#616A6B">1</span>Cultural diversity is not a February or March topic; it is woven into the daily fabric of an anti-bias classroom</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">2</span>Collect books, materials, and images that authentically represent the full diversity of the world rather than offering a curated or tokenistic version</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">3</span>Derman-Sparks &amp; Edwards (2010): children need windows (books about others) and mirrors (books about themselves) in equal measure</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">4</span>Address cultural stereotyping directly when it appears in materials or conversation; silence communicates approval</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SS_1_b">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#616A6B">SS.1.b</span>
+            <span class="std-title">Develops a basic understanding of needs, wants, and economic concepts.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Identifies basic needs (food, water, shelter, love, safety) and distinguishes them from wants</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Understands that people make choices because resources are limited</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Connects community helper roles to meeting people&#39;s needs</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Understands basic concepts of exchange: trading, buying, and giving</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#616A6B">1</span>Dramatic play is the primary vehicle for economics learning: the classroom restaurant, store, and post office are economic laboratories</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">2</span>Teach needs vs. wants through authentic moments: &#39;Do we need a fourth box of crayons, or do we want it?&#39;</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">3</span>Community helper studies should go beyond traditional roles to include non-traditional occupations and community-based workers</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">4</span>Economics for early childhood (NCSS, 2019): scarcity, choice, and exchange are the three foundational concepts</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SS_1_c">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#616A6B">SS.1.c</span>
+            <span class="std-title">Develops understanding that all people have rights and responsibilities within groups.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>States and follows classroom rules without adult prompting most of the time</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Takes ownership of classroom responsibilities and jobs</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Explains why rules and responsibilities matter for the wellbeing of the group</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Participates meaningfully in creating classroom agreements</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#616A6B">1</span>Classroom rules co-created with children are more internalized than rules handed down; invest the time</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">2</span>Connect classroom community to civic community; for example: &#39;We care for our classroom the same way neighbors care for a shared park&#39;</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">3</span>Introduce the language of rights alongside responsibilities; preschoolers can understand that everyone in the group deserves respect and safety</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">4</span>NCSS (2019): civic participation begins with the preschool classroom community; treat it as the laboratory for democratic life</li></ul>
+              </div>
+            </div>
+          </div>
+        </div><div class="std-card" id="SS_1_d">
+          <div class="std-head" onclick="toggleStd(this)">
+            <span class="std-code" style="background:#616A6B">SS.1.d</span>
+            <span class="std-title">Develops ability to take care of materials, the classroom, and the shared environment.</span>
+            <span class="std-chevron">&#8964;</span>
+          </div>
+          <div class="std-body">
+            <div class="std-cols">
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Developmental Indicators</div>
+                <ul class="ind-list"><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Returns materials to proper locations independently after use</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Handles books, tools, and materials with demonstrated care</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Takes initiative to repair or report damaged materials rather than abandoning them</li><li class="ind-item"><span class="ind-dot" style="background:#616A6B"></span>Participates in caring for living things in the classroom environment</li></ul>
+              </div>
+              <div class="std-col">
+                <div class="col-label" style="color:#616A6B">Educator Strategies</div>
+                <ul class="strat-list"><li class="strat-item"><span class="strat-num" style="color:#616A6B">1</span>Montessori&#39;s foundational insight: materials that are treated with respect invite respectful use; invest in real, beautiful, complete materials</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">2</span>Teach care of materials explicitly and repeatedly; it is not a character trait but a learned skill</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">3</span>Environmental stewardship begins in the classroom; when children care for their room, the garden, and a class pet they build an orientation toward the larger world</li><li class="strat-item"><span class="strat-num" style="color:#616A6B">4</span>Connect care of the classroom to care of the community and planet; environmental education, social studies, and citizenship are inseparable at this age</li></ul>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div><div class="section" id="refs">
+  <h2 class="sec-title">References</h2>
+  <p class="body-p">The following sources informed the development of re:Bloom. Educators are encouraged to read primary sources where possible. References are organized alphabetically.</p>
+  <ul class="refs-list"><li class="ref-item">Adams, M. J. (1990). Beginning to Read: Thinking and Learning about Print. Cambridge, MA: MIT Press.</li><li class="ref-item">Ayres, A. J. (1979). Sensory Integration and the Child. Los Angeles, CA: Western Psychological Services.</li><li class="ref-item">Beck, I. L., McKeown, M. G., &amp; Kucan, L. (2013). Bringing Words to Life: Robust Vocabulary Instruction (2nd ed.). New York: Guilford Press.</li><li class="ref-item">Berninger, V. W. (2012). Past, present, and future contributions of cognitive writing research to cognitive psychology. Indian Journal of Applied Linguistics, 38, 7–37.</li><li class="ref-item">Biemiller, A., &amp; Slonim, N. (2001). Estimating root word vocabulary growth in normative and advantaged populations. Journal of Educational Psychology, 93(3), 498–520.</li><li class="ref-item">Blair, C., &amp; Razza, R. P. (2007). Relating effortful control, executive function, and false belief understanding to emerging math and literacy ability in kindergarten. Child Development, 78(2), 647–663.</li><li class="ref-item">Bowlby, J. (1969). Attachment and Loss, Vol. 1: Attachment. New York: Basic Books.</li><li class="ref-item">Brackett, M. A. (2019). Permission to Feel. New York: Celadon Books.</li><li class="ref-item">Bryant, P. E., MacLean, M., Bradley, L. L., &amp; Crossland, J. (1990). Rhyme and alliteration, phoneme detection, and learning to read. Developmental Psychology, 26(3), 429–438.</li><li class="ref-item">Center on the Developing Child at Harvard University. (2020). Executive Function and Self-Regulation. Retrieved from https://developingchild.harvard.edu</li><li class="ref-item">Center on the Developing Child at Harvard University. (2021). Serve and Return. Retrieved from https://developingchild.harvard.edu</li><li class="ref-item">Clay, M. M. (2000). Concepts About Print: What Have Children Learned About the Way We Print Language? Portsmouth, NH: Heinemann.</li><li class="ref-item">Clements, D. H. (1999). Subitizing: What is it? Why teach it? Teaching Children Mathematics, 5, 400–405.</li><li class="ref-item">Clements, D. H., &amp; Sarama, J. (2014). Learning and Teaching Early Math: The Learning Trajectories Approach (2nd ed.). New York: Routledge.</li><li class="ref-item">Craig, A. D. (2015). How Do You Feel? An Interoceptive Moment with Your Neurobiological Self. Princeton, NJ: Princeton University Press.</li><li class="ref-item">Derman-Sparks, L., &amp; Edwards, J. O. (2010). Anti-Bias Education for Young Children and Ourselves. Washington, DC: NAEYC.</li><li class="ref-item">Diamond, A. (2013). Executive functions. Annual Review of Psychology, 64, 135–168.</li><li class="ref-item">Duncan, G. J., Dowsett, C. J., Claessens, A., Magnuson, K., Huston, A. C., Klebanov, P., ... &amp; Japel, C. (2007). School readiness and later achievement. Developmental Psychology, 43(6), 1428–1446.</li><li class="ref-item">Dweck, C. S. (2006). Mindset: The New Psychology of Success. New York: Random House.</li><li class="ref-item">Education Commission of the States. (2021). The Arts Count Series. Retrieved from https://www.ecs.org</li><li class="ref-item">Eisenberg, N., Spinrad, T. L., &amp; Knafo-Noam, A. (2015). Prosocial development. In M. E. Lamb &amp; R. M. Lerner (Eds.), Handbook of Child Psychology and Developmental Science: Socioemotional Processes (Vol. 3, pp. 610–656). New York: Wiley.</li><li class="ref-item">Finkelhor, D. (2009). The prevention of childhood sexual abuse. The Future of Children, 19(2), 169–194.</li><li class="ref-item">Gardner, H. (1983). Frames of Mind: The Theory of Multiple Intelligences. New York: Basic Books.</li><li class="ref-item">Gallahue, D. L., &amp; Ozmun, J. C. (2012). Understanding Motor Development: Infants, Children, Adolescents, Adults (7th ed.). New York: McGraw-Hill.</li><li class="ref-item">Gough, P. B., &amp; Tunmer, W. E. (1986). Decoding, reading, and reading disability. Remedial and Special Education, 7(1), 6–10.</li><li class="ref-item">Hart, B., &amp; Risley, T. R. (1995). Meaningful Differences in the Everyday Experience of Young American Children. Baltimore: Brookes.</li><li class="ref-item">Hills, A. P., Dengel, D. R., &amp; Lubans, D. R. (2015). Supporting public health priorities: Recommendations for physical education and physical activity promotion in schools. Progress in Cardiovascular Diseases, 57(4), 368–374.</li><li class="ref-item">Hirsch, E. D. (2006). The Knowledge Deficit: Closing the Shocking Education Gap for American Children. New York: Houghton Mifflin.</li><li class="ref-item">Jones, D. E., Greenberg, M., &amp; Crowley, M. (2015). Early social-emotional functioning and public health. American Journal of Public Health, 105, 2283–2290.</li><li class="ref-item">Kilpatrick, D. A. (2015). Essentials of Assessing, Preventing, and Overcoming Reading Difficulties. Hoboken, NJ: Wiley.</li><li class="ref-item">Montessori, M. (1949). The Absorbent Mind. Madras, India: Theosophical Publishing House.</li><li class="ref-item">National Council for the Social Studies. (2019). Early Childhood in the Social Studies Context. Position Statement. Washington, DC: NCSS.</li><li class="ref-item">National Council of Teachers of Mathematics. (2006). Curriculum Focal Points for Prekindergarten through Grade 8 Mathematics. Reston, VA: NCTM.</li><li class="ref-item">National Reading Panel. (2000). Teaching Children to Read: An Evidence-Based Assessment. Washington, DC: NICHD.</li><li class="ref-item">National Research Council. (2012). A Framework for K-12 Science Education. Washington, DC: National Academies Press.</li><li class="ref-item">National Research Council. (2015). Transforming the Workforce for Children Birth Through Age 8. Washington, DC: National Academies Press.</li><li class="ref-item">Paley, V. G. (1992). You Can&#39;t Say You Can&#39;t Play. Cambridge, MA: Harvard University Press.</li><li class="ref-item">Piaget, J. (1952). The Origins of Intelligence in Children. New York: International Universities Press.</li><li class="ref-item">Pianta, R. C., La Paro, K. M., &amp; Hamre, B. K. (2008). Classroom Assessment Scoring System (CLASS) Pre-K. Baltimore: Brookes.</li><li class="ref-item">Rood, E., Hadani, H., &amp; Liberman, B. (2020). Reimagining School Readiness. Bay Area Discovery Museum.</li><li class="ref-item">Satter, E. (2000). Child of Mine: Feeding with Love and Good Sense. Boulder, CO: Bull Publishing.</li><li class="ref-item">Scarborough, H. S. (2001). Connecting early language and literacy to later reading (dis)abilities. In S. Neuman &amp; D. Dickinson (Eds.), Handbook for Research in Early Literacy (pp. 97–110). New York: Guilford.</li><li class="ref-item">Shonkoff, J. P., &amp; Garner, A. S. (2012). The lifelong effects of early childhood adversity and toxic stress. Pediatrics, 129(1), e232–e246.</li><li class="ref-item">Shonkoff, J. P., &amp; Phillips, D. A. (Eds.). (2000). From Neurons to Neighborhoods: The Science of Early Childhood Development. Washington, DC: National Academy Press.</li><li class="ref-item">Shure, M. B. (2001). I Can Problem Solve (ICPS): An Interpersonal Cognitive Problem-Solving Program. Champaign, IL: Research Press.</li><li class="ref-item">Smith, B. J., &amp; Fox, L. (2003). Systems of Service Delivery: A Synthesis of Evidence Relevant to Young Children at Risk of or Who Have Challenging Behavior. Tampa: University of South Florida.</li><li class="ref-item">Verdine, B. N., Golinkoff, R. M., Hirsh-Pasek, K., &amp; Newcombe, N. S. (2014). Finding the missing piece: Blocks, puzzles, and shapes fuel school readiness. Trends in Neuroscience and Education, 3(1), 7–13.</li><li class="ref-item">Vygotsky, L. S. (1978). Mind in Society: The Development of Higher Psychological Processes. Cambridge, MA: Harvard University Press.</li></ul>
+</div></main>
+</div>
+<script>
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&'spac'.includes(e.key.toLowerCase()))e.preventDefault();});
+document.addEventListener('copy',e=>e.preventDefault());
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id)?.classList.add('visible');
+  document.querySelector('[data-sec="'+id+'"]')?.classList.add('active');
+  document.getElementById('main').scrollTop=0;
+}
+function toggleStd(head){head.closest('.std-card').classList.toggle('open');}
+window.addEventListener('DOMContentLoaded',()=>show('intro'));
+</script>
+</body>
+</html>
