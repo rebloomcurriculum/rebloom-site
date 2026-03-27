@@ -1,9 +1,9 @@
 {
   "name": "rebloom-site",
   "version": "1.0.0",
-  "description": "re:Bloom Digital Curriculum",
+  "type": "module",
+  "engines": { "node": ">=18.0.0" },
   "dependencies": {
-    "stripe": "^14.0.0",
-    "node-fetch": "^2.7.0"
+    "@netlify/identity": "^1.0.0"
   }
 }

@@ -1,24 +1,9 @@
 [build]
-  publish = "/"
-  functions = "netlify/functions"
+  command = "npm install"
 
-[dev]
-  framework = "#static"
-
-[[redirects]]
-  from = "/portal-login.html"
-  to = "/portal-login.html"
-  status = 200
-
-[[redirects]]
-  from = "/portal-center.html"
-  to = "/portal-center.html"
-  status = 200
-
-[[redirects]]
-  from = "/portal-fcc.html"
-  to = "/portal-fcc.html"
-  status = 200
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/portal-center.html"
@@ -31,26 +16,3 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-
-# Enable Netlify Identity
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-
-# Clean URLs
-[[redirects]]
-  from = "/login"
-  to = "/login.html"
-  status = 200
-
-[[redirects]]
-  from = "/portal"
-  to = "/portal.html"
-  status = 200
-
-[[redirects]]
-  from = "/portal-fcc"
-  to = "/portal-fcc.html"
-  status = 200
