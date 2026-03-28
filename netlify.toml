@@ -2,6 +2,12 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[functions.claude-proxy]
+  timeout = 26
+
+[functions.stripe-webhook]
+  timeout = 26
+
 [[headers]]
   for = "/portal-center.html"
   [headers.values]

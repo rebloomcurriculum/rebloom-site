@@ -385,7 +385,7 @@ function App() {
     const needsEnrich = scriptLevel!=="none" || !!state;
     try {
       // ── Call 1: Core plan (always) ──────────────────────────────────────────
-      const res1=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:8000,messages:[{role:"user",content:buildCorePrompt({track,weekStart,weekNum,teacher,theme,interests,needs,notes,groupComposition,homeEnv})}]})});
+      const res1=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:buildCorePrompt({track,weekStart,weekNum,teacher,theme,interests,needs,notes,groupComposition,homeEnv})}]})});
       if(!res1.ok){const e=await res1.json();throw new Error(e.error?.message||`API error ${res1.status}`);}
       const data1=await res1.json();
       const raw1=data1.content.map(b=>b.text||"").join("");
@@ -395,7 +395,7 @@ function App() {
 
       // ── Call 2: Scripts + state alignment (only when needed) ────────────────
       setLoadStep(4);
-      const res2=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:6000,messages:[{role:"user",content:buildEnrichPrompt({plan:corePlan,track,theme,interests,needs,state,scriptLevel,groupComposition})}]})});
+      const res2=await fetch("/.netlify/functions/claude-proxy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:3000,messages:[{role:"user",content:buildEnrichPrompt({plan:corePlan,track,theme,interests,needs,state,scriptLevel,groupComposition})}]})});
       if(!res2.ok){const e=await res2.json();throw new Error(e.error?.message||`API error ${res2.status}`);}
       const data2=await res2.json();
       const raw2=data2.content.map(b=>b.text||"").join("");
