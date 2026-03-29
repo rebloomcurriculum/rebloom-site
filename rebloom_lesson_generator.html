@@ -250,107 +250,165 @@ Respond ONLY with valid JSON no markdown:
 
 function generateWordDoc(plan, {track,teacher,theme,state,weekStart,weekNum,scriptLevel,groupComposition}) {
   const v = VERIFIED.includes(state);
-  const blks = [{key:"morningMeeting",label:"Morning Meeting"},{key:"readAloud",label:"Read-Aloud"},{key:"phonoAwareness",label:"Phono Awareness"},{key:"centerTime",label:"Center Time"},{key:"smallGroup",label:"Small Group"},{key:"outdoor",label:"Outdoor"}];
+  const blks = [
+    {key:"morningMeeting",label:"Morning Meeting"},
+    {key:"readAloud",label:"Read-Aloud"},
+    {key:"phonoAwareness",label:"Phono Awareness"},
+    {key:"centerTime",label:"Center Time"},
+    {key:"smallGroup",label:"Small Group"},
+    {key:"outdoor",label:"Outdoor"}
+  ];
+
+  const days = plan.days || [];
+  const dateStr = (di) => {
+    if (!weekStart) return "";
+    const d = new Date(weekStart + "T00:00:00");
+    d.setDate(d.getDate() + di);
+    return d.toLocaleDateString("en-US", {month:"numeric",day:"numeric"});
+  };
+
+  // Build one HTML table per week (landscape calendar style)
+  // Header row: blank | Mon | Tue | Wed | Thu | Fri
+  // Then one row per block: block label | day[0] activity | day[1] | ...
+
+  const hdrBg = "#1a2e1a";
+  const hdrColor = "#ffffff";
+  const accentGold = "#c9a84c";
+  const lightGreen = "#f4faf4";
+  const borderColor = "#c8e0c8";
+
+  const dayHeaders = days.map((day, di) => {
+    const dt = dateStr(di);
+    return `<th style="background:${hdrBg};color:${hdrColor};padding:6px 7px;font-size:9pt;text-align:center;border:1px solid ${borderColor};min-width:150px">
+      <div style="font-size:10pt;font-weight:bold">${day.day||""}</div>
+      ${dt ? `<div style="font-size:8pt;color:${accentGold}">${dt}</div>` : ""}
+    </th>`;
+  }).join("");
+
+  const blockRows = blks.map(({key, label}) => {
+    const cells = days.map(day => {
+      const b = day[key];
+      if (!b) return `<td style="padding:6px 7px;font-size:8.5pt;vertical-align:top;border:1px solid ${borderColor}"></td>`;
+      const showScript = scriptLevel==="all" || (scriptLevel==="key" && (key==="readAloud"||key==="smallGroup"));
+      const codes = (b.codes||[]).join(" · ");
+      return `<td style="padding:6px 7px;font-size:8.5pt;vertical-align:top;border:1px solid ${borderColor}">
+        <div style="font-weight:bold;color:#1a2e1a;margin-bottom:3px">${b.title||""}</div>
+        <div style="line-height:1.45;margin-bottom:4px">${b.description||""}</div>
+        ${showScript && b.script ? `<div style="background:#fef9ec;border-left:3px solid ${accentGold};padding:4px 6px;font-style:italic;font-size:8pt;color:#7a5010;margin:3px 0"><b>SAY:</b> "${b.script}"</div>` : ""}
+        ${b.differentiation ? `<div style="background:#eef4ff;border-left:3px solid #4a6fa5;padding:4px 6px;font-size:7.5pt;margin:3px 0">
+          <b>Ahead:</b> ${b.differentiation.ahead||""}<br>
+          <b>Support:</b> ${b.differentiation.support||""}</div>` : ""}
+        ${codes ? `<div style="font-size:7.5pt;color:#2d6a2d;font-style:italic;margin-top:3px">${codes}</div>` : ""}
+      </td>`;
+    }).join("");
+    return `<tr>
+      <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};white-space:nowrap;vertical-align:top">${label}</td>
+      ${cells}
+    </tr>`;
+  }).join("");
+
+  // Materials row
+  const materialsRow = `<tr>
+    <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};vertical-align:top">Materials</td>
+    ${days.map(day => `<td style="padding:6px 7px;font-size:8pt;vertical-align:top;border:1px solid ${borderColor}">${(day.materials||[]).join(", ")}</td>`).join("")}
+  </tr>`;
+
+  // Home connection row
+  const homeRow = `<tr>
+    <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};vertical-align:top">Home Connection</td>
+    ${days.map(day => `<td style="padding:6px 7px;font-size:8pt;vertical-align:top;border:1px solid ${borderColor};color:#555">${day.homeConnection||""}</td>`).join("")}
+  </tr>`;
+
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
-body{font-family:Arial,sans-serif;font-size:11pt;color:#1a1a1a;margin:0.75in}
-.cover{background:#1a2e1a;color:#fff;padding:60px 40px;margin:-0.75in -0.75in 36px;page-break-after:always}
-.ct{font-size:26pt;font-family:Georgia,serif;margin:0 0 6px}.cs{font-size:15pt;color:#c9a84c;margin:0 0 20px;font-family:Georgia,serif}
-.cm{font-size:10pt;color:rgba(255,255,255,0.7);line-height:1.9}
-h1{font-size:14pt;font-family:Georgia,serif;color:#1a2e1a;border-bottom:2px solid #d8ead8;padding-bottom:4px;margin:22px 0 9px}
-h2{font-size:12pt;color:#2d6a2d;margin:13px 0 5px}
-p{margin:3px 0 6px;line-height:1.55}
-.mt{width:100%;border-collapse:collapse;margin-bottom:12px}
-.mt td{padding:5px 9px;font-size:10pt;border-bottom:1px solid #e8f5e8}
-.mt td:first-child{font-weight:bold;color:#555;width:130px}
-.dt{width:100%;border-collapse:collapse;margin:7px 0 13px;page-break-inside:avoid}
-.dt th{background:#1a2e1a;color:#fff;padding:6px 9px;font-size:9.5pt;text-align:left}
-.dt td{padding:7px 9px;font-size:9.5pt;vertical-align:top;border-bottom:1px solid #e8f5e8;border-right:1px solid #e8f5e8}
-.dt td:first-child{font-weight:bold;color:#2d6a2d;background:#f4faf4;width:120px}
-.codes{font-size:8.5pt;color:#2d6a2d;font-style:italic;margin-top:3px}
-.sb{background:#fef9ec;border-left:3px solid #c9a84c;padding:5px 9px;margin:5px 0;font-style:italic;font-size:9.5pt;color:#7a5010}
-.db{background:#eef4ff;border-left:3px solid #4a6fa5;padding:5px 9px;margin:5px 0;font-size:9pt}
-.dl{font-weight:bold;font-size:8pt;color:#4a6fa5;text-transform:uppercase;letter-spacing:.04em}
-.vb{background:#f4faf4;border:1px solid #d8ead8;padding:9px 13px;border-radius:4px;margin:7px 0}
-.sorb{background:#e8f0fa;border:1px solid #b0c8f0;padding:9px 13px;border-radius:4px;margin:7px 0}
-.pb{background:#fff5e0;border:1px solid #e8d49a;padding:12px 16px;border-radius:4px;margin:7px 0}
-.ps{margin-bottom:10px}.pl{font-weight:bold;color:#7a5010;font-size:10pt;margin-bottom:3px}
-.ob{background:#fef9ec;border:1px solid #f0d090;padding:11px 15px;border-radius:4px;margin:7px 0}
-.st{width:100%;border-collapse:collapse;font-size:9.5pt}
-.st th{background:#1a3a6a;color:#fff;padding:5px 8px;text-align:left}
-.st td{padding:5px 8px;border-bottom:1px solid #e8eef8}
-.st tr:nth-child(even) td{background:#f0f4fa}
-.dom{width:100%;border-collapse:collapse;font-size:9.5pt;margin:7px 0}
-.dom th{background:#2d6a2d;color:#fff;padding:5px 9px;text-align:left}
-.dom td{padding:5px 9px;border-bottom:1px solid #d8ead8}
-.dom tr:nth-child(even) td{background:#f4faf4}
-.pg{page-break-after:always}
-.note{background:#fef9ec;border:1px solid #e8d49a;padding:7px 11px;font-size:9pt;color:#7a5010;margin:7px 0}
-.ok{background:#e8f5e8;border:1px solid #c8e8c8;padding:7px 11px;font-size:9pt;color:#2d6a2d;margin:7px 0}
-.ftr{margin-top:32px;padding-top:7px;border-top:1px solid #d8ead8;font-size:8.5pt;color:#bbb;text-align:center}
-ul{margin:4px 0 8px 18px}ul li{margin-bottom:2px;line-height:1.5}
+@page { size: landscape; margin: 0.5in; }
+body { font-family: Arial, sans-serif; font-size: 9pt; margin: 0; }
+.cover { background: #1a2e1a; color: #fff; padding: 30px 40px; margin-bottom: 20px; page-break-after: always; }
+.cover-title { font-size: 22pt; font-family: Georgia, serif; margin: 0 0 4px }
+.cover-sub { font-size: 13pt; color: ${accentGold}; margin: 0 0 14px; font-family: Georgia, serif }
+.cover-meta { font-size: 9pt; color: rgba(255,255,255,0.75); line-height: 2 }
+.overview-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt }
+.overview-table td { padding: 4px 8px; border-bottom: 1px solid ${borderColor} }
+.overview-table td:first-child { font-weight: bold; color: #555; width: 130px }
+.week-header { background: #1a2e1a; color: #fff; padding: 7px 10px; font-size: 10pt; font-family: Georgia, serif; margin: 14px 0 4px; page-break-before: always }
+.week-header:first-of-type { page-break-before: avoid }
+.cal-table { width: 100%; border-collapse: collapse; table-layout: fixed }
+.overview-box { background: #eef5ee; border: 1px solid ${borderColor}; padding: 8px 12px; border-radius: 3px; margin-bottom: 10px; font-size: 8.5pt }
+.sorfocus { background: #e8f0fa; border: 1px solid #b0c8f0; padding: 7px 11px; border-radius: 3px; margin-bottom: 8px; font-size: 8.5pt }
+.vocab { background: #f4faf4; border: 1px solid ${borderColor}; padding: 7px 11px; border-radius: 3px; margin-bottom: 8px; font-size: 8.5pt }
+.footer { margin-top: 20px; padding-top: 6px; border-top: 1px solid #ddd; font-size: 7.5pt; color: #bbb; text-align: center }
 </style></head><body>
-<div class="cover"><p class="ct">re<span style="color:#c9a84c">:Bloom</span> Digital Curriculum</p>
-<p class="cs">${plan.weekTitle||theme}</p>
-<p class="cm"><b>Track:</b> ${track} — ${TRACK_AGES[track]}${groupComposition?` (${groupComposition})`:""}<br><b>Theme:</b> ${theme}<br><b>Week ${weekNum||1} of:</b> ${weekStart||"this week"}<br><b>${track==="Family Child Care"?"Provider":"Educator"}:</b> ${teacher||"—"}<br><b>State:</b> ${state||"Not selected"} ${v?"(verified)":state?"(AI-generated alignment)":""}<br><b>Scripts:</b> ${SCRIPT_OPTIONS.find(s=>s.value===scriptLevel)?.label||"None"}<br><br><em style="font-size:8.5pt;color:rgba(255,255,255,0.4)">Generated by re:Bloom AI Lesson Plan Generator — rebloomcurriculum.com</em></p></div>
-<h1>Plan Overview — Week ${weekNum||1}</h1>
-<table class="mt">
-<tr><td>Big Question</td><td><em>${plan.bigQuestion||""}</em></td></tr>
-<tr><td>Track</td><td>${track} (${TRACK_AGES[track]})</td></tr>
-<tr><td>Theme</td><td>${theme}</td></tr>
-<tr><td>Vocabulary</td><td>${(plan.vocabulary||[]).join(", ")}</td></tr>
-<tr><td>State Standards</td><td>${state||"Not selected"}${v?" — Verified":state?" — AI-generated (confirm against current ELDS)":""}</td></tr>
-</table>
-<div class="sorb"><b>Science of Reading Focus:</b> ${plan.sorFocus||""}</div>
-<div class="vb"><b>Vocabulary Words:</b> ${(plan.vocabulary||[]).join(" · ")}</div>
-<h2>Environment Setup (complete before Monday)</h2><p>${plan.environmentSetup||""}</p>
-<h2>All Nine Domains — This Week</h2>
-<table class="dom"><tr><th>Domain</th><th>Standard</th><th>This Week</th></tr>
-${Object.entries(plan.weeklyDomainSummary||{}).map(([c,n])=>`<tr><td><b>${c}</b></td><td style="font-size:9pt">${n.split(" ")[0]||""}</td><td>${n.replace(/^[A-Z]+\\.[0-9]+\\.[a-z]\\s+/,"")}</td></tr>`).join("")}
-</table>
-<div class="pg"></div>
-${(plan.days||[]).map((day,di)=>{
-  const dt = weekStart ? new Date(new Date(weekStart+"T00:00:00").setDate(new Date(weekStart+"T00:00:00").getDate()+di)).toLocaleDateString("en-US",{month:"numeric",day:"numeric"}) : "";
-  return `<h1>${day.day}${dt?" — "+dt:""}</h1>
-<table class="dt"><tr><th style="width:120px">Block</th><th style="width:160px">Activity</th><th>Description${scriptLevel!=="none"?" and Script":""}</th><th style="width:110px">Standards</th></tr>
-${blks.map(({key,label})=>{
-  const b=day[key]; if(!b) return "";
-  const showS=scriptLevel==="all"||(scriptLevel==="key"&&(key==="readAloud"||key==="smallGroup"));
-  return `<tr><td>${label}</td><td><b>${b.title||""}</b></td><td><p style="margin:0 0 4px">${b.description||""}</p>${showS&&b.script?`<div class="sb"><b>SAY:</b> "${b.script}"</div>`:""}${b.differentiation?`<div class="db"><p style="margin:0 0 2px"><span class="dl">Ahead:</span> ${b.differentiation.ahead||""}</p><p style="margin:0 0 2px"><span class="dl">Support:</span> ${b.differentiation.support||""}</p><p style="margin:0 0 2px"><span class="dl">IEP/IFSP:</span> ${b.differentiation.iep||""}</p>${b.differentiation.ageGroups?`<div style="margin-top:4px;padding-top:4px;border-top:1px solid #e0c8b0"><span class="dl" style="color:#7B3D2A">Mixed-Age:</span> Infant: ${b.differentiation.ageGroups.infant||""} | Toddler: ${b.differentiation.ageGroups.toddler||""} | Preschool: ${b.differentiation.ageGroups.preschool||""}</div>`:""}</div>`:""}</td><td class="codes">${(b.codes||[]).join("<br>")}</td></tr>`;
-}).join("")}
-</table>
-<p><b>Materials:</b> ${(day.materials||[]).join(", ")}</p>
-<p style="background:#f4faf4;padding:5px 9px;border-left:3px solid #2d6a2d;margin:5px 0"><b>Home Connection:</b> ${day.homeConnection||""}</p>
-${di<4?'<div class="pg"></div>':""}`;
-}).join("")}
-<div class="pg"></div>
-<h1>Observation and Documentation Guide</h1>
-<div class="ob"><b>What to Watch for This Week</b><ul>${(plan.observationFocus||[]).map(o=>`<li>${o}</li>`).join("")}</ul>
-<b>QRIS Documentation Note</b><p>${plan.assessmentNote||""}</p>
-<b>Domain Standards This Week</b>
-${Object.entries(plan.weeklyDomainSummary||{}).map(([c,n])=>`<p style="margin:1px 0;font-size:9.5pt"><b>${c}:</b> ${n}</p>`).join("")}
+
+<div class="cover">
+  <p class="cover-title">re<span style="color:${accentGold}">:Bloom</span> Digital Curriculum</p>
+  <p class="cover-sub">${plan.weekTitle||theme}</p>
+  <p class="cover-meta">
+    <b>Track:</b> ${track} — ${TRACK_AGES[track]}${groupComposition ? ` (${groupComposition})` : ""}<br>
+    <b>Theme:</b> ${theme}<br>
+    <b>Week ${weekNum||1} of:</b> ${weekStart||"this week"}<br>
+    <b>${track==="Family Child Care"?"Provider":"Educator"}:</b> ${teacher||"—"}<br>
+    <b>State:</b> ${state||"Not selected"} ${v?"(verified)":state?"(AI-generated alignment)":""}<br>
+    <b>Scripts:</b> ${SCRIPT_OPTIONS.find(s=>s.value===scriptLevel)?.label||"None"}
+  </p>
 </div>
-${plan.parentHandout?`<div class="pg"></div><h1>Family Handout — Week ${weekNum||1}</h1>
-<p style="font-size:8.5pt;color:#aaa;font-style:italic">Print and send home or share digitally.</p>
-<div class="pb">
-<div class="ps"><p>${plan.parentHandout.greeting||""}</p></div>
-<div class="ps"><p class="pl">What We Learned This Week</p><p>${plan.parentHandout.whatWeLearned||""}</p></div>
-<div class="ps"><p class="pl">Try This at Home</p><ul>${(plan.parentHandout.atHome||[]).map(s=>`<li>${s}</li>`).join("")}</ul></div>
-<div class="ps"><p class="pl">Vocabulary at Home</p><p>${plan.parentHandout.vocabulary||""}</p></div>
-<div><p class="pl">What to Celebrate</p><p>${plan.parentHandout.lookFor||""}</p></div>
-</div>`:""}
-${state&&(plan.stateAlignment||[]).length>0?`<div class="pg"></div><h1>State Standards Alignment — ${state}</h1>
-${!v?`<div class="note"><b>Note:</b> AI-generated alignment. Verify codes against the current published ${state} ELDS before official QRIS use.</div>`:`<div class="ok"><b>Verified:</b> ${state} alignment confirmed against current ELDS.</div>`}
-<table class="st"><tr><th>Re:Bloom Code</th><th>${state} Code</th><th>State Standard</th></tr>
-${(plan.stateAlignment||[]).map(r=>`<tr><td><b style="color:#2d6a2d">${r.reBloomCode||""}</b></td><td style="color:#1a3a6a;font-weight:bold">${r.stateCode||""}</td><td>${r.stateStandard||""}</td></tr>`).join("")}
-</table>`:""}
-<div class="ftr">re:Bloom Digital Curriculum  |  rebloomcurriculum.com  |  Generated ${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
+
+<h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 6px;font-size:11pt">Week ${weekNum||1} Overview — ${theme}</h3>
+<table class="overview-table">
+  <tr><td>Big Question</td><td><em>${plan.bigQuestion||""}</em></td></tr>
+  <tr><td>Vocabulary</td><td>${(plan.vocabulary||[]).join(" · ")}</td></tr>
+  <tr><td>Environment Setup</td><td>${plan.environmentSetup||""}</td></tr>
+</table>
+<div class="sorfocus"><b>Science of Reading Focus:</b> ${plan.sorFocus||""}</div>
+<div class="vocab"><b>Domain Standards This Week:</b><br>
+${Object.entries(plan.weeklyDomainSummary||{}).map(([c,n])=>`<span style="color:#2d6a2d;font-weight:bold">${c}:</span> ${n}`).join(" &nbsp;|&nbsp; ")}
+</div>
+
+<div class="week-header" style="page-break-before:avoid">Week ${weekNum||1} — Daily Plan Calendar</div>
+<table class="cal-table">
+  <thead>
+    <tr>
+      <th style="background:#1a2e1a;color:#fff;padding:6px 7px;font-size:9pt;border:1px solid ${borderColor};width:90px">Block / Time</th>
+      ${dayHeaders}
+    </tr>
+  </thead>
+  <tbody>
+    ${blockRows}
+    ${materialsRow}
+    ${homeRow}
+  </tbody>
+</table>
+
+${plan.parentHandout ? `<div style="page-break-before:always">
+  <h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 8px">Family Handout — Week ${weekNum||1}</h3>
+  <p style="font-size:7.5pt;color:#aaa;font-style:italic">Print and send home or share digitally.</p>
+  <div style="background:#fff5e0;border:1px solid #e8d49a;padding:12px 16px;border-radius:4px;font-size:8.5pt">
+    <p>${plan.parentHandout.greeting||""}</p>
+    <p><b>What We Learned This Week</b><br>${plan.parentHandout.whatWeLearned||""}</p>
+    <p><b>Try This at Home</b></p><ul>${(plan.parentHandout.atHome||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
+    <p><b>Vocabulary at Home:</b> ${plan.parentHandout.vocabulary||""}</p>
+    <p><b>What to Celebrate:</b> ${plan.parentHandout.lookFor||""}</p>
+  </div>
+</div>` : ""}
+
+${state && (plan.stateAlignment||[]).length > 0 ? `<div style="page-break-before:always">
+  <h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 8px">State Standards Alignment — ${state}</h3>
+  ${!v ? `<div style="background:#fef9ec;border:1px solid #e8d49a;padding:7px 11px;font-size:8pt;color:#7a5010;margin-bottom:8px"><b>Note:</b> AI-generated alignment. Verify against current ${state} ELDS before QRIS use.</div>` : `<div style="background:#e8f5e8;border:1px solid #c8e8c8;padding:7px 11px;font-size:8pt;color:#2d6a2d;margin-bottom:8px"><b>Verified:</b> ${state} alignment confirmed.</div>`}
+  <table style="width:100%;border-collapse:collapse;font-size:8.5pt">
+    <tr style="background:#1a3a6a;color:#fff"><th style="padding:5px 8px;text-align:left">re:Bloom Code</th><th style="padding:5px 8px;text-align:left">${state} Code</th><th style="padding:5px 8px;text-align:left">Standard</th></tr>
+    ${(plan.stateAlignment||[]).map((r,i)=>`<tr style="${i%2===1?"background:#f0f4fa":""}"><td style="padding:5px 8px;font-weight:bold;color:#2d6a2d">${r.reBloomCode||""}</td><td style="padding:5px 8px;font-weight:bold;color:#1a3a6a">${r.stateCode||""}</td><td style="padding:5px 8px">${r.stateStandard||""}</td></tr>`).join("")}
+  </table>
+</div>` : ""}
+
+<div class="footer">re:Bloom Digital Curriculum &nbsp;|&nbsp; rebloomcurriculum.com &nbsp;|&nbsp; Generated ${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
 </body></html>`;
-  const blob = new Blob([html],{type:"application/vnd.ms-word;charset=utf-8"});
+
+  const blob = new Blob([html], {type: "application/vnd.ms-word;charset=utf-8"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href=url; a.download=`reBloom_${track}_Wk${weekNum||1}_${theme.replace(/\s+/g,"_").substring(0,28)}.doc`; a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),5000);
+  a.href = url;
+  a.download = `reBloom_${track}_Wk${weekNum||1}_${theme.replace(/\s+/g,"_").substring(0,28)}.doc`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
 }
 
 const STEPS=["Reading your theme and child interests…","Weaving all nine developmental domains…","Building activities for all five days…","Adding differentiation and SoR focus…",s=>s?`Adding ${s} state standards…`:"Finalizing your plan…","Almost done…"];
