@@ -1686,7 +1686,7 @@ async function generateAISummary() {
   textarea.value = '';
 
   try {
-    var res = await fetch('/.netlify/functions/claude-proxy', {
+    var res = await fetch('https://rebloom-claude-proxy.brehker.workers.dev', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
