@@ -250,159 +250,199 @@ Respond ONLY with valid JSON no markdown:
 
 function generateWordDoc(plan, {track,teacher,theme,state,weekStart,weekNum,scriptLevel,groupComposition}) {
   const v = VERIFIED.includes(state);
-  const blks = [
-    {key:"morningMeeting",label:"Morning Meeting"},
-    {key:"readAloud",label:"Read-Aloud"},
-    {key:"phonoAwareness",label:"Phono Awareness"},
-    {key:"centerTime",label:"Center Time"},
-    {key:"smallGroup",label:"Small Group"},
-    {key:"outdoor",label:"Outdoor"}
+  const days = plan.days || [];
+
+  // Row definitions matching sample plan
+  const blocks = [
+    {key:"morningMeeting", label:"Arrival &\nMorning Meeting", time:"7:30–8:30"},
+    {key:"readAloud",       label:"Intentional\nRead-Aloud",      time:"8:30–9:00"},
+    {key:"phonoAwareness", label:"Phonological\nAwareness",       time:"9:00–9:15"},
+    {key:"centerTime",     label:"Center\nTime",                  time:"9:15–10:15"},
+    {key:"smallGroup",     label:"Small\nGroup",                  time:"10:15–10:45"},
+    {key:"outdoor",        label:"Outdoor /\nLarge Motor",        time:"10:45–11:15"},
   ];
 
-  const days = plan.days || [];
   const dateStr = (di) => {
     if (!weekStart) return "";
     const d = new Date(weekStart + "T00:00:00");
     d.setDate(d.getDate() + di);
-    return d.toLocaleDateString("en-US", {month:"numeric",day:"numeric"});
+    return d.toLocaleDateString("en-US", {month:"numeric", day:"numeric"});
   };
 
-  // Build one HTML table per week (landscape calendar style)
-  // Header row: blank | Mon | Tue | Wed | Thu | Fri
-  // Then one row per block: block label | day[0] activity | day[1] | ...
+  const hdr    = "#1a2e1a";
+  const hdrTxt = "#ffffff";
+  const gold   = "#c9a84c";
+  const ltGrn  = "#f0f7f0";
+  const border = "1px solid #c0d8c0";
+  const cellPad = "5px 7px";
+  const fs = "8.5pt";
 
-  const hdrBg = "#1a2e1a";
-  const hdrColor = "#ffffff";
-  const accentGold = "#c9a84c";
-  const lightGreen = "#f4faf4";
-  const borderColor = "#c8e0c8";
-
-  const dayHeaders = days.map((day, di) => {
-    const dt = dateStr(di);
-    return `<th style="background:${hdrBg};color:${hdrColor};padding:6px 7px;font-size:9pt;text-align:center;border:1px solid ${borderColor};min-width:150px">
-      <div style="font-size:10pt;font-weight:bold">${day.day||""}</div>
-      ${dt ? `<div style="font-size:8pt;color:${accentGold}">${dt}</div>` : ""}
-    </th>`;
-  }).join("");
-
-  const blockRows = blks.map(({key, label}) => {
-    const cells = days.map(day => {
-      const b = day[key];
-      if (!b) return `<td style="padding:6px 7px;font-size:8.5pt;vertical-align:top;border:1px solid ${borderColor}"></td>`;
-      const showScript = scriptLevel==="all" || (scriptLevel==="key" && (key==="readAloud"||key==="smallGroup"));
-      const codes = (b.codes||[]).join(" · ");
-      return `<td style="padding:6px 7px;font-size:8.5pt;vertical-align:top;border:1px solid ${borderColor}">
-        <div style="font-weight:bold;color:#1a2e1a;margin-bottom:3px">${b.title||""}</div>
-        <div style="line-height:1.45;margin-bottom:4px">${b.description||""}</div>
-        ${showScript && b.script ? `<div style="background:#fef9ec;border-left:3px solid ${accentGold};padding:4px 6px;font-style:italic;font-size:8pt;color:#7a5010;margin:3px 0"><b>SAY:</b> "${b.script}"</div>` : ""}
-        ${b.differentiation ? `<div style="background:#eef4ff;border-left:3px solid #4a6fa5;padding:4px 6px;font-size:7.5pt;margin:3px 0">
-          <b>Ahead:</b> ${b.differentiation.ahead||""}<br>
-          <b>Support:</b> ${b.differentiation.support||""}</div>` : ""}
-        ${codes ? `<div style="font-size:7.5pt;color:#2d6a2d;font-style:italic;margin-top:3px">${codes}</div>` : ""}
-      </td>`;
-    }).join("");
-    return `<tr>
-      <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};white-space:nowrap;vertical-align:top">${label}</td>
-      ${cells}
-    </tr>`;
-  }).join("");
-
-  // Materials row
-  const materialsRow = `<tr>
-    <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};vertical-align:top">Materials</td>
-    ${days.map(day => `<td style="padding:6px 7px;font-size:8pt;vertical-align:top;border:1px solid ${borderColor}">${(day.materials||[]).join(", ")}</td>`).join("")}
-  </tr>`;
-
-  // Home connection row
-  const homeRow = `<tr>
-    <td style="background:${lightGreen};padding:6px 7px;font-weight:bold;font-size:8.5pt;color:#2d6a2d;border:1px solid ${borderColor};vertical-align:top">Home Connection</td>
-    ${days.map(day => `<td style="padding:6px 7px;font-size:8pt;vertical-align:top;border:1px solid ${borderColor};color:#555">${day.homeConnection||""}</td>`).join("")}
-  </tr>`;
-
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8">
-<style>
-@page { size: landscape; margin: 0.5in; }
-body { font-family: Arial, sans-serif; font-size: 9pt; margin: 0; }
-.cover { background: #1a2e1a; color: #fff; padding: 30px 40px; margin-bottom: 20px; page-break-after: always; }
-.cover-title { font-size: 22pt; font-family: Georgia, serif; margin: 0 0 4px }
-.cover-sub { font-size: 13pt; color: ${accentGold}; margin: 0 0 14px; font-family: Georgia, serif }
-.cover-meta { font-size: 9pt; color: rgba(255,255,255,0.75); line-height: 2 }
-.overview-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8.5pt }
-.overview-table td { padding: 4px 8px; border-bottom: 1px solid ${borderColor} }
-.overview-table td:first-child { font-weight: bold; color: #555; width: 130px }
-.week-header { background: #1a2e1a; color: #fff; padding: 7px 10px; font-size: 10pt; font-family: Georgia, serif; margin: 14px 0 4px; page-break-before: always }
-.week-header:first-of-type { page-break-before: avoid }
-.cal-table { width: 100%; border-collapse: collapse; table-layout: fixed }
-.overview-box { background: #eef5ee; border: 1px solid ${borderColor}; padding: 8px 12px; border-radius: 3px; margin-bottom: 10px; font-size: 8.5pt }
-.sorfocus { background: #e8f0fa; border: 1px solid #b0c8f0; padding: 7px 11px; border-radius: 3px; margin-bottom: 8px; font-size: 8.5pt }
-.vocab { background: #f4faf4; border: 1px solid ${borderColor}; padding: 7px 11px; border-radius: 3px; margin-bottom: 8px; font-size: 8.5pt }
-.footer { margin-top: 20px; padding-top: 6px; border-top: 1px solid #ddd; font-size: 7.5pt; color: #bbb; text-align: center }
-</style></head><body>
-
-<div class="cover">
-  <p class="cover-title">re<span style="color:${accentGold}">:Bloom</span> Digital Curriculum</p>
-  <p class="cover-sub">${plan.weekTitle||theme}</p>
-  <p class="cover-meta">
-    <b>Track:</b> ${track} — ${TRACK_AGES[track]}${groupComposition ? ` (${groupComposition})` : ""}<br>
-    <b>Theme:</b> ${theme}<br>
-    <b>Week ${weekNum||1} of:</b> ${weekStart||"this week"}<br>
-    <b>${track==="Family Child Care"?"Provider":"Educator"}:</b> ${teacher||"—"}<br>
-    <b>State:</b> ${state||"Not selected"} ${v?"(verified)":state?"(AI-generated alignment)":""}<br>
-    <b>Scripts:</b> ${SCRIPT_OPTIONS.find(s=>s.value===scriptLevel)?.label||"None"}
-  </p>
-</div>
-
-<h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 6px;font-size:11pt">Week ${weekNum||1} Overview — ${theme}</h3>
-<table class="overview-table">
-  <tr><td>Big Question</td><td><em>${plan.bigQuestion||""}</em></td></tr>
-  <tr><td>Vocabulary</td><td>${(plan.vocabulary||[]).join(" · ")}</td></tr>
-  <tr><td>Environment Setup</td><td>${plan.environmentSetup||""}</td></tr>
-</table>
-<div class="sorfocus"><b>Science of Reading Focus:</b> ${plan.sorFocus||""}</div>
-<div class="vocab"><b>Domain Standards This Week:</b><br>
-${Object.entries(plan.weeklyDomainSummary||{}).map(([c,n])=>`<span style="color:#2d6a2d;font-weight:bold">${c}:</span> ${n}`).join(" &nbsp;|&nbsp; ")}
-</div>
-
-<div class="week-header" style="page-break-before:avoid">Week ${weekNum||1} — Daily Plan Calendar</div>
-<table class="cal-table">
-  <thead>
-    <tr>
-      <th style="background:#1a2e1a;color:#fff;padding:6px 7px;font-size:9pt;border:1px solid ${borderColor};width:90px">Block / Time</th>
-      ${dayHeaders}
-    </tr>
-  </thead>
-  <tbody>
-    ${blockRows}
-    ${materialsRow}
-    ${homeRow}
-  </tbody>
-</table>
-
-${plan.parentHandout ? `<div style="page-break-before:always">
-  <h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 8px">Family Handout — Week ${weekNum||1}</h3>
-  <p style="font-size:7.5pt;color:#aaa;font-style:italic">Print and send home or share digitally.</p>
-  <div style="background:#fff5e0;border:1px solid #e8d49a;padding:12px 16px;border-radius:4px;font-size:8.5pt">
-    <p>${plan.parentHandout.greeting||""}</p>
-    <p><b>What We Learned This Week</b><br>${plan.parentHandout.whatWeLearned||""}</p>
-    <p><b>Try This at Home</b></p><ul>${(plan.parentHandout.atHome||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
-    <p><b>Vocabulary at Home:</b> ${plan.parentHandout.vocabulary||""}</p>
-    <p><b>What to Celebrate:</b> ${plan.parentHandout.lookFor||""}</p>
-  </div>
-</div>` : ""}
-
-${state && (plan.stateAlignment||[]).length > 0 ? `<div style="page-break-before:always">
-  <h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 8px">State Standards Alignment — ${state}</h3>
-  ${!v ? `<div style="background:#fef9ec;border:1px solid #e8d49a;padding:7px 11px;font-size:8pt;color:#7a5010;margin-bottom:8px"><b>Note:</b> AI-generated alignment. Verify against current ${state} ELDS before QRIS use.</div>` : `<div style="background:#e8f5e8;border:1px solid #c8e8c8;padding:7px 11px;font-size:8pt;color:#2d6a2d;margin-bottom:8px"><b>Verified:</b> ${state} alignment confirmed.</div>`}
-  <table style="width:100%;border-collapse:collapse;font-size:8.5pt">
-    <tr style="background:#1a3a6a;color:#fff"><th style="padding:5px 8px;text-align:left">re:Bloom Code</th><th style="padding:5px 8px;text-align:left">${state} Code</th><th style="padding:5px 8px;text-align:left">Standard</th></tr>
-    ${(plan.stateAlignment||[]).map((r,i)=>`<tr style="${i%2===1?"background:#f0f4fa":""}"><td style="padding:5px 8px;font-weight:bold;color:#2d6a2d">${r.reBloomCode||""}</td><td style="padding:5px 8px;font-weight:bold;color:#1a3a6a">${r.stateCode||""}</td><td style="padding:5px 8px">${r.stateStandard||""}</td></tr>`).join("")}
+  // Cover page
+  const coverHtml = `
+<div style="background:#1a2e1a;color:#fff;padding:50px 60px;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center">
+  <div style="font-size:30pt;font-family:Georgia,serif;margin-bottom:8px">re<span style="color:${gold}">:Bloom</span> Digital Curriculum</div>
+  <div style="font-size:18pt;color:${gold};font-family:Georgia,serif;margin-bottom:30px">${plan.weekTitle||theme}</div>
+  <table style="border-collapse:collapse;font-size:11pt;color:rgba(255,255,255,0.85)">
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5);width:140px">Track</td><td>${track} — ${TRACK_AGES[track]}${groupComposition?` (${groupComposition})`:""}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)">Theme</td><td>${theme}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)">Week</td><td>Week ${weekNum||1} of ${weekStart||"this week"}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)">${track==="Family Child Care"?"Provider":"Educator"}</td><td>${teacher||"—"}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)">State</td><td>${state||"Not selected"}${v?" (verified)":state?" (AI-generated alignment)":""}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)">Scripts</td><td>${SCRIPT_OPTIONS.find(s=>s.value===scriptLevel)?.label||"None"}</td></tr>
   </table>
-</div>` : ""}
+  <div style="margin-top:40px;font-size:8pt;color:rgba(255,255,255,0.3)">Generated by re:Bloom AI Lesson Plan Generator — rebloomcurriculum.com</div>
+</div>`;
 
-<div class="footer">re:Bloom Digital Curriculum &nbsp;|&nbsp; rebloomcurriculum.com &nbsp;|&nbsp; Generated ${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
+  // Build one calendar table per week
+  // The AI returns a single week so we have one table
+  const buildWeekTable = (weekDays, wkNum) => {
+    const dt = (di) => { const s = dateStr(di); return s ? `<br><span style="font-size:7.5pt;color:${gold}">${s}</span>` : ""; };
+
+    // Header row 1: logo/info spanning all, then day names
+    const infoCell = `<td rowspan="2" style="background:${hdr};color:${hdrTxt};padding:${cellPad};vertical-align:top;border:${border};width:95px">
+      <div style="font-family:Georgia,serif;font-size:9pt;font-weight:bold;color:${gold}">re:Bloom</div>
+      <div style="font-size:7.5pt;margin-top:4px">${track}</div>
+      <div style="font-size:8pt;font-weight:bold;margin-top:8px">${theme}</div>
+      <div style="font-size:7.5pt;margin-top:4px">Week ${wkNum||weekNum||1}</div>
+      <div style="font-size:7.5pt;color:rgba(255,255,255,0.6);margin-top:2px">Week of: ______</div>
+    </td>`;
+
+    const overviewRow = `<tr>
+      ${infoCell}
+      <td colspan="5" style="background:${ltGrn};padding:${cellPad};border:${border};font-size:7.5pt">
+        <b style="color:#1a2e1a">Big Question:</b> ${plan.bigQuestion||""} &nbsp;&nbsp;
+        <b style="color:#1a2e1a">Vocabulary:</b> ${(plan.vocabulary||[]).join(", ")} &nbsp;&nbsp;
+        <b style="color:#1a2e1a">SoR Focus:</b> ${plan.sorFocus||""} &nbsp;&nbsp;
+        <b style="color:#1a2e1a">Domain Standards:</b> ${Object.keys(plan.weeklyDomainSummary||{}).join(" · ")}
+      </td>
+    </tr>`;
+
+    const dayHeaderRow = `<tr>
+      ${weekDays.map((day,di) => `<td style="background:${hdr};color:${hdrTxt};padding:${cellPad};font-size:9pt;font-weight:bold;text-align:center;border:${border};min-width:155px">
+        ${day.day||""}${dt(di)}
+      </td>`).join("")}
+    </tr>`;
+
+    const blockRows = blocks.map(({key, label, time}) => {
+      const labelCell = `<td style="background:${ltGrn};padding:${cellPad};font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:${border};vertical-align:top;white-space:pre-line">
+        ${label}<br><span style="font-weight:normal;color:#666;font-size:7pt">${time}</span>
+      </td>`;
+
+      const showScript = scriptLevel==="all" || (scriptLevel==="key" && (key==="readAloud"||key==="smallGroup"));
+
+      const dayCells = weekDays.map(day => {
+        const b = day[key];
+        if (!b) return `<td style="padding:${cellPad};border:${border};vertical-align:top;font-size:${fs}"></td>`;
+        const codes = (b.codes||[]).join(" · ");
+        return `<td style="padding:${cellPad};border:${border};vertical-align:top;font-size:${fs}">
+          <b>${b.title||""}</b><br>
+          <span style="line-height:1.4">${b.description||""}</span>
+          ${showScript && b.script ? `<div style="background:#fef9ec;border-left:2px solid ${gold};padding:3px 5px;margin:3px 0;font-style:italic;font-size:7.5pt;color:#7a5010"><b>SAY:</b> "${b.script}"</div>` : ""}
+          ${b.differentiation ? `<div style="font-size:7pt;color:#4a6fa5;margin-top:2px"><b>Ahead:</b> ${b.differentiation.ahead||""} &nbsp;<b>Support:</b> ${b.differentiation.support||""}</div>` : ""}
+          ${codes ? `<div style="font-size:7pt;color:#2d6a2d;font-style:italic;margin-top:2px">${codes}</div>` : ""}
+        </td>`;
+      }).join("");
+
+      return `<tr>${labelCell}${dayCells}</tr>`;
+    }).join("");
+
+    // Materials row
+    const materialsRow = `<tr>
+      <td style="background:${ltGrn};padding:${cellPad};font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:${border};vertical-align:top">Materials</td>
+      ${weekDays.map(day => `<td style="padding:${cellPad};border:${border};vertical-align:top;font-size:7.5pt">${(day.materials||[]).join(", ")}</td>`).join("")}
+    </tr>`;
+
+    // Family connection row (bottom of calendar like sample)
+    const familyRow = `<tr>
+      <td style="background:${ltGrn};padding:${cellPad};font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:${border};vertical-align:top">Family Connection</td>
+      <td colspan="5" style="padding:${cellPad};border:${border};vertical-align:top;font-size:7.5pt">
+        ${weekDays.length > 0 && weekDays[0].homeConnection ? weekDays[0].homeConnection : plan.parentHandout ? (plan.parentHandout.atHome||[]).join(" | ") : ""}
+      </td>
+    </tr>`;
+
+    return `<table style="width:100%;border-collapse:collapse;table-layout:fixed;font-family:Arial,sans-serif">
+      ${overviewRow}
+      ${dayHeaderRow}
+      ${blockRows}
+      ${materialsRow}
+      ${familyRow}
+    </table>`;
+  };
+
+  // Parent handout — one clean page
+  const parentHandoutHtml = plan.parentHandout ? `
+<div style="font-family:Arial,sans-serif;padding:30px 40px;max-width:720px;margin:0 auto">
+  <div style="background:#1a2e1a;color:#fff;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <span style="font-family:Georgia,serif;font-size:14pt">re<span style="color:${gold}">:Bloom</span></span>
+      <span style="font-size:9pt;color:rgba(255,255,255,0.7);margin-left:12px">Family Handout — Week ${weekNum||1}</span>
+    </div>
+    <div style="font-size:8.5pt;color:rgba(255,255,255,0.6)">${theme}</div>
+  </div>
+  <p style="font-size:10pt;line-height:1.6;margin-bottom:14px">${plan.parentHandout.greeting||""}</p>
+  <table style="width:100%;border-collapse:collapse">
+    <tr>
+      <td style="vertical-align:top;padding-right:20px;width:50%">
+        <div style="background:#f4faf4;border:1px solid #c8e8c8;border-radius:4px;padding:12px 14px;margin-bottom:12px">
+          <div style="font-weight:bold;color:#1a2e1a;font-size:9.5pt;margin-bottom:6px">What We Learned This Week</div>
+          <p style="font-size:9pt;line-height:1.55;margin:0">${plan.parentHandout.whatWeLearned||""}</p>
+        </div>
+        <div style="background:#fef9ec;border:1px solid #e8d49a;border-radius:4px;padding:12px 14px">
+          <div style="font-weight:bold;color:#7a5010;font-size:9.5pt;margin-bottom:6px">Vocabulary at Home</div>
+          <p style="font-size:9pt;line-height:1.55;margin:0">${plan.parentHandout.vocabulary||""}</p>
+        </div>
+      </td>
+      <td style="vertical-align:top;width:50%">
+        <div style="background:#e8f0fa;border:1px solid #b0c8f0;border-radius:4px;padding:12px 14px;margin-bottom:12px">
+          <div style="font-weight:bold;color:#1a3a6a;font-size:9.5pt;margin-bottom:6px">Try This at Home</div>
+          <ul style="margin:0;padding-left:16px;font-size:9pt;line-height:1.6">${(plan.parentHandout.atHome||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
+        </div>
+        <div style="background:#f4faf4;border:1px solid #c8e8c8;border-radius:4px;padding:12px 14px">
+          <div style="font-weight:bold;color:#1a2e1a;font-size:9.5pt;margin-bottom:6px">What to Celebrate</div>
+          <p style="font-size:9pt;line-height:1.55;margin:0">${plan.parentHandout.lookFor||""}</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div style="margin-top:20px;padding-top:8px;border-top:1px solid #d8ead8;font-size:7.5pt;color:#aaa;text-align:center">
+    re:Bloom Digital Curriculum &nbsp;|&nbsp; rebloomcurriculum.com &nbsp;|&nbsp; Week ${weekNum||1}: ${theme}
+  </div>
+</div>` : "";
+
+  // State alignment page
+  const alignmentHtml = state && (plan.stateAlignment||[]).length > 0 ? `
+<div style="font-family:Arial,sans-serif;padding:30px 40px">
+  <h3 style="font-family:Georgia,serif;color:#1a2e1a;margin:0 0 10px">State Standards Alignment — ${state}</h3>
+  ${!v ? `<div style="background:#fef9ec;border:1px solid #e8d49a;padding:7px 11px;font-size:8.5pt;color:#7a5010;margin-bottom:10px;border-radius:3px"><b>Note:</b> AI-generated alignment. Verify against current ${state} ELDS before official QRIS use.</div>` : `<div style="background:#e8f5e8;border:1px solid #c8e8c8;padding:7px 11px;font-size:8.5pt;color:#2d6a2d;margin-bottom:10px;border-radius:3px"><b>Verified:</b> ${state} alignment confirmed against current ELDS.</div>`}
+  <table style="width:100%;border-collapse:collapse;font-size:8.5pt">
+    <tr style="background:#1a3a6a;color:#fff">
+      <th style="padding:5px 8px;text-align:left;width:120px">re:Bloom Code</th>
+      <th style="padding:5px 8px;text-align:left;width:120px">${state} Code</th>
+      <th style="padding:5px 8px;text-align:left">Standard</th>
+    </tr>
+    ${(plan.stateAlignment||[]).map((r,i)=>`<tr style="${i%2===1?"background:#f0f4fa":""}">
+      <td style="padding:5px 8px;font-weight:bold;color:#2d6a2d">${r.reBloomCode||""}</td>
+      <td style="padding:5px 8px;font-weight:bold;color:#1a3a6a">${r.stateCode||""}</td>
+      <td style="padding:5px 8px">${r.stateStandard||""}</td>
+    </tr>`).join("")}
+  </table>
+</div>` : "";
+
+  const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@page { size: 11in 8.5in landscape; margin: 0.375in; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+.page { page-break-after: always; }
+.page:last-child { page-break-after: avoid; }
+</style>
+</head><body>
+<div class="page">${coverHtml}</div>
+<div class="page" style="padding:0">${buildWeekTable(days, weekNum)}</div>
+${parentHandoutHtml ? `<div class="page">${parentHandoutHtml}</div>` : ""}
+${alignmentHtml ? `<div class="page">${alignmentHtml}</div>` : ""}
 </body></html>`;
 
-  const blob = new Blob([html], {type: "application/vnd.ms-word;charset=utf-8"});
+  const blob = new Blob([fullHtml], {type: "application/vnd.ms-word;charset=utf-8"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
