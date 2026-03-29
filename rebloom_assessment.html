@@ -1389,7 +1389,7 @@ function buildNarrative(domain, track, counts, total, rated, dominant) {
 
 // ── Get domain rating analysis ─────────────────────────────────────────
 function getDomainAnalysis(domainCode) {
-  var domain = ACTIVE_ACTIVE_DOMAINS.find(d=>d.code===domainCode);
+  var domain = window.ACTIVE_DOMAINS.find(d=>d.code===domainCode);
   if (!domain) return null;
   var total = 0, rated = 0;
   var counts = {nye:0, em:0, dev:0, con:0};
@@ -1742,9 +1742,15 @@ function clearAll() {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────
-// Set today's date as default
-document.getElementById('assess-date').value = new Date().toISOString().split('T')[0];
-renderAll();
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('assess-date').value = new Date().toISOString().split('T')[0];
+  try {
+    renderAll();
+    console.log('Assessment tool initialized successfully');
+  } catch(e) {
+    console.error('renderAll error:', e.message, e.stack);
+  }
+});
 </script>
 </body>
 </html>
