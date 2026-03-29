@@ -428,7 +428,22 @@ function generateWordDoc(plan, {track,teacher,theme,state,weekStart,weekNum,scri
   </table>
 </div>` : "";
 
-  const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
+  const pageBreak = '<p style="mso-break-type:section-break;page-break-after:always;margin:0;font-size:1pt">&nbsp;</p>';
+const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@page { size: 11in 8.5in landscape; margin: 0.375in; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+</style>
+</head><body>
+${coverHtml}
+${pageBreak}
+${buildWeekTable(days, weekNum)}
+${parentHandoutHtml ? pageBreak + parentHandoutHtml : ""}
+${alignmentHtml ? pageBreak + alignmentHtml : ""}
+</body></html>`;
+
+  // Download lesson plan (without parent handout)
+  const lessonHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
 @page { size: 11in 8.5in landscape; margin: 0.375in; }
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
@@ -438,17 +453,37 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
 </head><body>
 <div class="page">${coverHtml}</div>
 <div class="page" style="padding:0">${buildWeekTable(days, weekNum)}</div>
-${parentHandoutHtml ? `<div class="page" style="page-break-before:always;mso-page-break-before:always">${parentHandoutHtml}</div>` : ""}
 ${alignmentHtml ? `<div class="page" style="page-break-before:always;mso-page-break-before:always">${alignmentHtml}</div>` : ""}
 </body></html>`;
 
-  const blob = new Blob([fullHtml], {type: "application/vnd.ms-word;charset=utf-8"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `reBloom_${track}_Wk${weekNum||1}_${theme.replace(/\s+/g,"_").substring(0,28)}.doc`;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  const blob1 = new Blob([lessonHtml], {type: "application/vnd.ms-word;charset=utf-8"});
+  const url1 = URL.createObjectURL(blob1);
+  const a1 = document.createElement("a");
+  a1.href = url1;
+  a1.download = `reBloom_${track}_Wk${weekNum||1}_${theme.replace(/\s+/g,"_").substring(0,28)}_LessonPlan.doc`;
+  a1.click();
+
+  // Download family handout separately (only if it exists)
+  if (plan.parentHandout) {
+    setTimeout(() => {
+      const handoutFullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@page { size: letter; margin: 0.75in; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+</style>
+</head><body>${parentHandoutHtml}</body></html>`;
+
+      const blob2 = new Blob([handoutFullHtml], {type: "application/vnd.ms-word;charset=utf-8"});
+      const url2 = URL.createObjectURL(blob2);
+      const a2 = document.createElement("a");
+      a2.href = url2;
+      a2.download = `reBloom_${track}_Wk${weekNum||1}_${theme.replace(/\s+/g,"_").substring(0,28)}_FamilyHandout.doc`;
+      a2.click();
+      setTimeout(() => { URL.revokeObjectURL(url1); URL.revokeObjectURL(url2); }, 5000);
+    }, 800); // slight delay so both downloads don't conflict
+  } else {
+    setTimeout(() => URL.revokeObjectURL(url1), 5000);
+  }
 }
 
 const STEPS=["Reading your theme and child interests…","Weaving all nine developmental domains…","Building activities for all five days…","Adding differentiation and SoR focus…",s=>s?`Adding ${s} state standards…`:"Finalizing your plan…","Almost done…"];
