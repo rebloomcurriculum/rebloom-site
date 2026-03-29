@@ -432,14 +432,14 @@ function generateWordDoc(plan, {track,teacher,theme,state,weekStart,weekNum,scri
 <style>
 @page { size: 11in 8.5in landscape; margin: 0.375in; }
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-.page { page-break-after: always; }
-.page:last-child { page-break-after: avoid; }
+.page { page-break-after: always; mso-page-break-after: always; }
+.page:last-child { page-break-after: avoid; mso-page-break-after: avoid; }
 </style>
 </head><body>
 <div class="page">${coverHtml}</div>
 <div class="page" style="padding:0">${buildWeekTable(days, weekNum)}</div>
-${parentHandoutHtml ? `<div class="page">${parentHandoutHtml}</div>` : ""}
-${alignmentHtml ? `<div class="page">${alignmentHtml}</div>` : ""}
+${parentHandoutHtml ? `<div class="page" style="page-break-before:always;mso-page-break-before:always">${parentHandoutHtml}</div>` : ""}
+${alignmentHtml ? `<div class="page" style="page-break-before:always;mso-page-break-before:always">${alignmentHtml}</div>` : ""}
 </body></html>`;
 
   const blob = new Blob([fullHtml], {type: "application/vnd.ms-word;charset=utf-8"});
