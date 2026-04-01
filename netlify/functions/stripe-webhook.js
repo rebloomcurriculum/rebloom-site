@@ -1,90 +1,107 @@
 // stripe-webhook.js
-// Uses @netlify/identity for admin user management (official Netlify approach)
-// and GoTrue directly at the site's identity URL for webhook contexts
+// Handles Stripe subscription events and manages Supabase users
 
 const crypto = require('crypto');
 
-const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
-const PRICE_FCC = process.env.STRIPE_PRICE_FCC;
-const PRICE_CENTER = process.env.STRIPE_PRICE_CENTER;
-
-// The site URL is automatically available as process.env.URL in Netlify functions
-// Identity admin endpoint is at <site-url>/.netlify/identity
-// We use the Netlify personal access token to authenticate as admin
-
-const NETLIFY_ACCESS_TOKEN = process.env.NETLIFY_ACCESS_TOKEN;
-const SITE_URL = process.env.URL; // e.g. https://rebloomcurriculum.com
-
-function verifyStripeSignature(rawBody, sigHeader, secret) {
-  const parts = sigHeader.split(',');
-  let timestamp = '';
-  const signatures = [];
-  for (const part of parts) {
-    const [key, val] = part.split('=');
-    if (key === 't') timestamp = val;
-    if (key === 'v1') signatures.push(val);
-  }
-  if (!timestamp || signatures.length === 0) return false;
-  const payload = timestamp + '.' + rawBody;
-  const expected = crypto.createHmac('sha256', secret).update(payload, 'utf8').digest('hex');
-  return signatures.some(sig => {
-    try { return crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); }
-    catch { return false; }
-  });
+// Verify Stripe webhook signature
+function verifyStripeSignature(payload, signature, secret) {
+  const parts = signature.split(',');
+  const timestamp = parts.find(p => p.startsWith('t=')).split('=')[1];
+  const signatures = parts.filter(p => p.startsWith('v1=')).map(p => p.split('=')[1]);
+  const signedPayload = `${timestamp}.${payload}`;
+  const expectedSig = crypto
+    .createHmac('sha256', secret)
+    .update(signedPayload)
+    .digest('hex');
+  return signatures.some(sig => crypto.timingSafeEqual(
+    Buffer.from(sig, 'hex'),
+    Buffer.from(expectedSig, 'hex')
+  ));
 }
 
-async function stripeFetch(path) {
-  const res = await fetch('https://api.stripe.com/v1' + path, {
-    headers: { 'Authorization': 'Bearer ' + STRIPE_SECRET_KEY }
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error('Stripe error: ' + JSON.stringify(data));
-  return data;
+// Determine plan from Stripe price ID
+function getPlanFromPriceId(priceId) {
+  if (priceId === process.env.STRIPE_PRICE_CENTER) return 'center';
+  if (priceId === process.env.STRIPE_PRICE_FCC) return 'fcc';
+  return 'unknown';
 }
 
-// GoTrue admin API - called directly on the site's identity endpoint
-// Authenticate with Netlify personal access token
-async function goTrue(method, path, body) {
-  const url = SITE_URL + '/.netlify/identity' + path;
-  const options = {
-    method: method,
+// Supabase admin API call
+async function supabaseAdmin(method, path, body) {
+  const url = `${process.env.SUPABASE_URL}/rest/v1${path}`;
+  const res = await fetch(url, {
+    method,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + NETLIFY_ACCESS_TOKEN
-    }
-  };
-  if (body) options.body = JSON.stringify(body);
-  const res = await fetch(url, options);
+      'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+      'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+      'Prefer': method === 'POST' ? 'return=representation' : ''
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
   const text = await res.text();
-  console.log(method, path, '->', res.status, text.substring(0, 200));
   try { return { status: res.status, data: JSON.parse(text) }; }
   catch { return { status: res.status, data: text }; }
 }
 
-async function inviteUser(email, plan) {
-  // Use /invite endpoint which sends an invitation email automatically
-  // This works with Invite Only registration setting
-  const result = await goTrue('POST', '/invite', {
-    email: email,
-    data: { plan: plan, roles: [plan] }
+// Create Supabase auth user and send invite email
+async function createSupabaseUser(email, plan, stripeCustomerId, stripeSubscriptionId) {
+  // Create auth user via admin API
+  const authRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/admin/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+      'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+    },
+    body: JSON.stringify({
+      email,
+      email_confirm: true,
+      send_confirmation_email: false, // we'll send invite instead
+      user_metadata: { plan }
+    })
   });
-  console.log('Invite result:', result.status);
-  return result;
-}
 
-async function findUser(email) {
-  const result = await goTrue('GET', '/admin/users?per_page=100');
-  if (result.data && result.data.users) {
-    return result.data.users.find(u => u.email === email) || null;
+  const authData = await authRes.json();
+  console.log('Auth user created:', authRes.status, authData.id || authData.error);
+
+  if (!authRes.ok) {
+    // User might already exist — that's ok
+    if (!authData.msg?.includes('already been registered')) {
+      throw new Error(`Auth user creation failed: ${JSON.stringify(authData)}`);
+    }
   }
-  return null;
+
+  // Send magic link / invite email
+  await fetch(`${process.env.SUPABASE_URL}/auth/v1/admin/users/${authData.id}/send-invite`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+      'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+    }
+  });
+
+  // Upsert into subscribers table
+  await supabaseAdmin('POST', '/subscribers?on_conflict=email', {
+    email,
+    stripe_customer_id: stripeCustomerId,
+    stripe_subscription_id: stripeSubscriptionId,
+    plan,
+    status: 'active'
+  });
+
+  console.log('Subscriber record upserted for:', email);
 }
 
-async function updateUser(userId, plan) {
-  return await goTrue('PUT', '/admin/users/' + userId, {
-    app_metadata: { plan: plan, roles: [plan] }
-  });
+// Update subscriber status
+async function updateSubscriberStatus(stripeSubscriptionId, status) {
+  await supabaseAdmin(
+    'PATCH',
+    `/subscribers?stripe_subscription_id=eq.${stripeSubscriptionId}`,
+    { status }
+  );
+  console.log('Subscriber status updated:', stripeSubscriptionId, status);
 }
 
 exports.handler = async function(event) {
@@ -93,65 +110,82 @@ exports.handler = async function(event) {
   }
 
   const sig = event.headers['stripe-signature'];
-  if (!sig) return { statusCode: 400, body: 'Missing stripe-signature' };
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-  const rawBody = event.isBase64Encoded
-    ? Buffer.from(event.body, 'base64').toString('utf8')
-    : event.body;
-
-  if (!verifyStripeSignature(rawBody, sig, STRIPE_WEBHOOK_SECRET)) {
-    console.error('Signature verification failed');
-    return { statusCode: 400, body: 'Invalid signature' };
+  // Verify signature
+  try {
+    if (!verifyStripeSignature(event.body, sig, webhookSecret)) {
+      console.error('Invalid Stripe signature');
+      return { statusCode: 400, body: 'Invalid signature' };
+    }
+  } catch (err) {
+    console.error('Signature verification error:', err.message);
+    return { statusCode: 400, body: 'Signature error' };
   }
 
   let stripeEvent;
-  try { stripeEvent = JSON.parse(rawBody); }
-  catch { return { statusCode: 400, body: 'Invalid JSON' }; }
+  try {
+    stripeEvent = JSON.parse(event.body);
+  } catch {
+    return { statusCode: 400, body: 'Invalid JSON' };
+  }
 
-  console.log('Event:', stripeEvent.type);
-  console.log('Site URL:', SITE_URL);
+  console.log('Stripe event received:', stripeEvent.type);
 
   try {
-    const obj = stripeEvent.data.object;
+    switch (stripeEvent.type) {
 
-    if (stripeEvent.type === 'checkout.session.completed') {
-      const email = obj.customer_details && obj.customer_details.email;
-      console.log('Email:', email);
+      case 'checkout.session.completed': {
+        const session = stripeEvent.data.object;
+        const email = session.customer_details?.email || session.customer_email;
+        const customerId = session.customer;
+        const subscriptionId = session.subscription;
 
-      let plan = 'center';
-      if (obj.subscription) {
-        const sub = await stripeFetch('/subscriptions/' + obj.subscription);
-        const priceId = sub.items && sub.items.data[0] ? sub.items.data[0].price.id : null;
-        console.log('Price:', priceId, 'FCC:', PRICE_FCC);
-        if (priceId === PRICE_FCC) plan = 'fcc';
-      }
-      console.log('Plan:', plan);
-
-      if (email) {
-        // Check if user already exists
-        const existing = await findUser(email);
-        if (existing) {
-          console.log('Updating existing user:', existing.id);
-          await updateUser(existing.id, plan);
-        } else {
-          console.log('Inviting new user');
-          await inviteUser(email, plan);
+        if (!email || !subscriptionId) {
+          console.log('Missing email or subscription ID, skipping');
+          break;
         }
+
+        // Get subscription to find price ID and plan
+        const subRes = await fetch(`https://api.stripe.com/v1/subscriptions/${subscriptionId}`, {
+          headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` }
+        });
+        const sub = await subRes.json();
+        const priceId = sub.items?.data?.[0]?.price?.id;
+        const plan = getPlanFromPriceId(priceId);
+
+        console.log('New subscriber:', email, 'plan:', plan);
+        await createSupabaseUser(email, plan, customerId, subscriptionId);
+        break;
+      }
+
+      case 'customer.subscription.deleted':
+      case 'customer.subscription.paused': {
+        const sub = stripeEvent.data.object;
+        await updateSubscriberStatus(sub.id, 'canceled');
+        break;
+      }
+
+      case 'customer.subscription.updated': {
+        const sub = stripeEvent.data.object;
+        const status = sub.status === 'active' ? 'active' : sub.status;
+        await updateSubscriberStatus(sub.id, status);
+        break;
+      }
+
+      case 'invoice.payment_failed': {
+        const invoice = stripeEvent.data.object;
+        if (invoice.subscription) {
+          await updateSubscriberStatus(invoice.subscription, 'past_due');
+        }
+        break;
       }
     }
-
-    if (stripeEvent.type === 'customer.subscription.deleted') {
-      const customer = await stripeFetch('/customers/' + obj.customer);
-      if (customer.email) {
-        const existing = await findUser(customer.email);
-        if (existing) await updateUser(existing.id, null);
-      }
-    }
-
-    return { statusCode: 200, body: JSON.stringify({ received: true }) };
-
   } catch (err) {
-    console.error('Error:', err.message);
-    return { statusCode: 500, body: 'Server error: ' + err.message };
+    console.error('Webhook handler error:', err.message);
+    // Still return 200 to Stripe so it doesn't retry
+    return { statusCode: 200, body: JSON.stringify({ received: true, error: err.message }) };
   }
+
+  return { statusCode: 200, body: JSON.stringify({ received: true }) };
 };
