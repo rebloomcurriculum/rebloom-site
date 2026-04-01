@@ -97,8 +97,8 @@ body{font-family:var(--sans);background:var(--fcc-paler);color:var(--td);-webkit
 .dl-section{animation:up 0.35s 0.17s ease both}
 .bottom-row{animation:up 0.35s 0.22s ease both}
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+
 </head>
 <body>
 
@@ -239,17 +239,22 @@ body{font-family:var(--sans);background:var(--fcc-paler);color:var(--td);-webkit
 
 </div><!-- end page -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-netlifyIdentity.on('init', function(user) {
-  if (!user) {
+const { createClient } = supabase;
+const sb = createClient('https://keuvjcivwyytvnavnesn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0');
+
+// Auth guard — redirect to login if not signed in
+sb.auth.getSession().then(async ({ data: { session } }) => {
+  if (!session) {
     window.location.href = '/portal-login.html';
     return;
   }
-  populateUser(user);
+  populateUser(session.user);
 });
 
-netlifyIdentity.on('login', function(user) {
-  populateUser(user);
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') window.location.href = '/portal-login.html';
 });
 
 function populateUser(user) {
@@ -271,14 +276,10 @@ function populateUser(user) {
   if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
 }
 
-function signOut() {
-  netlifyIdentity.logout();
+async function signOut() {
+  await sb.auth.signOut();
   window.location.href = '/portal-login.html';
 }
-
-netlifyIdentity.on('logout', function() {
-  window.location.href = '/portal-login.html';
-});
 </script>
 </body>
 </html>

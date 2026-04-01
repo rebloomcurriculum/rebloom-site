@@ -94,7 +94,7 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
 .dl-section{animation:up 0.35s 0.17s ease both}
 .bottom-row{animation:up 0.35s 0.22s ease both}
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 </head>
 <body>
 
@@ -240,22 +240,60 @@ body{font-family:var(--sans);background:var(--sage-paler);color:var(--td);-webki
 
 </div><!-- end page -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Netlify Identity — populate user info and protect page
-netlifyIdentity.on('init', function(user) {
-  if (!user) {
-    window.location.href = '/portal-login.html';
-    return;
-  }
-  populateUser(user);
+const { createClient } = supabase;
+const sb = createClient('https://keuvjcivwyytvnavnesn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0');
+
+sb.auth.getSession().then(async ({ data: { session } }) => {
+  if (!session) { window.location.href = '/portal-login.html'; return; }
+  populateUser(session.user);
 });
 
-netlifyIdentity.on('login', function(user) {
-  populateUser(user);
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') window.location.href = '/portal-login.html';
 });
 
 function populateUser(user) {
-  // Welcome greeting with time of day
+  var hour = new Date().getHours();
+  var greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  var name = (user.user_metadata && user.user_metadata.full_name)
+    ? user.user_metadata.full_name.split(' ')[0]
+    : user.email.split('@')[0];
+  var heading = document.getElementById('welcome-heading');
+  if (heading) heading.innerHTML = greeting + ', <em>' + name + '.</em>';
+  var emailEl = document.getElementById('acct-email');
+  if (emailEl) emailEl.textContent = user.email;
+  var navName = document.getElementById('user-name');
+  if (navName) navName.textContent = name;
+  var avatar = document.getElementById('user-avatar');
+  if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  window.location.href = '/portal-login.html';
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const { createClient } = supabase;
+const sb = createClient('https://keuvjcivwyytvnavnesn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0');
+
+// Auth guard — redirect to login if not signed in
+sb.auth.getSession().then(async ({ data: { session } }) => {
+  if (!session) {
+    window.location.href = '/portal-login.html';
+    return;
+  }
+  populateUser(session.user);
+});
+
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') window.location.href = '/portal-login.html';
+});
+
+function populateUser(user) {
   var hour = new Date().getHours();
   var greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   var name = (user.user_metadata && user.user_metadata.full_name)
@@ -265,25 +303,19 @@ function populateUser(user) {
   var heading = document.getElementById('welcome-heading');
   if (heading) heading.innerHTML = greeting + ', <em>' + name + '.</em>';
 
-  // Set email in subscription card
   var emailEl = document.getElementById('acct-email');
   if (emailEl) emailEl.textContent = user.email;
 
-  // Set nav name and avatar
   var navName = document.getElementById('user-name');
   if (navName) navName.textContent = name;
   var avatar = document.getElementById('user-avatar');
   if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
 }
 
-function signOut() {
-  netlifyIdentity.logout();
+async function signOut() {
+  await sb.auth.signOut();
   window.location.href = '/portal-login.html';
 }
-
-netlifyIdentity.on('logout', function() {
-  window.location.href = '/portal-login.html';
-});
 </script>
 </body>
 </html>
