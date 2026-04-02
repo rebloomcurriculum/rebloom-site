@@ -330,13 +330,18 @@ async function signIn() {
   const btn = document.getElementById('login-btn');
   btn.disabled = true;
   btn.textContent = 'Signing in…';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
   if (error) {
     showMsg('login-msg', error.message === 'Invalid login credentials'
       ? 'Incorrect email or password. Try the email link option if you haven\'t set a password yet.'
       : error.message, true);
     btn.disabled = false;
     btn.textContent = 'Sign In';
+    return;
+  }
+  // Directly redirect on success — don't wait for onAuthStateChange
+  if (data && data.session) {
+    await redirectToPortal(data.session);
   }
 }
 
