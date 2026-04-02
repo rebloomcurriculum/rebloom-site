@@ -258,11 +258,11 @@
 
   <div class="footer">
     Not a subscriber? <a href="/#pricing">View plans →</a><br>
-    Questions? <a href="mailto:grow@rebloomcurriculum.com">grow@rebloomcurriculum.com</a>
+    Questions? <a href="/cdn-cgi/l/email-protection#7512071a0235071017191a1a18160007071c16001900185b161a18"><span class="__cf_email__" data-cfemail="7512071a0235071017191a1a18160007071c16001900185b161a18">[email&#160;protected]</span></a>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const SUPABASE_URL = 'https://keuvjcivwyytvnavnesn.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0';
 
@@ -286,28 +286,34 @@ sb.auth.onAuthStateChange(async (event, session) => {
 });
 
 async function redirectToPortal(session) {
-  // Get subscriber plan from the subscribers table
-  const { data, error } = await sb
-    .from('subscribers')
-    .select('plan, status')
-    .eq('email', session.user.email)
-    .single();
-
-  if (error || !data) {
-    // Not found in subscribers table — show error
-    showMsg('login-msg', 'Your account was not found. Please contact grow@rebloomcurriculum.com for help.', true);
+  // Get subscriber plan via server function (bypasses RLS)
+  let subData;
+  try {
+    const res = await fetch('/.netlify/functions/get-subscriber', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: session.user.email })
+    });
+    if (res.status === 404) {
+      showMsg('login-msg', 'Your account was not found. Please contact grow@rebloomcurriculum.com for help.', true);
+      await sb.auth.signOut();
+      return;
+    }
+    subData = await res.json();
+  } catch(e) {
+    showMsg('login-msg', 'Unable to verify your subscription. Please try again.', true);
     await sb.auth.signOut();
     return;
   }
 
-  if (data.status !== 'active') {
+  if (subData.status !== 'active') {
     showMsg('login-msg', 'Your subscription is not currently active. Please contact grow@rebloomcurriculum.com for help.', true);
     await sb.auth.signOut();
     return;
   }
 
   // Redirect based on plan
-  if (data.plan === 'fcc') {
+  if (subData.plan === 'fcc') {
     window.location.href = '/portal-fcc.html';
   } else {
     window.location.href = '/portal-center.html';
@@ -398,11 +404,4 @@ function showMsg(id, msg, isError) {
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     const active = document.querySelector('[style*="display: block"], [style*="display:block"]');
-    if (document.getElementById('login-form').style.display !== 'none') signIn();
-    else if (document.getElementById('magic-form').style.display !== 'none') sendMagicLink();
-    else if (document.getElementById('set-password-form').style.display !== 'none') sendPasswordReset();
-  }
-});
-</script>
-</body>
-</html>
+    if (document.getElementById('login-form').style.displa
