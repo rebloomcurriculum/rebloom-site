@@ -1,387 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In — re:Bloom Digital Curriculum</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-  <style>
-    :root {
-      --forest: #1a2e1a;
-      --sage: #4a7c59;
-      --sage-light: #d8ead8;
-      --gold: #c9a84c;
-      --border: #e4ede4;
-      --tl: #6b7b6b;
-      --serif: Georgia, serif;
-      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: var(--sans);
-      background: #f7faf7;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-    .card {
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem 2.25rem;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 4px 24px rgba(26,46,26,0.07);
-    }
-    .logo {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      color: var(--forest);
-      margin-bottom: 0.25rem;
-    }
-    .logo span { color: var(--gold); }
-    .tagline {
-      font-size: 0.78rem;
-      color: var(--tl);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
-    h1 {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      color: var(--forest);
-      font-weight: 400;
-      margin-bottom: 0.35rem;
-    }
-    .subtitle {
-      font-size: 0.82rem;
-      color: var(--tl);
-      margin-bottom: 1.75rem;
-      line-height: 1.55;
-    }
-    label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--tl);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.4rem;
-    }
-    input[type="email"], input[type="password"] {
-      width: 100%;
-      padding: 0.7rem 0.9rem;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-family: var(--sans);
-      color: var(--forest);
-      transition: border-color 0.18s;
-      margin-bottom: 1rem;
-    }
-    input:focus {
-      outline: none;
-      border-color: var(--sage);
-    }
-    .btn {
-      width: 100%;
-      padding: 0.8rem;
-      background: var(--forest);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      font-family: var(--sans);
-      cursor: pointer;
-      transition: background 0.18s;
-      margin-top: 0.25rem;
-    }
-    .btn:hover { background: var(--sage); }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .msg {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      display: none;
-    }
-    .msg.success {
-      background: #eaf3ea;
-      border: 1px solid var(--sage-light);
-      color: #2d5a2d;
-      display: block;
-    }
-    .msg.error {
-      background: #fdecea;
-      border: 1px solid #f5c6c6;
-      color: #8b1a1a;
-      display: block;
-    }
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin: 1.25rem 0;
-      color: var(--tl);
-      font-size: 0.75rem;
-    }
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .toggle-link {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--tl);
-      margin-top: 1.25rem;
-    }
-    .toggle-link a {
-      color: var(--sage);
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .toggle-link a:hover { text-decoration: underline; }
-    .magic-sent {
-      text-align: center;
-      padding: 1rem 0;
-    }
-    .magic-sent .icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-    }
-    .magic-sent h2 {
-      font-family: var(--serif);
-      color: var(--forest);
-      font-size: 1.2rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-    .magic-sent p {
-      font-size: 0.82rem;
-      color: var(--tl);
-      line-height: 1.6;
-    }
-    .footer {
-      margin-top: 2rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.74rem;
-      color: var(--tl);
-      text-align: center;
-      line-height: 1.6;
-    }
-    .footer a { color: var(--sage); text-decoration: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — re:Bloom Digital Curriculum</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+<style>
+:root{--forest:#1a2e1a;--sage:#4a7c59;--sage-light:#d8ead8;--gold:#c9a84c;--border:#e4ede4;--tl:#6b7b6b;--serif:Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:#f7faf7;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2.5rem 2.25rem;width:100%;max-width:420px;box-shadow:0 4px 24px rgba(26,46,26,0.07)}
+.logo{font-family:var(--serif);font-size:1.5rem;color:var(--forest);margin-bottom:0.25rem}
+.logo span{color:var(--gold)}
+.tagline{font-size:0.78rem;color:var(--tl);margin-bottom:2rem;font-weight:300}
+h1{font-family:var(--serif);font-size:1.35rem;color:var(--forest);font-weight:400;margin-bottom:0.35rem}
+.subtitle{font-size:0.82rem;color:var(--tl);margin-bottom:1.75rem;line-height:1.55}
+label{display:block;font-size:0.72rem;font-weight:700;color:var(--tl);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem}
+input[type=email],input[type=password]{width:100%;padding:0.7rem 0.9rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;font-family:var(--sans);color:var(--forest);transition:border-color 0.18s;margin-bottom:1rem}
+input:focus{outline:none;border-color:var(--sage)}
+.btn{width:100%;padding:0.8rem;background:var(--forest);color:#fff;border:none;border-radius:8px;font-size:0.95rem;font-weight:600;font-family:var(--sans);cursor:pointer;transition:background 0.18s;margin-top:0.25rem}
+.btn:hover{background:var(--sage)}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+.btn-outline{background:#f4faf4;color:var(--forest);border:1.5px solid var(--border);margin-top:0.75rem}
+.msg{margin-top:1rem;padding:0.75rem 1rem;border-radius:8px;font-size:0.82rem;line-height:1.5;display:none}
+.msg.success{background:#eaf3ea;border:1px solid var(--sage-light);color:#2d5a2d;display:block}
+.msg.error{background:#fdecea;border:1px solid #f5c6c6;color:#8b1a1a;display:block}
+.divider{display:flex;align-items:center;gap:0.75rem;margin:1.25rem 0;color:var(--tl);font-size:0.75rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.toggle-link{text-align:center;font-size:0.8rem;color:var(--tl);margin-top:1.25rem}
+.toggle-link a{color:var(--sage);font-weight:600;text-decoration:none;cursor:pointer}
+.toggle-link a:hover{text-decoration:underline}
+.magic-sent-box{text-align:center;padding:1rem 0}
+.magic-sent-box .icon{font-size:2.5rem;margin-bottom:0.75rem}
+.magic-sent-box h2{font-family:var(--serif);color:var(--forest);font-size:1.2rem;font-weight:400;margin-bottom:0.5rem}
+.magic-sent-box p{font-size:0.82rem;color:var(--tl);line-height:1.6}
+.footer{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--border);font-size:0.74rem;color:var(--tl);text-align:center;line-height:1.6}
+.footer a{color:var(--sage);text-decoration:none}
+</style>
 </head>
 <body>
-
 <div class="card">
   <div class="logo">re<span>:Bloom</span></div>
   <div class="tagline">Digital Curriculum — Subscriber Portal</div>
 
-  <!-- Password login form (default) -->
   <div id="login-form">
     <h1>Welcome back.</h1>
     <p class="subtitle">Sign in to access your curriculum, lesson plan generator, and downloads.</p>
-
     <label for="login-email">Email address</label>
     <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
-
     <label for="login-password">Password</label>
     <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password">
-
     <button class="btn" id="login-btn" onclick="signIn()">Sign In</button>
-
     <div class="divider">or</div>
-
-    <button class="btn" style="background:#f4faf4;color:var(--forest);border:1.5px solid var(--border)" onclick="showMagicLink()">
-      Email me a sign-in link instead
-    </button>
-
+    <button class="btn btn-outline" onclick="showMagicLink()">Email me a sign-in link instead</button>
     <div class="msg" id="login-msg"></div>
-
-    <div class="toggle-link">
-      First time signing in? <a onclick="showSetPassword()">Set your password →</a>
-    </div>
+    <div class="toggle-link">First time? <a onclick="showSetPassword()">Set your password →</a></div>
   </div>
 
-  <!-- Magic link form -->
   <div id="magic-form" style="display:none">
     <h1>Sign in with email.</h1>
-    <p class="subtitle">Enter your email and we'll send you a secure link — no password needed.</p>
-
+    <p class="subtitle">Enter your email and we'll send you a secure sign-in link.</p>
     <label for="magic-email">Email address</label>
     <input type="email" id="magic-email" placeholder="you@example.com" autocomplete="email">
-
     <button class="btn" id="magic-btn" onclick="sendMagicLink()">Send Sign-In Link</button>
     <div class="msg" id="magic-msg"></div>
-
-    <div class="toggle-link" style="margin-top:1rem">
-      <a onclick="showLogin()">← Back to sign in</a>
-    </div>
+    <div class="toggle-link"><a onclick="showLogin()">← Back to sign in</a></div>
   </div>
 
-  <!-- Magic link sent confirmation -->
   <div id="magic-sent" style="display:none">
-    <div class="magic-sent">
+    <div class="magic-sent-box">
       <div class="icon">✉️</div>
       <h2>Check your email.</h2>
-      <p>We sent a secure sign-in link to <strong id="magic-sent-email"></strong>.<br><br>Click the link in the email to access your portal. The link expires in 24 hours.</p>
+      <p>We sent a secure sign-in link to <strong id="magic-sent-email"></strong>.<br><br>Click the link to access your portal. It expires in 24 hours.</p>
     </div>
-    <div class="toggle-link" style="margin-top:1.5rem">
-      <a onclick="showLogin()">← Back to sign in</a>
-    </div>
+    <div class="toggle-link" style="margin-top:1.5rem"><a onclick="showLogin()">← Back to sign in</a></div>
   </div>
 
-  <!-- Set password form (first time) -->
   <div id="set-password-form" style="display:none">
     <h1>Set your password.</h1>
-    <p class="subtitle">First time signing in? Enter your email to receive a password setup link.</p>
-
+    <p class="subtitle">Enter your email to receive a password setup link.</p>
     <label for="reset-email">Email address</label>
     <input type="email" id="reset-email" placeholder="you@example.com" autocomplete="email">
-
     <button class="btn" id="reset-btn" onclick="sendPasswordReset()">Send Password Setup Link</button>
     <div class="msg" id="reset-msg"></div>
-
-    <div class="toggle-link" style="margin-top:1rem">
-      <a onclick="showLogin()">← Back to sign in</a>
-    </div>
+    <div class="toggle-link"><a onclick="showLogin()">← Back to sign in</a></div>
   </div>
 
   <div class="footer">
     Not a subscriber? <a href="/#pricing">View plans →</a><br>
-    Questions? <a href="/cdn-cgi/l/email-protection#7512071a0235071017191a1a18160007071c16001900185b161a18"><span class="__cf_email__" data-cfemail="7512071a0235071017191a1a18160007071c16001900185b161a18">[email&#160;protected]</span></a>
+    Questions? <a href="mailto:grow@rebloomcurriculum.com">grow@rebloomcurriculum.com</a>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const SUPABASE_URL = 'https://keuvjcivwyytvnavnesn.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0';
+<script>
+var SUPABASE_URL = 'https://keuvjcivwyytvnavnesn.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtldXZqY2l2d3l5dHZuYXZuZXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwNTEyNjIsImV4cCI6MjA5MDYyNzI2Mn0.ZkQUcKEl7-A25iRRNqlWyMPm62s_zjN8vker0PI90_0';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const { createClient } = supabase;
-const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function showLogin() {
+  document.getElementById('login-form').style.display = 'block';
+  document.getElementById('magic-form').style.display = 'none';
+  document.getElementById('magic-sent').style.display = 'none';
+  document.getElementById('set-password-form').style.display = 'none';
+}
+function showMagicLink() {
+  document.getElementById('login-form').style.display = 'none';
+  document.getElementById('magic-form').style.display = 'block';
+  document.getElementById('magic-sent').style.display = 'none';
+  document.getElementById('set-password-form').style.display = 'none';
+}
+function showSetPassword() {
+  document.getElementById('login-form').style.display = 'none';
+  document.getElementById('magic-form').style.display = 'none';
+  document.getElementById('magic-sent').style.display = 'none';
+  document.getElementById('set-password-form').style.display = 'block';
+}
 
-// Check if already logged in
-sb.auth.getSession().then(({ data: { session } }) => {
-  if (session) redirectToPortal(session);
-});
-
-// Handle auth state changes (e.g. magic link return)
-sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    redirectToPortal(session);
-  }
-  if (event === 'PASSWORD_RECOVERY') {
-    // User clicked reset link — show password update form
-    showUpdatePassword();
-  }
-});
+function showMsg(id, msg, isError) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'msg ' + (isError ? 'error' : 'success');
+}
 
 async function redirectToPortal(session) {
-  // Get subscriber plan via server function (bypasses RLS)
-  let subData;
   try {
-    const res = await fetch('/.netlify/functions/get-subscriber', {
+    var res = await fetch('/.netlify/functions/get-subscriber', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: session.user.email })
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: session.user.email})
     });
     if (res.status === 404) {
       showMsg('login-msg', 'Your account was not found. Please contact grow@rebloomcurriculum.com for help.', true);
       await sb.auth.signOut();
       return;
     }
-    subData = await res.json();
+    var data = await res.json();
+    if (data.status !== 'active') {
+      showMsg('login-msg', 'Your subscription is not currently active. Please contact grow@rebloomcurriculum.com for help.', true);
+      await sb.auth.signOut();
+      return;
+    }
+    window.location.href = data.plan === 'fcc' ? '/portal-fcc.html' : '/portal-center.html';
   } catch(e) {
     showMsg('login-msg', 'Unable to verify your subscription. Please try again.', true);
     await sb.auth.signOut();
-    return;
-  }
-
-  if (subData.status !== 'active') {
-    showMsg('login-msg', 'Your subscription is not currently active. Please contact grow@rebloomcurriculum.com for help.', true);
-    await sb.auth.signOut();
-    return;
-  }
-
-  // Redirect based on plan
-  if (subData.plan === 'fcc') {
-    window.location.href = '/portal-fcc.html';
-  } else {
-    window.location.href = '/portal-center.html';
   }
 }
 
 async function signIn() {
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
+  var email = document.getElementById('login-email').value.trim();
+  var password = document.getElementById('login-password').value;
   if (!email || !password) {
     showMsg('login-msg', 'Please enter your email and password.', true);
     return;
   }
-  const btn = document.getElementById('login-btn');
+  var btn = document.getElementById('login-btn');
   btn.disabled = true;
-  btn.textContent = 'Signing in…';
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) {
-    showMsg('login-msg', error.message === 'Invalid login credentials'
-      ? 'Incorrect email or password. Try the email link option if you haven\'t set a password yet.'
-      : error.message, true);
+  btn.textContent = 'Signing in...';
+  var result = await sb.auth.signInWithPassword({email: email, password: password});
+  if (result.error) {
+    showMsg('login-msg', result.error.message === 'Invalid login credentials'
+      ? 'Incorrect email or password. Try the email link option if you have not set a password yet.'
+      : result.error.message, true);
     btn.disabled = false;
     btn.textContent = 'Sign In';
     return;
   }
-  // Directly redirect on success — don't wait for onAuthStateChange
-  if (data && data.session) {
-    await redirectToPortal(data.session);
+  if (result.data && result.data.session) {
+    await redirectToPortal(result.data.session);
   }
 }
 
 async function sendMagicLink() {
-  const email = document.getElementById('magic-email').value.trim();
-  if (!email) {
-    showMsg('magic-msg', 'Please enter your email address.', true);
-    return;
-  }
-  const btn = document.getElementById('magic-btn');
+  var email = document.getElementById('magic-email').value.trim();
+  if (!email) { showMsg('magic-msg', 'Please enter your email address.', true); return; }
+  var btn = document.getElementById('magic-btn');
   btn.disabled = true;
-  btn.textContent = 'Sending…';
-  const { error } = await sb.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: window.location.origin + '/portal-login.html' }
+  btn.textContent = 'Sending...';
+  var result = await sb.auth.signInWithOtp({
+    email: email,
+    options: {emailRedirectTo: window.location.origin + '/portal-login.html'}
   });
-  if (error) {
-    showMsg('magic-msg', error.message, true);
+  if (result.error) {
+    showMsg('magic-msg', result.error.message, true);
     btn.disabled = false;
     btn.textContent = 'Send Sign-In Link';
   } else {
     document.getElementById('magic-sent-email').textContent = email;
-    show('magic-sent');
+    document.getElementById('magic-form').style.display = 'none';
+    document.getElementById('magic-sent').style.display = 'block';
   }
 }
 
 async function sendPasswordReset() {
-  const email = document.getElementById('reset-email').value.trim();
-  if (!email) {
-    showMsg('reset-msg', 'Please enter your email address.', true);
-    return;
-  }
-  const btn = document.getElementById('reset-btn');
+  var email = document.getElementById('reset-email').value.trim();
+  if (!email) { showMsg('reset-msg', 'Please enter your email address.', true); return; }
+  var btn = document.getElementById('reset-btn');
   btn.disabled = true;
-  btn.textContent = 'Sending…';
-  const { error } = await sb.auth.resetPasswordForEmail(email, {
+  btn.textContent = 'Sending...';
+  var result = await sb.auth.resetPasswordForEmail(email, {
     redirectTo: window.location.origin + '/portal-login.html'
   });
-  if (error) {
-    showMsg('reset-msg', error.message, true);
+  if (result.error) {
+    showMsg('reset-msg', result.error.message, true);
     btn.disabled = false;
     btn.textContent = 'Send Password Setup Link';
   } else {
@@ -389,24 +210,20 @@ async function sendPasswordReset() {
   }
 }
 
-function showLogin() { show('login-form'); }
-function showMagicLink() { show('magic-form'); }
-function showSetPassword() { show('set-password-form'); }
+// Handle magic link and password reset returns
+sb.auth.onAuthStateChange(function(event, session) {
+  if (event === 'SIGNED_IN' && session) {
+    redirectToPortal(session);
+  }
+});
 
-function show(id) {
-  ['login-form','magic-form','magic-sent','set-password-form'].forEach(s => {
-    document.getElementById(s).style.display = s === id ? 'block' : 'none';
-  });
-}
-
-function showMsg(id, msg, isError) {
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.className = 'msg ' + (isError ? 'error' : 'success');
-}
-
-// Allow Enter key to submit
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const active = document.querySelector('[style*="display: block"], [style*="display:block"]');
-    if (document.getElementById('login-form').style.displa
+// Enter key support
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  if (document.getElementById('login-form').style.display !== 'none') signIn();
+  else if (document.getElementById('magic-form').style.display !== 'none') sendMagicLink();
+  else if (document.getElementById('set-password-form').style.display !== 'none') sendPasswordReset();
+});
+</script>
+</body>
+</html>
