@@ -718,8 +718,12 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
       <div class="price-card featured" style="max-width:420px">
         <div class="price-badge">Full Access</div>
         <p class="price-tier">Center-Based Programs</p>
-        <div class="price-amount" id="price-full"><sup>$</sup>39<span class="per" id="period-full">/mo</span></div>
+        <div class="price-amount" id="price-full"><sup>$</sup>29<span class="per" id="period-full">/mo</span></div>
         <p class="price-annual-note" id="note-full">&nbsp;</p>
+        <div style="background:linear-gradient(135deg,#e8f5e9,#f0f7f0);border:1px solid var(--sage);border-radius:8px;padding:0.6rem 0.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
+          <span style="font-size:1.1rem">🌱</span>
+          <span style="font-size:0.82rem;color:var(--forest);font-weight:600;line-height:1.35">Your first 30 days are on us — cancel anytime, no questions asked.</span>
+        </div>
         <p class="price-desc">The complete re:Bloom system for licensed center-based programs — every document, every tool, all three center tracks. Everything an infant, toddler, and preschool program needs to implement with fidelity.</p>
         <hr class="price-divider">
         <ul class="price-features">
@@ -741,6 +745,10 @@ footer{background:var(--forest);padding:3.5rem 2rem;text-align:center}
         <p class="price-tier" style="color:#7B3D2A">Family Child Care</p>
         <div class="price-amount" id="price-fcc" style="color:#7B3D2A"><sup>$</sup>13<span class="per" id="period-fcc">/mo</span></div>
         <p class="price-annual-note" id="note-fcc">&nbsp;</p>
+        <div style="background:linear-gradient(135deg,#fef6f2,#fdf0ea);border:1px solid #E8C4B0;border-radius:8px;padding:0.6rem 0.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
+          <span style="font-size:1.1rem">🌱</span>
+          <span style="font-size:0.82rem;color:#7B3D2A;font-weight:600;line-height:1.35">Your first 30 days are on us — cancel anytime, no questions asked.</span>
+        </div>
         <p class="price-desc">The Family Child Care track only — built specifically for mixed-age, home-based programs. Everything an FCC provider needs, at a price that reflects the reality of a home-based business.</p>
         <hr class="price-divider">
         <ul class="price-features">
@@ -1012,12 +1020,12 @@ function toggleBilling(){
   var btn=document.getElementById('billing-toggle')
   btn.classList.toggle('active',isAnnual)
   if(isAnnual){
-    document.getElementById('price-full').innerHTML='<sup>$</sup>31<span class="per">/mo</span>'
-    document.getElementById('note-full').textContent='$372 billed annually — save $96'
+    document.getElementById('price-full').innerHTML='<sup>$</sup>23<span class="per">/mo</span>'
+    document.getElementById('note-full').textContent='$276 billed annually — save $72'
     document.getElementById('price-fcc').innerHTML='<sup>$</sup>10<span class="per">/mo</span>'
     document.getElementById('note-fcc').textContent='$120 billed annually — save $36'
   } else {
-    document.getElementById('price-full').innerHTML='<sup>$</sup>39<span class="per">/mo</span>'
+    document.getElementById('price-full').innerHTML='<sup>$</sup>29<span class="per">/mo</span>'
     document.getElementById('note-full').innerHTML='&nbsp;'
     document.getElementById('price-fcc').innerHTML='<sup>$</sup>13<span class="per">/mo</span>'
     document.getElementById('note-fcc').innerHTML='&nbsp;'
