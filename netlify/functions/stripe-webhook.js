@@ -146,6 +146,55 @@ exports.handler = async function(event) {
           break;
         }
 
+        // --- TRIAL ABUSE PREVENTION ---
+        // Search Stripe for any prior customers with this email
+        const customerSearchRes = await fetch(
+          `https://api.stripe.com/v1/customers/search?query=email:'${encodeURIComponent(email)}'`,
+          { headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` } }
+        );
+        const customerSearch = await customerSearchRes.json();
+        const allCustomerIds = (customerSearch.data || []).map(c => c.id);
+
+        // Check if any prior customer ID (excluding current) has a previous subscription
+        let hadPriorSubscription = false;
+        for (const cid of allCustomerIds) {
+          if (cid === customerId) continue; // skip current signup
+          const prevSubRes = await fetch(
+            `https://api.stripe.com/v1/subscriptions?customer=${cid}&limit=1`,
+            { headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` } }
+          );
+          const prevSubs = await prevSubRes.json();
+          if (prevSubs.data && prevSubs.data.length > 0) {
+            hadPriorSubscription = true;
+            break;
+          }
+        }
+
+        // Also check current customer for any prior/cancelled subscriptions
+        // (catches same customer re-subscribing)
+        const currentSubsRes = await fetch(
+          `https://api.stripe.com/v1/subscriptions?customer=${customerId}&status=all&limit=10`,
+          { headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` } }
+        );
+        const currentSubs = await currentSubsRes.json();
+        // If there's more than 1 subscription on this customer (current + prior), flag it
+        const priorSubs = (currentSubs.data || []).filter(s => s.id !== subscriptionId);
+        if (priorSubs.length > 0) hadPriorSubscription = true;
+
+        if (hadPriorSubscription) {
+          console.log(`Trial abuse detected for ${email} — removing trial from subscription ${subscriptionId}`);
+          // Remove the trial period from the current subscription so they're billed immediately
+          await fetch(`https://api.stripe.com/v1/subscriptions/${subscriptionId}`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'trial_end=now'
+          });
+        }
+        // --- END TRIAL ABUSE PREVENTION ---
+
         // Get subscription to find price ID and plan
         const subRes = await fetch(`https://api.stripe.com/v1/subscriptions/${subscriptionId}`, {
           headers: { 'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}` }
