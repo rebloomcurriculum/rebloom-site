@@ -1,0 +1,11 @@
+<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Five petals radiating from center -->
+  <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(0 14 14)"/>
+  <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(72 14 14)"/>
+  <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(144 14 14)"/>
+  <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(216 14 14)"/>
+  <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(288 14 14)"/>
+  <!-- Golden center -->
+  <circle cx="14" cy="14" r="3.5" fill="#b8943a"/>
+  <circle cx="14" cy="14" r="2" fill="#d4aa50"/>
+</svg>
