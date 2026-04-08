@@ -65,29 +65,51 @@ async function createSupabaseUser(email, plan, stripeCustomerId, stripeSubscript
   const authData = await authRes.json();
   console.log('Auth user created:', authRes.status, authData.id || authData.error);
 
+  let userAlreadyExisted = false;
+
   if (!authRes.ok) {
     if (authData.msg?.includes('already been registered') || authData.code === 'email_exists') {
-      console.log('User already exists, will resend invite to:', email);
+      console.log('User already exists:', email);
+      userAlreadyExisted = true;
     } else {
       throw new Error(`Auth user creation failed: ${JSON.stringify(authData)}`);
     }
   }
 
-  // Send invite email via correct Supabase endpoint
-  const inviteRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/invite`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
-      'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-    },
-    body: JSON.stringify({ email, data: { plan } })
-  });
-  const inviteText = await inviteRes.text();
-  if (!inviteRes.ok) {
-    console.error('Invite email failed:', inviteRes.status, inviteText);
+  if (userAlreadyExisted) {
+    // Existing confirmed user — send a magic link so they can log in
+    const magicRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/admin/generate_link`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+      },
+      body: JSON.stringify({ type: 'magiclink', email })
+    });
+    const magicText = await magicRes.text();
+    if (!magicRes.ok) {
+      console.error('Magic link generation failed:', magicRes.status, magicText);
+    } else {
+      console.log('Magic link sent successfully to:', email);
+    }
   } else {
-    console.log('Invite email sent successfully to:', email, '| status:', inviteRes.status);
+    // New user — send invite so they can set their password
+    const inviteRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/invite`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+      },
+      body: JSON.stringify({ email, data: { plan } })
+    });
+    const inviteText = await inviteRes.text();
+    if (!inviteRes.ok) {
+      console.error('Invite email failed:', inviteRes.status, inviteText);
+    } else {
+      console.log('Invite email sent successfully to:', email, '| status:', inviteRes.status);
+    }
   }
 
   // Upsert into subscribers table
