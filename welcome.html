@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome to re:Bloom</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#2d4a2d;--sage:#4a7c59;--sage-mid:#6a9e78;--sage-light:#c8dfc8;
+    --sage-pale:#eaf3ea;--sage-paler:#f4faf4;--cream:#fdfaf5;--gold:#b8943a;
+    --gold-light:#f5ecd4;--td:#2a2a2a;--tm:#4a4a4a;--tl:#7a7a7a;
+    --border:#d8e8d8;--serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--td);background:var(--cream);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+
+  .card{
+    background:#fff;border:1px solid var(--border);border-radius:24px;
+    padding:3rem 2.5rem;max-width:520px;width:100%;text-align:center;
+    box-shadow:0 8px 40px rgba(45,74,45,0.08);
+  }
+
+  .flower{margin-bottom:1.5rem;display:flex;justify-content:center}
+
+  .checkmark{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,var(--sage-pale),#d4edda);
+    border:2px solid var(--sage-light);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;
+  }
+  .checkmark svg{width:28px;height:28px;stroke:var(--sage);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+  h1{font-family:var(--serif);font-size:2rem;color:var(--forest);font-weight:600;margin-bottom:0.75rem;letter-spacing:-0.02em}
+  .subtitle{font-size:1.05rem;color:var(--tm);line-height:1.65;font-weight:300;margin-bottom:2rem}
+  .subtitle strong{color:var(--forest);font-weight:600}
+
+  .email-notice{
+    background:linear-gradient(135deg,var(--sage-pale),#f0f7f0);
+    border:1px solid var(--sage-light);border-radius:14px;
+    padding:1.25rem 1.5rem;margin-bottom:2rem;
+  }
+  .email-notice .icon{font-size:1.5rem;margin-bottom:0.5rem}
+  .email-notice p{font-size:0.9rem;color:var(--forest);line-height:1.6;font-weight:400}
+  .email-notice p strong{font-weight:700}
+  .email-notice .hint{font-size:0.78rem;color:var(--tl);margin-top:0.4rem}
+
+  .steps{text-align:left;margin-bottom:2rem}
+  .step{display:flex;gap:1rem;align-items:flex-start;padding:0.75rem 0;border-bottom:1px solid var(--border)}
+  .step:last-child{border-bottom:none}
+  .step-num{
+    width:28px;height:28px;border-radius:50%;background:var(--forest);
+    color:#fff;font-size:0.78rem;font-weight:700;display:flex;align-items:center;
+    justify-content:center;flex-shrink:0;margin-top:1px;
+  }
+  .step-text{font-size:0.88rem;color:var(--tm);line-height:1.55}
+  .step-text strong{color:var(--td);font-weight:600;display:block;margin-bottom:0.1rem}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
+    background:var(--forest);color:#fff;font-family:var(--sans);font-size:0.95rem;
+    font-weight:600;padding:0.85rem 2rem;border-radius:50px;text-decoration:none;
+    border:none;cursor:pointer;width:100%;
+    transition:background 0.2s,transform 0.15s;
+  }
+  .btn:hover{background:var(--sage);transform:translateY(-1px)}
+
+  .footer-note{font-size:0.78rem;color:var(--tl);margin-top:1.25rem;line-height:1.5}
+  .footer-note a{color:var(--sage);text-decoration:none;font-weight:600}
+  .footer-note a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Flower logo -->
+  <div class="flower">
+    <svg width="40" height="40" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(0 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(72 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(144 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#4a7c59" opacity="0.85" transform="rotate(216 14 14)"/>
+      <ellipse cx="14" cy="8.5" rx="3.2" ry="5.5" fill="#6a9e78" opacity="0.9" transform="rotate(288 14 14)"/>
+      <circle cx="14" cy="14" r="3.5" fill="#b8943a"/>
+      <circle cx="14" cy="14" r="2" fill="#d4aa50"/>
+    </svg>
+  </div>
+
+  <!-- Checkmark -->
+  <div class="checkmark">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+
+  <h1>You&#x2019;re in the garden.</h1>
+  <p class="subtitle">Welcome to re:Bloom. Your 30-day free trial has started — <strong>no charge until your trial ends.</strong></p>
+
+  <!-- Email callout -->
+  <div class="email-notice">
+    <div class="icon">📬</div>
+    <p><strong>Check your inbox.</strong> We just sent you an email to set up your account password and access your portal.</p>
+    <p class="hint">Don't see it? Check your spam folder, or contact us at <a href="mailto:Grow@rebloomcurriculum.com" style="color:var(--sage);font-weight:600">Grow@rebloomcurriculum.com</a></p>
+  </div>
+
+  <!-- Steps -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Open your welcome email</strong>Click the link inside to set your password and activate your account.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Log in to your portal</strong>Access all curriculum documents, your lesson plan generator, and more.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Start with the lesson generator</strong>Enter your theme and child interests — your weekly plan is ready in under 30 seconds.</div>
+    </div>
+  </div>
+
+  <a class="btn" href="/portal-login.html">Go to Login →</a>
+
+  <p class="footer-note">Questions? We're here — <a href="mailto:Grow@rebloomcurriculum.com">Grow@rebloomcurriculum.com</a></p>
+
+</div>
+
+</body>
+</html>
