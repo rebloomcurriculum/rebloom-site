@@ -98,11 +98,11 @@ async function createSupabaseUser(email, plan, stripeCustomerId, stripeSubscript
         'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
       }
     });
-    const inviteData = await inviteRes.json();
+    const inviteText = await inviteRes.text();
     if (!inviteRes.ok) {
-      console.error('Invite email failed:', JSON.stringify(inviteData));
+      console.error('Invite email failed:', inviteRes.status, inviteText);
     } else {
-      console.log('Invite email sent successfully to:', email);
+      console.log('Invite email sent successfully to:', email, '| status:', inviteRes.status);
     }
   } else {
     console.error('Could not determine user ID — invite email not sent for:', email);
