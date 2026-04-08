@@ -65,47 +65,29 @@ async function createSupabaseUser(email, plan, stripeCustomerId, stripeSubscript
   const authData = await authRes.json();
   console.log('Auth user created:', authRes.status, authData.id || authData.error);
 
-  let userId = authData.id;
-
   if (!authRes.ok) {
-    // User already exists — look up their existing ID so we can still send the invite
     if (authData.msg?.includes('already been registered') || authData.code === 'email_exists') {
-      console.log('User already exists, looking up existing ID for:', email);
-      const listRes = await fetch(
-        `${process.env.SUPABASE_URL}/auth/v1/admin/users?email=${encodeURIComponent(email)}`,
-        {
-          headers: {
-            'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
-            'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-          }
-        }
-      );
-      const listData = await listRes.json();
-      userId = listData.users?.[0]?.id;
-      console.log('Existing user ID found:', userId);
+      console.log('User already exists, will resend invite to:', email);
     } else {
       throw new Error(`Auth user creation failed: ${JSON.stringify(authData)}`);
     }
   }
 
-  // Send invite email — with error logging so failures are visible
-  if (userId) {
-    const inviteRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/admin/users/${userId}/send-invite`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
-        'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-      }
-    });
-    const inviteText = await inviteRes.text();
-    if (!inviteRes.ok) {
-      console.error('Invite email failed:', inviteRes.status, inviteText);
-    } else {
-      console.log('Invite email sent successfully to:', email, '| status:', inviteRes.status);
-    }
+  // Send invite email via correct Supabase endpoint
+  const inviteRes = await fetch(`${process.env.SUPABASE_URL}/auth/v1/invite`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+      'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
+    },
+    body: JSON.stringify({ email, data: { plan } })
+  });
+  const inviteText = await inviteRes.text();
+  if (!inviteRes.ok) {
+    console.error('Invite email failed:', inviteRes.status, inviteText);
   } else {
-    console.error('Could not determine user ID — invite email not sent for:', email);
+    console.log('Invite email sent successfully to:', email, '| status:', inviteRes.status);
   }
 
   // Upsert into subscribers table
