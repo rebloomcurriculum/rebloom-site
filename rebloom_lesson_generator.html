@@ -1039,13 +1039,13 @@ function App() {
           needsEnrich = scriptLevel !== "none" || !!state;
           _context.p = 2;
           _context.n = 3;
-          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
+          return fetch("/.netlify/functions/claude-proxy", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              model: "claude-sonnet-4-6",
+              model: "claude-sonnet-4-20250514",
               max_tokens: 8000,
               messages: [{
                 role: "user",
@@ -1095,13 +1095,13 @@ function App() {
           // ── Call 2: Scripts + state alignment (only when needed) ────────────────
           setLoadStep(4);
           _context.n = 8;
-          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
+          return fetch("/.netlify/functions/claude-proxy", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              model: "claude-sonnet-4-6",
+              model: "claude-sonnet-4-20250514",
               max_tokens: 6000,
               messages: [{
                 role: "user",
