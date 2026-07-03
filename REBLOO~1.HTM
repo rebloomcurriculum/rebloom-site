@@ -1,0 +1,1735 @@
+https://raw.githubusercontent.com/rebloomcurriculum/rebloom-site/main/rebloom_lesson_generator.html
+→ https://raw.githubusercontent.com/rebloomcurriculum/rebloom-site/main/rebloom_lesson_generator.html
+Content-Type: text/plain; charset=utf-8
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>re:Bloom AI Lesson Plan Generator</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { height: 100vh; overflow: hidden; }
+  #root { height: 100vh; display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var _React = React,
+  useState = _React.useState,
+  useCallback = _React.useCallback,
+  useRef = _React.useRef;
+var TRACK_AGES = {
+  Infant: "Birth–12 Months",
+  Toddler: "12–36 Months",
+  Preschool: "Ages 3–5",
+  "Family Child Care": "Mixed-Age · Birth–5"
+};
+var SCRIPT_OPTIONS = [{
+  value: "none",
+  label: "No Scripts",
+  desc: "Activities only"
+}, {
+  value: "key",
+  label: "Key Activities",
+  desc: "Read-aloud and small group scripts"
+}, {
+  value: "all",
+  label: "Full Scripts",
+  desc: "Verbatim scripts for every block"
+}];
+var US_STATES = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+var VERIFIED = [];
+var DC = {
+  AL: "#2980B9",
+  CO: "#1A5276",
+  CR: "#B7950B",
+  LL: "#1E8449",
+  MA: "#7D3C98",
+  PW: "#C0392B",
+  SC: "#148F77",
+  SE: "#CA6F1E",
+  SS: "#616A6B"
+};
+var S = {
+  wrap: {
+    fontFamily: "'DM Sans',system-ui,sans-serif",
+    minHeight: "100vh",
+    background: "#f4faf4",
+    display: "flex",
+    flexDirection: "column",
+    fontSize: 14
+  },
+  header: {
+    background: "#1a2e1a",
+    padding: "0.75rem 1.25rem",
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+    flexShrink: 0
+  },
+  logoText: {
+    fontFamily: "Georgia,serif",
+    fontSize: "1.15rem",
+    color: "#fff",
+    margin: 0
+  },
+  logoSpan: {
+    color: "#c9a84c"
+  },
+  logoSub: {
+    fontSize: "0.7rem",
+    color: "rgba(255,255,255,0.4)",
+    fontWeight: 300
+  },
+  hRight: {
+    marginLeft: "auto",
+    display: "flex",
+    gap: "0.4rem"
+  },
+  hBadge: {
+    fontSize: "0.63rem",
+    padding: "0.18rem 0.5rem",
+    borderRadius: 100,
+    background: "rgba(255,255,255,0.12)",
+    color: "rgba(255,255,255,0.65)"
+  },
+  body: {
+    display: "grid",
+    gridTemplateColumns: "290px 1fr",
+    flex: 1,
+    minHeight: 0
+  },
+  sidebar: {
+    background: "#fff",
+    borderRight: "1px solid #d8ead8",
+    padding: "0.9rem",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.7rem"
+  },
+  sTitle: {
+    fontFamily: "Georgia,serif",
+    fontSize: "0.95rem",
+    color: "#1a2e1a",
+    margin: 0
+  },
+  sSub: {
+    fontSize: "0.7rem",
+    color: "#999",
+    fontWeight: 300,
+    marginTop: "0.1rem",
+    lineHeight: 1.5
+  },
+  label: {
+    display: "block",
+    fontSize: "0.67rem",
+    fontWeight: 700,
+    color: "#444",
+    marginBottom: "0.22rem",
+    letterSpacing: "0.04em",
+    textTransform: "uppercase"
+  },
+  sublabel: {
+    display: "block",
+    fontSize: "0.65rem",
+    color: "#bbb",
+    fontWeight: 300,
+    marginTop: "0.12rem"
+  },
+  hint: {
+    fontSize: "0.65rem",
+    color: "#bbb",
+    fontWeight: 300
+  },
+  input: {
+    width: "100%",
+    padding: "0.42rem 0.6rem",
+    border: "1px solid #d8ead8",
+    borderRadius: 7,
+    fontSize: "0.8rem",
+    fontFamily: "inherit",
+    background: "#fff",
+    color: "#1a1a1a",
+    outline: "none",
+    boxSizing: "border-box"
+  },
+  select: {
+    width: "100%",
+    padding: "0.42rem 0.6rem",
+    border: "1px solid #d8ead8",
+    borderRadius: 7,
+    fontSize: "0.8rem",
+    fontFamily: "inherit",
+    background: "#fff",
+    color: "#1a1a1a",
+    outline: "none",
+    boxSizing: "border-box"
+  },
+  textarea: {
+    width: "100%",
+    padding: "0.42rem 0.6rem",
+    border: "1px solid #d8ead8",
+    borderRadius: 7,
+    fontSize: "0.8rem",
+    fontFamily: "inherit",
+    background: "#fff",
+    color: "#1a1a1a",
+    outline: "none",
+    resize: "vertical",
+    minHeight: 56,
+    lineHeight: 1.5,
+    boxSizing: "border-box"
+  },
+  row2: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "0.45rem"
+  },
+  divider: {
+    border: "none",
+    borderTop: "1px solid #e8f5e8",
+    margin: "0.05rem 0"
+  },
+  trackGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2,1fr)",
+    gap: "0.3rem",
+    marginTop: "0.22rem"
+  },
+  trackBtn: function trackBtn(a) {
+    return {
+      padding: "0.38rem 0.15rem",
+      border: "1px solid ".concat(a ? "#2d6a2d" : "#d8ead8"),
+      borderRadius: 7,
+      background: a ? "#e8f5e8" : "#fff",
+      fontSize: "0.72rem",
+      fontFamily: "inherit",
+      color: a ? "#2d6a2d" : "#444",
+      cursor: "pointer",
+      textAlign: "center",
+      fontWeight: a ? 700 : 400,
+      lineHeight: 1.3
+    };
+  },
+  trackAge: {
+    display: "block",
+    fontSize: "0.6rem",
+    color: "#aaa",
+    marginTop: 1,
+    fontWeight: 300
+  },
+  scriptGrid: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.28rem",
+    marginTop: "0.22rem"
+  },
+  scriptBtn: function scriptBtn(a) {
+    return {
+      padding: "0.38rem 0.65rem",
+      border: "1px solid ".concat(a ? "#2d6a2d" : "#d8ead8"),
+      borderRadius: 7,
+      background: a ? "#e8f5e8" : "#fff",
+      fontSize: "0.72rem",
+      fontFamily: "inherit",
+      color: a ? "#2d6a2d" : "#444",
+      cursor: "pointer",
+      textAlign: "left",
+      fontWeight: a ? 700 : 400,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    };
+  },
+  scriptDesc: {
+    fontSize: "0.62rem",
+    color: "#bbb",
+    fontWeight: 300
+  },
+  genBtn: function genBtn(l) {
+    return {
+      width: "100%",
+      padding: "0.72rem",
+      background: l ? "#4a9c4a" : "#1a3a1a",
+      color: "#fff",
+      border: "none",
+      borderRadius: 9,
+      fontSize: "0.85rem",
+      fontWeight: 700,
+      fontFamily: "inherit",
+      cursor: l ? "not-allowed" : "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.45rem",
+      opacity: l ? 0.8 : 1,
+      marginTop: "0.1rem"
+    };
+  },
+  dlBtn: {
+    padding: "0.42rem 0.9rem",
+    borderRadius: 7,
+    fontSize: "0.74rem",
+    fontFamily: "inherit",
+    cursor: "pointer",
+    background: "#1a3a1a",
+    border: "none",
+    color: "#fff",
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    gap: "0.35rem"
+  },
+  main: {
+    padding: "1.1rem",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.85rem"
+  },
+  planHead: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: "1rem",
+    flexWrap: "wrap"
+  },
+  planTitle: {
+    fontFamily: "Georgia,serif",
+    fontSize: "1.3rem",
+    color: "#1a2e1a",
+    lineHeight: 1.2,
+    margin: 0
+  },
+  metaRow: {
+    display: "flex",
+    gap: "0.3rem",
+    flexWrap: "wrap",
+    marginTop: "0.3rem"
+  },
+  chip: {
+    fontSize: "0.65rem",
+    padding: "0.13rem 0.45rem",
+    borderRadius: 100,
+    border: "1px solid #d8ead8",
+    color: "#555",
+    background: "#fff"
+  },
+  stateChip: function stateChip(v) {
+    return {
+      fontSize: "0.65rem",
+      padding: "0.13rem 0.45rem",
+      borderRadius: 100,
+      border: "1px solid ".concat(v ? "#2d6a2d" : "#d4a017"),
+      color: v ? "#2d6a2d" : "#8b6914",
+      background: v ? "#e8f5e8" : "#fef9ec"
+    };
+  },
+  actRow: {
+    display: "flex",
+    gap: "0.35rem",
+    flexShrink: 0,
+    flexWrap: "wrap"
+  },
+  regenBtn: {
+    padding: "0.38rem 0.75rem",
+    borderRadius: 7,
+    fontSize: "0.72rem",
+    fontFamily: "inherit",
+    cursor: "pointer",
+    background: "#1a3a1a",
+    border: "none",
+    color: "#fff",
+    fontWeight: 700
+  },
+  printBtn: {
+    padding: "0.38rem 0.75rem",
+    borderRadius: 7,
+    fontSize: "0.72rem",
+    fontFamily: "inherit",
+    cursor: "pointer",
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    color: "#555",
+    fontWeight: 500
+  },
+  card: {
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    borderRadius: 10,
+    padding: "0.9rem"
+  },
+  cardTitle: {
+    fontSize: "0.65rem",
+    fontWeight: 700,
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    color: "#aaa",
+    marginBottom: "0.5rem"
+  },
+  sg: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3,1fr)",
+    gap: "0.8rem"
+  },
+  sLabel: {
+    fontSize: "0.62rem",
+    fontWeight: 700,
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    color: "#aaa",
+    marginBottom: "0.18rem"
+  },
+  sVal: {
+    fontSize: "0.78rem",
+    color: "#1a1a1a",
+    lineHeight: 1.55
+  },
+  domRow: {
+    marginTop: "0.8rem",
+    paddingTop: "0.8rem",
+    borderTop: "1px solid #d8ead8"
+  },
+  domPills: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.28rem",
+    marginTop: "0.35rem"
+  },
+  domPill: function domPill(code) {
+    return {
+      fontSize: "0.63rem",
+      padding: "0.12rem 0.45rem",
+      borderRadius: 100,
+      background: "".concat(DC[code] || "#888", "18"),
+      color: DC[code] || "#555",
+      fontWeight: 700,
+      border: "1px solid ".concat(DC[code] || "#ccc", "35"),
+      cursor: "default"
+    };
+  },
+  dayCard: {
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    borderRadius: 10,
+    overflow: "hidden"
+  },
+  dayHead: {
+    padding: "0.55rem 0.9rem",
+    background: "#1a2e1a",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  dayName: {
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    color: "#fff",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase"
+  },
+  daySub: {
+    fontSize: "0.67rem",
+    color: "rgba(255,255,255,0.4)"
+  },
+  dayGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(6,1fr)"
+  },
+  blk: function blk(last) {
+    return {
+      padding: "0.65rem 0.7rem",
+      borderRight: last ? "none" : "1px solid #e8f5e8"
+    };
+  },
+  bLabel: {
+    fontSize: "0.58rem",
+    fontWeight: 700,
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    color: "#aaa",
+    marginBottom: "0.18rem"
+  },
+  bTitle: {
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    color: "#1a2e1a",
+    marginBottom: "0.18rem",
+    lineHeight: 1.3
+  },
+  bDesc: {
+    fontSize: "0.69rem",
+    color: "#555",
+    lineHeight: 1.5,
+    fontWeight: 300
+  },
+  bScript: {
+    fontSize: "0.69rem",
+    color: "#7a4a1a",
+    lineHeight: 1.5,
+    fontStyle: "italic",
+    marginTop: "0.3rem",
+    padding: "0.28rem 0.45rem",
+    background: "#fef9ec",
+    borderRadius: 4,
+    borderLeft: "2px solid #c9a84c"
+  },
+  bDiff: {
+    marginTop: "0.3rem",
+    padding: "0.28rem 0.45rem",
+    background: "#f0f4ff",
+    borderRadius: 4,
+    borderLeft: "2px solid #4a6fa5"
+  },
+  diffLbl: {
+    fontSize: "0.57rem",
+    fontWeight: 700,
+    color: "#4a6fa5",
+    textTransform: "uppercase",
+    letterSpacing: "0.03em",
+    marginBottom: "0.12rem"
+  },
+  diffTxt: {
+    fontSize: "0.65rem",
+    color: "#2c3e50",
+    lineHeight: 1.4
+  },
+  bCodes: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.12rem",
+    marginTop: "0.3rem"
+  },
+  cTag: function cTag(code) {
+    var d = code.split(".")[0];
+    return {
+      fontSize: "0.59rem",
+      padding: "0.06rem 0.28rem",
+      borderRadius: 3,
+      background: "".concat(DC[d] || "#888", "18"),
+      color: DC[d] || "#555",
+      fontWeight: 700,
+      border: "1px solid ".concat(DC[d] || "#ccc", "28")
+    };
+  },
+  dayFoot: {
+    padding: "0.45rem 0.9rem",
+    background: "#f4faf4",
+    borderTop: "1px solid #d8ead8"
+  },
+  footLbl: {
+    fontSize: "0.65rem",
+    fontWeight: 700,
+    color: "#1a2e1a",
+    marginBottom: "0.15rem"
+  },
+  footTxt: {
+    fontSize: "0.69rem",
+    color: "#555",
+    lineHeight: 1.5
+  },
+  obsCard: {
+    background: "#fef9ec",
+    border: "1px solid #f0d090",
+    borderRadius: 10,
+    padding: "0.9rem"
+  },
+  obsTitle: {
+    fontSize: "0.65rem",
+    fontWeight: 700,
+    color: "#7a6020",
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    marginBottom: "0.5rem"
+  },
+  obsGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "0.9rem"
+  },
+  obsSec: {
+    fontSize: "0.78rem",
+    color: "#4a3a10",
+    lineHeight: 1.6
+  },
+  obsLbl: {
+    display: "block",
+    fontWeight: 700,
+    marginBottom: "0.25rem"
+  },
+  parentCard: {
+    background: "#fff5e0",
+    border: "1px solid #e8d49a",
+    borderRadius: 10,
+    padding: "0.9rem"
+  },
+  parentT: {
+    fontSize: "0.65rem",
+    fontWeight: 700,
+    color: "#7a5010",
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    marginBottom: "0.55rem"
+  },
+  parentSec: {
+    marginBottom: "0.65rem"
+  },
+  parentLbl: {
+    fontSize: "0.69rem",
+    fontWeight: 700,
+    color: "#5a3a00",
+    marginBottom: "0.18rem"
+  },
+  parentTxt: {
+    fontSize: "0.76rem",
+    color: "#4a3000",
+    lineHeight: 1.6
+  },
+  stateCard: {
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    borderRadius: 10,
+    overflow: "hidden"
+  },
+  stateHead: {
+    padding: "0.5rem 0.9rem",
+    background: "#f4faf4",
+    borderBottom: "1px solid #d8ead8",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  stateT: {
+    fontSize: "0.69rem",
+    fontWeight: 700,
+    color: "#1a2e1a",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase"
+  },
+  stateBdg: function stateBdg(v) {
+    return {
+      fontSize: "0.62rem",
+      padding: "0.13rem 0.45rem",
+      borderRadius: 100,
+      background: v ? "#e8f5e8" : "#fef9ec",
+      color: v ? "#2d6a2d" : "#8b6914",
+      fontWeight: 700,
+      border: "1px solid ".concat(v ? "#c8e8c8" : "#e8d49a")
+    };
+  },
+  loadBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "0.9rem",
+    padding: "2rem",
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    borderRadius: 10
+  },
+  loadT: {
+    fontFamily: "Georgia,serif",
+    fontSize: "0.95rem",
+    color: "#1a2e1a"
+  },
+  loadSteps: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.35rem",
+    alignSelf: "stretch"
+  },
+  loadStep: function loadStep(a, d) {
+    return {
+      fontSize: "0.75rem",
+      color: d ? "#2d6a2d" : a ? "#1a2e1a" : "#ccc",
+      display: "flex",
+      alignItems: "center",
+      gap: "0.45rem",
+      fontWeight: a ? 700 : 400
+    };
+  },
+  empty: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    textAlign: "center",
+    padding: "2.5rem 1rem"
+  },
+  emptyT: {
+    fontFamily: "Georgia,serif",
+    fontSize: "1.2rem",
+    color: "#1a2e1a",
+    margin: "0.9rem 0 0.45rem"
+  },
+  emptySub: {
+    fontSize: "0.79rem",
+    color: "#777",
+    maxWidth: 360,
+    lineHeight: 1.6,
+    fontWeight: 300
+  },
+  featGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gap: "0.6rem",
+    marginTop: "1.1rem",
+    maxWidth: 450
+  },
+  featItem: {
+    background: "#fff",
+    border: "1px solid #d8ead8",
+    borderRadius: 8,
+    padding: "0.6rem",
+    textAlign: "left"
+  },
+  featIcon: {
+    fontSize: "1rem",
+    marginBottom: "0.25rem"
+  },
+  featTxt: {
+    fontSize: "0.69rem",
+    color: "#444",
+    lineHeight: 1.4
+  },
+  errBox: {
+    background: "#fff8f8",
+    border: "1px solid #fcc",
+    borderRadius: 10,
+    padding: "0.9rem",
+    fontSize: "0.79rem",
+    color: "#c33"
+  }
+};
+function Spinner(_ref) {
+  var _ref$size = _ref.size,
+    size = _ref$size === void 0 ? 7 : _ref$size,
+    _ref$color = _ref.color,
+    color = _ref$color === void 0 ? "#fff" : _ref$color;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 3
+    }
+  }, [0, 0.2, 0.4].map(function (d, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: color,
+        animation: "rbp 1.2s ease-in-out ".concat(d, "s infinite")
+      }
+    });
+  }), /*#__PURE__*/React.createElement("style", null, "@keyframes rbp{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}"));
+}
+function buildCorePrompt(_ref2) {
+  var track = _ref2.track,
+    weekStart = _ref2.weekStart,
+    weekNum = _ref2.weekNum,
+    teacher = _ref2.teacher,
+    theme = _ref2.theme,
+    interests = _ref2.interests,
+    needs = _ref2.needs,
+    notes = _ref2.notes,
+    groupComposition = _ref2.groupComposition,
+    homeEnv = _ref2.homeEnv;
+  var isFCC = track === "Family Child Care";
+  if (isFCC) {
+    return "You are an expert early childhood curriculum specialist for re:Bloom Digital Curriculum. Generate a complete weekly lesson plan for a FAMILY CHILD CARE (mixed-age, home-based) setting. Be concise \u2014 1-2 sentences per activity description.\n\nNINE DOMAINS (all must appear across the week):\nAL: AL.1.a AL.1.b AL.1.c AL.2.a | CO: CO.1.a CO.2.a CO.3.a CO.4.a | CR: CR.1.a CR.1.b CR.2.a\nLL: LL.1.a-LL.4.b | MA: MA.1.a-MA.4.b | PW: PW.1.a-PW.2.e | SC: SC.1.a SC.1.b\nSE: SE.1.a-SE.4.c | SS: SS.1.a-SS.1.d\n\nTRACK: Family Child Care (Mixed-Age, Birth\u20135) | WEEK: ".concat(weekNum || 1, " | WEEK OF: ").concat(weekStart || "this week", "\nPROVIDER: ").concat(teacher || "Provider", " | THEME: ").concat(theme, "\nGROUP COMPOSITION: ").concat(groupComposition || "mixed ages, birth through 5", "\nCHILD INTERESTS: ").concat(interests || "general play and exploration", "\nGROUP NEEDS: ").concat(needs || "general development", "\nHOME ENVIRONMENT NOTES: ").concat(homeEnv || "standard home setting", "\nOTHER NOTES: ").concat(notes || "none", "\n\nCRITICAL FCC REQUIREMENTS:\n- Every activity must specify how EACH age group (infants, toddlers, preschoolers) participates simultaneously\n- Use \"MIX\" strategy: one activity, differentiated participation by age band\n- Morning meeting must be brief (5-10 min) and work for all ages present\n- Read-aloud must include differentiated questions (pointing for toddlers, inferential for preschoolers)\n- Phonological awareness block must layer: infants hear rhythm, toddlers rhyme, preschoolers segment\n- Center time must specify what each age group does with available home materials\n- Small group focuses on preschoolers while infants/toddlers have parallel independent engagement\n- Outdoor time must account for infant floor/mat time alongside toddler/preschool active play\n- Home environment: activities use real household items (kitchen, yard, natural materials)\n- Caregiving routines (meals, diapering, nap) are curriculum \u2014 reference them in homeConnection\n\nRespond ONLY with valid JSON no markdown:\n{\"weekTitle\":\"\",\"bigQuestion\":\"\",\"vocabulary\":[\"6-7 words across age levels\"],\"sorFocus\":\"1-2 sentences on SoR layered across ages\",\n\"days\":[{\"day\":\"Monday\",\n  \"morningMeeting\":{\"title\":\"\",\"description\":\"include how all ages participate\",\"codes\":[\"2-3\"]},\n  \"readAloud\":{\"title\":\"Book title and author\",\"description\":\"include differentiated questions by age\",\"codes\":[\"LL.1.e\",\"1-2 others\"]},\n  \"phonoAwareness\":{\"title\":\"\",\"description\":\"layered by age: infants/toddlers/preschoolers\",\"codes\":[\"LL.2.x\",\"1 other\"]},\n  \"centerTime\":{\"title\":\"\",\"description\":\"specify what each age group does simultaneously\",\"codes\":[\"3-4 across domains\"],\"differentiation\":{\"infant\":\"\",\"toddler\":\"\",\"preschool\":\"\"}},\n  \"smallGroup\":{\"title\":\"\",\"description\":\"preschool focus with parallel infant/toddler activity noted\",\"codes\":[\"3-4\"],\"differentiation\":{\"infant\":\"\",\"toddler\":\"\",\"preschool\":\"\"}},\n  \"outdoor\":{\"title\":\"\",\"description\":\"include infant mat/sensory time and active play for older children\",\"codes\":[\"PW.2.e\",\"1-2 others\"]},\n  \"materials\":[\"5-6 household or simple materials\"],\"homeConnection\":\"one sentence connecting to FCC caregiving routines\"}],\n\"environmentSetup\":\"1-2 sentences on home environment arrangement for the week\",\n\"weeklyDomainSummary\":{\"AL\":\"code phrase\",\"CO\":\"code phrase\",\"CR\":\"code phrase\",\"LL\":\"code phrase\",\"MA\":\"code phrase\",\"PW\":\"code phrase\",\"SC\":\"code phrase\",\"SE\":\"code phrase\",\"SS\":\"code phrase\"},\n\"observationFocus\":[\"3 behaviors with codes \u2014 one per age band if possible\"],\"assessmentNote\":\"1-2 sentences on QRIS documentation in FCC context\",\n\"parentHandout\":{\"greeting\":\"\",\"whatWeLearned\":\"2-3 sentences no jargon\",\"atHome\":[\"3 things families can do at home\"],\"vocabulary\":\"1 sentence\",\"lookFor\":\"1 sentence\"}}\nAll 5 days. All 6 blocks. Every activity must address all age groups present. All 9 domains across the week.");
+  }
+  return "You are an expert early childhood curriculum specialist for re:Bloom Digital Curriculum. Generate a complete weekly lesson plan. Be concise \u2014 1-2 sentences per activity description.\n\nNINE DOMAINS (all must appear across the week):\nAL: AL.1.a AL.1.b AL.1.c AL.2.a | CO: CO.1.a CO.2.a CO.3.a CO.4.a | CR: CR.1.a CR.1.b CR.2.a\nLL: LL.1.a-LL.4.b | MA: MA.1.a-MA.4.b | PW: PW.1.a-PW.2.f | SC: SC.1.a SC.1.b\nSE: SE.1.a-SE.4.c | SS: SS.1.a-SS.1.d\n\nTRACK: ".concat(track, " (").concat(TRACK_AGES[track], ") | WEEK: ").concat(weekNum || 1, " | WEEK OF: ").concat(weekStart || "this week", "\nTEACHER: ").concat(teacher || "Teacher", " | THEME: ").concat(theme, "\nCHILD INTERESTS: ").concat(interests || "general play and exploration", "\nGROUP NEEDS: ").concat(needs || "general development", "\nNOTES: ").concat(notes || "none", "\n\nRespond ONLY with valid JSON no markdown:\n{\"weekTitle\":\"\",\"bigQuestion\":\"\",\"vocabulary\":[\"6-7 words\"],\"sorFocus\":\"1-2 sentences on SoR skill this week\",\n\"days\":[{\"day\":\"Monday\",\n  \"morningMeeting\":{\"title\":\"\",\"description\":\"1-2 sentences\",\"codes\":[\"2-3\"]},\n  \"readAloud\":{\"title\":\"Book title and author\",\"description\":\"1-2 sentences\",\"codes\":[\"LL.1.e\",\"1-2 others\"]},\n  \"phonoAwareness\":{\"title\":\"\",\"description\":\"1-2 sentences\",\"codes\":[\"LL.2.x\",\"1 other\"]},\n  \"centerTime\":{\"title\":\"\",\"description\":\"2 sentences\",\"codes\":[\"3-4 across domains\"],\"differentiation\":{\"ahead\":\"\",\"support\":\"\",\"iep\":\"\"}},\n  \"smallGroup\":{\"title\":\"\",\"description\":\"2 sentences\",\"codes\":[\"3-4\"],\"differentiation\":{\"ahead\":\"\",\"support\":\"\",\"iep\":\"\"}},\n  \"outdoor\":{\"title\":\"\",\"description\":\"1-2 sentences\",\"codes\":[\"PW.2.e\",\"1-2 others\"]},\n  \"materials\":[\"5-6 materials\"],\"homeConnection\":\"one sentence\"}],\n\"environmentSetup\":\"1-2 sentences\",\"weeklyDomainSummary\":{\"AL\":\"code phrase\",\"CO\":\"code phrase\",\"CR\":\"code phrase\",\"LL\":\"code phrase\",\"MA\":\"code phrase\",\"PW\":\"code phrase\",\"SC\":\"code phrase\",\"SE\":\"code phrase\",\"SS\":\"code phrase\"},\n\"observationFocus\":[\"3 behaviors with codes\"],\"assessmentNote\":\"1-2 sentences on QRIS documentation\",\n\"parentHandout\":{\"greeting\":\"\",\"whatWeLearned\":\"2-3 sentences no jargon\",\"atHome\":[\"3 things\"],\"vocabulary\":\"1 sentence\",\"lookFor\":\"1 sentence\"}}\nAll 5 days. All 6 blocks. Be concise. All 9 domains across the week.");
+}
+function buildEnrichPrompt(_ref3) {
+  var plan = _ref3.plan,
+    track = _ref3.track,
+    theme = _ref3.theme,
+    interests = _ref3.interests,
+    needs = _ref3.needs,
+    state = _ref3.state,
+    scriptLevel = _ref3.scriptLevel,
+    groupComposition = _ref3.groupComposition;
+  var v = VERIFIED.includes(state);
+  var needsScripts = scriptLevel !== "none";
+  var needsState = !!state;
+  var planSummary = plan.days.map(function (d) {
+    var _d$morningMeeting, _d$readAloud, _d$phonoAwareness, _d$centerTime, _d$smallGroup, _d$outdoor;
+    return "".concat(d.day, ": morningMeeting=\"").concat((_d$morningMeeting = d.morningMeeting) === null || _d$morningMeeting === void 0 ? void 0 : _d$morningMeeting.title, "\", readAloud=\"").concat((_d$readAloud = d.readAloud) === null || _d$readAloud === void 0 ? void 0 : _d$readAloud.title, "\", phonoAwareness=\"").concat((_d$phonoAwareness = d.phonoAwareness) === null || _d$phonoAwareness === void 0 ? void 0 : _d$phonoAwareness.title, "\", centerTime=\"").concat((_d$centerTime = d.centerTime) === null || _d$centerTime === void 0 ? void 0 : _d$centerTime.title, "\", smallGroup=\"").concat((_d$smallGroup = d.smallGroup) === null || _d$smallGroup === void 0 ? void 0 : _d$smallGroup.title, "\", outdoor=\"").concat((_d$outdoor = d.outdoor) === null || _d$outdoor === void 0 ? void 0 : _d$outdoor.title, "\"");
+  }).join("\n");
+  var scriptInstr = scriptLevel === "all" ? "For EVERY activity block across all 5 days, add a \"script\" field with 1-2 sentences of warm verbatim educator language." : "For readAloud and smallGroup ONLY across all 5 days, add a \"script\" field with 1-2 sentences of warm verbatim educator language.";
+  var stateInstr = needsState ? "Generate stateAlignment array mapping each re:Bloom code used in this plan to the corresponding ".concat(state, " ELDS code and standard. Use ").concat(state, " current published ELDS. Ohio: DCCY 2022. Indiana: Early Learning Foundations 2023. Other states: use your knowledge of that state's published standards. Format: [{reBloomCode, stateCode, stateStandard}].") : "";
+  return "You are enriching an existing re:Bloom weekly lesson plan with additional detail.\n\nTRACK: ".concat(track).concat(track === "Family Child Care" ? " (Mixed-Age FCC)" : "", " | THEME: ").concat(theme, " | INTERESTS: ").concat(interests || "general", " | NEEDS: ").concat(needs || "general").concat(track === "Family Child Care" ? " | GROUP: " + groupComposition : "", "\n\nEXISTING PLAN ACTIVITIES:\n").concat(planSummary, "\n\nDOMAIN CODES USED THIS WEEK:\n").concat(JSON.stringify(plan.weeklyDomainSummary), "\n\n").concat(needsScripts ? scriptInstr : "", "\n").concat(needsState ? stateInstr : "", "\n\nRespond ONLY with valid JSON no markdown:\n{").concat(needsScripts ? "\"scripts\":{".concat(plan.days.map(function (d) {
+    return "\"".concat(d.day, "\":{").concat(scriptLevel === "all" ? "\"morningMeeting\":\"\",\"readAloud\":\"\",\"phonoAwareness\":\"\",\"centerTime\":\"\",\"smallGroup\":\"\",\"outdoor\":\"\"" : "\"readAloud\":\"\",\"smallGroup\":\"\"", "}");
+  }).join(","), "}") : "").concat(needsScripts && needsState ? "," : "").concat(needsState ? "\"stateAlignment\":[]" : "", "}");
+}
+function generateWordDoc(plan, _ref4) {
+  var _SCRIPT_OPTIONS$find;
+  var track = _ref4.track,
+    teacher = _ref4.teacher,
+    theme = _ref4.theme,
+    state = _ref4.state,
+    weekStart = _ref4.weekStart,
+    weekNum = _ref4.weekNum,
+    scriptLevel = _ref4.scriptLevel,
+    groupComposition = _ref4.groupComposition;
+  var v = VERIFIED.includes(state);
+  var days = plan.days || [];
+
+  // Row definitions matching sample plan
+  var blocks = [{
+    key: "morningMeeting",
+    label: "Arrival &\nMorning Meeting",
+    time: "7:30–8:30"
+  }, {
+    key: "readAloud",
+    label: "Intentional\nRead-Aloud",
+    time: "8:30–9:00"
+  }, {
+    key: "phonoAwareness",
+    label: "Phonological\nAwareness",
+    time: "9:00–9:15"
+  }, {
+    key: "centerTime",
+    label: "Center\nTime",
+    time: "9:15–10:15"
+  }, {
+    key: "smallGroup",
+    label: "Small\nGroup",
+    time: "10:15–10:45"
+  }, {
+    key: "outdoor",
+    label: "Outdoor /\nLarge Motor",
+    time: "10:45–11:15"
+  }];
+  var dateStr = function dateStr(di) {
+    if (!weekStart) return "";
+    var d = new Date(weekStart + "T00:00:00");
+    d.setDate(d.getDate() + di);
+    return d.toLocaleDateString("en-US", {
+      month: "numeric",
+      day: "numeric"
+    });
+  };
+  var hdr = "#1a2e1a";
+  var hdrTxt = "#ffffff";
+  var gold = "#c9a84c";
+  var ltGrn = "#f0f7f0";
+  var border = "1px solid #c0d8c0";
+  var cellPad = "5px 7px";
+  var fs = "8.5pt";
+
+  // Cover page
+  var coverHtml = "\n<div style=\"background:#1a2e1a;color:#fff;padding:50px 60px;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center\">\n  <div style=\"font-size:30pt;font-family:Georgia,serif;margin-bottom:8px\">re<span style=\"color:".concat(gold, "\">:Bloom</span> Digital Curriculum</div>\n  <div style=\"font-size:18pt;color:").concat(gold, ";font-family:Georgia,serif;margin-bottom:30px\">").concat(plan.weekTitle || theme, "</div>\n  <table style=\"border-collapse:collapse;font-size:11pt;color:rgba(255,255,255,0.85)\">\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5);width:140px\">Track</td><td>").concat(track, " \u2014 ").concat(TRACK_AGES[track]).concat(groupComposition ? " (".concat(groupComposition, ")") : "", "</td></tr>\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)\">Theme</td><td>").concat(theme, "</td></tr>\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)\">Week</td><td>Week ").concat(weekNum || 1, " of ").concat(weekStart || "this week", "</td></tr>\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)\">").concat(track === "Family Child Care" ? "Provider" : "Educator", "</td><td>").concat(teacher || "—", "</td></tr>\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)\">State</td><td>").concat(state || "Not selected").concat(v ? " (verified)" : state ? " (AI-generated alignment)" : "", "</td></tr>\n    <tr><td style=\"padding:4px 12px 4px 0;font-weight:bold;color:rgba(255,255,255,0.5)\">Scripts</td><td>").concat(((_SCRIPT_OPTIONS$find = SCRIPT_OPTIONS.find(function (s) {
+    return s.value === scriptLevel;
+  })) === null || _SCRIPT_OPTIONS$find === void 0 ? void 0 : _SCRIPT_OPTIONS$find.label) || "None", "</td></tr>\n  </table>\n  <div style=\"margin-top:40px;font-size:8pt;color:rgba(255,255,255,0.3)\">Generated by re:Bloom AI Lesson Plan Generator \u2014 rebloomcurriculum.com</div>\n</div>");
+
+  // Build one calendar table per week
+  // The AI returns a single week so we have one table
+  var buildWeekTable = function buildWeekTable(weekDays, wkNum) {
+    var dt = function dt(di) {
+      var s = dateStr(di);
+      return s ? "<br><span style=\"font-size:7.5pt;color:".concat(gold, "\">").concat(s, "</span>") : "";
+    };
+
+    // Header row 1: logo/info spanning all, then day names
+    var infoCell = "<td rowspan=\"2\" style=\"background:".concat(hdr, ";color:").concat(hdrTxt, ";padding:").concat(cellPad, ";vertical-align:top;border:").concat(border, ";width:95px\">\n      <div style=\"font-family:Georgia,serif;font-size:9pt;font-weight:bold;color:").concat(gold, "\">re:Bloom</div>\n      <div style=\"font-size:7.5pt;margin-top:4px\">").concat(track, "</div>\n      <div style=\"font-size:8pt;font-weight:bold;margin-top:8px\">").concat(theme, "</div>\n      <div style=\"font-size:7.5pt;margin-top:4px\">Week ").concat(wkNum || weekNum || 1, "</div>\n      <div style=\"font-size:7.5pt;color:rgba(255,255,255,0.6);margin-top:2px\">Week of: ______</div>\n    </td>");
+    var overviewRow = "<tr>\n      ".concat(infoCell, "\n      <td colspan=\"5\" style=\"background:").concat(ltGrn, ";padding:").concat(cellPad, ";border:").concat(border, ";font-size:7.5pt\">\n        <b style=\"color:#1a2e1a\">Big Question:</b> ").concat(plan.bigQuestion || "", " &nbsp;&nbsp;\n        <b style=\"color:#1a2e1a\">Vocabulary:</b> ").concat((plan.vocabulary || []).join(", "), " &nbsp;&nbsp;\n        <b style=\"color:#1a2e1a\">SoR Focus:</b> ").concat(plan.sorFocus || "", " &nbsp;&nbsp;\n        <b style=\"color:#1a2e1a\">Domain Standards:</b> ").concat(Object.keys(plan.weeklyDomainSummary || {}).join(" · "), "\n      </td>\n    </tr>");
+    var dayHeaderRow = "<tr>\n      ".concat(weekDays.map(function (day, di) {
+      return "<td style=\"background:".concat(hdr, ";color:").concat(hdrTxt, ";padding:").concat(cellPad, ";font-size:9pt;font-weight:bold;text-align:center;border:").concat(border, ";min-width:155px\">\n        ").concat(day.day || "").concat(dt(di), "\n      </td>");
+    }).join(""), "\n    </tr>");
+    var blockRows = blocks.map(function (_ref5) {
+      var key = _ref5.key,
+        label = _ref5.label,
+        time = _ref5.time;
+      var labelCell = "<td style=\"background:".concat(ltGrn, ";padding:").concat(cellPad, ";font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:").concat(border, ";vertical-align:top;white-space:pre-line\">\n        ").concat(label, "<br><span style=\"font-weight:normal;color:#666;font-size:7pt\">").concat(time, "</span>\n      </td>");
+      var showScript = scriptLevel === "all" || scriptLevel === "key" && (key === "readAloud" || key === "smallGroup");
+      var dayCells = weekDays.map(function (day) {
+        var b = day[key];
+        if (!b) return "<td style=\"padding:".concat(cellPad, ";border:").concat(border, ";vertical-align:top;font-size:").concat(fs, "\"></td>");
+        var codes = (b.codes || []).join(" · ");
+        return "<td style=\"padding:".concat(cellPad, ";border:").concat(border, ";vertical-align:top;font-size:").concat(fs, "\">\n          <b>").concat(b.title || "", "</b><br>\n          <span style=\"line-height:1.4\">").concat(b.description || "", "</span>\n          ").concat(showScript && b.script ? "<div style=\"background:#fef9ec;border-left:2px solid ".concat(gold, ";padding:3px 5px;margin:3px 0;font-style:italic;font-size:7.5pt;color:#7a5010\"><b>SAY:</b> \"").concat(b.script, "\"</div>") : "", "\n          ").concat(b.differentiation ? "<div style=\"font-size:7pt;color:#4a6fa5;margin-top:2px\"><b>Ahead:</b> ".concat(b.differentiation.ahead || "", " &nbsp;<b>Support:</b> ").concat(b.differentiation.support || "", "</div>") : "", "\n          ").concat(codes ? "<div style=\"font-size:7pt;color:#2d6a2d;font-style:italic;margin-top:2px\">".concat(codes, "</div>") : "", "\n        </td>");
+      }).join("");
+      return "<tr>".concat(labelCell).concat(dayCells, "</tr>");
+    }).join("");
+
+    // Materials row
+    var materialsRow = "<tr>\n      <td style=\"background:".concat(ltGrn, ";padding:").concat(cellPad, ";font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:").concat(border, ";vertical-align:top\">Materials</td>\n      ").concat(weekDays.map(function (day) {
+      return "<td style=\"padding:".concat(cellPad, ";border:").concat(border, ";vertical-align:top;font-size:7.5pt\">").concat((day.materials || []).join(", "), "</td>");
+    }).join(""), "\n    </tr>");
+
+    // Family connection row (bottom of calendar like sample)
+    var familyRow = "<tr>\n      <td style=\"background:".concat(ltGrn, ";padding:").concat(cellPad, ";font-size:7.5pt;font-weight:bold;color:#1a2e1a;border:").concat(border, ";vertical-align:top\">Family Connection</td>\n      <td colspan=\"5\" style=\"padding:").concat(cellPad, ";border:").concat(border, ";vertical-align:top;font-size:7.5pt\">\n        ").concat(weekDays.length > 0 && weekDays[0].homeConnection ? weekDays[0].homeConnection : plan.parentHandout ? (plan.parentHandout.atHome || []).join(" | ") : "", "\n      </td>\n    </tr>");
+    return "<table style=\"width:100%;border-collapse:collapse;table-layout:fixed;font-family:Arial,sans-serif\">\n      ".concat(overviewRow, "\n      ").concat(dayHeaderRow, "\n      ").concat(blockRows, "\n      ").concat(materialsRow, "\n      ").concat(familyRow, "\n    </table>");
+  };
+
+  // Parent handout — one clean page
+  var parentHandoutHtml = plan.parentHandout ? "\n<div style=\"font-family:Arial,sans-serif;padding:30px 40px;max-width:720px;margin:0 auto\">\n  <div style=\"background:#1a2e1a;color:#fff;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between\">\n    <div>\n      <span style=\"font-family:Georgia,serif;font-size:14pt\">re<span style=\"color:".concat(gold, "\">:Bloom</span></span>\n      <span style=\"font-size:9pt;color:rgba(255,255,255,0.7);margin-left:12px\">Family Handout \u2014 Week ").concat(weekNum || 1, "</span>\n    </div>\n    <div style=\"font-size:8.5pt;color:rgba(255,255,255,0.6)\">").concat(theme, "</div>\n  </div>\n  <p style=\"font-size:10pt;line-height:1.6;margin-bottom:14px\">").concat(plan.parentHandout.greeting || "", "</p>\n  <table style=\"width:100%;border-collapse:collapse\">\n    <tr>\n      <td style=\"vertical-align:top;padding-right:20px;width:50%\">\n        <div style=\"background:#f4faf4;border:1px solid #c8e8c8;border-radius:4px;padding:12px 14px;margin-bottom:12px\">\n          <div style=\"font-weight:bold;color:#1a2e1a;font-size:9.5pt;margin-bottom:6px\">What We Learned This Week</div>\n          <p style=\"font-size:9pt;line-height:1.55;margin:0\">").concat(plan.parentHandout.whatWeLearned || "", "</p>\n        </div>\n        <div style=\"background:#fef9ec;border:1px solid #e8d49a;border-radius:4px;padding:12px 14px\">\n          <div style=\"font-weight:bold;color:#7a5010;font-size:9.5pt;margin-bottom:6px\">Vocabulary at Home</div>\n          <p style=\"font-size:9pt;line-height:1.55;margin:0\">").concat(plan.parentHandout.vocabulary || "", "</p>\n        </div>\n      </td>\n      <td style=\"vertical-align:top;width:50%\">\n        <div style=\"background:#e8f0fa;border:1px solid #b0c8f0;border-radius:4px;padding:12px 14px;margin-bottom:12px\">\n          <div style=\"font-weight:bold;color:#1a3a6a;font-size:9.5pt;margin-bottom:6px\">Try This at Home</div>\n          <ul style=\"margin:0;padding-left:16px;font-size:9pt;line-height:1.6\">").concat((plan.parentHandout.atHome || []).map(function (s) {
+    return "<li>".concat(s, "</li>");
+  }).join(""), "</ul>\n        </div>\n        <div style=\"background:#f4faf4;border:1px solid #c8e8c8;border-radius:4px;padding:12px 14px\">\n          <div style=\"font-weight:bold;color:#1a2e1a;font-size:9.5pt;margin-bottom:6px\">What to Celebrate</div>\n          <p style=\"font-size:9pt;line-height:1.55;margin:0\">").concat(plan.parentHandout.lookFor || "", "</p>\n        </div>\n      </td>\n    </tr>\n  </table>\n  <div style=\"margin-top:20px;padding-top:8px;border-top:1px solid #d8ead8;font-size:7.5pt;color:#aaa;text-align:center\">\n    re:Bloom Digital Curriculum &nbsp;|&nbsp; rebloomcurriculum.com &nbsp;|&nbsp; Week ").concat(weekNum || 1, ": ").concat(theme, "\n  </div>\n</div>") : "";
+
+  // State alignment page
+  var alignmentHtml = state && (plan.stateAlignment || []).length > 0 ? "\n<div style=\"font-family:Arial,sans-serif;padding:30px 40px\">\n  <h3 style=\"font-family:Georgia,serif;color:#1a2e1a;margin:0 0 10px\">State Standards Alignment \u2014 ".concat(state, "</h3>\n  ").concat(!v ? "<div style=\"background:#fef9ec;border:1px solid #e8d49a;padding:7px 11px;font-size:8.5pt;color:#7a5010;margin-bottom:10px;border-radius:3px\"><b>Note:</b> AI-generated alignment. Verify against current ".concat(state, " ELDS before official QRIS use.</div>") : "<div style=\"background:#e8f5e8;border:1px solid #c8e8c8;padding:7px 11px;font-size:8.5pt;color:#2d6a2d;margin-bottom:10px;border-radius:3px\"><b>Verified:</b> ".concat(state, " alignment confirmed against current ELDS.</div>"), "\n  <table style=\"width:100%;border-collapse:collapse;font-size:8.5pt\">\n    <tr style=\"background:#1a3a6a;color:#fff\">\n      <th style=\"padding:5px 8px;text-align:left;width:120px\">re:Bloom Code</th>\n      <th style=\"padding:5px 8px;text-align:left;width:120px\">").concat(state, " Code</th>\n      <th style=\"padding:5px 8px;text-align:left\">Standard</th>\n    </tr>\n    ").concat((plan.stateAlignment || []).map(function (r, i) {
+    return "<tr style=\"".concat(i % 2 === 1 ? "background:#f0f4fa" : "", "\">\n      <td style=\"padding:5px 8px;font-weight:bold;color:#2d6a2d\">").concat(r.reBloomCode || "", "</td>\n      <td style=\"padding:5px 8px;font-weight:bold;color:#1a3a6a\">").concat(r.stateCode || "", "</td>\n      <td style=\"padding:5px 8px\">").concat(r.stateStandard || "", "</td>\n    </tr>");
+  }).join(""), "\n  </table>\n</div>") : "";
+  var pageBreak = '<p style="mso-break-type:section-break;page-break-after:always;margin:0;font-size:1pt">&nbsp;</p>';
+  var fullHtml = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\n<style>\n@page { size: 11in 8.5in landscape; margin: 0.375in; }\nbody { font-family: Arial, sans-serif; margin: 0; padding: 0; }\n</style>\n</head><body>\n".concat(coverHtml, "\n").concat(pageBreak, "\n").concat(buildWeekTable(days, weekNum), "\n").concat(parentHandoutHtml ? pageBreak + parentHandoutHtml : "", "\n").concat(alignmentHtml ? pageBreak + alignmentHtml : "", "\n</body></html>");
+
+  // Download lesson plan (without parent handout)
+  var lessonHtml = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\n<style>\n@page { size: 11in 8.5in landscape; margin: 0.375in; }\nbody { font-family: Arial, sans-serif; margin: 0; padding: 0; }\n.page { page-break-after: always; mso-page-break-after: always; }\n.page:last-child { page-break-after: avoid; mso-page-break-after: avoid; }\n</style>\n</head><body>\n<div class=\"page\">".concat(coverHtml, "</div>\n<div class=\"page\" style=\"padding:0\">").concat(buildWeekTable(days, weekNum), "</div>\n").concat(alignmentHtml ? "<div class=\"page\" style=\"page-break-before:always;mso-page-break-before:always\">".concat(alignmentHtml, "</div>") : "", "\n</body></html>");
+  var blob1 = new Blob([lessonHtml], {
+    type: "application/vnd.ms-word;charset=utf-8"
+  });
+  var url1 = URL.createObjectURL(blob1);
+  var a1 = document.createElement("a");
+  a1.href = url1;
+  a1.download = "reBloom_".concat(track, "_Wk").concat(weekNum || 1, "_").concat(theme.replace(/\s+/g, "_").substring(0, 28), "_LessonPlan.doc");
+  a1.click();
+
+  // Download family handout separately (only if it exists)
+  if (plan.parentHandout) {
+    setTimeout(function () {
+      var handoutFullHtml = "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\n<style>\n@page { size: letter; margin: 0.75in; }\nbody { font-family: Arial, sans-serif; margin: 0; padding: 0; }\n</style>\n</head><body>".concat(parentHandoutHtml, "</body></html>");
+      var blob2 = new Blob([handoutFullHtml], {
+        type: "application/vnd.ms-word;charset=utf-8"
+      });
+      var url2 = URL.createObjectURL(blob2);
+      var a2 = document.createElement("a");
+      a2.href = url2;
+      a2.download = "reBloom_".concat(track, "_Wk").concat(weekNum || 1, "_").concat(theme.replace(/\s+/g, "_").substring(0, 28), "_FamilyHandout.doc");
+      a2.click();
+      setTimeout(function () {
+        URL.revokeObjectURL(url1);
+        URL.revokeObjectURL(url2);
+      }, 5000);
+    }, 800); // slight delay so both downloads don't conflict
+  } else {
+    setTimeout(function () {
+      return URL.revokeObjectURL(url1);
+    }, 5000);
+  }
+}
+var STEPS = ["Reading your theme and child interests…", "Weaving all nine developmental domains…", "Building activities for all five days…", "Adding differentiation and SoR focus…", function (s) {
+  return s ? "Adding ".concat(s, " state standards\u2026") : "Finalizing your plan…";
+}, "Almost done…"];
+function App() {
+  var _SCRIPT_OPTIONS$find2;
+  var _useState = useState("Preschool"),
+    _useState2 = _slicedToArray(_useState, 2),
+    track = _useState2[0],
+    setTrack = _useState2[1];
+  var _useState3 = useState(function () {
+      var d = new Date(),
+        day = d.getDay();
+      d.setDate(d.getDate() + (day === 0 ? 1 : 8 - day));
+      return d.toISOString().split("T")[0];
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    weekStart = _useState4[0],
+    setWeekStart = _useState4[1];
+  var _useState5 = useState("1"),
+    _useState6 = _slicedToArray(_useState5, 2),
+    weekNum = _useState6[0],
+    setWeekNum = _useState6[1];
+  var _useState7 = useState(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    teacher = _useState8[0],
+    setTeacher = _useState8[1];
+  var _useState9 = useState(""),
+    _useState0 = _slicedToArray(_useState9, 2),
+    theme = _useState0[0],
+    setTheme = _useState0[1];
+  var _useState1 = useState(""),
+    _useState10 = _slicedToArray(_useState1, 2),
+    interests = _useState10[0],
+    setInterests = _useState10[1];
+  var _useState11 = useState(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    needs = _useState12[0],
+    setNeeds = _useState12[1];
+  var _useState13 = useState(""),
+    _useState14 = _slicedToArray(_useState13, 2),
+    notes = _useState14[0],
+    setNotes = _useState14[1];
+  var _useState15 = useState(""),
+    _useState16 = _slicedToArray(_useState15, 2),
+    groupComposition = _useState16[0],
+    setGroupComposition = _useState16[1];
+  var _useState17 = useState(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    homeEnv = _useState18[0],
+    setHomeEnv = _useState18[1];
+  var _useState19 = useState(""),
+    _useState20 = _slicedToArray(_useState19, 2),
+    state = _useState20[0],
+    setState = _useState20[1];
+  var _useState21 = useState("none"),
+    _useState22 = _slicedToArray(_useState21, 2),
+    scriptLevel = _useState22[0],
+    setScriptLevel = _useState22[1];
+  var _useState23 = useState(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    themeErr = _useState24[0],
+    setThemeErr = _useState24[1];
+  var _useState25 = useState(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    loading = _useState26[0],
+    setLoading = _useState26[1];
+  var _useState27 = useState(0),
+    _useState28 = _slicedToArray(_useState27, 2),
+    loadStep = _useState28[0],
+    setLoadStep = _useState28[1];
+  var _useState29 = useState(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    plan = _useState30[0],
+    setPlan = _useState30[1];
+  var _useState31 = useState(""),
+    _useState32 = _slicedToArray(_useState31, 2),
+    error = _useState32[0],
+    setError = _useState32[1];
+  var _useState33 = useState(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    downloading = _useState34[0],
+    setDownloading = _useState34[1];
+  var loadRef = useRef(null);
+  var v = VERIFIED.includes(state);
+  var generate = useCallback(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+    var step, needsEnrich, res1, _e$error, e, data1, raw1, clean1, corePlan, res2, _e$error2, _e, data2, raw2, clean2, enrichData, _t;
+    return _regenerator().w(function (_context) {
+      while (1) switch (_context.p = _context.n) {
+        case 0:
+          if (theme.trim()) {
+            _context.n = 1;
+            break;
+          }
+          setThemeErr(true);
+          setTimeout(function () {
+            return setThemeErr(false);
+          }, 2000);
+          return _context.a(2);
+        case 1:
+          setLoading(true);
+          setError("");
+          setPlan(null);
+          setLoadStep(0);
+          step = 0;
+          loadRef.current = setInterval(function () {
+            step = Math.min(step + 1, STEPS.length - 1);
+            setLoadStep(step);
+          }, 2800);
+          needsEnrich = scriptLevel !== "none" || !!state;
+          _context.p = 2;
+          _context.n = 3;
+          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              model: "claude-sonnet-5",
+              max_tokens: 8000,
+              messages: [{
+                role: "user",
+                content: buildCorePrompt({
+                  track: track,
+                  weekStart: weekStart,
+                  weekNum: weekNum,
+                  teacher: teacher,
+                  theme: theme,
+                  interests: interests,
+                  needs: needs,
+                  notes: notes,
+                  groupComposition: groupComposition,
+                  homeEnv: homeEnv
+                })
+              }]
+            })
+          });
+        case 3:
+          res1 = _context.v;
+          if (res1.ok) {
+            _context.n = 5;
+            break;
+          }
+          _context.n = 4;
+          return res1.json();
+        case 4:
+          e = _context.v;
+          throw new Error(((_e$error = e.error) === null || _e$error === void 0 ? void 0 : _e$error.message) || "API error ".concat(res1.status));
+        case 5:
+          _context.n = 6;
+          return res1.json();
+        case 6:
+          data1 = _context.v;
+          raw1 = data1.content.map(function (b) {
+            return b.text || "";
+          }).join("");
+          clean1 = raw1.replace(/^```json?\s*/i, "").replace(/```\s*$/i, "").trim();
+          corePlan = JSON.parse(clean1);
+          if (needsEnrich) {
+            _context.n = 7;
+            break;
+          }
+          setPlan(corePlan);
+          return _context.a(2);
+        case 7:
+          // ── Call 2: Scripts + state alignment (only when needed) ────────────────
+          setLoadStep(4);
+          _context.n = 8;
+          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              model: "claude-sonnet-5",
+              max_tokens: 6000,
+              messages: [{
+                role: "user",
+                content: buildEnrichPrompt({
+                  plan: corePlan,
+                  track: track,
+                  theme: theme,
+                  interests: interests,
+                  needs: needs,
+                  state: state,
+                  scriptLevel: scriptLevel,
+                  groupComposition: groupComposition
+                })
+              }]
+            })
+          });
+        case 8:
+          res2 = _context.v;
+          if (res2.ok) {
+            _context.n = 10;
+            break;
+          }
+          _context.n = 9;
+          return res2.json();
+        case 9:
+          _e = _context.v;
+          throw new Error(((_e$error2 = _e.error) === null || _e$error2 === void 0 ? void 0 : _e$error2.message) || "API error ".concat(res2.status));
+        case 10:
+          _context.n = 11;
+          return res2.json();
+        case 11:
+          data2 = _context.v;
+          raw2 = data2.content.map(function (b) {
+            return b.text || "";
+          }).join("");
+          clean2 = raw2.replace(/^```json?\s*/i, "").replace(/```\s*$/i, "").trim();
+          enrichData = JSON.parse(clean2); // Merge scripts into corePlan days
+          if (enrichData.scripts) {
+            corePlan.days = corePlan.days.map(function (day) {
+              var ds = enrichData.scripts[day.day] || {};
+              var blks = ["morningMeeting", "readAloud", "phonoAwareness", "centerTime", "smallGroup", "outdoor"];
+              blks.forEach(function (k) {
+                if (day[k] && ds[k]) day[k].script = ds[k];
+              });
+              return day;
+            });
+          }
+          // Merge state alignment
+          if (enrichData.stateAlignment) corePlan.stateAlignment = enrichData.stateAlignment;
+          setPlan(corePlan);
+          _context.n = 13;
+          break;
+        case 12:
+          _context.p = 12;
+          _t = _context.v;
+          setError(_t.message);
+        case 13:
+          _context.p = 13;
+          clearInterval(loadRef.current);
+          setLoading(false);
+          return _context.f(13);
+        case 14:
+          return _context.a(2);
+      }
+    }, _callee, null, [[2, 12, 13, 14]]);
+  })), [track, weekStart, weekNum, teacher, theme, interests, needs, notes, state, scriptLevel]);
+  var download = useCallback(function () {
+    if (!plan) return;
+    setDownloading(true);
+    try {
+      generateWordDoc(plan, {
+        track: track,
+        teacher: teacher,
+        theme: theme,
+        state: state,
+        weekStart: weekStart,
+        weekNum: weekNum,
+        scriptLevel: scriptLevel,
+        groupComposition: groupComposition
+      });
+    } finally {
+      setTimeout(function () {
+        return setDownloading(false);
+      }, 1000);
+    }
+  }, [plan, track, teacher, theme, state, weekStart, weekNum, scriptLevel, groupComposition]);
+  var stepLabel = typeof STEPS[loadStep] === "function" ? STEPS[loadStep](state) : STEPS[loadStep];
+  var blocks = [{
+    key: "morningMeeting",
+    label: "Morning Meeting"
+  }, {
+    key: "readAloud",
+    label: "Read-Aloud"
+  }, {
+    key: "phonoAwareness",
+    label: "Phono Awareness"
+  }, {
+    key: "centerTime",
+    label: "Center Time"
+  }, {
+    key: "smallGroup",
+    label: "Small Group"
+  }, {
+    key: "outdoor",
+    label: "Outdoor"
+  }];
+  return /*#__PURE__*/React.createElement("div", {
+    style: S.wrap
+  }, /*#__PURE__*/React.createElement("header", {
+    style: S.header
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.logoText
+  }, "re", /*#__PURE__*/React.createElement("span", {
+    style: S.logoSpan
+  }, ":Bloom")), /*#__PURE__*/React.createElement("span", {
+    style: S.logoSub
+  }, "AI Lesson Plan Generator"), /*#__PURE__*/React.createElement("div", {
+    style: S.hRight
+  }, ["All 9 Domains", "SoR Aligned", "QRIS Ready"].map(function (t) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: t,
+      style: S.hBadge
+    }, t);
+  }), state && /*#__PURE__*/React.createElement("span", {
+    style: S.hBadge
+  }, state, v ? " ✓" : ""))), /*#__PURE__*/React.createElement("div", {
+    style: S.body
+  }, /*#__PURE__*/React.createElement("aside", {
+    style: S.sidebar
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: S.sTitle
+  }, "Plan Details"), /*#__PURE__*/React.createElement("p", {
+    style: S.sSub
+  }, "All nine domains and the Science of Reading woven into every activity. Mixed-age FCC plans differentiate by age band. State ELDS codes tagged automatically.")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Age Track"), /*#__PURE__*/React.createElement("div", {
+    style: S.trackGrid
+  }, Object.keys(TRACK_AGES).map(function (t) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: t,
+      style: S.trackBtn(track === t),
+      onClick: function onClick() {
+        return setTrack(t);
+      }
+    }, t, /*#__PURE__*/React.createElement("span", {
+      style: S.trackAge
+    }, TRACK_AGES[t]));
+  }))), /*#__PURE__*/React.createElement("div", null, track === "Family Child Care" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Group Composition ", /*#__PURE__*/React.createElement("span", {
+    style: S.hint
+  }, "(optional)")), /*#__PURE__*/React.createElement("input", {
+    style: _objectSpread(_objectSpread({}, S.input), {}, {
+      width: "100%"
+    }),
+    value: groupComposition,
+    onChange: function onChange(e) {
+      return setGroupComposition(e.target.value);
+    },
+    placeholder: "e.g. 2 infants, 3 toddlers, 2 preschoolers"
+  })), track === "Family Child Care" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Home Environment ", /*#__PURE__*/React.createElement("span", {
+    style: S.hint
+  }, "(optional)")), /*#__PURE__*/React.createElement("input", {
+    style: _objectSpread(_objectSpread({}, S.input), {}, {
+      width: "100%"
+    }),
+    value: homeEnv,
+    onChange: function onChange(e) {
+      return setHomeEnv(e.target.value);
+    },
+    placeholder: "e.g. fenced yard, garden, no outdoor space"
+  })), /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "State ", /*#__PURE__*/React.createElement("span", {
+    style: S.hint
+  }, "(standards tagging)")), /*#__PURE__*/React.createElement("select", {
+    style: S.select,
+    value: state,
+    onChange: function onChange(e) {
+      return setState(e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Select state (optional)"), US_STATES.map(function (s) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: s,
+      value: s
+    }, s, VERIFIED.includes(s) ? " ✓" : "");
+  })), state && /*#__PURE__*/React.createElement("span", {
+    style: _objectSpread(_objectSpread({}, S.stateChip(v)), {}, {
+      display: "inline-block",
+      marginTop: 4,
+      fontSize: "0.62rem"
+    })
+  }, v ? "✓ Verified alignment" : "Verify codes against current published ELDS")), /*#__PURE__*/React.createElement("hr", {
+    style: S.divider
+  }), /*#__PURE__*/React.createElement("div", {
+    style: S.row2
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Week Starting"), /*#__PURE__*/React.createElement("input", {
+    style: S.input,
+    type: "date",
+    value: weekStart,
+    onChange: function onChange(e) {
+      return setWeekStart(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Week # of Month"), /*#__PURE__*/React.createElement("select", {
+    style: S.select,
+    value: weekNum,
+    onChange: function onChange(e) {
+      return setWeekNum(e.target.value);
+    }
+  }, ["1", "2", "3", "4"].map(function (n) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: n,
+      value: n
+    }, "Week ", n);
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Teacher Name"), /*#__PURE__*/React.createElement("input", {
+    style: S.input,
+    type: "text",
+    placeholder: "Your name",
+    value: teacher,
+    onChange: function onChange(e) {
+      return setTeacher(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("hr", {
+    style: S.divider
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Monthly Inquiry Theme ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "#e24b4a"
+    }
+  }, "*")), /*#__PURE__*/React.createElement("input", {
+    style: _objectSpread(_objectSpread({}, S.input), {}, {
+      borderColor: themeErr ? "#e24b4a" : "#d8ead8"
+    }),
+    type: "text",
+    placeholder: "e.g. Living Things, Our Community, Water\u2026",
+    value: theme,
+    onChange: function onChange(e) {
+      return setTheme(e.target.value);
+    }
+  }), themeErr && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: "0.65rem",
+      color: "#c33",
+      marginTop: 3
+    }
+  }, "Theme is required")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Children's Interests"), /*#__PURE__*/React.createElement("textarea", {
+    style: S.textarea,
+    placeholder: "e.g. dinosaurs, trucks, cooking, music, animals\u2026",
+    value: interests,
+    onChange: function onChange(e) {
+      return setInterests(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Group Needs and Focus Areas"), /*#__PURE__*/React.createElement("textarea", {
+    style: S.textarea,
+    placeholder: "e.g. emotion regulation, vocabulary, fine motor, letter awareness\u2026",
+    value: needs,
+    onChange: function onChange(e) {
+      return setNeeds(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Additional Notes ", /*#__PURE__*/React.createElement("span", {
+    style: S.hint
+  }, "(optional)")), /*#__PURE__*/React.createElement("textarea", {
+    style: _objectSpread(_objectSpread({}, S.textarea), {}, {
+      minHeight: 44
+    }),
+    placeholder: "Events, field trips, IEP notes\u2026",
+    value: notes,
+    onChange: function onChange(e) {
+      return setNotes(e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("hr", {
+    style: S.divider
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+    style: S.label
+  }, "Educator Scripts"), /*#__PURE__*/React.createElement("span", {
+    style: S.sublabel
+  }, "Verbatim language for activities"), /*#__PURE__*/React.createElement("div", {
+    style: S.scriptGrid
+  }, SCRIPT_OPTIONS.map(function (opt) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: opt.value,
+      style: S.scriptBtn(scriptLevel === opt.value),
+      onClick: function onClick() {
+        return setScriptLevel(opt.value);
+      }
+    }, opt.label, /*#__PURE__*/React.createElement("span", {
+      style: S.scriptDesc
+    }, opt.desc));
+  }))), /*#__PURE__*/React.createElement("button", {
+    style: S.genBtn(loading),
+    onClick: generate,
+    disabled: loading
+  }, loading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Spinner, null), " Generating\u2026") : "✦  Generate Lesson Plan")), /*#__PURE__*/React.createElement("main", {
+    style: S.main
+  }, !loading && !plan && !error && /*#__PURE__*/React.createElement("div", {
+    style: S.empty
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: 58,
+      height: 58,
+      background: "#e8f5e8",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "26",
+    height: "26",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "#2d6a2d",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+  }))), /*#__PURE__*/React.createElement("p", {
+    style: S.emptyT
+  }, "Your complete lesson plan will appear here"), /*#__PURE__*/React.createElement("p", {
+    style: S.emptySub
+  }, "Enter your theme, child interests, and group needs. Choose your state for automatic standards tagging. Every plan includes all nine domains, SoR alignment, differentiation, parent handout, and QRIS documentation."), /*#__PURE__*/React.createElement("div", {
+    style: S.featGrid
+  }, [["All 9 domains in every plan"], ["SoR sequence for your track"], ["State ELDS codes auto-tagged"], ["Optional educator scripts"], ["Differentiation built in"], ["Parent handout included"]].map(function (_ref7, i) {
+    var _ref8 = _slicedToArray(_ref7, 1),
+      txt = _ref8[0];
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: S.featItem
+    }, /*#__PURE__*/React.createElement("div", {
+      style: S.featTxt
+    }, txt));
+  }))), loading && /*#__PURE__*/React.createElement("div", {
+    style: S.loadBox
+  }, /*#__PURE__*/React.createElement(Spinner, {
+    size: 9,
+    color: "#2d6a2d"
+  }), /*#__PURE__*/React.createElement("p", {
+    style: S.loadT
+  }, "Building your plan\u2026"), /*#__PURE__*/React.createElement("div", {
+    style: S.loadSteps
+  }, STEPS.map(function (step, i) {
+    var lbl = typeof step === "function" ? step(state) : step;
+    var done = i < loadStep,
+      active = i === loadStep;
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: S.loadStep(active, done)
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 15,
+        height: 15,
+        borderRadius: "50%",
+        background: done ? "#2d6a2d" : active ? "#c9a84c" : "#e8e8e8",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0
+      }
+    }, done && /*#__PURE__*/React.createElement("svg", {
+      width: "8",
+      height: "8",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "white",
+      strokeWidth: "3",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("polyline", {
+      points: "20 6 9 17 4 12"
+    }))), lbl);
+  })), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: "0.69rem",
+      color: "#aaa",
+      fontWeight: 300,
+      marginTop: 3
+    }
+  }, "About 25\u201335 seconds \u2014 worth the wait.")), error && /*#__PURE__*/React.createElement("div", {
+    style: S.errBox
+  }, "Could not generate the plan: ", error, " \u2014 Please try again."), plan && !loading && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: S.planHead
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: S.planTitle
+  }, plan.weekTitle), /*#__PURE__*/React.createElement("div", {
+    style: S.metaRow
+  }, ["".concat(track, " \u2014 ").concat(TRACK_AGES[track]), "Week ".concat(weekNum), theme, teacher].filter(Boolean).map(function (c, i) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: S.chip
+    }, c);
+  }), state && /*#__PURE__*/React.createElement("span", {
+    style: S.stateChip(v)
+  }, state, v ? " ✓" : ""), /*#__PURE__*/React.createElement("span", {
+    style: _objectSpread(_objectSpread({}, S.chip), {}, {
+      background: "#e8f5e8",
+      color: "#2d6a2d",
+      borderColor: "#c8e8c8"
+    })
+  }, (_SCRIPT_OPTIONS$find2 = SCRIPT_OPTIONS.find(function (s) {
+    return s.value === scriptLevel;
+  })) === null || _SCRIPT_OPTIONS$find2 === void 0 ? void 0 : _SCRIPT_OPTIONS$find2.label))), /*#__PURE__*/React.createElement("div", {
+    style: S.actRow
+  }, /*#__PURE__*/React.createElement("button", {
+    style: S.printBtn,
+    onClick: function onClick() {
+      return window.print();
+    }
+  }, "Print"), /*#__PURE__*/React.createElement("button", {
+    style: S.dlBtn,
+    onClick: download,
+    disabled: downloading
+  }, downloading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Spinner, {
+    size: 6
+  }), " Preparing\u2026") : "⬇ Download Word Doc"), /*#__PURE__*/React.createElement("button", {
+    style: S.regenBtn,
+    onClick: generate
+  }, "Regenerate"))), /*#__PURE__*/React.createElement("div", {
+    style: S.card
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.cardTitle
+  }, "Week Overview"), /*#__PURE__*/React.createElement("div", {
+    style: S.sg
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: S.sLabel
+  }, "Big Question"), /*#__PURE__*/React.createElement("p", {
+    style: S.sVal
+  }, /*#__PURE__*/React.createElement("em", null, plan.bigQuestion))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: S.sLabel
+  }, "Vocabulary Focus"), /*#__PURE__*/React.createElement("p", {
+    style: S.sVal
+  }, (plan.vocabulary || []).join(" · "))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: S.sLabel
+  }, "SoR Focus"), /*#__PURE__*/React.createElement("p", {
+    style: S.sVal
+  }, plan.sorFocus))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "0.7rem",
+      padding: "0.55rem 0.75rem",
+      background: "#f4faf4",
+      borderRadius: 7,
+      fontSize: "0.75rem",
+      color: "#333",
+      lineHeight: 1.55
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "Environment Setup:"), " ", plan.environmentSetup), /*#__PURE__*/React.createElement("div", {
+    style: S.domRow
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.sLabel
+  }, "All Nine Domains"), /*#__PURE__*/React.createElement("div", {
+    style: S.domPills
+  }, Object.entries(plan.weeklyDomainSummary || {}).map(function (_ref9) {
+    var _ref0 = _slicedToArray(_ref9, 2),
+      code = _ref0[0],
+      note = _ref0[1];
+    return /*#__PURE__*/React.createElement("div", {
+      key: code,
+      style: S.domPill(code),
+      title: note
+    }, code);
+  })))), (plan.days || []).map(function (day, di) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: di,
+      style: S.dayCard
+    }, /*#__PURE__*/React.createElement("div", {
+      style: S.dayHead
+    }, /*#__PURE__*/React.createElement("span", {
+      style: S.dayName
+    }, day.day), /*#__PURE__*/React.createElement("span", {
+      style: S.daySub
+    }, "Week ", weekNum, " \xB7 ", theme)), /*#__PURE__*/React.createElement("div", {
+      style: S.dayGrid
+    }, blocks.map(function (_ref1, bi) {
+      var key = _ref1.key,
+        label = _ref1.label;
+      var b = day[key];
+      if (!b) return null;
+      var showS = scriptLevel === "all" || scriptLevel === "key" && (key === "readAloud" || key === "smallGroup");
+      return /*#__PURE__*/React.createElement("div", {
+        key: bi,
+        style: _objectSpread(_objectSpread({}, S.blk(bi === blocks.length - 1)), {}, {
+          borderRight: bi === blocks.length - 1 ? "none" : "1px solid #e8f5e8"
+        })
+      }, /*#__PURE__*/React.createElement("p", {
+        style: S.bLabel
+      }, label), /*#__PURE__*/React.createElement("p", {
+        style: S.bTitle
+      }, b.title), /*#__PURE__*/React.createElement("p", {
+        style: S.bDesc
+      }, b.description), showS && b.script && /*#__PURE__*/React.createElement("div", {
+        style: S.bScript
+      }, /*#__PURE__*/React.createElement("strong", null, "SAY:"), " \"", b.script, "\""), b.differentiation && /*#__PURE__*/React.createElement("div", {
+        style: S.bDiff
+      }, track === "Family Child Care" ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+        style: S.diffLbl
+      }, "By Age Band"), b.differentiation.infant && /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          marginBottom: 2
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "Infant"), " ", b.differentiation.infant), b.differentiation.toddler && /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          marginBottom: 2
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "Toddler"), " ", b.differentiation.toddler), b.differentiation.preschool && /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          margin: 0
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "Preschool"), " ", b.differentiation.preschool)) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+        style: S.diffLbl
+      }, "Differentiation"), /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          marginBottom: 2
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "\u2191"), " ", b.differentiation.ahead), /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          marginBottom: 2
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "\u2193"), " ", b.differentiation.support), /*#__PURE__*/React.createElement("p", {
+        style: _objectSpread(_objectSpread({}, S.diffTxt), {}, {
+          margin: 0
+        })
+      }, /*#__PURE__*/React.createElement("strong", null, "IEP"), " ", b.differentiation.iep))), b.codes && b.codes.length > 0 && /*#__PURE__*/React.createElement("div", {
+        style: S.bCodes
+      }, b.codes.map(function (c, ci) {
+        return /*#__PURE__*/React.createElement("span", {
+          key: ci,
+          style: S.cTag(c)
+        }, c);
+      })));
+    })), /*#__PURE__*/React.createElement("div", {
+      style: S.dayFoot
+    }, /*#__PURE__*/React.createElement("p", {
+      style: S.footLbl
+    }, "Materials"), /*#__PURE__*/React.createElement("p", {
+      style: S.footTxt
+    }, (day.materials || []).join(" · ")), day.homeConnection && /*#__PURE__*/React.createElement("p", {
+      style: _objectSpread(_objectSpread({}, S.footTxt), {}, {
+        marginTop: 3
+      })
+    }, /*#__PURE__*/React.createElement("strong", null, "Home Connection:"), " ", day.homeConnection), day.routineIntegration && /*#__PURE__*/React.createElement("p", {
+      style: _objectSpread(_objectSpread({}, S.footTxt), {}, {
+        marginTop: 3,
+        color: "#7B3D2A"
+      })
+    }, /*#__PURE__*/React.createElement("strong", null, "FCC Routine:"), " ", day.routineIntegration)));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: S.obsCard
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.obsTitle
+  }, "Observation and Documentation Guide"), /*#__PURE__*/React.createElement("div", {
+    style: S.obsGrid
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", {
+    style: S.obsLbl
+  }, "What to Watch for This Week"), (plan.observationFocus || []).map(function (o, i) {
+    return /*#__PURE__*/React.createElement("p", {
+      key: i,
+      style: _objectSpread(_objectSpread({}, S.obsSec), {}, {
+        marginBottom: "0.28rem"
+      })
+    }, i + 1, ". ", o);
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", {
+    style: S.obsLbl
+  }, "QRIS Documentation Note"), /*#__PURE__*/React.createElement("p", {
+    style: S.obsSec
+  }, plan.assessmentNote), /*#__PURE__*/React.createElement("strong", {
+    style: _objectSpread(_objectSpread({}, S.obsLbl), {}, {
+      marginTop: "0.65rem",
+      display: "block"
+    })
+  }, "Standards This Week"), Object.entries(plan.weeklyDomainSummary || {}).map(function (_ref10) {
+    var _ref11 = _slicedToArray(_ref10, 2),
+      code = _ref11[0],
+      note = _ref11[1];
+    return /*#__PURE__*/React.createElement("p", {
+      key: code,
+      style: _objectSpread(_objectSpread({}, S.obsSec), {}, {
+        marginBottom: "0.12rem",
+        fontSize: "0.72rem"
+      })
+    }, /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: DC[code]
+      }
+    }, code, ":"), " ", note);
+  })))), plan.parentHandout && /*#__PURE__*/React.createElement("div", {
+    style: S.parentCard
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.parentT
+  }, "Family Handout \u2014 Week ", weekNum, " (included in Word download)"), /*#__PURE__*/React.createElement("div", {
+    style: S.parentSec
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.parentTxt
+  }, /*#__PURE__*/React.createElement("strong", null, plan.parentHandout.greeting))), /*#__PURE__*/React.createElement("div", {
+    style: S.parentSec
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.parentLbl
+  }, "What We Learned"), /*#__PURE__*/React.createElement("p", {
+    style: S.parentTxt
+  }, plan.parentHandout.whatWeLearned)), /*#__PURE__*/React.createElement("div", {
+    style: S.parentSec
+  }, /*#__PURE__*/React.createElement("p", {
+    style: S.parentLbl
+  }, "Try at Home"), (plan.parentHandout.atHome || []).map(function (s, i) {
+    return /*#__PURE__*/React.createElement("p", {
+      key: i,
+      style: _objectSpread(_objectSpread({}, S.parentTxt), {}, {
+        marginBottom: 2
+      })
+    }, "\u2022 ", s);
+  })), /*#__PURE__*/React.createElement(
