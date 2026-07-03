@@ -1039,7 +1039,7 @@ function App() {
           needsEnrich = scriptLevel !== "none" || !!state;
           _context.p = 2;
           _context.n = 3;
-          return fetch("/.netlify/functions/claude-proxy", {
+          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -1095,7 +1095,7 @@ function App() {
           // ── Call 2: Scripts + state alignment (only when needed) ────────────────
           setLoadStep(4);
           _context.n = 8;
-          return fetch("/.netlify/functions/claude-proxy", {
+          return fetch("https://rebloom-claude-proxy.brehker.workers.dev", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
