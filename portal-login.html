@@ -81,7 +81,18 @@ input:focus{outline:none;border-color:var(--sage)}
     <div class="toggle-link"><a onclick="showLogin()">Back to sign in</a></div>
   </div>
 
-  <div class="footer">Not a subscriber? <a href="/#pricing">View plans</a><br>Questions? grow@rebloomcurriculum.com</div>
+  <div id="new-password-form" style="display:none">
+<h1>Choose your password.</h1>
+<p class="subtitle">Enter a new password for your account.</p>
+<label for="new-password">New password</label>
+<input type="password" id="new-password" placeholder="At least 8 characters" autocomplete="new-password">
+<label for="confirm-password">Confirm password</label>
+<input type="password" id="confirm-password" placeholder="Repeat your password" autocomplete="new-password">
+<button class="btn" id="new-password-btn" onclick="setNewPassword()">Set Password</button>
+<div class="msg" id="new-password-msg"></div>
+</div>
+
+<div class="footer">Not a subscriber? <a href="/#pricing">View plans</a><br>Questions? grow@rebloomcurriculum.com</div>
 </div>
 
 <script>
@@ -183,8 +194,34 @@ async function sendPasswordReset() {
   }
 }
 
+function showNewPassword() {
+['login-form','magic-form','magic-sent','set-password-form'].forEach(function(id){
+document.getElementById(id).style.display='none';
+});
+document.getElementById('new-password-form').style.display='block';
+}
+
+async function setNewPassword() {
+var pw = document.getElementById('new-password').value;
+var pw2 = document.getElementById('confirm-password').value;
+if (!pw || pw.length < 8) { showMsg('new-password-msg','Password must be at least 8 characters.',true); return; }
+if (pw !== pw2) { showMsg('new-password-msg','Passwords do not match.',true); return; }
+var btn = document.getElementById('new-password-btn');
+btn.disabled=true; btn.textContent='Saving...';
+var result = await sb.auth.updateUser({password: pw});
+if (result.error) {
+showMsg('new-password-msg', result.error.message, true);
+btn.disabled=false; btn.textContent='Set Password';
+} else {
+showMsg('new-password-msg','Password set! Signing you in…',false);
+var s = (await sb.auth.getSession()).data.session;
+if (s) await redirectToPortal(s);
+}
+}
+
 sb.auth.onAuthStateChange(function(event, session) {
-  if (event === 'SIGNED_IN' && session) { redirectToPortal(session); }
+if (event === 'PASSWORD_RECOVERY') { showNewPassword(); }
+else if (event === 'SIGNED_IN' && session) { redirectToPortal(session); }
 });
 
 document.addEventListener('keydown', function(e) {
